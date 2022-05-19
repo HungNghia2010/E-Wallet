@@ -30,13 +30,20 @@ exports.login = async (req, res) => {
     try{
 
         const {username,pwd} = req.body
-        
-        db.query('SELECT * FROM register WHERE username = ?', [username], async (error,result) => {
-            console.log(result)
-            if(result.length = 0){
+        console.log(req.body)
+
+        db.query('SELECT * FROM register WHERE username = ?', [username], (error,result) => {
+            if(result.length === 0){
                 res.render('login',{
                     message: 'Username này không tồn tại'
                 })
+            }
+            else if(!result || pwd != result[0].pass){
+                res.render('login',{
+                    message: 'Mật khẩu không đúng'
+                })
+            }else if(!result || pwd === result[0].pass){
+                res.send("Form submit")
             }
         })
 
@@ -49,8 +56,15 @@ exports.register = (req, res) => {
     console.log(req.body)
 
     const { name, birth, email, phone, cmnd, address} = req.body;
+
+    // if(!name){
+    //     return res.render('register',{
+    //         message: 'Họ và tên không được trống'
+    //     })
+    // }
     
-    db.query('SELECT email FROM register WHERE email = ?', [email,phone], (error, result) => {
+    
+    db.query('SELECT * FROM register WHERE email = ? OR phone_number = ?', [email,phone], (error, result) => {
         if(error){
             console.log(error)
         }
@@ -68,7 +82,7 @@ exports.register = (req, res) => {
             if(error){
                 console.log(error)
             } else{
-                //mail
+                // //mail
                 // var mailOptions = {
                 //     from: 'sinhvien@phongdaotao.com',
                 //     to: email,
