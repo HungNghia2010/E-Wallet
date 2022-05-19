@@ -1,16 +1,3 @@
-//eye login
-$(document).ready(function() {
-    $('#eye').click(function() {
-        $(this).toggleClass('open');
-        $(this).children('i').toggleClass("fa-eye-slash fa-eye");
-        if ($(this).hasClass('open')) {
-            $(this).prev().attr("type", "text");
-        } else {
-            $(this).prev().attr("type", "password");
-        }
-    });
-});
-
 //login
 function validateInput() {
     let userBox = document.getElementById("username")
@@ -37,6 +24,10 @@ function validateInput() {
     messageBox.innerHTML = "";
     return true;
 }
+
+
+
+
 
 let navbar = document.querySelector('.navbar');
 
@@ -67,6 +58,22 @@ function showDivs(n) {
     x[slideIndex - 1].style.display = "block";
 }
 
-function goBack() {
-    window.history.back()
+$('#eye').click(function() {
+    $(this).toggleClass('open');
+    $(this).children('i').toggleClass("fa-eye-slash fa-eye");
+    if ($(this).hasClass('open')) {
+        $(this).prev().attr("type", "text");
+    } else {
+        $(this).prev().attr("type", "password");
+    }
+});
+
+function eye() {
+    $('#eye').toggleClass('open');
+    $('#eye').children('i').toggleClass("fa-eye-slash fa-eye");
+    if ($('#eye').hasClass('open')) {
+        $('#eye').prev().attr("type", "text");
+    } else {
+        $('#eye').prev().attr("type", "password");
+    };
 }

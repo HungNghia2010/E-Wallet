@@ -25,13 +25,13 @@
             <h1 class="form-heading">Login Form</h1>
             <div class="form-group form-group-admin ">
                 <i class="far fa-user"></i>
-                <input value="" type="text" onclick="clearError()" class="form-input form-input-admin" id="username" placeholder="Enter username" name="username">
+                <input value="" type="text" onclick="validateInput()" class="form-input form-input-admin" id="username" placeholder="Enter username" name="username">
             </div>
 
             <div class="form-group form-group-admin">
                 <i class="fas fa-key"></i>
-                <input value="" type="password" onclick="clearError()" class="form-input form-input-admin" id="pwd" placeholder="Enter password" name="pwd">
-                <div id="eye">
+                <input value="" type="password" onclick="validateInput()" class="form-input form-input-admin" id="pwd" placeholder="Enter password" name="pwd">
+                <div onclick="eye()" id="eye">
                     <i class="far fa-eye"></i>
                 </div>
             </div>
@@ -39,7 +39,7 @@
                 <div class='alert alert-danger'></div>
             </div>
             <button class="form-submit" type="submit" class="btn btn-default">Login now</button>
-            <button class="form-submit" type="submit" class="btn btn-default"><a href="/register">Register A New Account</a></button>
+            <button class="form-submit" type="submit" class="btn btn-default">Register A New Account</button>
         </form>
 
 

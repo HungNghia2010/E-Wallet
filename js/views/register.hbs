@@ -18,7 +18,7 @@
         <div class="container container-about-me">
             <div class="title">Register</div>
             <div class="content content-about-me">
-                <form class="form-about-me" action="/auth/register" method="post">
+                <form class="form-about-me" action="#">
                     <div id="content-img">
                         <div class="about-me-image">
                             <img src="images/empicon.jpg" class="rounded-circle " width="150">
@@ -36,46 +36,63 @@
 
                         <div class="input-box">
                             <span class="details">Họ và tên</span>
-                            <input value="" type="text" placeholder="" id="name" name="name">
+                            <input value="Nguyen Trung Hau" type="text" placeholder="" required>
                         </div>
                         <div class="input-box">
                             <span class="details">Ngày sinh</span>
-                            <input value="" type="text" placeholder="" id="birth" name="birth">
+                            <input value="1/1/2025" type="text" placeholder="" required>
                         </div>
                         <div class="input-box">
                             <span class="details">Email</span>
-                            <input value="" type="text" placeholder="" id="email" name="email">
+                            <input value="hau@gmail.com" type="text" placeholder="" required>
                         </div>
                         <div class="input-box">
                             <span class="details">Số điện thoại</span>
-                            <input value="" type="text" placeholder="" id="phone" name="phone">
+                            <input value="0919191919" type="text" placeholder="" required>
                         </div>
                         <div class="input-box">
                             <span class="details">CMND/CCCD</span>
-                            <input value="" type="text" placeholder="" id="cmnd" name="cmnd">
+                            <input value="989898989" type="text" placeholder="" required>
                         </div>
                         <div class="input-box">
                             <span class="details">Địa chỉ</span>
-                            <input value="" type="text" placeholder="" id="address" name="address">
+                            <input value="An Giang" type="text" placeholder="" required>
                         </div>
                         <div class="input-box">
                             <span class="details">Mặt trước CMND</span>
-                            <input class="file-upload-input" type="file">
+                            <input class="file-upload-input" type="file" required>
                         </div>
                         <div class="input-box">
                             <span class="details">Mặt sau CMND</span>
-                            <input class="file-upload-input" type="file">
+                            <input class="file-upload-input" type="file" required>
                         </div>
 
                     </div>
 
+                    <div class="gender-details">
+                        <input type="radio" name="gender" id="dot-1">
+                        <input type="radio" name="gender" id="dot-2">
+                        <input type="radio" name="gender" id="dot-3">
+                        <span class="gender-title">Gender</span>
+                        <div class="category">
+                            <label for="dot-1">
+                                <span class="dot one"></span>
+                                <span class="gender">Male</span>
+                            </label>
+                            <label for="dot-2">
+                                <span class="dot two"></span>
+                                <span class="gender">Female</span>
+                            </label>
+                            <label for="dot-3">
+                                <span class="dot three"></span>
+                                <span class="gender">Prefer not to say</span>
+                            </label>
+                        </div>
+                    </div>
                     <div class="button register-button">
-                        <input type="button" value="Back" onclick="goBack()">
+                        <input type="submit" value="Back">
                         <input type="submit" value="Register">
                     </div>
-                    {{#if message}}
-                    <h4 class="alert alert-danger mt-4">{{message}}</h4>
-                    {{/if}}
                 </form>
             </div>
         </div>
