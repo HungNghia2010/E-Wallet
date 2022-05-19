@@ -1,7 +1,8 @@
 const mysql = require('mysql')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
-const nodemailer = require('nodemailer')
+const nodemailer = require('nodemailer');
+const { text } = require('express');
 
 var transporter = nodemailer.createTransport({
     host: "mail.phongdaotao.com",
@@ -46,12 +47,12 @@ exports.register = (req, res) => {
             if(error){
                 console.log(error)
             } else{
-                
+                //mail
                 var mailOptions = {
                     from: 'sinhvien@phongdaotao.com',
                     to: email,
                     subject: 'Gửi thông tin đăng nhập',
-                    text: '<h1>Tên đăng nhập: {{username}} , Mật khẩu: {{password}}</h1>'
+                    text: '<h1>Tên đăng nhập: {{username}} , Mật khẩu: {{password}}</h1>',
                 }
 
                 transporter.sendMail(mailOptions,function(error, info) {
@@ -62,7 +63,7 @@ exports.register = (req, res) => {
                     }
                 })
 
-
+                //send message to register.hbs
                 return res.render('register',{
                     message: 'Đăng ký thành công'
                 })
