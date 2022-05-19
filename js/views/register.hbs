@@ -66,7 +66,6 @@
                             <span class="details">Mặt sau CMND</span>
                             <input class="file-upload-input" type="file">
                         </div>
-
                     </div>
 
                     <div class="button register-button">
@@ -75,6 +74,9 @@
                     </div>
                 </form>
             </div>
+            {{#if message}}
+                <h4 class="alert alert-danger mt-4">{{message}}</h4>
+            {{/if}}
         </div>
 
     </section>
