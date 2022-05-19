@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CK Bank</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+    <header class="header headermana">
+
+        <a href="index.html" class="logo">
+            <img src="images/Flash.png" alt="">
+        </a>
+
+        <nav class="navbar ulnav">
+            <!-- Chức năng chung -->
+            <a href="#home">Home</a>
+            <!-- Chức năng admin -->
+
+            <li class="dropdown">
+                <a href="manager.html" class="dropbtn">Manage</a>
+                <div class="dropdown-content">
+                    <a href="manager.html#kichhoat">Chờ kích hoạt</a>
+                    <a href="manager.html#kichhoated">Đã kích hoạt</a>
+                    <a href="manager.html#vohieu">Bị vô hiệu hóa</a>
+                    <a href="manager.html#khoa">Bị khóa vô thời hạn</a>
+                    <a href="manager.html#gdrut">Giao dịch rút tiền</a>
+                    <a href="manager.html#gdchuyen">Giao dịch chuyển tiền</a>
+                </div>
+            </li>
+
+            <!-- Chức năng chung -->
+            <a href="#about">About</a>
+            <a href="#menu">Menu</a>
+            <a href="#products">Card</a>
+            <a href="#contact">Contact</a>
+            <a href="#logout">Logout</a>
+
+        </nav>
+
+        <div class="icons">
+            <div id="user-btn">
+                <a href="info.html" class="fa-solid fa-user"></a>
+            </div>
+
+            <div class="fas fa-bars" id="menu-btn"></div>
+        </div>
+
+    </header>
+
+    <section class="home" id="home">
+
+        <div class="content" id="content">
+            <h3>flash cash</h3>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Placeat labore, sint cupiditate distinctio tempora reiciendis.</p>
+            <a href="#" class="btn">payments</a>
+
+        </div>
+
+    </section>
+
+    <section class="about" id="about">
+
+        <h1 class="heading"> <span>about</span> us </h1>
+
+        <div class="row">
+
+            <div class="image w3-content w3-display-container">
+                <img class="mySlides" src="images/Flash1.png" alt="" style="width:100%">
+                <img class="mySlides" src="images/ngoc.jpg" alt="" style="width:100%">
+                <img class="mySlides" src="images/son.jpg" alt="" style="width:100%">
+                <img class="mySlides" src="images/nghia.jpg" alt="" style="width:100%">
+                <img class="mySlides" src="images/hau.jpg" alt="" style="width:100%">
+                <img class="mySlides" src="images/dai.jpg" alt="" style="width:100%">
+
+                <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+                <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+            </div>
+
+            <div class="content">
+                <h3>Đội ngũ kỹ sư chuyên nghiệp</h3>
+                <p>Mai Văn Ngọc - 51900147: Kỹ sư phần mềm 20 năm kinh nghiệm</p>
+                <p>Nguyễn Thanh Sơn - 51900200: Thầy giáo dạy vật lý 23 năm kinh nghiệm</p>
+                <p>Phạm Hùng Nghĩa - 51900145: Đầu bếp pizza 23 năm kinh nghiệm</p>
+                <p>Nguyễn Trung Hậu - 51900067: Sinh viên năm 3</p>
+                <p>Nguyễn Chánh Đại - 51900021: Giáo viên triết học 3 năm kinh nghiệm</p>
+            </div>
+
+        </div>
+    </section>
+
+
+
+
+    <section class="menu" id="menu">
+
+        <h1 class="heading"> our <span>services</span> </h1>
+
+        <div class="box-container">
+
+            <div class="box">
+                <div class="fa-solid fa-money-check-dollar icons" id="nap-btn"></div>
+                <h3>thông qua thẻ tín dụng</h3>
+                <a href="nap.html" class="btn">nạp tiền</a>
+            </div>
+
+            <div class="box">
+                <div class="fa-solid fa-coins icons" id="rut-btn"></div>
+                <h3>đơn giản, nhanh chóng</h3>
+                <a href="ruttien.html" class="btn">rút tiền</a>
+            </div>
+
+            <div class="box">
+                <div class="fa-solid fa-comments-dollar icons" id="chuyen-btn"></div>
+                <h3>miễn phí, đơn giản, bảo mật</h3>
+                <a href="chuyen.html" class="btn">chuyển tiền</a>
+            </div>
+
+            <div class="box">
+                <div class="fa-solid fa-receipt icons" id="transfermoney-btn"></div>
+                <h3>chính xác, rõ ràng</h3>
+                <a href="lichsu.html" class="btn">lịch sử</a>
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <section class="products" id="products">
+
+        <h1 class="heading"> our <span>cards</span> </h1>
+
+        <div class="box-container">
+
+            <div class="box">
+                <div class="content">
+                    <h3>Viettel</h3>
+                </div>
+                <div class="image">
+                    <img src="images/viettel.jpg" alt="">
+                </div>
+                <form class="icons" action="">
+                    <label for="pricez">Chọn mệnh giá:</label>
+                    <select name="pricez" id="pricez">
+                      <option value="price">10,000đ</option>
+                      <option value="price">20,000đ</option>
+                      <option value="price">50,000đ</option>
+                      <option value="price">100,000đ</option>
+                    </select>
+                    <br></br>
+                    <input type="submit" value="Mua" class="btn">
+                </form>
+            </div>
+
+            <div class="box">
+                <div class="content">
+                    <h3>Mobifone</h3>
+                </div>
+                <div class="image">
+                    <img src="images/mobi.jpg" alt="">
+                </div>
+                <form class="icons" action="">
+                    <label for="pricez">Chọn mệnh giá:</label>
+                    <select name="pricez" id="pricez">
+                      <option value="price">10,000đ</option>
+                      <option value="price">20,000đ</option>
+                      <option value="price">50,000đ</option>
+                      <option value="price">100,000đ</option>
+                    </select>
+                    <br></br>
+                    <input type="submit" value="Mua" class="btn">
+                </form>
+            </div>
+
+            <div class="box">
+                <div class="content">
+                    <h3>Vinaphone</h3>
+                </div>
+                <div class="image">
+                    <img src="images/vina.jpg" alt="">
+                </div>
+                <form class="icons" action="">
+                    <label for="pricez">Chọn mệnh giá:</label>
+                    <select name="pricez" id="pricez">
+                      <option value="price">10,000đ</option>
+                      <option value="price">20,000đ</option>
+                      <option value="price">50,000đ</option>
+                      <option value="price">100,000đ</option>
+                    </select>
+                    <br></br>
+                    <input type="submit" value="Mua" class="btn">
+                </form>
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+
+    <section class="contact" id="contact">
+
+        <h1 class="heading"> <span>contact</span> us </h1>
+
+        <div class="row">
+
+            <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3920.0243805837226!2d106.69728031465488!3d10.732602892351277!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317528b2747a81a3%3A0x33c1813055acb613!2sTon%20Duc%20Thang%20University!5e0!3m2!1sen!2s!4v1647269203034!5m2!1sen!2s"
+                allowfullscreen="" loading="lazy"></iframe>
+
+            <form action="">
+                <h3>get in touch</h3>
+                <div class="inputBox">
+                    <span class="fas fa-user"></span>
+                    <input type="text" placeholder="name">
+                </div>
+                <div class="inputBox">
+                    <span class="fas fa-envelope"></span>
+                    <input type="email" placeholder="email">
+                </div>
+                <div class="inputBox">
+                    <span class="fas fa-phone"></span>
+                    <input type="number" placeholder="number">
+                </div>
+                <input type="submit" value="contact now" class="btn">
+            </form>
+
+        </div>
+
+    </section>
+
+
+    <section class="footer">
+
+        <div class="share">
+            <a href="#" class="fab fa-facebook-f"></a>
+            <a href="#" class="fab fa-twitter"></a>
+            <a href="#" class="fab fa-instagram"></a>
+        </div>
+
+        <div class="links">
+            <a href="index.html">home</a>
+            <a href="#about">about</a>
+            <a href="#menu">menu</a>
+            <a href="#products">card</a>
+            <a href="#contact">contact</a>
+        </div>
+
+        <div class="credit">created by <span>us</span></div>
+
+    </section>
+
+
+    <script src="js/script.js" defer></script>
+
+</body>
+
+</html>
