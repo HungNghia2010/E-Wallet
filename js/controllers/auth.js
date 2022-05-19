@@ -30,7 +30,7 @@ exports.register = (req, res) => {
 
     const { name, birth, email, phone, cmnd, address} = req.body;
     
-    db.query('SELECT email FROM register WHERE email = ? or phone_number = ?', [email,phone], (error, result) => {
+    db.query('SELECT email FROM register WHERE email = ?', [email,phone], (error, result) => {
         if(error){
             console.log(error)
         }
@@ -40,6 +40,7 @@ exports.register = (req, res) => {
                 message: 'Email hoặc số điện thoại này đã được sử dụng'
             })
         }
+
         const username = Math.floor(1000000000 + Math.random() * 9000000000);
         const password = generateRandomString(6);
 
@@ -75,6 +76,7 @@ exports.register = (req, res) => {
 
 }
 
+//random string for password
 const generateRandomString = (myLength) => {
     const chars =
       "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890";
