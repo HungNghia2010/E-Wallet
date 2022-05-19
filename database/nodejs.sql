@@ -12,5 +12,6 @@ CREATE TABLE register(
     birth varchar(25) NOT NULL,
     address varchar(255) NOT NULL,
     CMND1 varchar(255) COLLATE utf8_unicode_ci ,
-    CMND2 varchar(255) COLLATE utf8_unicode_ci  
+    CMND2 varchar(255) COLLATE utf8_unicode_ci ,
+    PRIMARY KEY(id)
 );
