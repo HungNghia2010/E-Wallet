@@ -25,6 +25,26 @@ const db = mysql.createConnection({
     database: process.env.DATABASE
 });
 
+exports.login = async (req, res) => {
+
+    try{
+
+        const {username,pwd} = req.body
+        
+        db.query('SELECT * FROM register WHERE username = ?', [username], async (error,result) => {
+            console.log(result)
+            if(result.length = 0){
+                res.render('login',{
+                    message: 'Username này không tồn tại'
+                })
+            }
+        })
+
+    }catch(error){
+        console.log(error)
+    }
+}
+
 exports.register = (req, res) => {
     console.log(req.body)
 
@@ -49,24 +69,24 @@ exports.register = (req, res) => {
                 console.log(error)
             } else{
                 //mail
-                var mailOptions = {
-                    from: 'sinhvien@phongdaotao.com',
-                    to: email,
-                    subject: 'Gửi thông tin đăng nhập',
-                    text: '<h1>Tên đăng nhập: {{username}} , Mật khẩu: {{password}}</h1>',
-                }
+                // var mailOptions = {
+                //     from: 'sinhvien@phongdaotao.com',
+                //     to: email,
+                //     subject: 'Gửi thông tin đăng nhập',
+                //     text: '<h1>Tên đăng nhập: {{username}} , Mật khẩu: {{password}}</h1>',
+                // }
 
-                transporter.sendMail(mailOptions,function(error, info) {
-                    if(error){
-                        console.log(error)
-                    }else{
-                        console.log('Email sent: ' + info.response)
-                    }
-                })
+                // transporter.sendMail(mailOptions,function(error, info) {
+                //     if(error){
+                //         console.log(error)
+                //     }else{
+                //         console.log('Email sent: ' + info.response)
+                //     }
+                // })
 
                 //send message to register.hbs
                 return res.render('register',{
-                    message: 'Đăng ký thành công'
+                    message: 'Đăng ký thành công, tên đăng nhập là: ' + username + ', mật khẩu là: ' + password
                 })
  
             }

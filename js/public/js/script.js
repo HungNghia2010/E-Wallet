@@ -77,4 +77,3 @@ function eye() {
         $('#eye').prev().attr("type", "password");
     };
 }
-

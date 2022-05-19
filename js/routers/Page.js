@@ -1,7 +1,7 @@
 const express = require('express')
 const Router = express.Router()
 
-Router.get('/', (req, res) => {
+Router.get('/login', (req, res) => {
     res.render('login')
 })
 
