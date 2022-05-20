@@ -57,11 +57,11 @@ exports.register = (req, res) => {
 
     const { name, birth, email, phone, cmnd, address} = req.body;
 
-    // if(!name){
-    //     return res.render('register',{
-    //         message: 'Họ và tên không được trống'
-    //     })
-    // }
+    if(!name){
+        return res.render('register',{
+            message: 'Họ và tên không được trống'
+        })
+    }
     
     
     db.query('SELECT * FROM register WHERE email = ? OR phone_number = ?', [email,phone], (error, result) => {
@@ -100,7 +100,7 @@ exports.register = (req, res) => {
 
                 //send message to register.hbs
                 return res.render('register',{
-                    message: 'Đăng ký thành công, tên đăng nhập là: ' + username + ', mật khẩu là: ' + password
+                    success: 'Đăng ký thành công, tên đăng nhập là: ' + username + ', mật khẩu là: ' + password
                 })
  
             }

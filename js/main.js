@@ -36,5 +36,5 @@ app.use('/auth', require('./routers/Auth'))
 
 const port = process.env.PORT || 8080
 app.listen(port, () => {
-    console.log('http://localhost:' + port)
+    console.log('http://localhost:' + port+'/login')
 })

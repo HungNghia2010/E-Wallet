@@ -67,20 +67,23 @@
                             <input class="file-upload-input" type="file">
                         </div>
                     </div>
-                    <div id="dialogCont" class="dig-container">
-                        <div class="dig-header">
-                            Welcome!
+                    {{#if success}}
+                        <div id="dialogCont" class="dig-container">
+                            <div class="dig-header">
+                                Welcome!
+                            </div>
+                            <div id="digbody" class="dig-body">
+                                <h4>{{success}}</h4>
+                            </div>
+                            <div class="dig-footer">
+                                <a href="http://localhost:9090/login">OK</a>
+                                <a onclick="">Cancel</a>
+                            </div>
                         </div>
-                        <div id="digbody" class="dig-body">
-                            {{#if message}}
-                                <h4>{{message}}</h4>
-                            {{/if}}
-                        </div>
-                        <div class="dig-footer">
-                            <a onclick="">OK</a>
-                            <a onclick="">Cancel</a>
-                        </div>
-                    </div>
+                    {{/if}}
+                    {{#if message}}
+                        <h4>{{message}}</h4>
+                    {{/if}}
                     <div class="button register-button">
                         <input type="button" value="Back" id="Backbutn">
                         <input type="submit" value="Register">
