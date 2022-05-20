@@ -47,7 +47,16 @@ exports.login = async (req, res) => {
                 else if(!result || !(await bcrypt.compare(pwd,result[0].pass))){
                     return res.json({status:"error", error:"Mật khẩu không chính xác"})
                 }else{
-                    console.log('Đăng nhập thành công')
+                    const token = jwt.sign({ id: result[0].id }, process.env.JWT_SECRET, {
+                        expiresIn: process.env.JWT_EXPIRRES,
+                        httpOnly: true
+                    })
+                    const cookieOptions = {
+                        expiresIn: new Date(Date.now() + process.env.COOKIE_EXPIRRES * 24 * 60 * 60 * 1000),
+                        httpOnly: true
+                    }
+                    res.cookie("userRegistered", token, cookieOptions)
+                    return res.json({status: "success", success: "User has been logged In"})
                 }
             })
         }
@@ -131,3 +140,7 @@ const generateRandomString = (myLength) => {
     const randomString = randomArray.join("");
     return randomString;
 };
+
+exports.LoggedIn = (req, res) => {
+
+}
