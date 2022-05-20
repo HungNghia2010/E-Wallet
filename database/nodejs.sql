@@ -2,7 +2,7 @@ CREATE DATABASE IF NOT EXISTS nodejs DEFAULT CHARACTER SET utf8 COLLATE utf8_uni
 USE nodejs;
 
 CREATE TABLE register(
-    id int(10) NOT NULL,
+    id int(10) NOT NULL AUTO_INCREMENT,
     username varchar(64) NOT NULL,
     pass varchar(255) NOT NULL,
     name varchar(64) COLLATE utf8_unicode_ci NOT NULL,
