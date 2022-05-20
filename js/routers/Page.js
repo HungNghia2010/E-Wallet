@@ -9,4 +9,8 @@ Router.get('/register', (req, res) => {
     res.render('register')
 })
 
+Router.get('/index', (req,res) => {
+    res.render('index')
+})
+
 module.exports = Router

@@ -2,9 +2,11 @@ require('dotenv').config()
 const path = require('path')
 const express = require('express')
 const mysql = require('mysql')
+const cookieparser = require('cookie-parser')
 
 
 const app = express()
+app.use(cookieparser)
 const db = mysql.createConnection({
     host: process.env.DATABASE_HOST,
     user: process.env.DATABASE_USER,

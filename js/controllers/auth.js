@@ -32,6 +32,7 @@ exports.login = async (req, res) => {
         const {username,pwd} = req.body
         console.log(req.body)
 
+        
         db.query('SELECT * FROM register WHERE username = ?', [username], async (error,result) => {
             if(result.length === 0){
                 res.render('login',{
@@ -43,7 +44,18 @@ exports.login = async (req, res) => {
                     message: 'Mật khẩu không đúng'
                 })
             }else{
-                res.send("Form submit")
+                const id = result[0].id
+                const token = jwt.sign({id}, process.env.JWT_SECRET,{
+                    expiresIn: process.env.JWT_EXPIRRES_IN
+                })
+                const cookieOptions = {
+                    expires : new Date(
+                        Date.now() + process.env.JWT_COOKIE_EXPIRRES * 24 * 60 * 60 * 1000
+                    ),
+                    httponly: true,
+                }
+                res.cookie('jwt', token, cookieOptions)
+                res.status(200).redirect("/index")
             }
         })
 
