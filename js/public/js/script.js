@@ -1,29 +1,23 @@
 //login
-function validateInput() {
-    let userBox = document.getElementById("username")
-    let passwordBox = document.getElementById("pwd")
-    let messageBox = document.getElementById("errorMessage")
-
-    let user = userBox.value;
-    let password = passwordBox.value;
-
-
-    if (user === "") {
-        messageBox.innerHTML = "Please enter your username";
-        emailBox.focus();
-        return false;
-    } else if (password === "") {
-        messageBox.innerHTML = "Please enter your password";
-        passwordBox.focus();
-        return false;
-    } else if (password.length < 6) {
-        messageBox.innerHTML = "Your password must contain at least 6 characters";
-        passwordBox.focus();
-        return false;
+document.getElementById('form-login').addEventListener("submit", ()=>{
+    const login = {
+        username: username.value,
+        pwd: pwd.value
     }
-    messageBox.innerHTML = "";
-    return true;
-}
+    fetch("/auth/login",{
+        method: "POST",
+        body: JSON.stringify(login),
+        headers: {
+            "Content-type":"application/json"
+        }
+    }).then(res => res.json())
+    .then(data => {
+        if(data.status == "error"){
+            errorMessage.style.display = "block"
+            error.innerText = data.error
+        }
+    })
+})
 
 
 

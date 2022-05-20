@@ -32,21 +32,25 @@ exports.login = async (req, res) => {
         const {username,pwd} = req.body
         console.log(req.body)
 
-        
-        db.query('SELECT * FROM register WHERE username = ?', [username], async (error,result) => {
-            if(result.length === 0){
-                res.render('login',{
-                    message: 'Username này không tồn tại'
-                })
-            }
-            else if(!result || !(await bcrypt.compare(pwd,result[0].pass))){
-                res.render('login',{
-                    message: 'Mật khẩu không đúng'
-                })
-            }else{
-                res.send("Form submit")
-            }
-        })
+        if(!username){
+            return res.json({status:"error", error:"Hãy nhập tên đăng nhập"})
+        }else if(!pwd){
+            return res.json({status:"error", error:"Hãy nhập mật khẩu"})
+        }else if(pwd.length < 6){
+            return res.json({status:"error", error:"Mật khẩu phải có tối thiểu 6 ký tự"})
+        }
+        else{
+            db.query('SELECT * FROM register WHERE username = ?', [username], async (error,result) => {
+                if(result.length === 0){
+                    return res.json({status:"error", error:"Tên đăng nhập không tồn tại"})
+                }
+                else if(!result || !(await bcrypt.compare(pwd,result[0].pass))){
+                    return res.json({status:"error", error:"Mật khẩu không chính xác"})
+                }else{
+                    res.send("Form submit")
+                }
+            })
+        }
 
     }catch(error){
         console.log(error)

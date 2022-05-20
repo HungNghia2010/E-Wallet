@@ -21,29 +21,24 @@
     <div id="wrapper" class="wrapper">
 
 
-        <form class="form-login" id="form-login" onsubmit="return validateInput()" action="/auth/login" method="post">
+        <form class="form-login" id="form-login" onsubmit="return false;">
             <h1 class="form-heading">Login Form</h1>
             <div class="form-group form-group-admin ">
                 <i class="far fa-user"></i>
-                <input value="" type="text" onclick="validateInput()" class="form-input form-input-admin" id="username" placeholder="Enter username" name="username">
+                <input type="text" class="form-input form-input-admin" id="username" placeholder="Enter username" name="username">
             </div>
 
             <div class="form-group form-group-admin">
                 <i class="fas fa-key"></i>
-                <input value="" type="password" onclick="validateInput()" class="form-input form-input-admin" id="pwd" placeholder="Enter password" name="pwd">
+                <input type="password" class="form-input form-input-admin" id="pwd" placeholder="Enter password" name="pwd">
                 <div onclick="eye()" id="eye">
                     <i class="far fa-eye"></i>
                 </div>
             </div>
-            <div id="errorMessage" class="errorMessage my-3">
-                <div class='alert alert-danger'></div>
+            <div id="errorMessage" class="errorMessage my-3" style="display: none;">
+                <div class='alert alert-danger' id="error"></div>
             </div>
-            {{#if message}}
-                <div class="alert">
-                    <span class="fas fa-exclamation-circle"></span>
-                    <span class="msg">{{message}}</span>
-                </div>
-            {{/if}}
+            
             <button class="form-submit" type="submit" class="btn btn-default">Login now</button>
             <button class="form-submit" type="submit" class="btn btn-default"><a href="/register">Register A New Account</a></button>
         </form>
