@@ -81,9 +81,14 @@
                             </div>
                         </div>
                     {{/if}}
+
                     {{#if message}}
-                        <h4>{{message}}</h4>
+                        <div class="alert">
+                            <span class="fas fa-exclamation-circle"></span>
+                            <span class="msg">{{message}}</span>
+                        </div>
                     {{/if}}
+
                     <div class="button register-button">
                         <input type="button" value="Back" id="Backbutn">
                         <input type="submit" value="Register">
