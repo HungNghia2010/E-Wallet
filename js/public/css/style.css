@@ -882,7 +882,59 @@ section {
 /* } */
 
 
-/*---------------------*/
+/*--------------------------------------------------------dialog------------*/
+
+.dig-container {
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    transform: translateX(-50%) translateY(-50%);
+    width: 400px;
+    background: #fff;
+    padding: 10px;
+    border: 2px solid #ddd;
+    box-shadow: 1px 1px 5px 1px #ccc;
+    border-radius: 10px;
+    opacity: 1;
+    transition: all 0.3s linear 0s;
+}
+
+.dig-header {
+    text-align: center;
+    padding: 10px;
+    font-weight: bold;
+    background: #29bbb6;
+    color: #f6f7f8;
+}
+
+.dig-body {
+    padding: 10px;
+    line-height: 30px;
+}
+
+.dig-footer {
+    text-align: center;
+    background: #f5f5f2;
+    padding: 3px 0;
+}
+
+.dig-footer a {
+    display: inline-block;
+    width: 100px;
+    padding: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background: #eee;
+    cursor: pointer;
+}
+
+.dig-footer a:active {
+    box-shadow: inset 2px 2px 4px 0#ccc;
+    color: #666;
+}
+
+
+/*---------------------------------------------------------dialog----------*/
 
 
 /* media queries  */
