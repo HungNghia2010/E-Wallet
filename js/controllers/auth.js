@@ -47,7 +47,7 @@ exports.login = async (req, res) => {
                 else if(!result || !(await bcrypt.compare(pwd,result[0].pass))){
                     return res.json({status:"error", error:"Mật khẩu không chính xác"})
                 }else{
-                    res.send("Form submit")
+                    console.log('Đăng nhập thành công')
                 }
             })
         }
@@ -108,7 +108,7 @@ exports.register = async (req, res) => {
                     // })
     
                     //send message to register.hbs
-                    const success = 'Đăng ký thành công, tên đăng nhập là: ' + username + ', mật khẩu là: ' + password;
+                    const success = 'Tên đăng nhập là: ' + username + ', Mật khẩu là: ' + password;
                     return res.json({status: "success", success: success });
      
                 }
