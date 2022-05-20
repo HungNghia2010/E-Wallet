@@ -39,7 +39,6 @@ exports.login = async (req, res) => {
                 })
             }
             else if(!result || !(await bcrypt.compare(pwd,result[0].pass))){
-                console.log(bcrypt.compare(result[0].pass,pwd))
                 res.render('login',{
                     message: 'Mật khẩu không đúng'
                 })
@@ -62,53 +61,72 @@ exports.register = (req, res) => {
         return res.render('register',{
             message: 'Họ và tên không được trống'
         })
-    }
-    
-    
-    db.query('SELECT * FROM register WHERE email = ? OR phone_number = ?', [email,phone], async (error, result) => {
-        if(error){
-            console.log(error)
-        }
-
-        if(result.length > 0){
-            return res.render('register',{
-                message: 'Email hoặc số điện thoại này đã được sử dụng'
-            })
-        }
-
-        const username = Math.floor(1000000000 + Math.random() * 9000000000);
-        const password = generateRandomString(6);
-        let hashedpass = await bcrypt.hash(password,8)
-        console.log(hashedpass)
-        db.query('INSERT INTO register SET ?',{username : username, pass: hashedpass, name: name, email: email, phone_number: phone, identity: cmnd, address: address}, (error, result)=>{
+    }else if(!birth){
+        return res.render('register',{
+            message: 'Ngày sinh không được trống'
+        })
+    }else if(!email){
+        return res.render('register',{
+            message: 'Email không được trống'
+        })
+    }else if(!phone){
+        return res.render('register',{
+            message: 'Số điện thoại không được trống'
+        })
+    }else if(!cmnd){
+        return res.render('register',{
+            message: 'Số chứng minh nhân dân không được trống'
+        })
+    }else if(!address){
+        return res.render('register',{
+            message: 'Địa chỉ không được trống'
+        })
+    }else{
+        db.query('SELECT * FROM register WHERE email = ? OR phone_number = ?', [email,phone], async (error, result) => {
             if(error){
                 console.log(error)
-            } else{
-                // //mail
-                // var mailOptions = {
-                //     from: 'sinhvien@phongdaotao.com',
-                //     to: email,
-                //     subject: 'Gửi thông tin đăng nhập',
-                //     text: '<h1>Tên đăng nhập: {{username}} , Mật khẩu: {{password}}</h1>',
-                // }
-
-                // transporter.sendMail(mailOptions,function(error, info) {
-                //     if(error){
-                //         console.log(error)
-                //     }else{
-                //         console.log('Email sent: ' + info.response)
-                //     }
-                // })
-
-                //send message to register.hbs
-                return res.render('register',{
-                    success: 'Đăng ký thành công, tên đăng nhập là: ' + username + ', mật khẩu là: ' + password
-                })
- 
             }
+    
+            if(result.length > 0){
+                return res.render('register',{
+                    message: 'Email hoặc số điện thoại này đã được sử dụng'
+                })
+            }
+    
+            const username = Math.floor(1000000000 + Math.random() * 9000000000);
+            const password = generateRandomString(6);
+            let hashedpass = await bcrypt.hash(password,8)
+            console.log(hashedpass)
+            db.query('INSERT INTO register SET ?',{username : username, pass: hashedpass, name: name, email: email, phone_number: phone, identity: cmnd, address: address}, (error, result)=>{
+                if(error){
+                    console.log(error)
+                } else{
+                    // //mail
+                    // var mailOptions = {
+                    //     from: 'sinhvien@phongdaotao.com',
+                    //     to: email,
+                    //     subject: 'Gửi thông tin đăng nhập',
+                    //     text: '<h1>Tên đăng nhập: {{username}} , Mật khẩu: {{password}}</h1>',
+                    // }
+    
+                    // transporter.sendMail(mailOptions,function(error, info) {
+                    //     if(error){
+                    //         console.log(error)
+                    //     }else{
+                    //         console.log('Email sent: ' + info.response)
+                    //     }
+                    // })
+    
+                    //send message to register.hbs
+                    return res.render('register',{
+                        success: 'Đăng ký thành công, tên đăng nhập là: ' + username + ', mật khẩu là: ' + password
+                    })
+     
+                }
+            })
+    
         })
-
-    })
+    }
 
 }
 
