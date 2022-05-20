@@ -937,6 +937,34 @@ section {
 /*---------------------------------------------------------dialog----------*/
 
 
+/*---------------------------------------------------------alert----------*/
+
+.alert {
+    background: #f8d7da;
+    padding: 20px 40px;
+    min-width: 420px;
+    right: 0px;
+    top: 10px;
+    border-radius: 7px;
+    border-left: 8px solid #f34655;
+}
+
+.alert .fa-exclamation-circle {
+    left: 5px;
+    top: 50%;
+    font-size: 20px;
+}
+
+.alert .msg {
+    padding: 0 10px;
+    font-size: 18px;
+    color: #881c23;
+}
+
+
+/*---------------------------------------------------------alert----------*/
+
+
 /* media queries  */
 
 @media (max-width:991px) {
