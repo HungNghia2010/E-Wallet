@@ -53,35 +53,23 @@ exports.login = async (req, res) => {
     }
 }
 
-exports.register = (req, res) => {
+exports.register = async (req, res) => {
     console.log(req.body)
 
-    const { name, birth, email, phone, cmnd, address} = req.body;
+    const { nameeee, birth, email, phone, cmnd, address} = req.body;
 
-    if(!name){
-        return res.render('register',{
-            message: 'Họ và tên không được trống'
-        })
+    if(!nameeee){
+        return res.json({status:"error", error:"Hãy nhập tên"})
     }else if(!birth){
-        return res.render('register',{
-            message: 'Ngày sinh không được trống'
-        })
+        return res.json({status:"error", error:"Hãy nhập ngày sinh"});
     }else if(!email){
-        return res.render('register',{
-            message: 'Email không được trống'
-        })
+        return res.json({status:"error", error:"Hãy nhập email"});
     }else if(!phone){
-        return res.render('register',{
-            message: 'Số điện thoại không được trống'
-        })
+        return res.json({status:"error", error:"Hãy nhập số điện thoại"});
     }else if(!cmnd){
-        return res.render('register',{
-            message: 'Số chứng minh nhân dân không được trống'
-        })
+        return res.json({status:"error", error:"Hãy nhập chứng minh nhân dân"});
     }else if(!address){
-        return res.render('register',{
-            message: 'Địa chỉ không được trống'
-        })
+        return res.json({status:"error", error:"Hãy nhập địa chỉ"});
     }else{
         db.query('SELECT * FROM register WHERE email = ? OR phone_number = ?', [email,phone], async (error, result) => {
             if(error){
@@ -89,16 +77,13 @@ exports.register = (req, res) => {
             }
     
             if(result.length > 0){
-                return res.render('register',{
-                    message: 'Email hoặc số điện thoại này đã được sử dụng'
-                })
+                return res.json({status:"error", error:"Email hoặc số điện thoại này đã được sử dụng"});
             }
     
             const username = Math.floor(1000000000 + Math.random() * 9000000000);
             const password = generateRandomString(6);
             let hashedpass = await bcrypt.hash(password,8)
-            console.log(hashedpass)
-            db.query('INSERT INTO register SET ?',{username : username, pass: hashedpass, name: name, email: email, phone_number: phone, identity: cmnd, address: address}, (error, result)=>{
+            db.query('INSERT INTO register SET ?',{username : username, pass: hashedpass, name: nameeee, email: email, phone_number: phone, identity: cmnd, address: address}, (error, result)=>{
                 if(error){
                     console.log(error)
                 } else{
@@ -119,9 +104,8 @@ exports.register = (req, res) => {
                     // })
     
                     //send message to register.hbs
-                    return res.render('register',{
-                        success: 'Đăng ký thành công, tên đăng nhập là: ' + username + ', mật khẩu là: ' + password
-                    })
+                    const success = 'Đăng ký thành công, tên đăng nhập là: ' + username + ', mật khẩu là: ' + password;
+                    return res.json({status: "success", success: success });
      
                 }
             })

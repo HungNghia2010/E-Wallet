@@ -18,7 +18,7 @@
         <div class="container container-about-me">
             <div class="title">Register</div>
             <div class="content content-about-me">
-                <form class="form-about-me" action="/auth/register" method="post">
+                <form class="form-about-me" onsubmit="return false;"; id="form">
                     <div id="content-img">
                         <div class="about-me-image">
                             <img src="/images/empicon.jpg" class="rounded-circle " width="150">
@@ -36,27 +36,27 @@
 
                         <div class="input-box">
                             <span class="details">Họ và tên</span>
-                            <input value="" type="text" placeholder="" id="name" name="name">
+                            <input type="text" placeholder="" id="nameeee" name="nameeee">
                         </div>
                         <div class="input-box">
                             <span class="details">Ngày sinh</span>
-                            <input value="" type="text" placeholder="" id="birth" name="birth" >
+                            <input type="text" placeholder="" id="birth" name="birth" >
                         </div>
                         <div class="input-box">
                             <span class="details">Email</span>
-                            <input value="" type="text" placeholder="" id="email" name="email" >
+                            <input type="text" placeholder="" id="email" name="email" >
                         </div>
                         <div class="input-box">
                             <span class="details">Số điện thoại</span>
-                            <input value="" type="text" placeholder="" id="phone" name="phone" >
+                            <input type="text" placeholder="" id="phone" name="phone" >
                         </div>
                         <div class="input-box">
                             <span class="details">CMND/CCCD</span>
-                            <input value="" type="text" placeholder="" id="cmnd" name="cmnd">
+                            <input type="text" placeholder="" id="cmnd" name="cmnd">
                         </div>
                         <div class="input-box">
                             <span class="details">Địa chỉ</span>
-                            <input value="" type="text" placeholder="" id="address" name="address" >
+                            <input type="text" placeholder="" id="address" name="address" >
                         </div>
                         <div class="input-box">
                             <span class="details">Mặt trước CMND</span>
@@ -67,33 +67,37 @@
                             <input class="file-upload-input" type="file">
                         </div>
                     </div>
-                    {{#if success}}
-                        <div id="dialogCont" class="dig-container">
+                    
+                        <div id="dialogCont" class="dig-container" style="display: none;">
                             <div class="dig-header">
                                 Welcome!
                             </div>
                             <div id="digbody" class="dig-body">
-                                <h4>{{success}}</h4>
+                                <h4 id="success"></h4>
                             </div>
                             <div class="dig-footer">
                                 <a href="http://localhost:9090/login">Chuyển về trang đăng nhập</a>
                             </div>
                         </div>
-                    {{/if}}
+                    
 
-                    {{#if message}}
+                    {{!-- {{#if message}}
                         <div class="alert">
                             <span class="fas fa-exclamation-circle"></span>
                             <span class="msg">{{message}}</span>
                         </div>
-                    {{/if}}
+                    {{/if}} --}}
+                    <div class="alert" id="alerterror" style="display: none;">
+                        <span class="fas fa-exclamation-circle"></span>
+                        <span class="msg" id="error"></span>
+                    </div>
 
 
                     <div class="button register-button">
                         {{!-- <input type="button" value="Back" id="Backbutn">
                         <input type="submit" value="Register"> --}}
-                        <button class="regisbutton"><a href="">Back</a></button>
-                        <button class="regisbutton"><a href="">Register</a></button>
+                        <button type="submit" class="regisbutton"><a href="http://localhost:9090/login">Back</a></button>
+                        <button type="submit" class="regisbutton"><a>Register</a></button>
                     </div>
                 </form>
             </div>
@@ -106,7 +110,7 @@
 
 
 
-    <script src="/js/script.js"></script>
+    <script src="/js/Register.js"></script>
 
 </body>
 
