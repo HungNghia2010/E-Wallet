@@ -38,12 +38,15 @@
             <div id="errorMessage" class="errorMessage my-3">
                 <div class='alert alert-danger'></div>
             </div>
+            {{#if message}}
+                <div class="alert">
+                    <span class="fas fa-exclamation-circle"></span>
+                    <span class="msg">{{message}}</span>
+                </div>
+            {{/if}}
             <button class="form-submit" type="submit" class="btn btn-default">Login now</button>
             <button class="form-submit" type="submit" class="btn btn-default"><a href="/register">Register A New Account</a></button>
         </form>
-        {{#if message}}
-            <h4>{{message}}</h4>
-        {{/if}}
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
