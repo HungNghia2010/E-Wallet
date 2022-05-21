@@ -142,5 +142,5 @@ const generateRandomString = (myLength) => {
 };
 
 exports.LoggedIn = (req, res) => {
-
+    
 }
