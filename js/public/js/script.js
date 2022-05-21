@@ -15,6 +15,8 @@ document.getElementById('form-login').addEventListener("submit", ()=>{
         if(data.status == "error"){
             errorMessage.style.display = "block"
             error.innerText = data.error
+        }else{
+            document.location.replace("/index")
         }
     })
 })

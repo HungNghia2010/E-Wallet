@@ -2,7 +2,7 @@ require('dotenv').config()
 const path = require('path')
 const express = require('express')
 const mysql = require('mysql')
-//const cookieparser = require('cookie-parser')
+const cookieparser = require('cookie-parser')
 
 
 const app = express()
@@ -29,6 +29,7 @@ db.connect( (error) => {
 
 app.use(express.urlencoded({extended: false}))
 app.use(express.json())
+app.use(cookieparser())
 
 //define routers
 app.use('/', require('./routers/Page'))

@@ -48,8 +48,7 @@ exports.login = async (req, res) => {
                     return res.json({status:"error", error:"Mật khẩu không chính xác"})
                 }else{
                     const token = jwt.sign({ id: result[0].id }, process.env.JWT_SECRET, {
-                        expiresIn: process.env.JWT_EXPIRRES,
-                        httpOnly: true
+                        expiresIn: process.env.JWT_EXPIRRES
                     })
                     const cookieOptions = {
                         expiresIn: new Date(Date.now() + process.env.COOKIE_EXPIRRES * 24 * 60 * 60 * 1000),
@@ -100,26 +99,21 @@ exports.register = async (req, res) => {
                 if(error){
                     console.log(error)
                 } else{
-                    // //mail
-                    // var mailOptions = {
-                    //     from: 'sinhvien@phongdaotao.com',
-                    //     to: email,
-                    //     subject: 'Gửi thông tin đăng nhập',
-                    //     text: '<h1>Tên đăng nhập: {{username}} , Mật khẩu: {{password}}</h1>',
-                    // }
+                    //mail
+                    var mailOptions = {
+                        from: 'sinhvien@phongdaotao.com',
+                        to: email,
+                        subject: 'Gửi thông tin đăng nhập',
+                        text: 'Tên đăng nhập: '+ username +' , Mật khẩu: ' + password,
+                    }
     
-                    // transporter.sendMail(mailOptions,function(error, info) {
-                    //     if(error){
-                    //         console.log(error)
-                    //     }else{
-                    //         console.log('Email sent: ' + info.response)
-                    //     }
-                    // })
-    
-                    //send message to register.hbs
-                    const success = 'Tên đăng nhập là: ' + username + ', Mật khẩu là: ' + password;
-                    return res.json({status: "success", success: success });
-     
+                    transporter.sendMail(mailOptions,function(error, info) {
+                        if(error){
+                            console.log(error)
+                        }else{
+                            return res.json({status: "success", success: "Hãy kiểm tra mail để biết username và password" });
+                        }
+                    })
                 }
             })
     
@@ -140,7 +134,3 @@ const generateRandomString = (myLength) => {
     const randomString = randomArray.join("");
     return randomString;
 };
-
-exports.LoggedIn = (req, res) => {
-    
-}
