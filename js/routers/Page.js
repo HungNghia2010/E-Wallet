@@ -21,4 +21,8 @@ Router.get('/index', loggedIn.loggedIn, (req,res) => {
 
 Router.get('/logout',logout.logout)
 
+Router.get('/info', (req, res) => {
+    res.render('info')
+})
+
 module.exports = Router
