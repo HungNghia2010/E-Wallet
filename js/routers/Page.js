@@ -23,6 +23,7 @@ Router.get('/logout',logout.logout)
 
 Router.get('/info', loggedIn.loggedIn,(req, res) => {
     if(req.user){
+        console.log(req.user)
         res.render('info',{status:"info",user: req.user})
     }else{
         res.render('no',{status:"no",user: "nothing"})
