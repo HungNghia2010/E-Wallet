@@ -21,8 +21,12 @@ Router.get('/index', loggedIn.loggedIn, (req,res) => {
 
 Router.get('/logout',logout.logout)
 
-Router.get('/info', (req, res) => {
-    res.render('info')
+Router.get('/info', loggedIn.loggedIn,(req, res) => {
+    if(req.user){
+        res.render('info',{status:"info",user: req.user})
+    }else{
+        res.render('no',{status:"no",user: "nothing"})
+    }
 })
 
 module.exports = Router

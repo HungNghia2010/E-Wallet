@@ -21,7 +21,7 @@
 
         <nav class="navbar ulnav">
             <!-- Chức năng chung -->
-            <a href="index.html">Home</a>
+            <a href="/index">Home</a>
             <!-- Chức năng admin -->
 
             <li class="dropdown">
@@ -41,7 +41,7 @@
             <a href="index.html#menu">Menu</a>
             <a href="index.html#products">Card</a>
             <a href="index.html#contact">Contact</a>
-            <a href="index.html#logout">Logout</a>
+            <a href="/logout">Logout</a>
 
         </nav>
 
@@ -80,19 +80,19 @@
 
                         <div class="input-box">
                             <span class="details">Họ và tên</span>
-                            <input value="Nguyen Trung Hau" type="text" placeholder="Enter your name" required>
+                            <input value="{{user.name}}" type="text" placeholder="Enter your name" required>
                         </div>
                         <div class="input-box">
                             <span class="details">Username</span>
-                            <input value="1131141150" type="text" placeholder="" required>
+                            <input value="{{user.username}}" type="text" placeholder="" required>
                         </div>
                         <div class="input-box">
                             <span class="details">Email</span>
-                            <input value="hau@gmail.com" type="text" placeholder="" required>
+                            <input value="{{user.email}}" type="text" placeholder="" required>
                         </div>
                         <div class="input-box">
                             <span class="details">Số điện thoại</span>
-                            <input value="0919191919" type="text" placeholder="" required>
+                            <input value="{{user.phone_number}}" type="text" placeholder="" required>
                         </div>
                         <div class="input-box">
                             <span class="details">Số dư</span>
@@ -116,11 +116,11 @@
 
                         <div class="input-box">
                             <span class="details">CMND/CCCD</span>
-                            <input value="989898989" type="text" placeholder="" required>
+                            <input value="{{user.identity}}" type="text" placeholder="" required>
                         </div>
                         <div class="input-box">
                             <span class="details">Địa chỉ</span>
-                            <input value="An Giang" type="text" placeholder="" required>
+                            <input value="{{user.address}}" type="text" placeholder="" required>
                         </div>
                         <div class="input-box">
                             <span class="details">Ngày sinh</span>
@@ -128,7 +128,7 @@
                         </div>
                         <div class="input-box">
                             <span class="details">Trạng thái</span>
-                            <input value="đang chờ xác minh" type="text" placeholder="" required>
+                            <input value="đang chờ xác minh" type="text" placeholder="" readonly>
                         </div>
 
 
