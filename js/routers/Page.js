@@ -3,6 +3,10 @@ const Router = express.Router()
 const loggedIn = require('../controllers/LoggedIn')
 const logout = require('../controllers/Logout')
 
+Router.get('/firststep', (req,res) => {
+    res.render('firststep')
+})
+
 Router.get('/login', (req, res) => {
     res.render('login')
 })

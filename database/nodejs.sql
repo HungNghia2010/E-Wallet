@@ -13,5 +13,7 @@ CREATE TABLE register(
     address varchar(255) NOT NULL,
     CMND1 varchar(255) COLLATE utf8_unicode_ci ,
     CMND2 varchar(255) COLLATE utf8_unicode_ci ,
+    status varchar(50) NOT NULL,
+    role int(10) NOT NULL,
     PRIMARY KEY(id)
 );
