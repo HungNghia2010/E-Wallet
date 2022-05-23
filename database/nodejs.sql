@@ -15,5 +15,6 @@ CREATE TABLE register(
     CMND2 varchar(255) COLLATE utf8_unicode_ci ,
     status varchar(50) NOT NULL,
     role int(10) NOT NULL,
+    change_pass int(5) NOT NULL,
     PRIMARY KEY(id)
 );

@@ -21,25 +21,25 @@
     <div id="wrapper" class="wrapper">
 
 
-        <form class="form-login" id="form-login" action="" method="post">
-            <h1 class="form-heading">First Step</h1>
+        <form class="form-login" id="form-login" onsubmit="return false;">
+            <h1 class="form-heading">First Login Please Change Your Password</h1>
             <div class="form-group form-group-admin ">
                 <i class="fas fa-key"></i>
-                <input value="" type="password" onclick="clearError()" class="form-input form-input-admin" id="pwd" placeholder="Enter new password" name="pwd">
+                <input value="" type="password" class="form-input form-input-admin" id="pwd" placeholder="Enter new password" name="pwd">
             </div>
 
             <div class="form-group form-group-admin">
                 <i class="fas fa-key"></i>
-                <input value="" type="password" onclick="clearError()" class="form-input form-input-admin" id="pwd" placeholder="Enter new password again" name="pwd">
+                <input value="" type="password" class="form-input form-input-admin" id="pwd-confirm" placeholder="Enter new password again" name="pwd-confirm">
                 <div onclick="eye()" id="eye">
                     <i class="far fa-eye"></i>
                 </div>
             </div>
-            <div id="errorMessage" class="errorMessage my-3">
+            <div id="errorMessage" class="errorMessage my-3" style="display: none;">
                 <div class='alert alert-danger'></div>
             </div>
             <button class="form-submit" type="submit" class="btn btn-default">Login now</button>
-            <button class="form-submit" type="submit" class="btn btn-default">Log out</button>
+            <button class="form-submit" type="button" class="btn btn-default"><a href="/logout">LOG OUT</a></button>
         </form>
 
 
@@ -48,7 +48,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script src="js/script.js"></script>
+    <script src="js/changepass.js"></script>
 </body>
 
 </html>
