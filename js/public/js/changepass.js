@@ -1,11 +1,11 @@
 document.getElementById('form-login').addEventListener("submit", ()=>{
     const pass = {
         pwd: pwd.value,
-        pwdcf: pwd-confirm.value
+        pwdcf: pwdconfirm.value
     }
-    fetch("/auth/login",{
+    fetch("/auth/firststep",{
         method: "POST",
-        body: JSON.stringify(login),
+        body: JSON.stringify(pass),
         headers: {
             "Content-type":"application/json"
         }
@@ -15,7 +15,9 @@ document.getElementById('form-login').addEventListener("submit", ()=>{
             errorMessage.style.display = "block"
             error.innerText = data.error
         }else{
-            document.location.replace("/index")
+            //document.location.replace("/index")
+            errorMessage.style.display = "block"
+            error.innerText = data.success
         }
     })
 })

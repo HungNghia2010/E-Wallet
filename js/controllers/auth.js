@@ -122,6 +122,26 @@ exports.register = async (req, res) => {
 
 }
 
+exports.change_passft = async (req, res) => {
+    const {pwd,pwdcf} = req.body
+    if(!pwd){
+        return res.json({status:"error", error:"Hãy nhập mật khẩu mới"})
+    }else if(!pwdcf){
+        return res.json({status:"error", error:"Hãy xác nhận lại mật khẩu"})
+    }else if(pwd.length < 6){
+        return res.json({status:"error", error:"Mật khẩu phải có tối thiểu 6 ký tự"})
+    }else {
+        let hashedpass = await bcrypt.hash(pwd,8)
+        db.query("UPDATE register SET pass = ?, change_pass = ? WHERE id = ?", [hashedpass,1,req.user.id], (err,result) => {
+            if(err){
+                console.log(err)
+            } else{
+                return res.json({status:"success", success:"Đổi mật khẩu thành công"})
+            }
+        })
+    }
+}
+
 //random string for password
 const generateRandomString = (myLength) => {
     const chars =
