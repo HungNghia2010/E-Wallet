@@ -21,17 +21,18 @@
     <div id="wrapper" class="wrapper">
 
 
-        <form class="form-login" id="form-login" action="" method="post">
+        <form class="form-login" id="form-login" onsubmit="return false;">
             <h1 class="form-heading">Forgot Password</h1>
+            
             <div class="form-group form-group-admin ">
                 <i class="fa-solid fa-envelope"></i>
-                <input value="" type="text" class="form-input form-input-admin" id="email" placeholder="Enter your email" name="email">
+                <input type="text" class="form-input form-input-admin" id="email" placeholder="Enter your email" name="email">
             </div>
 
-            <div class="form-group form-group-admin">
+            {{!-- <div class="form-group form-group-admin">
                 <i class="fa-solid fa-phone"></i>
                 <input value="" type="number" class="form-input form-input-admin" id="phonenum" placeholder="Enter your phone number" name="phonenum">
-            </div>
+            </div> --}}
             <div id="errorMessage" class="errorMessage my-3" style="display: none;">
                 <div class='alert alert-danger' id="error"></div>
             </div>
@@ -44,7 +45,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script src="js/script.js"></script>
+    <script src="js/checkmail.js"></script>
 </body>
 
 </html>

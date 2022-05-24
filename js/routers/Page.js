@@ -23,6 +23,10 @@ Router.get('/register', (req, res) => {
     res.render('register')
 })
 
+Router.get('/forgot', (req, res) => {
+    res.render('forgotpass')
+})
+
 Router.get('/index', loggedIn.loggedIn, (req,res) => {
     if(req.user){
         if(req.user.change_pass === 0){

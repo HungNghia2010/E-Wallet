@@ -142,6 +142,39 @@ exports.change_passft = async (req, res) => {
     }
 }
 
+exports.checkmail = async(req, res) => {
+    const {email} = req.body
+
+    if(!email){
+        return res.json({status:"error", error:"Hãy nhập email"})
+    }else{
+        db.query('SELECT * FROM register WHERE email = ?', [email], async (error,result) => {
+            if(error){
+                console.log(error)
+            }else{
+                if(result.length === 0){
+                    return res.json({status:"error", error:"Email không tồn tại"})
+                }else{
+                    var mailOptions = {
+                        from: 'sinhvien@phongdaotao.com',
+                        to: email,
+                        subject: 'Gửi OTP đổi mật khẩu',
+                        text: 'Tên đăng nhập: '+ username +' , Mật khẩu: ' + password,
+                    }
+    
+                    transporter.sendMail(mailOptions,function(error, info) {
+                        if(error){
+                            console.log(error)
+                        }else{
+                            return res.json({status: "success", success: "Hãy kiểm tra mail để biết username và password" });
+                        }
+                    })
+                }
+            }
+        })
+    }
+}
+
 //random string for password
 const generateRandomString = (myLength) => {
     const chars =
