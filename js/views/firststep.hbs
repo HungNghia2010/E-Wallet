@@ -35,10 +35,25 @@
                     <i class="far fa-eye"></i>
                 </div>
             </div>
+
+            <div id="dialogCont" class="dig-container" style="display: none;">
+                <div class="dig-header">
+                    Đổi mật khẩu thành công
+                </div>
+                <div id="digbody" class="dig-body">
+                    <h4 id="success"></h4>
+                </div>
+                    <div class="dig-footer">
+                    <a href="http://localhost:9090/index">Chuyển về trang đăng nhập</a>
+                </div>
+            </div>
+
             <div id="errorMessage" class="errorMessage my-3" style="display: none;">
                 <div id="error" class='alert alert-danger'></div>
             </div>
-            <button class="form-submit" type="submit" class="btn btn-default">Login now</button>
+
+
+            <button class="form-submit" type="submit" class="btn btn-default">Change Password</button>
             <button class="form-submit" type="button" class="btn btn-default"><a href="/logout">LOG OUT</a></button>
         </form>
 

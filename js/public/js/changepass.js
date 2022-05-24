@@ -12,12 +12,14 @@ document.getElementById('form-login').addEventListener("submit", ()=>{
     }).then(res => res.json())
     .then(data => {
         if(data.status == "error"){
+            dialogCont.style.display = "none"
             errorMessage.style.display = "block"
             error.innerText = data.error
         }else{
             //document.location.replace("/index")
-            errorMessage.style.display = "block"
-            error.innerText = data.success
+            dialogCont.style.display = "block"
+            errorMessage.style.display = "none"
+            success.innerText = data.success 
         }
     })
 })
