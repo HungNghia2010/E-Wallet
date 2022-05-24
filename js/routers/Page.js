@@ -47,4 +47,26 @@ Router.get('/info', loggedIn.loggedIn,(req, res) => {
     }
 })
 
+Router.get('/info/update', loggedIn.loggedIn, (req, res) => {
+    if(req.user){
+        if(req.user.change_pass === 0){
+            res.redirect('/firststep')
+        }
+        else res.render('updateinfo',{status:"info",user: req.user})
+    }else{
+        res.render('404',{status:"no",user: "nothing"})
+    }
+})
+
+Router.get('/info/changepassword', loggedIn.loggedIn, (req, res) => {
+    if(req.user){
+        if(req.user.change_pass === 0){
+            res.redirect('/firststep')
+        }
+        else res.render('changepas',{status:"info",user: req.user})
+    }else{
+        res.render('404',{status:"no",user: "nothing"})
+    }
+})
+
 module.exports = Router

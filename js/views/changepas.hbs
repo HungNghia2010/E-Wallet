@@ -9,14 +9,14 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body>
     <header class="header headermana">
 
         <a href="index.html" class="logo">
-            <img src="images/Flash.png" alt="">
+            <img src="../images/Flash.png" alt="">
         </a>
 
         <nav class="navbar ulnav">
@@ -60,12 +60,12 @@
     <section class="about-me" id="about-me">
 
         <div class="container container-about-me">
-            <div class="title">Information</div>
+            <div class="title">Đổi mật khẩu</div>
             <div class="content content-about-me">
-                <form class="form-about-me" action="#">
+                <form class="form-about-me" action="">
                     <div id="content-img">
                         <div class="about-me-image">
-                            <img src="images/empicon.jpg" class="rounded-circle " width="150">
+                            <img src="../images/empicon.jpg" class="rounded-circle " width="150">
                         </div>
                     </div>
                     <!-- <div class="about-me-image">
@@ -78,9 +78,9 @@
 
                     <div class="user-details">
 
-                        <div class="input-box">
-                            <span class="details">Họ và tên</span>
-                            <input value="{{user.name}}" type="text" readonly>
+                        {{!-- <div class="input-box">
+                            <span class="details">Nhập mật khẩu cũ</span>
+                            <input id="password" name="password" type="text" required>
                         </div>
                         <div class="input-box">
                             <span class="details">Username</span>
@@ -88,56 +88,18 @@
                         </div>
                         <div class="input-box">
                             <span class="details">Email</span>
-                            <input value="{{user.email}}" type="text" placeholder="" readonly>
-                        </div>
+                            <input value="{{user.email}}" type="text" placeholder="" required>
+                        </div> --}}
                         <div class="input-box">
-                            <span class="details">Số điện thoại</span>
-                            <input value="{{user.phone_number}}" type="text" placeholder="" readonly>
+                            <span class="details">Nhập mật khẩu hiện tại</span>
+                            <input type="password" id="pwd" placeholder="Enter password" name="pwd">
                         </div>
-                        <div class="input-box">
-                            <span class="details">Số dư</span>
-                            <input value="1.000.000.000" type="text" placeholder="" readonly>
-                        </div>
-
-                        <div class="input-box">
-                            <span class="details">Số tài khoản</span>
-                            <input value="123456" type="text" placeholder="" readonly>
-                        </div>
-                        <div class="input-box">
-                            <span class="details">Ngày hết hạn thẻ</span>
-                            <input value="1/1/2025" type="text" placeholder="" readonly>
-                        </div>
-
-                        <div class="input-box">
-                            <span class="details">Mã CVV</span>
-                            <input value="411" type="text" placeholder="" readonly>
-                        </div>
-
-
-                        <div class="input-box">
-                            <span class="details">CMND/CCCD</span>
-                            <input value="{{user.identity}}" type="text" placeholder="" readonly>
-                        </div>
-                        <div class="input-box">
-                            <span class="details">Địa chỉ</span>
-                            <input value="{{user.address}}" type="text" placeholder="" readonly>
-                        </div>
-                        <div class="input-box">
-                            <span class="details">Ngày sinh</span>
-                            <input value="1/1/2025" type="text" placeholder="" readonly>
-                        </div>
-                        <div class="input-box">
-                            <span class="details">Trạng thái</span>
-                            <input value="đang chờ xác minh" type="text" placeholder="" readonly>
-                        </div>
-
 
                     </div>
 
                     
                     <div class="button register-button">
-                        <button type="button" class="regisbutton"><a href="/info/changepassword"> Đổi mật khẩu </a>
-                        <button type="button" class="regisbutton"><a href="/info/update"> Cập nhật thông tin </a>
+                        <button type="submit" class="regisbutton"> Đổi mật khẩu
                     </div>
                 </form>
             </div>
@@ -199,7 +161,7 @@
     </section>
 
 
-    <script src="js/script.js"></script>
+    <script src="../js/script.js"></script>
 
 </body>
 
