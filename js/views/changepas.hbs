@@ -5,23 +5,25 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CK Bank | Profile</title>
+    <title>CK Bank | Đổi mật khẩu</title>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
     <header class="header headermana">
 
         <a href="index.html" class="logo">
-            <img src="../images/Flash.png" alt="">
+            <img src="images/Flash.png" alt="">
         </a>
 
         <nav class="navbar ulnav">
             <!-- Chức năng chung -->
-            <a href="/index">Home</a>
+            <a href="index.html">Home</a>
             <!-- Chức năng admin -->
 
             <li class="dropdown">
@@ -37,17 +39,17 @@
             </li>
 
             <!-- Chức năng chung -->
-            <a href="/index#about">About</a>
-            <a href="/index.html#menu">Menu</a>
-            <a href="/index#products">Card</a>
-            <a href="/index#contact">Contact</a>
-            <a href="/logout">Logout</a>
+            <a href="index.html#about">About</a>
+            <a href="index.html#menu">Menu</a>
+            <a href="index.html#products">Card</a>
+            <a href="index.html#contact">Contact</a>
+            <a href="index.html#logout">Logout</a>
 
         </nav>
 
         <div class="icons">
             <div id="user-btn">
-                <a href="/info" class="fa-solid fa-user"></a>
+                <a href="info.html" class="fa-solid fa-user"></a>
             </div>
 
             <div class="fas fa-bars" id="menu-btn"></div>
@@ -59,85 +61,45 @@
 
     <section class="about-me" id="about-me">
 
+
         <div class="container container-about-me">
             <div class="title">Đổi mật khẩu</div>
-            <div class="content content-about-me">
-                <form class="form-about-me" action="">
-                    <div id="content-img">
-                        <div class="about-me-image">
-                            <img src="../images/empicon.jpg" class="rounded-circle " width="150">
+            <div class="content content-about-me content-changepass">
+                <form class="form-about-me" action="#">
+
+                    <div class="user-details changepass-user">
+                        <div class="input-box">
+                            <span class="details">Mật khẩu cũ</span>
+                            <input value="" type="password" placeholder="" required>
                         </div>
-                    </div>
-                    <!-- <div class="about-me-image">
-                        <img src="images/empicon.jpg" class="rounded-circle " width="150">
-                    </div>
 
-                    <div class="about-me-image about-me-image2">
-                        <img src="images/ngoc.jpg" class="rounded-circle " width="150">
-                    </div> -->
-
-                    <div class="user-details">
-
-                        {{!-- <div class="input-box">
-                            <span class="details">Nhập mật khẩu cũ</span>
-                            <input id="password" name="password" type="text" required>
+                        <div class="input-box">
+                            <span class="details">Mật khẩu mới</span>
+                            <input value="" type="password" placeholder="" required>
                         </div>
                         <div class="input-box">
-                            <span class="details">Username</span>
-                            <input value="{{user.username}}" type="text" placeholder="" readonly>
+                            <span class="details">Xác nhận mật khẩu mới</span>
+                            <input value="" type="password" placeholder="" required>
                         </div>
-                        <div class="input-box">
-                            <span class="details">Email</span>
-                            <input value="{{user.email}}" type="text" placeholder="" required>
-                        </div> --}}
-                        <div class="input-box">
-                            <span class="details">Nhập mật khẩu hiện tại</span>
-                            <input type="password" id="pwd" placeholder="Enter password" name="pwd">
-                        </div>
-
                     </div>
 
-                    
-                    <div class="button register-button">
-                        <button type="submit" class="regisbutton"> Đổi mật khẩu
+
+                    <div class="button">
+                        <input type="submit" value="Đổi mật khẩu">
                     </div>
                 </form>
             </div>
         </div>
 
+
+
+
+
     </section>
 
 
 
-    <!-- <section class="contact" id="contact">
 
-        <h1 class="heading"> <span>contact</span> us </h1>
-
-        <div class="row">
-
-            <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3920.0243805837226!2d106.69728031465488!3d10.732602892351277!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317528b2747a81a3%3A0x33c1813055acb613!2sTon%20Duc%20Thang%20University!5e0!3m2!1sen!2s!4v1647269203034!5m2!1sen!2s"
-                allowfullscreen="" loading="lazy"></iframe>
-
-            <form action="">
-                <h3>get in touch</h3>
-                <div class="inputBox">
-                    <span class="fas fa-user"></span>
-                    <input type="text" placeholder="name">
-                </div>
-                <div class="inputBox">
-                    <span class="fas fa-envelope"></span>
-                    <input type="email" placeholder="email">
-                </div>
-                <div class="inputBox">
-                    <span class="fas fa-phone"></span>
-                    <input type="number" placeholder="number">
-                </div>
-                <input type="submit" value="contact now" class="btn">
-            </form>
-
-        </div>
-
-    </section> -->
 
 
     <section class="footer">
@@ -161,7 +123,7 @@
     </section>
 
 
-    <script src="../js/script.js"></script>
+    <script src="js/script.js"></script>
 
 </body>
 

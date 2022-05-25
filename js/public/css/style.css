@@ -1037,6 +1037,24 @@ section {
 /*---------------------------------------------------------update----------*/
 
 
+/*---------------------------------------------------------changepass----------*/
+
+.content-changepass form .user-details {
+    display: inline;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 20px 0 12px 0;
+}
+
+.form-about-me .changepass-user .input-box {
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+
+/*---------------------------------------------------------changepass----------*/
+
+
 /* media queries  */
 
 @media (max-width:991px) {
