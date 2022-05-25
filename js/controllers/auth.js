@@ -142,6 +142,14 @@ exports.change_passft = async (req, res) => {
     }
 }
 
+exports.change_pass = async (req, res) => {
+    const {pwd, pwdnew, pwdcf} = req.body
+    
+    if(!pwd){
+        console.log('123142')
+    }
+}
+
 exports.checkmail = async(req, res) => {
     const {email} = req.body
 

@@ -1,9 +1,11 @@
-document.getElementById('form-login').addEventListener("submit", ()=>{
+document.getElementById('form-about-me').addEventListener("submit", ()=>{
     const pass = {
         pwd: pwd.value,
-        pwdcf: pwdconfirm.value
+        pwdnew: pwdnew.value,
+        pwdcf: pwdcf.value
+
     }
-    fetch("/auth/firststep",{
+    fetch("/auth/info/changepassword",{
         method: "POST",
         body: JSON.stringify(pass),
         headers: {
@@ -12,15 +14,13 @@ document.getElementById('form-login').addEventListener("submit", ()=>{
     }).then(res => res.json())
     .then(data => {
         if(data.status == "error"){
-            dialogCont.style.display = "none"
+            // dialogCont.style.display = "none"
             errorMessage.style.display = "block"
             error.innerText = data.error
         }else{
-            //document.location.replace("/index")
-            dialogCont.style.display = "block"
-            errorMessage.style.display = "none"
-            success.innerText = data.success 
+            // dialogCont.style.display = "block"
+            // errorMessage.style.display = "none"
+            // success.innerText = data.success 
         }
     })
 })
-

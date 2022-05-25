@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body>
@@ -49,7 +49,7 @@
 
         <div class="icons">
             <div id="user-btn">
-                <a href="info.html" class="fa-solid fa-user"></a>
+                <a href="/info" class="fa-solid fa-user"></a>
             </div>
 
             <div class="fas fa-bars" id="menu-btn"></div>
@@ -65,29 +65,34 @@
         <div class="container container-about-me">
             <div class="title">Đổi mật khẩu</div>
             <div class="content content-about-me content-changepass">
-                <form class="form-about-me" action="#">
+                <form class="form-about-me" onsubmit="return false;">
 
                     <div class="user-details changepass-user">
                         <div class="input-box">
                             <span class="details">Mật khẩu cũ</span>
-                            <input value="" type="password" placeholder="" required>
+                            <input type="password" id="pwd" name="pwd" placeholder="Nhập mật khẩu cũ">
                         </div>
 
                         <div class="input-box">
                             <span class="details">Mật khẩu mới</span>
-                            <input value="" type="password" placeholder="" required>
+                            <input type="password" id="pwdnew" name="pwdnew" placeholder="Nhập mật khẩu mới">
                         </div>
                         <div class="input-box">
                             <span class="details">Xác nhận mật khẩu mới</span>
-                            <input value="" type="password" placeholder="" required>
+                            <input type="password" id="pwdcf" name="pwdcf" placeholder="Xác nhận mật khẩu mới">
                         </div>
                     </div>
 
+                    <div id="errorMessage" class="errorMessage my-3" style="display: none;">
+                        <div id="error" class='alert alert-danger'></div>
+                    </div>
 
                     <div class="button">
                         <input type="submit" value="Đổi mật khẩu">
                     </div>
                 </form>
+ 
+            </div>
             </div>
         </div>
 
@@ -123,7 +128,7 @@
     </section>
 
 
-    <script src="js/script.js"></script>
+    <script src="../js/new.js"></script>
 
 </body>
 
