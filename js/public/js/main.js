@@ -1,58 +1,68 @@
-// login
-
-document.getElementById('form-login').addEventListener("submit", ()=>{
-    console.log('hello');
-    
-    const login = {
-        username: username.value,
-        pwd: pwd.value
-    }
-    fetch("/auth/login",{
-        method: "POST",
-        body: JSON.stringify(login),
-        headers: {
-            "Content-type":"application/json"
-        }
-    }).then(res => res.json())
-    .then(data => {
-        if(data.status == "error"){
-            errorMessage.style.display = "block"
-            error.innerText = data.error
-        }else{
-            document.location.replace("/index")
-        }
-    })
-})
-
+//login
+var login = document.getElementById('form-login')
 //register
-document.getElementById('form').addEventListener("submit", ()=>{
-    const register = {
-        nameeee: nameeee.value,
-        birth: birth.value,
-        email: email.value,
-        phone: phone.value,
-        cmnd: cmnd.value,
-        address: address.value
-    }
-    fetch("/auth/register",{
-        method: "POST",
-        body: JSON.stringify(register),
-        headers: {
-            "Content-type":"application/json"
+var register = document.getElementById("form")
+
+if(login){
+    validateLogin()
+}else if(register){
+    validateRegister()
+}
+
+function validateLogin(){
+    login.addEventListener("submit", ()=>{
+        const login = {
+            username: username.value,
+            pwd: pwd.value
         }
-    }).then(res => res.json())
-    .then(data => {
-        if(data.status == "error"){
-            dialogCont.style.display = "none"
-            alerterror.style.display = "block"
-            error.innerText = data.error
-        }else {
-            dialogCont.style.display = "block"
-            alerterror.style.display = "none"
-            success.innerText = data.success    
-        }
+        fetch("/auth/login",{
+            method: "POST",
+            body: JSON.stringify(login),
+            headers: {
+                "Content-type":"application/json"
+            }
+        }).then(res => res.json())
+        .then(data => {
+            if(data.status == "error"){
+                errorMessage.style.display = "block"
+                error.innerText = data.error
+            }else{
+                document.location.replace("/index")
+            }
+        })
     })
-})
+}
+
+function validateRegister(){
+    register.addEventListener("submit", ()=>{
+        const register = {
+            nameeee: nameeee.value,
+            birth: birth.value,
+            email: email.value,
+            phone: phone.value,
+            cmnd: cmnd.value,
+            address: address.value
+        }
+        fetch("/auth/register",{
+            method: "POST",
+            body: JSON.stringify(register),
+            headers: {
+                "Content-type":"application/json"
+            }
+        }).then(res => res.json())
+        .then(data => {
+            if(data.status == "error"){
+                dialogCont.style.display = "none"
+                alerterror.style.display = "block"
+                error.innerText = data.error
+            }else {
+                dialogCont.style.display = "block"
+                alerterror.style.display = "none"
+                success.innerText = data.success    
+            }
+        })
+    })
+}
 
 let navbar = document.querySelector('.navbar');
 

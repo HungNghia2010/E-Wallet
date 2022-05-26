@@ -18,3 +18,7 @@ CREATE TABLE register(
     change_pass int(5) NOT NULL,
     PRIMARY KEY(id)
 );
+
+INSERT INTO register VALUES 
+(1, 'admin', '$2a$08$2atY3gZJNtmW9jQKXjaDGeJTrg7qXTt48L0KJ58bWVdBwwHmaZN3m', 'admin', 'ad@gmail.com', '0123456789', 
+'123456789', '01/01/2000', 'Hà Nội', '', '', '', 1, 1)
