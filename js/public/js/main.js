@@ -5,12 +5,16 @@ var register = document.getElementById("form")
 
 var infochange = document.getElementById('form-changepass')
 
+var firststep = document.getElementById("form-first-changePass")
+
 if(login){
     validateLogin()
 }else if(register){
     validateRegister()
 }else if(infochange){
     validatechangepassinfo()
+}else if(firststep){
+    validatefirststep()
 }
 
 function validateLogin(){
@@ -97,6 +101,34 @@ function validatechangepassinfo(){
     })
 }
 
+function validatefirststep(){
+    firststep.addEventListener("submit", ()=>{
+        const pass = {
+            pwd: pwd.value,
+            pwdcf: pwdconfirm.value
+        }
+        fetch("/auth/firststep",{
+            method: "POST",
+            body: JSON.stringify(pass),
+            headers: {
+                "Content-type":"application/json"
+            }
+        }).then(res => res.json())
+        .then(data => {
+            if(data.status == "error"){
+                dialogCont.style.display = "none"
+                errorMessage.style.display = "block"
+                error.innerText = data.error
+            }else{
+                //document.location.replace("/index")
+                dialogCont.style.display = "block"
+                errorMessage.style.display = "none"
+                success.innerText = data.success 
+            }
+        })
+    })
+}
+
 
 document.getElementById('eye').onclick = function(){
     var temp = document.getElementById('pwd')
@@ -106,6 +138,7 @@ document.getElementById('eye').onclick = function(){
         temp.type = "password"
     }
 }
+
 
 document.getElementById('close').onclick = function(){
     dialogCont.style.display = "none"

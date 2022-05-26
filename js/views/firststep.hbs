@@ -34,7 +34,7 @@
             <div class="form-group form-group-admin">
                 <i class="fas fa-key"></i>
                 <input type="password" class="form-input form-input-admin" id="pwdconfirm" placeholder="Enter new password again" name="pwdconfirm">
-                <div onclick="eye()" id="eye">
+                <div onclick="openeye(pwdconfirm)" id="eye2">
                     <i class="far fa-eye"></i>
                 </div>
             </div>
@@ -51,8 +51,9 @@
                 </div>
             </div>
 
-            <div id="errorMessage" class="errorMessage my-3" style="display: none;">
-                <div id="error" class='alert alert-danger'></div>
+            <div class="alert" id="errorMessage" style="display: none;">
+                <span class="fas fa-exclamation-circle"></span>
+                <span class="msg" id="error"></span>
             </div>
 
 
