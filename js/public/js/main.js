@@ -13,6 +13,10 @@ if(login){
     validateRegister()
 }else if(infochange){
     validatechangepassinfo()
+    document.getElementById('close').onclick = function(){
+        dialogCont.style.display = "none"
+        window.location.reload()
+    }
 }else if(firststep){
     validatefirststep()
 }
@@ -77,7 +81,7 @@ function validatechangepassinfo(){
         const pass = {
             pwd: pwd.value,
             pwdnew: pwdnew.value,
-            pwdcf: pwdcf.value
+            pwdconfirm: pwdconfirm.value
     
         }
         fetch("/auth/changepassword",{
@@ -148,11 +152,15 @@ document.getElementById('eye1').onclick = function(){
     }
 }
 
-
-document.getElementById('close').onclick = function(){
-    dialogCont.style.display = "none"
-    window.location.reload()
+document.getElementById('eye2').onclick = function(){
+    var temp = document.getElementById('pwdnew')
+    if(temp.type === "password"){
+        temp.type = "text"
+    }else{
+        temp.type = "password"
+    }
 }
+
 
 let navbar = document.querySelector('.navbar');
 

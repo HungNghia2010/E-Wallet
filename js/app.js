@@ -1,18 +1,13 @@
 require('dotenv').config()
 const path = require('path')
 const express = require('express')
-const mysql = require('mysql')
+const db = require('./routers/db-config')
 const cookieparser = require('cookie-parser')
 
 
 const app = express()
 //app.use(cookieparser)
-const db = mysql.createConnection({
-    host: process.env.DATABASE_HOST,
-    user: process.env.DATABASE_USER,
-    password: process.env.DATABASE_PASSWORD,
-    database: process.env.DATABASE
-});
+
 
 const publicDirectory = path.join(__dirname, './public')
 app.use(express.static(publicDirectory))

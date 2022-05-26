@@ -1,12 +1,6 @@
-const mysql = require('mysql')
-const jwt = require('jsonwebtoken')
 
-const db = mysql.createConnection({
-    host: process.env.DATABASE_HOST,
-    user: process.env.DATABASE_USER,
-    password: process.env.DATABASE_PASSWORD,
-    database: process.env.DATABASE
-});
+const jwt = require('jsonwebtoken')
+const db = require('../routers/db-config')
 
 exports.loggedIn = async (req, res, next) => {
     if (!req.cookies.userRegistered) return next();
