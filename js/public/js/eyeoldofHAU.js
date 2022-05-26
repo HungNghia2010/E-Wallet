@@ -1,9 +1,4 @@
 
-document.getElementById('close').onclick = function(){
-    dialogCont.style.display = "none"
-    window.location.reload()
-}
-
 $('#eye').click(function() {
     $(this).toggleClass('open');
     $(this).children('i').toggleClass("fa-eye-slash fa-eye");

@@ -139,6 +139,15 @@ document.getElementById('eye').onclick = function(){
     }
 }
 
+document.getElementById('eye1').onclick = function(){
+    var temp = document.getElementById('pwdconfirm')
+    if(temp.type === "password"){
+        temp.type = "text"
+    }else{
+        temp.type = "password"
+    }
+}
+
 
 document.getElementById('close').onclick = function(){
     dialogCont.style.display = "none"

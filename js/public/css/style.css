@@ -185,7 +185,7 @@ section {
     overflow: hidden;
 }
 
-#eye i {
+#eye #eye1 i {
     padding-right: 0;
     cursor: pointer;
 }
