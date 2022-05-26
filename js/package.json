@@ -12,11 +12,11 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon main.js"
+    "start": "nodemon app.js"
   },
   "name": "js",
   "version": "1.0.0",
-  "main": "main.js",
+  "main": "app.js",
   "keywords": [],
   "author": "",
   "license": "ISC",
