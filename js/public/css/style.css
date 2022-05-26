@@ -197,7 +197,8 @@ section {
     align-items: center;
 }
 
-#form-login {
+#form-login,
+#form-first-changePass {
     max-width: 400px;
     background: rgba(0, 0, 0, 0.8);
     flex-grow: 1;
@@ -234,7 +235,8 @@ section {
     flex-grow: 1;
 }
 
-.form-login .form-submit {
+.form-login .form-submit,
+.form-first-changePass .form-submit {
     background: transparent;
     border: 1px solid #fff;
     color: #f5f5f5;
@@ -245,7 +247,8 @@ section {
     margin-top: 30px;
 }
 
-.form-login .form-submit:hover {
+.form-login .form-submit:hover,
+.form-first-changePass .form-submit:hover {
     border: 1px solid #29bbb6;
 }
 
