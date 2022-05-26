@@ -1,28 +1,31 @@
-//login
-// document.getElementById('form-login').addEventListener("submit", ()=>{
-//     const login = {
-//         username: username.value,
-//         pwd: pwd.value
-//     }
-//     fetch("/auth/login",{
-//         method: "POST",
-//         body: JSON.stringify(login),
-//         headers: {
-//             "Content-type":"application/json"
-//         }
-//     }).then(res => res.json())
-//     .then(data => {
-//         if(data.status == "error"){
-//             errorMessage.style.display = "block"
-//             error.innerText = data.error
-//         }else{
-//             document.location.replace("/index")
-//         }
-//     })
-// })
+// login
+
+document.getElementById('form-login').addEventListener("submit", ()=>{
+    console.log('hello');
+    
+    const login = {
+        username: username.value,
+        pwd: pwd.value
+    }
+    fetch("/auth/login",{
+        method: "POST",
+        body: JSON.stringify(login),
+        headers: {
+            "Content-type":"application/json"
+        }
+    }).then(res => res.json())
+    .then(data => {
+        if(data.status == "error"){
+            errorMessage.style.display = "block"
+            error.innerText = data.error
+        }else{
+            document.location.replace("/index")
+        }
+    })
+})
 
 //register
-form.addEventListener("submit", ()=>{
+document.getElementById('form').addEventListener("submit", ()=>{
     const register = {
         nameeee: nameeee.value,
         birth: birth.value,
@@ -56,7 +59,6 @@ let navbar = document.querySelector('.navbar');
 document.querySelector('#menu-btn').onclick = () => {
     navbar.classList.toggle('active');
 }
-
 
 window.onscroll = () => {
     navbar.classList.remove('active');

@@ -13,12 +13,12 @@
 </head>
 
 <body>
-    <section class="about-me register-form" id="about-me">
+    <div class="about-me register-form" id="about-me">
 
         <div class="container container-about-me">
             <div class="title">Register</div>
             <div class="content content-about-me">
-                <form class="form-about-me" onsubmit="return false;"; id="form">
+                <form class="form-about-me" onsubmit="return false;" id="form">
                     <div id="content-img">
                         <div class="about-me-image">
                             <img src="/images/empicon.jpg" class="rounded-circle " width="150">
@@ -91,21 +91,17 @@
                         {{!-- <input type="button" value="Back" id="Backbutn">
                         <input type="submit" value="Register"> --}}
                         <button type="button" class="regisbutton"><a href="http://localhost:9090/login">Back</a></button>
-                        <button type="submit" class="regisbutton"><a>Register</a></button>
+                        <button type="submit" class="regisbutton" id="btn-register"><a>Register</a></button>
                     </div>
                 </form>
             </div>
         </div>
 
-    </section>
+    </div>
 
-
-
-
-
-
-    <script src="/js/main.js"></script>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="./js/main.js"></script>
 </body>
 
 </html>
