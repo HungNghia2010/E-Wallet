@@ -132,7 +132,7 @@ exports.change_passft = async (req, res) => {
         return res.json({status:"error", error:"Mật khẩu phải có tối thiểu 6 ký tự"})
     }else {
         let hashedpass = await bcrypt.hash(pwd,8)
-        db.query("UPDATE register SET pass = ?, change_pass = ? WHERE id = ?", [hashedpass,1,req.user.id], (err,result) => {
+        db.query("UPDATE register SET pass = ?, change_pass = ? WHERE id = ?", [hashedpass,1,req.user.id], async (err,result) => {
             if(err){
                 console.log(err)
             } else{
@@ -144,9 +144,38 @@ exports.change_passft = async (req, res) => {
 
 exports.change_pass = async (req, res) => {
     const {pwd, pwdnew, pwdcf} = req.body
-    
+   
     if(!pwd){
-        console.log('123142')
+        return res.json({status:"error", error:"Hãy nhập mật khẩu hiện tại"});
+    }else if(!pwdnew){
+        return res.json({status:"error", error:"Hãy nhập mật khẩu mới"});
+    }else if(pwdnew.length < 6){
+        return res.json({status:"error", error:"Mật khẩu mới phải tối thiểu 6 ký tự"});
+    }else if(pwdnew === pwd){
+        return res.json({status:"error", error:"Mật khẩu mới không được giống mật khẩu cũ"});
+    }else if(!pwdcf){
+        return res.json({status:"error", error:"Hãy xác nhận mật khẩu mới"});
+    }else if(!(pwdnew === pwdcf)){
+        return res.json({status:"error", error:"Mật khẩu xác nhận không khớp"});
+    }else{
+        db.query('SELECT pass FROM register WHERE id = ?',[req.user.id], async (error, result) => {
+            if(error){
+                console.log(error)
+            }else{
+                if(!(await bcrypt.compare(pwd,result[0].pass))){
+                    return res.json({status:"error", error:"Mật khẩu hiện tại không chính xác"});
+                }else{
+                    let hashedpass = await bcrypt.hash(pwdnew, 8)
+                    db.query('UPDATE register SET pass = ? WHERE id = ?', [hashedpass, req.user.id], (error, result) => {
+                        if(error){
+                            console.log(error)
+                        }else{
+                            return res.json({status:"success", success:"Đổi mật khẩu thành công"});
+                        }
+                    })
+                }
+            }
+        })
     }
 }
 

@@ -17,13 +17,13 @@
 <body>
     <header class="header headermana">
 
-        <a href="index.html" class="logo">
-            <img src="images/Flash.png" alt="">
+        <a href="/index" class="logo">
+            <img src="../images/Flash.png" alt="">
         </a>
 
         <nav class="navbar ulnav">
             <!-- Chức năng chung -->
-            <a href="index.html">Home</a>
+            <a href="/index">Home</a>
             <!-- Chức năng admin -->
 
             <li class="dropdown">
@@ -65,8 +65,7 @@
         <div class="container container-about-me">
             <div class="title">Đổi mật khẩu</div>
             <div class="content content-about-me content-changepass">
-                <form class="form-about-me" onsubmit="return false;">
-
+                <form class="form-about-me" id="form-about-me" onsubmit="return false;">
                     <div class="user-details changepass-user">
                         <div class="input-box">
                             <span class="details">Mật khẩu cũ</span>
@@ -86,6 +85,18 @@
                     <div id="errorMessage" class="errorMessage my-3" style="display: none;">
                         <div id="error" class='alert alert-danger'></div>
                     </div>
+
+                    <div id="dialogCont" class="dig-container" style="display: none;">
+                            <div class="dig-header">
+                                Đổi mật khẩu
+                            </div>
+                            <div id="digbody" class="dig-body">
+                                <h4 id="success" style="text-align: center;"></h4>
+                            </div>
+                            <div class="dig-footer">
+                                <a id="close">Đóng</a>
+                            </div>
+                        </div>
 
                     <div class="button">
                         <input type="submit" value="Đổi mật khẩu">
@@ -128,7 +139,7 @@
     </section>
 
 
-    <script src="../js/new.js"></script>
+    <script src="../js/infochangepass.js"></script>
 
 </body>
 

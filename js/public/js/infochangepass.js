@@ -5,7 +5,7 @@ document.getElementById('form-about-me').addEventListener("submit", ()=>{
         pwdcf: pwdcf.value
 
     }
-    fetch("/auth/info/changepassword",{
+    fetch("/auth/changepassword",{
         method: "POST",
         body: JSON.stringify(pass),
         headers: {
@@ -14,13 +14,18 @@ document.getElementById('form-about-me').addEventListener("submit", ()=>{
     }).then(res => res.json())
     .then(data => {
         if(data.status == "error"){
-            // dialogCont.style.display = "none"
+            dialogCont.style.display = "none"
             errorMessage.style.display = "block"
             error.innerText = data.error
         }else{
-            // dialogCont.style.display = "block"
-            // errorMessage.style.display = "none"
-            // success.innerText = data.success 
+            dialogCont.style.display = "block"
+            errorMessage.style.display = "none"
+            success.innerText = data.success 
         }
     })
 })
+
+document.getElementById('close').onclick = function(){
+    dialogCont.style.display = "none"
+    window.location.reload()
+}
