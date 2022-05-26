@@ -11,19 +11,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body>
     <header class="header headermana">
 
-        <a href="index.html" class="logo">
-            <img src="images/Flash.png" alt="">
+        <a href="/index" class="logo">
+            <img src="../images/Flash.png" alt="">
         </a>
 
         <nav class="navbar ulnav">
             <!-- Chức năng chung -->
-            <a href="index.html">Home</a>
+            <a href="/index">Home</a>
             <!-- Chức năng admin -->
 
             <li class="dropdown">
@@ -49,7 +49,7 @@
 
         <div class="icons">
             <div id="user-btn">
-                <a href="info.html" class="fa-solid fa-user"></a>
+                <a href="/info" class="fa-solid fa-user"></a>
             </div>
 
             <div class="fas fa-bars" id="menu-btn"></div>
@@ -65,27 +65,53 @@
         <div class="container container-about-me">
             <div class="title">Đổi mật khẩu</div>
             <div class="content content-about-me content-changepass">
-                <form class="form-about-me" action="#">
-
+                <form class="form-about-me" id="form-about-me" onsubmit="return false;">
                     <div class="user-details changepass-user">
                         <div class="input-box">
                             <span class="details">Mật khẩu cũ</span>
-                            <input value="" type="password" placeholder="" required>
+                            <input type="password" id="pwd" name="pwd" placeholder="Nhập mật khẩu cũ">
+                            {{!-- <div onclick="eye()" id="eye">
+                                <i class="far fa-eye"></i>
+                            </div> --}}
                         </div>
 
                         <div class="input-box">
                             <span class="details">Mật khẩu mới</span>
-                            <input value="" type="password" placeholder="" required>
+                            <input type="password" id="pwdnew" name="pwdnew" placeholder="Nhập mật khẩu mới">
                         </div>
                         <div class="input-box">
                             <span class="details">Xác nhận mật khẩu mới</span>
-                            <input value="" type="password" placeholder="" required>
+                            <input type="password" id="pwdcf" name="pwdcf" placeholder="Xác nhận mật khẩu mới">
                         </div>
                     </div>
+<<<<<<< HEAD
                     <div class="button register-button">
                         <button type="submit" class="regisbutton"><a>Đổi mật khẩu</a></button>
+=======
+
+                    <div id="errorMessage" class="errorMessage my-3" style="display: none;">
+                        <div id="error" class='alert alert-danger'></div>
+                    </div>
+
+                    <div id="dialogCont" class="dig-container" style="display: none;">
+                            <div class="dig-header">
+                                Đổi mật khẩu
+                            </div>
+                            <div id="digbody" class="dig-body">
+                                <h4 id="success" style="text-align: center;"></h4>
+                            </div>
+                            <div class="dig-footer">
+                                <a id="close">Đóng</a>
+                            </div>
+                        </div>
+
+                    <div class="button">
+                        <input type="submit" value="Đổi mật khẩu">
+>>>>>>> 40f75bfff6636e6be254ca4f5cc4759ac38f36ed
                     </div>
                 </form>
+ 
+            </div>
             </div>
         </div>
 
@@ -121,7 +147,7 @@
     </section>
 
 
-    <script src="js/script.js"></script>
+    <script src="../js/infochangepass.js"></script>
 
 </body>
 
