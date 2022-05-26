@@ -3,10 +3,14 @@ var login = document.getElementById('form-login')
 //register
 var register = document.getElementById("form")
 
+var infochange = document.getElementById('form-changepass')
+
 if(login){
     validateLogin()
 }else if(register){
     validateRegister()
+}else if(infochange){
+    validatechangepassinfo()
 }
 
 function validateLogin(){
@@ -64,6 +68,50 @@ function validateRegister(){
     })
 }
 
+function validatechangepassinfo(){
+    infochange.addEventListener("submit", ()=>{
+        const pass = {
+            pwd: pwd.value,
+            pwdnew: pwdnew.value,
+            pwdcf: pwdcf.value
+    
+        }
+        fetch("/auth/changepassword",{
+            method: "POST",
+            body: JSON.stringify(pass),
+            headers: {
+                "Content-type":"application/json"
+            }
+        }).then(res => res.json())
+        .then(data => {
+            if(data.status == "error"){
+                dialogCont.style.display = "none"
+                errorMessage.style.display = "block"
+                error.innerText = data.error
+            }else{
+                dialogCont.style.display = "block"
+                errorMessage.style.display = "none"
+                success.innerText = data.success 
+            }
+        })
+    })
+}
+
+
+document.getElementById('eye').onclick = function(){
+    var temp = document.getElementById('pwd')
+    if(temp.type === "password"){
+        temp.type = "text"
+    }else{
+        temp.type = "password"
+    }
+}
+
+document.getElementById('close').onclick = function(){
+    dialogCont.style.display = "none"
+    window.location.reload()
+}
+
 let navbar = document.querySelector('.navbar');
 
 document.querySelector('#menu-btn').onclick = () => {
@@ -91,6 +139,8 @@ function showDivs(n) {
     }
     x[slideIndex - 1].style.display = "block";
 }
+
+
 
 
 
