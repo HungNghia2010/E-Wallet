@@ -1039,16 +1039,56 @@ section {
 
 /*---------------------------------------------------------changepass----------*/
 
-.content-changepass form .user-details {
-    display: inline;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin: 20px 0 12px 0;
+#wrapper-changepass {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.form-about-me .changepass-user .input-box {
-    margin-bottom: 15px;
+#form-changepass {
+    background: rgba(255, 255, 255, 0.8);
+    flex-grow: 1;
+    padding: 30px 30px 40px;
+}
+
+.form-group-changepass {
+    border-bottom: 1px solid rgb(0, 0, 0);
+    margin-top: 20px;
+    margin-bottom: 30px;
+    display: flex;
+}
+
+.form-group-changepass i {
+    color: rgb(0, 0, 0);
+    font-size: 14px;
+    padding-top: 5px;
+    padding-right: 10px;
+}
+
+.form-input-changepass {
+    background: transparent;
+    border: 0;
+    outline: 0;
+    color: rgb(0, 0, 0);
+    flex-grow: 1;
+}
+
+.changepass-button button {
+    height: 100%;
     width: 100%;
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: #29bbb6;
+    margin-top: 30px;
+}
+
+.changepass-button button:hover {
+    color: #000000;
 }
 
 
