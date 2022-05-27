@@ -19,6 +19,24 @@ CREATE TABLE register(
     PRIMARY KEY(id)
 );
 
+CREATE TABLE lockAccount (
+    id int(10) NOT NULL AUTO_INCREMENT,
+    username varchar(64) NOT NULL,
+    wrongPassword int(5),
+    loginAbnormality int(5),
+    lockIndefinitely int(5),
+    PRIMARY KEY(id)
+);
+
 INSERT INTO register VALUES 
 (1, 'admin', '$2a$08$2atY3gZJNtmW9jQKXjaDGeJTrg7qXTt48L0KJ58bWVdBwwHmaZN3m', 'admin', 'ad@gmail.com', '0123456789', 
-'123456789', '01/01/2000', 'Hà Nội', '', '', '', 1, 1)
+'123456789', '01/01/2000', 'Hà Nội', '', '', 'chờ xác minh', 1, 1);
+
+INSERT INTO lockAccount VALUES 
+('1', 'admin', 0, 0, 0);
+
+ALTER TABLE register
+    MODIFY id int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+ALTER TABLE lockAccount
+    MODIFY id int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
