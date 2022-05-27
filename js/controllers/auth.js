@@ -60,8 +60,9 @@ exports.login = async (req, res) => {
 
 exports.register = async (req, res) => {
 
-    const { nameeee, birth, email, phone, cmnd, address, images} = req.body;
-    console.log(req.body)
+    const { nameeee, birth, email, phone, cmnd, address} = req.body;
+    const images = req.file;
+    console.log(req.file)
 
     if(!nameeee){
         return res.json({status:"error", error:"Hãy nhập tên"})
@@ -95,20 +96,21 @@ exports.register = async (req, res) => {
                     console.log(error)
                 } else{
                     //mail
-                    var mailOptions = {
-                        from: 'sinhvien@phongdaotao.com',
-                        to: email,
-                        subject: 'Gửi thông tin đăng nhập',
-                        text: 'Tên đăng nhập: '+ username +' , Mật khẩu: ' + password,
-                    }
+                    // var mailOptions = {
+                    //     from: 'sinhvien@phongdaotao.com',
+                    //     to: email,
+                    //     subject: 'Gửi thông tin đăng nhập',
+                    //     text: 'Tên đăng nhập: '+ username +' , Mật khẩu: ' + password,
+                    // }
     
-                    transporter.sendMail(mailOptions,function(error, info) {
-                        if(error){
-                            console.log(error)
-                        }else{
-                            return res.json({status: "success", success: "Hãy kiểm tra mail để biết username và password" });
-                        }
-                    })
+                    // transporter.sendMail(mailOptions,function(error, info) {
+                    //     if(error){
+                    //         console.log(error)
+                    //     }else{
+                    //         return res.json({status: "success", success: "Hãy kiểm tra mail để biết username và password" });
+                    //     }
+                    // })
+                    return res.json({status: "success", success: "Tên đăng nhập là: "+username+", Mật khẩu là: " + password });
                 }
             })
     
