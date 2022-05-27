@@ -8,6 +8,8 @@ var infochange = document.getElementById('form-changepass')
 
 var firststep = document.getElementById("form-first-changePass")
 
+var updateinfo = document.getElementById("form-update-info")
+
 var navbar = document.querySelector('.navbar');
 
 if(login){
@@ -22,6 +24,11 @@ if(login){
     }
 }else if(firststep){
     validatefirststep()
+}else if(updateinfo){
+    valideUpdateform()
+    document.getElementById('close').onclick = function(){
+        dialogCont.style.display = "none"
+    }
 }else if (navbar){
     document.querySelector('#menu-btn').onclick = () => {
         navbar.classList.toggle('active');
@@ -145,6 +152,39 @@ function validatefirststep(){
                 dialogCont.style.display = "block"
                 errorMessage.style.display = "none"
                 success.innerText = data.success 
+            }
+        })
+    })
+}
+
+//updateinfo
+function valideUpdateform(){
+    updateinfo.addEventListener("submit", ()=>{
+        const update = {
+            nameeee: nameeee.value,
+            birth: birth.value,
+            email: email.value,
+            phone: phone.value,
+            cmnd: cmnd.value,
+            address: address.value
+        }
+        fetch("/auth/update",{
+            method: "POST",
+            enctype: "multipart/form-data",
+            body: JSON.stringify(update),
+            headers: {
+                "Content-type":"application/json"
+            }
+        }).then(res => res.json())
+        .then(data => {
+            if(data.status == "error"){
+                dialogCont.style.display = "none"
+                errorMessage.style.display = "block"
+                error.innerText = data.error
+            }else {
+                dialogCont.style.display = "block"
+                errorMessage.style.display = "none"
+                success.innerText = data.success    
             }
         })
     })

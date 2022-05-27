@@ -61,8 +61,6 @@ exports.login = async (req, res) => {
 exports.register = async (req, res) => {
 
     const { nameeee, birth, email, phone, cmnd, address} = req.body;
-    const images = req.file;
-    console.log(req.file)
 
     if(!nameeee){
         return res.json({status:"error", error:"Hãy nhập tên"})
@@ -76,8 +74,8 @@ exports.register = async (req, res) => {
         return res.json({status:"error", error:"Hãy nhập chứng minh nhân dân"});
     }else if(!address){
         return res.json({status:"error", error:"Hãy nhập địa chỉ"});
-    }else if(!images){
-        return res.json({status:"error", error:"Hãy tải ảnh chứng minh nhân dân"});
+    // }else if(!images){
+    //     return res.json({status:"error", error:"Hãy tải ảnh chứng minh nhân dân"});
     }else{
         db.query('SELECT * FROM register WHERE email = ? OR phone_number = ?', [email,phone], async (error, result) => {
             if(error){
@@ -91,7 +89,7 @@ exports.register = async (req, res) => {
             const username = Math.floor(1000000000 + Math.random() * 9000000000);
             const password = generateRandomString(6);
             let hashedpass = await bcrypt.hash(password,8)
-            db.query('INSERT INTO register SET ?',{username : username, pass: hashedpass, name: nameeee, email: email, phone_number: phone, identity: cmnd, birth: birth ,address: address, status: 'chờ xác minh', CMND1: images,role: 2, change_pass: 0}, (error, result)=>{
+            db.query('INSERT INTO register SET ?',{username : username, pass: hashedpass, name: nameeee, email: email, phone_number: phone, identity: cmnd, birth: birth ,address: address, status: 'chờ xác minh',role: 2, change_pass: 0}, (error, result)=>{
                 if(error){
                     console.log(error)
                 } else{
@@ -207,6 +205,33 @@ exports.checkmail = async(req, res) => {
             }
         })
     }
+}
+
+exports.update_info = async (req, res) => {
+    const { nameeee, birth, email, phone, cmnd, address} = req.body;
+
+    if(!nameeee){
+        return res.json({status:"error", error:"Hãy nhập tên"})
+    }else if(!birth){
+        return res.json({status:"error", error:"Hãy nhập ngày sinh"});
+    }else if(!email){
+        return res.json({status:"error", error:"Hãy nhập email"});
+    }else if(!phone){
+        return res.json({status:"error", error:"Hãy nhập số điện thoại"});
+    }else if(!cmnd){
+        return res.json({status:"error", error:"Hãy nhập chứng minh nhân dân"});
+    }else if(!address){
+        return res.json({status:"error", error:"Hãy nhập địa chỉ"});
+    }else{
+        db.query("UPDATE register SET ? WHERE ?",[{name: nameeee, email: email, phone_number: phone, identity: cmnd, birth: birth ,address: address}, req.user.id ] , (err,result) => {
+            if(err){
+                console.log(err)
+            }else {
+                return res.json({status:"success", success:"Cập nhật thành công"});
+            }
+        })
+    }
+
 }
 
 //random string for password

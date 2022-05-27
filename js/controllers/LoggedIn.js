@@ -9,6 +9,9 @@ exports.loggedIn = async (req, res, next) => {
         db.query('SELECT * FROM register WHERE id = ?', [decoded.id], (err, result) => {
             if(err) return next()
             req.user = result[0]
+            if(result[0].role === 1){
+                req.user.auth = 'Admin'
+            }
             return next()
         })
     }catch (err){

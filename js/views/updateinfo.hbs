@@ -24,6 +24,7 @@
             <a href="/index">Home</a>
             <!-- Chức năng admin -->
 
+            {{#if user.auth}}
             <li class="dropdown">
                 <a href="manager.html" class="dropbtn">Manage</a>
                 <div class="dropdown-content">
@@ -35,6 +36,7 @@
                     <a href="manager.html#gdchuyen">Giao dịch chuyển tiền</a>
                 </div>
             </li>
+            {{/if}}
 
             <!-- Chức năng chung -->
             <a href="/index#about">About</a>
@@ -62,7 +64,7 @@
         <div class="container container-about-me">
             <div class="title">Cập nhật thông tin</div>
             <div class="content content-about-me">
-                <form class="form-about-me" action="">
+                <form class="form-about-me" id="form-update-info" onsubmit="return false;">
                     <div id="content-img">
                         <div class="about-me-image">
                             <img src="../images/empicon.jpg" class="rounded-circle " width="150">
@@ -80,7 +82,7 @@
 
                         <div class="input-box">
                             <span class="details">Họ và tên</span>
-                            <input value="{{user.name}}" type="text" required>
+                            <input value="{{user.name}}" type="text" id="nameeee" name="nameeee">
                         </div>
                         <div class="input-box">
                             <span class="details">Username</span>
@@ -88,11 +90,11 @@
                         </div>
                         <div class="input-box">
                             <span class="details">Email</span>
-                            <input value="{{user.email}}" type="text" placeholder="" required>
+                            <input value="{{user.email}}" type="text" id="email" name="email">
                         </div>
                         <div class="input-box">
                             <span class="details">Số điện thoại</span>
-                            <input value="{{user.phone_number}}" type="text" placeholder="" required>
+                            <input value="{{user.phone_number}}" type="text" id="phone" name="phone" >
                         </div>
                         <div class="input-box">
                             <span class="details">Số dư</span>
@@ -101,36 +103,53 @@
 
                         <div class="input-box">
                             <span class="details">Số tài khoản</span>
-                            <input value="123456" type="text" placeholder="" required>
+                            <input value="123456" type="text" placeholder="">
                         </div>
                         <div class="input-box">
                             <span class="details">Ngày hết hạn thẻ</span>
-                            <input value="1/1/2025" type="text" placeholder="" required>
+                            <input value="1/1/2025" type="text" placeholder="" >
                         </div>
 
                         <div class="input-box">
                             <span class="details">Mã CVV</span>
-                            <input value="411" type="text" placeholder="" required>
+                            <input value="411" type="text" placeholder="" >
                         </div>
 
 
                         <div class="input-box">
                             <span class="details">CMND/CCCD</span>
-                            <input value="{{user.identity}}" type="text" placeholder="" required>
+                            <input value="{{user.identity}}" type="text" id="cmnd" name="cmnd" >
                         </div>
                         <div class="input-box">
                             <span class="details">Địa chỉ</span>
-                            <input value="{{user.address}}" type="text" placeholder="" required>
+                            <input value="{{user.address}}" type="text" id="address" name="address" >
                         </div>
                         <div class="input-box">
                             <span class="details">Ngày sinh</span>
-                            <input value="1/1/2025" type="text" placeholder="" required>
+                            <input value="1/1/2025" type="text" id="birth" name="birth">
                         </div>
                         <div class="input-box">
                             <span class="details">Trạng thái</span>
                             <input value="đang chờ xác minh" type="text" placeholder="" readonly>
                         </div>
 
+
+                        <div class="alert" id="errorMessage" style="display: none;">
+                            <span class="fas fa-exclamation-circle"></span>
+                            <span class="msg" id="error"></span>
+                        </div>
+
+                        <div id="dialogCont" class="dig-container" style="display: none;">
+                            <div class="dig-header">
+                                Cập nhật thông tin
+                            </div>
+                            <div id="digbody" class="dig-body">
+                                <h4 id="success"></h4>
+                            </div>
+                            <div class="dig-footer">
+                                <a id="close">Đóng</a>
+                            </div>
+                        </div>
 
                     </div>
 
@@ -198,7 +217,7 @@
     </section>
 
 
-    <script src="../js/script.js"></script>
+    <script src="../js/main.js"></script>
 
 </body>
 

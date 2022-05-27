@@ -28,6 +28,7 @@ Router.get('/forgot', (req, res) => {
 })
 
 Router.get('/index', loggedIn.loggedIn, (req,res) => {
+    console.log(req.user)
     if(req.user){
         if(req.user.change_pass === 0){
             res.redirect('/firststep')
@@ -68,6 +69,19 @@ Router.get('/info/changepassword', loggedIn.loggedIn, (req, res) => {
             res.redirect('/firststep')
         }
         else res.render('changepas',{status:"info",user: req.user})
+    }else{
+        res.render('404',{status:"no",user: "nothing"})
+    }
+})
+
+Router.get('/naptien', loggedIn.loggedIn, (req, res) => {
+    if(req.user){
+        if(req.user.change_pass === 0){
+            res.redirect('/firststep')
+        }else if(req.user.status === "chờ xác minh"){
+            res.render('404',{status:"no",user: "nothing"})
+        }
+        else res.render('nap',{status:"info",user: req.user})
     }else{
         res.render('404',{status:"no",user: "nothing"})
     }
