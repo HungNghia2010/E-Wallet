@@ -69,7 +69,8 @@ function validateRegister(){
             email: email.value,
             phone: phone.value,
             cmnd: cmnd.value,
-            address: address.value
+            address: address.value,
+            images: images.value
         }
         fetch("/auth/register",{
             method: "POST",

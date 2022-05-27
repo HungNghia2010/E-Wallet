@@ -18,7 +18,7 @@
         <div class="container container-about-me">
             <div class="title">Register</div>
             <div class="content content-about-me">
-                <form class="form-about-me" onsubmit="return false;" id="form">
+                <form class="form-about-me" onsubmit="return false;" id="form" enctype="multipart/form-data">
                     <div id="content-img">
                         <div class="about-me-image">
                             <img src="/images/empicon.jpg" class="rounded-circle " width="150">
@@ -58,13 +58,10 @@
                             <span class="details">Địa chỉ</span>
                             <input type="text" placeholder="" id="address" name="address" >
                         </div>
+
                         <div class="input-box">
-                            <span class="details">Mặt trước CMND</span>
-                            <input class="file-upload-input" type="file">
-                        </div>
-                        <div class="input-box">
-                            <span class="details">Mặt sau CMND</span>
-                            <input class="file-upload-input" type="file">
+                            <span class="details">Hình ảnh CMND</span>
+                            <input class="file-upload-input" id="images" name="images" type="file">
                         </div>
                     </div>
                     
