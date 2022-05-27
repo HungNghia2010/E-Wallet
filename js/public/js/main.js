@@ -1,3 +1,7 @@
+// Slide show
+var slideIndex = 1;
+showDivs(slideIndex);
+
 //login
 var login = document.getElementById('form-login')
 //register
@@ -172,9 +176,6 @@ window.onscroll = () => {
     navbar.classList.remove('active');
 }
 
-var slideIndex = 1;
-showDivs(slideIndex);
-
 function plusDivs(n) {
     showDivs(slideIndex += n);
 }
@@ -187,10 +188,6 @@ function showDivs(n) {
     for (i = 0; i < x.length; i++) {
         x[i].style.display = "none";
     }
+    console.log(slideIndex);
     x[slideIndex - 1].style.display = "block";
 }
-
-
-
-
-
