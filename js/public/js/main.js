@@ -1,6 +1,3 @@
-// Slide show
-var slideIndex = 1;
-showDivs(slideIndex);
 
 //login
 var login = document.getElementById('form-login')
@@ -23,6 +20,10 @@ if(login){
     }
 }else if(firststep){
     validatefirststep()
+}else {
+    // Slide show
+    var slideIndex = 1;
+    showDivs(slideIndex);
 }
 
 function validateLogin(){
