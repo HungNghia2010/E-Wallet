@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
 
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body class="login-body">
@@ -21,15 +21,19 @@
     <div id="wrapper" class="wrapper">
 
 
-        <form class="form-login" id="form-login" action="" method="post">
+        <form class="form-login" id="form-login" action="/auth/otp" method="post">
             <h1 class="form-heading">Verify Account</h1>
             <div class="form-group form-group-admin ">
                 <i class="fa-solid fa-shield"></i>
-                <input value="" type="number" class="form-input form-input-admin" id="otp" placeholder="Enter your OTP" name="otp">
+                <input type="text" class="form-input form-input-admin" id="otp" placeholder="Enter your OTP" name="otp">
             </div>
-            <div id="errorMessage" class="errorMessage my-3" style="display: none;">
-                <div class='alert alert-danger' id="error"></div>
+
+            {{#if msg}}
+            <div id="errorMessage" class="errorMessage my-3">
+                <div class='alert alert-danger' id="error">{{msg}}</div>
             </div>
+            {{/if}}
+
             <button class="form-submit" type="submit" class="btn btn-default">Verify</button>
         </form>
 
@@ -39,7 +43,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script src="js/script.js"></script>
+    <script src="/js/main.js"></script>
 </body>
 
 </html>

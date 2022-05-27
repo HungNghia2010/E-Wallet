@@ -106,11 +106,35 @@
         <h1 class="heading"> our <span>services</span> </h1>
 
         <div class="box-container">
-
+            {{#if user.wait}}
             <div class="box">
                 <div class="fa-solid fa-money-check-dollar icons" id="nap-btn"></div>
                 <h3>thông qua thẻ tín dụng</h3>
-                <a href="/naptien" class="btn">nạp tiền</a>
+                <a href="/naptien" class="btn" onclick="return false;">nạp tiền</a>
+            </div>
+
+            <div class="box">
+                <div class="fa-solid fa-coins icons" id="rut-btn"></div>
+                <h3>đơn giản, nhanh chóng</h3>
+                <a href="ruttien.html" class="btn" onclick="return false;">rút tiền</a>
+            </div>
+
+            <div class="box">
+                <div class="fa-solid fa-comments-dollar icons" id="chuyen-btn"></div>
+                <h3>miễn phí, đơn giản, bảo mật</h3>
+                <a href="chuyen.html" class="btn" onclick="return false;">chuyển tiền</a>
+            </div>
+
+            <div class="box">
+                <div class="fa-solid fa-receipt icons" id="transfermoney-btn"></div>
+                <h3>chính xác, rõ ràng</h3>
+                <a href="lichsu.html" class="btn" onclick="return false;">lịch sử</a>
+            </div>
+            {{else}}
+            <div class="box">
+                <div class="fa-solid fa-money-check-dollar icons" id="nap-btn"></div>
+                <h3>thông qua thẻ tín dụng</h3>
+                <a href="/naptien" class="btn">nạp tiền {{wait}}</a>
             </div>
 
             <div class="box">
@@ -130,8 +154,7 @@
                 <h3>chính xác, rõ ràng</h3>
                 <a href="lichsu.html" class="btn">lịch sử</a>
             </div>
-
-
+            {{/if}}
         </div>
 
     </section>

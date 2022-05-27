@@ -2,6 +2,7 @@ const express = require('express')
 const Router = express.Router()
 const loggedIn = require('../controllers/LoggedIn')
 const logout = require('../controllers/Logout')
+const OTP = require('../controllers/Sendotp')
 
 Router.get('/404', (req, res) => {
     res.render('404')
@@ -25,6 +26,14 @@ Router.get('/register', (req, res) => {
 
 Router.get('/forgot', (req, res) => {
     res.render('forgotpass')
+})
+
+Router.get('/otp',OTP.otp ,(req, res) => {
+    if(req.otp){
+        res.render('otp')
+    }else{
+        res.render('404')
+    }
 })
 
 Router.get('/index', loggedIn.loggedIn, (req,res) => {

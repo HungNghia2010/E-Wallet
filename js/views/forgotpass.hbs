@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
 
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body class="login-body">
@@ -21,7 +21,7 @@
     <div id="wrapper" class="wrapper">
 
 
-        <form class="form-login" id="form-login" onsubmit="return false;">
+        <form class="form-login" id="form-login" method="post" action="/auth/forgot">
             <h1 class="form-heading">Forgot Password</h1>
             
             <div class="form-group form-group-admin ">
@@ -33,9 +33,26 @@
                 <i class="fa-solid fa-phone"></i>
                 <input value="" type="number" class="form-input form-input-admin" id="phonenum" placeholder="Enter your phone number" name="phonenum">
             </div> --}}
-            <div id="errorMessage" class="errorMessage my-3" style="display: none;">
-                <div class='alert alert-danger' id="error"></div>
+            {{#if msg}}
+            <div id="errorMessage" class="errorMessage my-3">
+                <div class='alert alert-danger' id="error">{{msg}}</div>
             </div>
+            {{/if}}
+
+            {{#if success}}
+            <div id="dialogCont" class="dig-container" >
+                <div class="dig-header">
+                    Gửi otp
+                </div>
+                    <div id="digbody" class="dig-body">
+                        <h4 id="success"> {{success}}</h4>
+                    </div>
+                <div class="dig-footer">
+                    <a href="/otp">Chuyển sang trang nhập OTP</a>
+                </div>
+            </div>
+            {{/if}}
+
             <button class="form-submit" type="submit" class="btn btn-default">Send OTP</button>
         </form>
 
@@ -45,7 +62,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script src="js/checkmail.js"></script>
+    <script src="js/main.js"></script>
 </body>
 
 </html>
