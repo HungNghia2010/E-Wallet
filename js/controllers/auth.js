@@ -88,7 +88,7 @@ exports.register = async (req, res) => {
             const username = Math.floor(1000000000 + Math.random() * 9000000000);
             const password = generateRandomString(6);
             let hashedpass = await bcrypt.hash(password,8)
-            db.query('INSERT INTO register SET ?',{username : username, pass: hashedpass, name: nameeee, email: email, phone_number: phone, identity: cmnd, birth: birth ,address: address, status: 'Đang chờ', role: 2, change_pass: 0}, (error, result)=>{
+            db.query('INSERT INTO register SET ?',{username : username, pass: hashedpass, name: nameeee, email: email, phone_number: phone, identity: cmnd, birth: birth ,address: address, status: 'chờ xác minh', role: 2, change_pass: 0}, (error, result)=>{
                 if(error){
                     console.log(error)
                 } else{

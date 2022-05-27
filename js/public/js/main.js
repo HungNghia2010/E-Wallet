@@ -8,6 +8,8 @@ var infochange = document.getElementById('form-changepass')
 
 var firststep = document.getElementById("form-first-changePass")
 
+var navbar = document.querySelector('.navbar');
+
 if(login){
     validateLogin()
 }else if(register){
@@ -20,7 +22,16 @@ if(login){
     }
 }else if(firststep){
     validatefirststep()
-}else {
+}else if (navbar){
+    document.querySelector('#menu-btn').onclick = () => {
+        navbar.classList.toggle('active');
+    }
+    
+    window.onscroll = () => {
+        navbar.classList.remove('active');
+    }
+}
+else {
     // Slide show
     var slideIndex = 1;
     showDivs(slideIndex);
@@ -164,17 +175,6 @@ document.getElementById('eye2').onclick = function(){
     }else{
         temp.type = "password"
     }
-}
-
-
-let navbar = document.querySelector('.navbar');
-
-document.querySelector('#menu-btn').onclick = () => {
-    navbar.classList.toggle('active');
-}
-
-window.onscroll = () => {
-    navbar.classList.remove('active');
 }
 
 function plusDivs(n) {
