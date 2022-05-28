@@ -251,7 +251,8 @@ exports.checkmail = async(req, res) => {
                             console.log(error)
                         }if(result1.length === 0){
                             db.query('INSERT INTO otp SET ? ',{id: result[0].id, otp: otp, expiry: formatted, checkotp: checkotp});
-                        }else{
+                        }
+                        else{
                             db.query('UPDATE otp SET ? WHERE ?',[{otp: otp, expiry: formatted, checkotp: checkotp}, result[0].id]);
                         }
                     })
@@ -259,14 +260,14 @@ exports.checkmail = async(req, res) => {
                     //     from: 'sinhvien@phongdaotao.com',
                     //     to: email,
                     //     subject: 'Gửi OTP đổi mật khẩu',
-                    //     text: 'Tên đăng nhập: '+ username +' , Mật khẩu: ' + password,
+                    //     text: 'OTP của bạn là '+ otp +' , OTP này có hiệu quả trong vòng 1 phút,
                     // }
     
                     // transporter.sendMail(mailOptions,function(error, info) {
                     //     if(error){
                     //         console.log(error)
                     //     }else{
-                    //         return res.json({status: "success", success: "Hãy kiểm tra mail để biết username và password" });
+                    //         res.render('forgotpass',{success: 'Hãy kiểm tra mail để lấy otp'});
                     //     }
                     // })
                     const token = jwt.sign({ id: result[0].id }, process.env.JWT_SECRET, {
