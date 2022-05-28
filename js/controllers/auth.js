@@ -64,13 +64,9 @@ exports.login = async (req, res) => {
                             }
                         })
                     }else{
-                        if(loginAbnormality === 1) {
-                            wrongPassword = 0;
-                            loginAbnormality = 0;
-                            db.query('UPDATE lockAccount SET wrongPassword = ?, loginAbnormality = ? WHERE username = ?', [wrongPassword, loginAbnormality, username]);
-                        }
                         wrongPassword = 0;
-                        db.query('UPDATE lockAccount SET wrongPassword = ? WHERE username = ?', [wrongPassword, username]);
+                        loginAbnormality = 0;
+                        db.query('UPDATE lockAccount SET wrongPassword = ?, loginAbnormality = ? WHERE username = ?', [wrongPassword, loginAbnormality, username]);
                         const token = jwt.sign({ id: result[0].id }, process.env.JWT_SECRET, {
                             expiresIn: process.env.JWT_EXPIRRES
                         })
