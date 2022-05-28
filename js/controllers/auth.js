@@ -245,13 +245,14 @@ exports.checkmail = async(req, res) => {
                     const otp = generateRandomString(6)
                     const dt = dateTime.create()
                     const formatted = dt.format('H:M:S')
+                    const checkotp = 0
                     db.query('SELECT * FROM otp WHERE id = ?',[result[0].id] , async (error,result1) => {
                         if(error){
                             console.log(error)
                         }if(result1.length === 0){
-                            db.query('INSERT INTO otp SET ? ',{id: result[0].id, otp: otp, expiry: formatted});
+                            db.query('INSERT INTO otp SET ? ',{id: result[0].id, otp: otp, expiry: formatted, checkotp: checkotp});
                         }else{
-                            db.query('UPDATE otp SET ? WHERE ?',[{otp: otp, expiry: formatted}, result[0].id]);
+                            db.query('UPDATE otp SET ? WHERE ?',[{otp: otp, expiry: formatted, checkotp: checkotp}, result[0].id]);
                         }
                     })
                     // var mailOptions = {
