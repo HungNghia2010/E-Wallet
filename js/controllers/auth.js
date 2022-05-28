@@ -22,7 +22,7 @@ var transporter = nodemailer.createTransport({
 let wrongPassword = 0;
 let loginAbnormality = 0;
 let lockIndefinitely = 0;
-const role = 1;
+const role = 1; //admin
 exports.login = async (req, res) => {
     try{
 
@@ -42,22 +42,27 @@ exports.login = async (req, res) => {
                         return res.json({status:"error", error:"Tên đăng nhập không tồn tại"})
                     }
                     else if(!result || !(await bcrypt.compare(pwd,result[0].pass))){
-                        console.log("wrong password")
-                        wrongPassword++;
-                        console.log(wrongPassword);
-                        db.query('UPDATE lockAccount SET wrongPassword = ? WHERE username = ?', [wrongPassword, username]);
-                        if(wrongPassword === 3){
-                            if(loginAbnormality === 1) {
-                                lockIndefinitely = 1;
-                                db.query('UPDATE lockAccount SET lockIndefinitely = ?, lockTime = NOW() WHERE username = ?', [lockIndefinitely, username]);
-                                return res.json({status:"error", error:"Tài khoản đã bị khóa do nhập sai mật khẩu nhiều lần, vui lòng liên hệ quản trị viên để được hỗ trợ"});
+                        db.query('SELECT * FROM register WHERE username = ? and role = ?', [username, role], async (error,result) => {
+                            if(result.length === 0) {
+                                wrongPassword++;
+                                db.query('UPDATE lockAccount SET wrongPassword = ? WHERE username = ?', [wrongPassword, username]);
+                                if(wrongPassword === 3){
+                                    if(loginAbnormality === 1) {
+                                        lockIndefinitely = 1;
+                                        db.query('UPDATE lockAccount SET lockIndefinitely = ?, lockTime = NOW() WHERE username = ?', [lockIndefinitely, username]);
+                                        return res.json({status:"error", error:"Tài khoản đã bị khóa do nhập sai mật khẩu nhiều lần, vui lòng liên hệ quản trị viên để được hỗ trợ"});
+                                    }
+                                    loginAbnormality += 1;
+                                    db.query('UPDATE lockAccount SET loginAbnormality = ? WHERE username = ?', [loginAbnormality, username]);
+                                    wrongPassword = 0;
+                                    return res.json({status:"error", error:"Tài khoản hiện đang bị tạm khóa, vui lòng thử lại sau 1 phút"});
+                                }
+                                return res.json({status:"error", error:"Mật khẩu không chính xác"})
                             }
-                            loginAbnormality += 1;
-                            db.query('UPDATE lockAccount SET loginAbnormality = ? WHERE username = ?', [loginAbnormality, username]);
-                            wrongPassword = 0;
-                            return res.json({status:"error", error:"Tài khoản hiện đang bị tạm khóa, vui lòng thử lại sau 1 phút"});
-                        }
-                        return res.json({status:"error", error:"Mật khẩu không chính xác"})
+                            else {
+                                return res.json({status:"error", error:"Mật khẩu không chính xác"})
+                            }
+                        })
                     }else{
                         if(loginAbnormality === 1) {
                             wrongPassword = 0;
