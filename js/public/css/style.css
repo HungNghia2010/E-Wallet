@@ -688,6 +688,10 @@ section {
     padding: 10px;
 }
 
+.lichsutd a:hover {
+    text-decoration: underline;
+}
+
 .lichsutr:hover {
     background-color: rgb(185, 223, 245);
     cursor: pointer;
