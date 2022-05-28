@@ -131,6 +131,7 @@ exports.register = async (req, res) => {
     // }else if(!images){
     //     return res.json({status:"error", error:"Hãy tải ảnh chứng minh nhân dân"});
     }else{
+        const username = Math.floor(1000000000 + Math.random() * 9000000000);
         db.query('SELECT * FROM register WHERE email = ? OR phone_number = ?', [email,phone], async (error, result) => {
             if(error){
                 console.log(error)
@@ -139,8 +140,7 @@ exports.register = async (req, res) => {
             if(result.length > 0){
                 return res.json({status:"error", error:"Email hoặc số điện thoại này đã được sử dụng"});
             }
-    
-            const username = Math.floor(1000000000 + Math.random() * 9000000000);
+
             const password = generateRandomString(6);
             let hashedpass = await bcrypt.hash(password,8)
             db.query('INSERT INTO register SET ?',{username : username, pass: hashedpass, name: nameeee, email: email, phone_number: phone, identity: cmnd, birth: birth ,address: address, status: 'chờ xác minh',role: 2, change_pass: 0}, (error, result)=>{
@@ -167,7 +167,7 @@ exports.register = async (req, res) => {
             })
     
         })
-        db.query('INSERT INTO lockAccount SET ?', {username : username, wrongPassword: 0, loginAbnormality: 0, lockIndefinitely: 0, lockTime: ''});
+        db.query('INSERT INTO lockAccount SET ?', {username : nameeee, wrongPassword: 0, loginAbnormality: 0, lockIndefinitely: 0, lockTime: ''});
     }
 
 }
