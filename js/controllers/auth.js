@@ -171,7 +171,7 @@ exports.register = async (req, res) => {
             })
     
         })
-        db.query('INSERT INTO lockaccount SET ?', {username : nameeee, wrongPassword: 0, loginAbnormality: 0, lockTime: ''});
+        db.query('INSERT INTO lockaccount SET ?', {username : username, wrongPassword: 0, loginAbnormality: 0, lockTime: ''});
     }
 
 }
