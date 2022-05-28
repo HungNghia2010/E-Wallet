@@ -23,61 +23,84 @@ let wrongPassword = 0;
 let loginAbnormality = 0;
 let lockIndefinitely = 0;
 const role = 1; //admin
+
+let minutesStartLock = 0;
+let minutesEndLock = 0;
+let tempLock = 0;
 exports.login = async (req, res) => {
+    const time = dateTime.create();
+    const timeFM = time.format('H:M:S');
+    const minutesNow = parseInt(timeFM.split(':')[1]);
+    const secondNow = parseInt(timeFM.split(':')[2]);
+    
     try{
 
         const {username,pwd} = req.body
         console.log(req.body)
-        if (lockIndefinitely != 1) {        
-            if(!username){
-                return res.json({status:"error", error:"Hãy nhập tên đăng nhập"})
-            }else if(!pwd){
-                return res.json({status:"error", error:"Hãy nhập mật khẩu"})
-            }else if(pwd.length < 6){
-                return res.json({status:"error", error:"Mật khẩu phải có tối thiểu 6 ký tự"})
-            }
-            else{
-                db.query('SELECT * FROM register WHERE username = ?', [username], async (error,result) => {
-                    if(result.length === 0){
-                        return res.json({status:"error", error:"Tên đăng nhập không tồn tại"})
-                    }
-                    else if(!result || !(await bcrypt.compare(pwd,result[0].pass))){
-                        db.query('SELECT * FROM register WHERE username = ? and role = ?', [username, role], async (error,result) => {
-                            if(result.length === 0) {
-                                wrongPassword++;
-                                db.query('UPDATE lockAccount SET wrongPassword = ? WHERE username = ?', [wrongPassword, username]);
-                                if(wrongPassword === 3){
-                                    if(loginAbnormality === 1) {
-                                        lockIndefinitely = 1;
-                                        db.query('UPDATE lockAccount SET lockIndefinitely = ?, lockTime = NOW() WHERE username = ?', [lockIndefinitely, username]);
-                                        return res.json({status:"error", error:"Tài khoản đã bị khóa do nhập sai mật khẩu nhiều lần, vui lòng liên hệ quản trị viên để được hỗ trợ"});
-                                    }
-                                    loginAbnormality += 1;
-                                    db.query('UPDATE lockAccount SET loginAbnormality = ? WHERE username = ?', [loginAbnormality, username]);
-                                    wrongPassword = 0;
-                                    return res.json({status:"error", error:"Tài khoản hiện đang bị tạm khóa, vui lòng thử lại sau 1 phút"});
-                                }
-                                return res.json({status:"error", error:"Mật khẩu không chính xác"})
-                            }
-                            else {
-                                return res.json({status:"error", error:"Mật khẩu không chính xác"})
-                            }
-                        })
-                    }else{
-                        wrongPassword = 0;
-                        loginAbnormality = 0;
-                        db.query('UPDATE lockAccount SET wrongPassword = ?, loginAbnormality = ? WHERE username = ?', [wrongPassword, loginAbnormality, username]);
-                        const token = jwt.sign({ id: result[0].id }, process.env.JWT_SECRET, {
-                            expiresIn: process.env.JWT_EXPIRRES
-                        })
-                        const cookieOptions = {
-                            expiresIn: new Date(Date.now() + process.env.COOKIE_EXPIRRES * 24 * 60 * 60 * 1000),
-                            httpOnly: true
+        if (lockIndefinitely != 1) {     
+            if(tempLock != 1){
+                if(!username){
+                    return res.json({status:"error", error:"Hãy nhập tên đăng nhập"})
+                }else if(!pwd){
+                    return res.json({status:"error", error:"Hãy nhập mật khẩu"})
+                }else if(pwd.length < 6){
+                    return res.json({status:"error", error:"Mật khẩu phải có tối thiểu 6 ký tự"})
+                }
+                else{
+                    db.query('SELECT * FROM register WHERE username = ?', [username], async (error,result) => {
+                        if(result.length === 0){
+                            return res.json({status:"error", error:"Tên đăng nhập không tồn tại"})
                         }
-                        res.cookie("userRegistered", token, cookieOptions)
-                        return res.json({status: "success", success: "User has been logged In"})
-                    }
-                })
+                        else if(!result || !(await bcrypt.compare(pwd,result[0].pass))){
+                            db.query('SELECT * FROM register WHERE username = ? and role = ?', [username, role], async (error,result) => {
+                                if(result.length === 0) {
+                                    wrongPassword++;
+                                    db.query('UPDATE lockAccount SET wrongPassword = ? WHERE username = ?', [wrongPassword, username]);
+                                    if(wrongPassword === 3){
+                                        if(loginAbnormality === 1) {
+                                            lockIndefinitely = 1;
+                                            db.query('UPDATE lockAccount SET lockIndefinitely = ?, lockTime = NOW() WHERE username = ?', [lockIndefinitely, username]);
+                                            return res.json({status:"error", error:"Tài khoản đã bị khóa do nhập sai mật khẩu nhiều lần, vui lòng liên hệ quản trị viên để được hỗ trợ"});
+                                        }
+                                        loginAbnormality += 1;
+                                        wrongPassword = 0;
+                                        const startLockTime = dateTime.create();
+                                        const startLockTimeFM = startLockTime.format('H:M:S');
+                                        minutesStartLock = startLockTimeFM.split(':')[1];
+                                        secondEndLock = startLockTimeFM.split(':')[2];
+                                        minutesEndLock = parseInt(minutesStartLock) + 1;
+                                        tempLock = 1;
+                                        db.query('UPDATE lockAccount SET loginAbnormality = ? WHERE username = ?', [loginAbnormality, username]);
+                                        return res.json({status:"error", error:"Tài khoản hiện đang bị tạm khóa, vui lòng thử lại sau 1 phút"});
+                                    }
+                                    return res.json({status:"error", error:"Mật khẩu không chính xác"})
+                                }
+                                else {
+                                    return res.json({status:"error", error:"Mật khẩu không chính xác"})
+                                }
+                            })
+                        }else{
+                            wrongPassword = 0;
+                            loginAbnormality = 0;
+                            db.query('UPDATE lockAccount SET wrongPassword = ?, loginAbnormality = ? WHERE username = ?', [wrongPassword, loginAbnormality, username]);
+                            const token = jwt.sign({ id: result[0].id }, process.env.JWT_SECRET, {
+                                expiresIn: process.env.JWT_EXPIRRES
+                            })
+                            const cookieOptions = {
+                                expiresIn: new Date(Date.now() + process.env.COOKIE_EXPIRRES * 24 * 60 * 60 * 1000),
+                                httpOnly: true
+                            }
+                            res.cookie("userRegistered", token, cookieOptions)
+                            return res.json({status: "success", success: "User has been logged In"})
+                        }
+                    })
+                }
+            }
+            else if((minutesEndLock <= minutesNow) && (secondEndLock <= secondNow)) {
+                tempLock = 0;
+            }
+            else {
+                return res.json({status:"error", error:"Tài khoản hiện đang bị tạm khóa, vui lòng thử lại sau 1 phút"})
             }
         }
         else {
