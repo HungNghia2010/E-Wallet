@@ -30,8 +30,9 @@ CREATE TABLE lockaccount (
 
 CREATE TABLE otp(
     id int(10) NOT NULL AUTO_INCREMENT,
-    opt varchar(10),
+    otp varchar(10),
     expiry time,
+    checkotp varchar(10),
     PRIMARY KEY(id)
 );
 
