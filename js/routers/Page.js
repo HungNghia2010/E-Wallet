@@ -36,6 +36,10 @@ Router.get('/otp',OTP.otp ,(req, res) => {
     }
 })
 
+Router.get('/newpassword', (req, res) => {
+    res.render('changepassforgot')
+})
+
 Router.get('/index', loggedIn.loggedIn, (req,res) => {
     console.log(req.user)
     if(req.user){
