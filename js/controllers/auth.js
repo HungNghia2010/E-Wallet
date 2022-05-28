@@ -55,11 +55,11 @@ exports.login = async (req, res) => {
                             db.query('SELECT * FROM register WHERE username = ? and role = ?', [username, role], async (error,result) => {
                                 if(result.length === 0) {
                                     wrongPassword++;
-                                    db.query('UPDATE lockAccount SET wrongPassword = ? WHERE username = ?', [wrongPassword, username]);
+                                    db.query('UPDATE lockaccount SET wrongPassword = ? WHERE username = ?', [wrongPassword, username]);
                                     if(wrongPassword === 3){
                                         if(loginAbnormality === 1) {
                                             lockIndefinitely = 1;
-                                            db.query('UPDATE lockAccount SET lockIndefinitely = ?, lockTime = NOW() WHERE username = ?', [lockIndefinitely, username]);
+                                            db.query('UPDATE lockaccount SET lockIndefinitely = ?, lockTime = NOW() WHERE username = ?', [lockIndefinitely, username]);
                                             return res.json({status:"error", error:"Tài khoản đã bị khóa do nhập sai mật khẩu nhiều lần, vui lòng liên hệ quản trị viên để được hỗ trợ"});
                                         }
                                         loginAbnormality += 1;
@@ -70,7 +70,7 @@ exports.login = async (req, res) => {
                                         secondEndLock = startLockTimeFM.split(':')[2];
                                         minutesEndLock = parseInt(minutesStartLock) + 1;
                                         tempLock = 1;
-                                        db.query('UPDATE lockAccount SET loginAbnormality = ? WHERE username = ?', [loginAbnormality, username]);
+                                        db.query('UPDATE lockaccount SET loginAbnormality = ? WHERE username = ?', [loginAbnormality, username]);
                                         return res.json({status:"error", error:"Tài khoản hiện đang bị tạm khóa, vui lòng thử lại sau 1 phút"});
                                     }
                                     return res.json({status:"error", error:"Mật khẩu không chính xác"})
@@ -82,7 +82,7 @@ exports.login = async (req, res) => {
                         }else{
                             wrongPassword = 0;
                             loginAbnormality = 0;
-                            db.query('UPDATE lockAccount SET wrongPassword = ?, loginAbnormality = ? WHERE username = ?', [wrongPassword, loginAbnormality, username]);
+                            db.query('UPDATE lockaccount SET wrongPassword = ?, loginAbnormality = ? WHERE username = ?', [wrongPassword, loginAbnormality, username]);
                             const token = jwt.sign({ id: result[0].id }, process.env.JWT_SECRET, {
                                 expiresIn: process.env.JWT_EXPIRRES
                             })
@@ -167,7 +167,7 @@ exports.register = async (req, res) => {
             })
     
         })
-        db.query('INSERT INTO lockAccount SET ?', {username : nameeee, wrongPassword: 0, loginAbnormality: 0, lockIndefinitely: 0, lockTime: ''});
+        db.query('INSERT INTO lockaccount SET ?', {username : nameeee, wrongPassword: 0, loginAbnormality: 0, lockIndefinitely: 0, lockTime: ''});
     }
 
 }
