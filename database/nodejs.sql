@@ -24,7 +24,6 @@ CREATE TABLE lockaccount (
     username varchar(64) NOT NULL,
     wrongPassword int(5),
     loginAbnormality int(5),
-    lockIndefinitely int(5),
     lockTime varchar(25),
     PRIMARY KEY(id)
 );
@@ -41,7 +40,7 @@ INSERT INTO register VALUES
 '123456789', '01/01/2000', 'Hà Nội', '', '', 'chờ xác minh', 1, 1);
 
 INSERT INTO lockaccount VALUES 
-('1', 'admin', 0, 0, 0, '');
+('1', 'admin', 0, 0, '');
 
 ALTER TABLE register
     MODIFY id int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
