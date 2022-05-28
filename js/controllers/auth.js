@@ -36,7 +36,7 @@ exports.login = async (req, res) => {
     try{
 
         const {username,pwd} = req.body
-        console.log(req.body)
+        //console.log(req.body)
         if (lockIndefinitely != 1) {     
             if(tempLock != 1){
                 if(!username){
