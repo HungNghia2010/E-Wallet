@@ -59,6 +59,11 @@ exports.login = async (req, res) => {
                         }
                         return res.json({status:"error", error:"Mật khẩu không chính xác"})
                     }else{
+                        if(loginAbnormality === 1) {
+                            wrongPassword = 0;
+                            loginAbnormality = 0;
+                            db.query('UPDATE lockAccount SET wrongPassword = ?, loginAbnormality = ? WHERE username = ?', [wrongPassword, loginAbnormality, username]);
+                        }
                         const token = jwt.sign({ id: result[0].id }, process.env.JWT_SECRET, {
                             expiresIn: process.env.JWT_EXPIRRES
                         })
