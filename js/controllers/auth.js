@@ -69,6 +69,8 @@ exports.login = async (req, res) => {
                             loginAbnormality = 0;
                             db.query('UPDATE lockAccount SET wrongPassword = ?, loginAbnormality = ? WHERE username = ?', [wrongPassword, loginAbnormality, username]);
                         }
+                        wrongPassword = 0;
+                        db.query('UPDATE lockAccount SET wrongPassword = ? WHERE username = ?', [wrongPassword, username]);
                         const token = jwt.sign({ id: result[0].id }, process.env.JWT_SECRET, {
                             expiresIn: process.env.JWT_EXPIRRES
                         })
