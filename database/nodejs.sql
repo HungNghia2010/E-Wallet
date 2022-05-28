@@ -29,6 +29,13 @@ CREATE TABLE lockAccount (
     PRIMARY KEY(id)
 );
 
+CREATE TABLE otp(
+    id int(10) NOT NULL AUTO_INCREMENT,
+    opt varchar(10),
+    expiry time,
+    PRIMARY KEY(id)
+);
+
 INSERT INTO register VALUES 
 (1, 'admin', '$2a$08$2atY3gZJNtmW9jQKXjaDGeJTrg7qXTt48L0KJ58bWVdBwwHmaZN3m', 'admin', 'ad@gmail.com', '0123456789', 
 '123456789', '01/01/2000', 'Hà Nội', '', '', 'chờ xác minh', 1, 1);
@@ -40,4 +47,7 @@ ALTER TABLE register
     MODIFY id int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 ALTER TABLE lockAccount
+    MODIFY id int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+ALTER TABLE otp
     MODIFY id int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;

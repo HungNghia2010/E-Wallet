@@ -24,6 +24,7 @@
             <a href="/index">Home</a>
             <!-- Chức năng admin -->
 
+            {{#if user.auth}}
             <li class="dropdown">
                 <a href="manager.html" class="dropbtn">Manage</a>
                 <div class="dropdown-content">
@@ -35,6 +36,7 @@
                     <a href="manager.html#gdchuyen">Giao dịch chuyển tiền</a>
                 </div>
             </li>
+            {{/if}}
 
             <!-- Chức năng chung -->
             <a href="/index#about">About</a>
@@ -100,21 +102,6 @@
                         </div>
 
                         <div class="input-box">
-                            <span class="details">Số tài khoản</span>
-                            <input value="123456" type="text" placeholder="" readonly>
-                        </div>
-                        <div class="input-box">
-                            <span class="details">Ngày hết hạn thẻ</span>
-                            <input value="1/1/2025" type="text" placeholder="" readonly>
-                        </div>
-
-                        <div class="input-box">
-                            <span class="details">Mã CVV</span>
-                            <input value="411" type="text" placeholder="" readonly>
-                        </div>
-
-
-                        <div class="input-box">
                             <span class="details">CMND/CCCD</span>
                             <input value="{{user.identity}}" type="text" placeholder="" readonly>
                         </div>
@@ -124,11 +111,11 @@
                         </div>
                         <div class="input-box">
                             <span class="details">Ngày sinh</span>
-                            <input value="1/1/2025" type="text" placeholder="" readonly>
+                            <input value="{{user.birth}}" type="text" placeholder="" readonly>
                         </div>
                         <div class="input-box">
                             <span class="details">Trạng thái</span>
-                            <input value="đang chờ xác minh" type="text" placeholder="" readonly>
+                            <input value="{{user.status}}" type="text" placeholder="" readonly>
                         </div>
 
 
