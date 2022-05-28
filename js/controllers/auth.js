@@ -178,6 +178,8 @@ exports.change_passft = async (req, res) => {
         return res.json({status:"error", error:"Hãy nhập mật khẩu mới"})
     }else if(!pwdcf){
         return res.json({status:"error", error:"Hãy xác nhận lại mật khẩu"})
+    }else if(pwd != pwdcf){
+        return res.json({status:"error", error:"Mật khẩu xác nhận không đúng"})
     }else if(pwd.length < 6){
         return res.json({status:"error", error:"Mật khẩu phải có tối thiểu 6 ký tự"})
     }else {
@@ -293,10 +295,63 @@ exports.checkotp = async(req, res) => {
         return res.render('otp',{msg: 'Hãy nhập otp'})
     }else{
         db.query('SELECT * FROM otp WHERE id = ?', [req.otp.id] ,  async (err,result) => {
-            
+            const dt = dateTime.create()
+            const formatted = dt.format('H:M:S')
+            hn = formatted.split(':')[0] * 3600;
+            mn = formatted.split(':')[1] * 60;
+            sn = formatted.split(':')[2];
+
+            const time = result[0].expiry
+            h = time.split(':')[0] * 3600;
+            m = time.split(':')[1] * 60;
+            s = time.split(':')[2];
+
+            const timeexpiry = (hn + mn + sn) - (h + m + s);
+
+            if(err){
+                console.log(error)
+            }else if(otp != result[0].otp){
+                return res.render('otp',{msg: 'Mã otp này không đúng'})
+            }else if(timeexpiry > 60){
+                res.clearCookie("userOTP")
+                return res.render('otp',{out: 'Mã otp đã hết hạn hãy gửi lại'})
+            }else {
+                db.query('UPDATE otp SET checkotp = ? WHERE otp = ?', [1,otp] , (err,result) => {
+                    if(err){
+                        console.log(error)
+                    }else{
+                        return res.render('otp',{success: 'OTP chính xác hãy qua trang đổi mật khẩu'})
+                    }
+                })
+            }
+
         })
     }
 
+}
+
+exports.change_passforgot = async(req,res) => {
+    const {pwd,pwdconfirm} = req.body
+    if(!pwd){
+        return res.render('changepassforgot',{msg: 'Hãy nhập mật khẩu mới'})
+    }else if (!pwdconfirm){
+        return res.render('changepassforgot',{msg: 'Hãy nhập mật khẩu xác nhận'})
+    }else if(pwd != pwdconfirm){
+        return res.render('changepassforgot',{msg: 'Mật khẩu xác nhận không đúng'})
+    }else if(pwd.length < 6){
+        return res.render('changepassforgot',{msg: 'Độ dài mật khẩu phải tối thiểu 6 ký tự'})
+    }else{
+        let hashedpass = await bcrypt.hash(pwd,8)
+        db.query("UPDATE register SET pass = ? WHERE id = ?", [hashedpass,req.otp.id], async (err,result) => {
+            if(err){
+                console.log(err)
+            } else{
+                db.query("UPDATE otp set checkotp = ? WHERE id = ?", [0, req.otp.id])
+                res.clearCookie("userOTP")
+                return res.render('changepassforgot',{success: 'Đổi mật khẩu thành công'})
+            }
+        })
+    }
 }
 
 exports.update_info = async (req, res) => {

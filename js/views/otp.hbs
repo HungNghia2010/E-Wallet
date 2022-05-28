@@ -34,6 +34,34 @@
             </div>
             {{/if}}
 
+            {{#if out}}
+            <div id="dialogCont" class="dig-container" >
+                <div class="dig-header">
+                    Thông báo
+                </div>
+                    <div id="digbody" class="dig-body">
+                        <h4 id="success"> {{out}}</h4>
+                    </div>
+                <div class="dig-footer">
+                    <a href="/forgot">Chuyển sang trang gửi email lại</a>
+                </div>
+            </div>
+            {{/if}}
+
+            {{#if success}}
+            <div id="dialogCont" class="dig-container" >
+                <div class="dig-header">
+                    Thông báo
+                </div>
+                    <div id="digbody" class="dig-body">
+                        <h4 id="success"> {{success}}</h4>
+                    </div>
+                <div class="dig-footer">
+                    <a href="/newpassword">Chuyển sang trang gửi email lại</a>
+                </div>
+            </div>
+            {{/if}}
+
             <button class="form-submit" type="submit" class="btn btn-default">Verify</button>
         </form>
 

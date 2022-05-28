@@ -26,6 +26,8 @@ Router.post('/forgot', authController.checkmail)
 
 Router.post('/otp',otp.otp,authController.checkotp)
 
+Router.post('/newpassword', otp.otp, authController.change_passforgot)
+
 Router.post('/firststep', loggedIn.loggedIn, authController.change_passft)
 
 Router.post('/changepassword', loggedIn.loggedIn, authController.change_pass)

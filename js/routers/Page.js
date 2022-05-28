@@ -17,15 +17,27 @@ Router.get('/firststep', loggedIn.loggedIn,(req,res) => {
 })
 
 Router.get('/login', (req, res) => {
-    res.render('login')
+    if(!req.cookies.userRegistered){
+        res.render('login')
+    }else{
+        res.render('404')
+    }
 })
 
 Router.get('/register', (req, res) => {
-    res.render('register')
+    if(!req.cookies.userRegistered){
+        res.render('register')
+    }else{
+        res.render('404')
+    }
 })
 
 Router.get('/forgot', (req, res) => {
-    res.render('forgotpass')
+    if(!req.cookies.userRegistered){
+        res.render('forgotpass')
+    }else{
+        res.render('404')
+    }
 })
 
 Router.get('/otp',OTP.otp ,(req, res) => {
@@ -36,8 +48,12 @@ Router.get('/otp',OTP.otp ,(req, res) => {
     }
 })
 
-Router.get('/newpassword', (req, res) => {
-    res.render('changepassforgot')
+Router.get('/newpassword', OTP.otp,(req, res) => {
+    if(req.otp.checkotp === '1'){
+        res.render('changepassforgot')
+    }else{
+        res.render('404')
+    }
 })
 
 Router.get('/index', loggedIn.loggedIn, (req,res) => {
