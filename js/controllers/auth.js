@@ -292,7 +292,9 @@ exports.checkotp = async(req, res) => {
     if(!otp){
         return res.render('otp',{msg: 'Hãy nhập otp'})
     }else{
-        db.query('')
+        db.query('SELECT * FROM otp WHERE id = ?', [req.otp.id] ,  async (err,result) => {
+            
+        })
     }
 
 }
