@@ -15,13 +15,13 @@
 <body>
     <header class="header headermana">
 
-        <a href="index.html" class="logo">
+        <a href="/index" class="logo">
             <img src="images/Flash.png" alt="">
         </a>
 
         <nav class="navbar ulnav">
             <!-- Chức năng chung -->
-            <a href="index.html">Home</a>
+            <a href="/index">Home</a>
             <!-- Chức năng admin -->
 
             <li class="dropdown">
@@ -37,17 +37,17 @@
             </li>
 
             <!-- Chức năng chung -->
-            <a href="index.html#about">About</a>
-            <a href="index.html#menu">Menu</a>
-            <a href="index.html#products">Card</a>
-            <a href="index.html#contact">Contact</a>
-            <a href="index.html#logout">Logout</a>
+            <a href="/index#about">About</a>
+            <a href="/index#menu">Menu</a>
+            <a href="/index#products">Card</a>
+            <a href="/index#contact">Contact</a>
+            <a href="/logout">Logout</a>
 
         </nav>
 
         <div class="icons">
             <div id="user-btn">
-                <a href="info.html" class="fa-solid fa-user"></a>
+                <a href="/info" class="fa-solid fa-user"></a>
             </div>
 
             <div class="fas fa-bars" id="menu-btn"></div>
@@ -62,47 +62,41 @@
         <div class="container container-about-me">
             <div class="title">Rút tiền</div>
             <div class="content content-about-me">
-                <form class="form-about-me" action="#">
+                <form class="form-about-me" id="form-rut-tien">
 
                     <div class="user-details">
 
                         <div class="input-box">
                             <span class="details">Họ và tên</span>
-                            <input disabled value="Nguyen Trung Hau" type="text" placeholder="" required>
+                            <input disabled value="{{user.name}}" type="text" placeholder="">
                         </div>
+
                         <div class="input-box">
                             <span class="details">Số dư</span>
-                            <input disabled value="1.000.000.000" type="text" placeholder="" required>
+                            <input disabled id="money" value="{{user.money}}" type="text" placeholder="">
                         </div>
 
                         <div class="input-box">
                             <span class="details">Số tài khoản</span>
-                            <input value="" type="text" placeholder="" required>
+                            <input value="" type="text" placeholder="">
                         </div>
                         <div class="input-box">
                             <span class="details">Ngày hết hạn thẻ</span>
-                            <input value="" type="text" placeholder="" required>
+                            <input value="" type="text" placeholder="">
                         </div>
 
                         <div class="input-box">
                             <span class="details">Mã CVV</span>
-                            <input value="" type="text" placeholder="" required>
+                            <input value="" type="text" placeholder="">
                         </div>
                         <div class="input-box">
                             <span class="details">Số tiền muốn rút</span>
-                            <input value="" type="text" placeholder="" required>
+                            <input value="" type="text" placeholder="">
                         </div>
                         <div class="input-box">
                             <span class="details">Ghi chú</span>
-                            <input value="" type="text" placeholder="" required>
+                            <input value="" type="text" placeholder="">
                         </div>
-                        <div class="input-box">
-                            <span class="details">Trạng thái</span>
-                            <input value="" type="text" placeholder="" required>
-                        </div>
-
-
-
 
                     </div>
 
@@ -158,11 +152,11 @@
         </div>
 
         <div class="links">
-            <a href="index.html">home</a>
-            <a href="index.html#about">about</a>
-            <a href="index.html#menu">menu</a>
-            <a href="index.html#products">card</a>
-            <a href="index.html#contact">contact</a>
+            <a href="/index">home</a>
+            <a href="/index#about">about</a>
+            <a href="/index#menu">menu</a>
+            <a href="/index#products">card</a>
+            <a href="/index#contact">contact</a>
         </div>
 
         <div class="credit">created by <span>us</span></div>
@@ -170,7 +164,7 @@
     </section>
 
 
-    <script src="js/script.js"></script>
+    <script src="js/main.js"></script>
 
 </body>
 
