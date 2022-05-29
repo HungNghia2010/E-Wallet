@@ -83,6 +83,11 @@ exports.login = async (req, res) => {
                                     }
                                 })
                             }else{
+                                db.query('SELECT * FROM account WHERE id = ?',[result[0].id], async(err, result01) => {
+                                    if(result01.length === 0){
+                                        db.query('INSERT INTO account SET ?', {id: result[0].id, money: 0})
+                                    }
+                                })
                                 wrongPassword = 0;
                                 loginAbnormality = 0;
                                 db.query('UPDATE lockaccount SET wrongPassword = ?, loginAbnormality = ? WHERE username = ?', [wrongPassword, loginAbnormality, username]);
@@ -151,7 +156,7 @@ exports.register = async (req, res) => {
                 if(error){
                     console.log(error)
                 } else{
-                    //mail
+                    //Gửi mail
                     // var mailOptions = {
                     //     from: 'sinhvien@phongdaotao.com',
                     //     to: email,
@@ -166,6 +171,7 @@ exports.register = async (req, res) => {
                     //         return res.json({status: "success", success: "Hãy kiểm tra mail để biết username và password" });
                     //     }
                     // })
+                    //vì không gửi được nên thông báo username + password ra dialog
                     return res.json({status: "success", success: "Tên đăng nhập là: "+username+", Mật khẩu là: " + password });
                 }
             })
@@ -391,13 +397,11 @@ exports.isActivated = async(req,res,next) => {
     if (!req.cookies.userRegistered) return next();
     try{
         const decoded = jwt.verify(req.cookies.userRegistered, process.env.JWT_SECRET)
-        db.query('SELECT * FROM register WHERE id = ?', [decoded.id], async (error,result) => {
+        db.query('SELECT * FROM register INNER JOIN account WHERE register.id = account.id AND register.id = ?', [decoded.id], async (error,result) => {
         if(error) return next()
             req.user = result[0]
             if(result[0].role === 1){
                 req.user.auth = 'Admin'
-            }else if(result[0].status === 'chờ xác minh' || result[0].status === 'chờ cập nhật'){
-                req.user.wait = 'NoUse'
             }
             return next()
         })

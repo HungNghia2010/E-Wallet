@@ -106,7 +106,10 @@ Router.get('/info/changepassword', loggedIn.loggedIn, (req, res) => {
 
 Router.get('/naptien', controllers.isActivated , (req, res) => {
     if(req.user){
-        if(req.user.status === "chờ xác minh"){
+        if(req.user.change_pass === 0){
+            res.redirect('/firststep')
+        }
+        else if(req.user.status === "chờ xác minh"){
             res.redirect('/index')
         }
         else res.render('nap',{status:"info",user: req.user})
