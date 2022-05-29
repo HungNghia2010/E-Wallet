@@ -11,6 +11,8 @@ var updateinfo = document.getElementById("form-update-info")
 
 var nap = document.getElementById("form-nap-tien")
 
+var rut = document.getElementById("form-rut-tien")
+
 var navbar = document.querySelector('.navbar');
 
 if(login){
@@ -40,6 +42,15 @@ if(login){
     }
     
     naptien()
+}else if(rut){
+    const s = document.getElementById('money').value;
+    document.getElementById('money').setAttribute('value',formatCash(s) + 'đ');
+
+    document.getElementById('close').onclick = function(){
+        dialogCont.style.display = "none"
+        window.location.reload()
+    }
+    
 }else if (navbar){
     document.querySelector('#menu-btn').onclick = () => {
         navbar.classList.toggle('active');
