@@ -67,56 +67,19 @@
                     <th class="lichsuth">Ngày tạo</th>
                     <th class="lichsuth">...</th>
                 </tr>
+                <% rows.forEach(function(row) { %>
                 <tr class="lichsutr">
-                    <td class="lichsutd">1</td>
-                    <td class="lichsutd">Trần Anh Đức</td>
-                    <td class="lichsutd">Đức Cống</td>
-                    <td class="lichsutd">0909090909</td>
-                    <td class="lichsutd">03/08/1993</td>
+                    <td class="lichsutd"><%= row.id %></td>
+                    <td class="lichsutd"><%= row.name %></td>
+                    <td class="lichsutd"><%= row.username %></td>
+                    <td class="lichsutd"><%= row.phone_number %></td>
+                    <td class="lichsutd">chua</td>
                     <td class="lichsutd">
                         <a href="/xemchoduyet">Xem</a>
                     </td>
                 </tr>
-                <tr class="lichsutr">
-                    <td class="lichsutd">2</td>
-                    <td class="lichsutd">Trần Anh Đức</td>
-                    <td class="lichsutd">Đức Cống</td>
-                    <td class="lichsutd">0909090909</td>
-                    <td class="lichsutd">03/08/1993</td>
-                    <td class="lichsutd">
-                        <a href="/xemchoduyet">Xem</a>
-                    </td>
-                </tr>
-                <tr class="lichsutr">
-                    <td class="lichsutd">3</td>
-                    <td class="lichsutd">Trần Anh Đức</td>
-                    <td class="lichsutd">Đức Cống</td>
-                    <td class="lichsutd">0909090909</td>
-                    <td class="lichsutd">03/08/1993</td>
-                    <td class="lichsutd">
-                        <a href="/xemchoduyet">Xem</a>
-                    </td>
-                </tr>
-                <tr class="lichsutr">
-                    <td class="lichsutd">4</td>
-                    <td class="lichsutd">Trần Anh Đức</td>
-                    <td class="lichsutd">Đức Cống</td>
-                    <td class="lichsutd">0909090909</td>
-                    <td class="lichsutd">03/08/1993</td>
-                    <td class="lichsutd">
-                        <a href="/xemchoduyet">Xem</a>
-                    </td>
-                </tr>
-                <tr class="lichsutr">
-                    <td class="lichsutd">5</td>
-                    <td class="lichsutd">Trần Anh Đức</td>
-                    <td class="lichsutd">Đức Cống</td>
-                    <td class="lichsutd">0909090909</td>
-                    <td class="lichsutd">03/08/1993</td>
-                    <td class="lichsutd">
-                        <a href="/xemchoduyet">Xem</a>
-                    </td>
-                </tr>
+                <% }) %>
+                
             </table>
         </div>
 
