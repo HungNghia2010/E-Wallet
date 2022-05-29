@@ -149,4 +149,13 @@ Router.get('/lichsu', controllers.isActivated , (req, res) => {
     }
 })
 
+Router.get('/manager', loggedIn.loggedIn, (req, res) => {
+    console.log(req.user)
+    if(req.user.auth === 'Admin'){
+        res.render('manager',{status:"info", user: req.user})
+    }else{
+        res.render('404',{status:"no",user: "nothing"})
+    }
+})
+
 module.exports = Router
