@@ -205,7 +205,7 @@ exports.change_passft = async (req, res) => {
 }
 
 exports.change_pass = async (req, res) => {
-    const {pwd, pwdnew, pwdcf} = req.body
+    const {pwd, pwdnew, pwdconfirm} = req.body
    
     if(!pwd){
         return res.json({status:"error", error:"Hãy nhập mật khẩu hiện tại"});
@@ -215,9 +215,9 @@ exports.change_pass = async (req, res) => {
         return res.json({status:"error", error:"Mật khẩu mới phải tối thiểu 6 ký tự"});
     }else if(pwdnew === pwd){
         return res.json({status:"error", error:"Mật khẩu mới không được giống mật khẩu cũ"});
-    }else if(!pwdcf){
+    }else if(!pwdconfirm){
         return res.json({status:"error", error:"Hãy xác nhận mật khẩu mới"});
-    }else if(!(pwdnew === pwdcf)){
+    }else if(!(pwdnew === pwdconfirm)){
         return res.json({status:"error", error:"Mật khẩu xác nhận không khớp"});
     }else{
         db.query('SELECT pass FROM register WHERE id = ?',[req.user.id], async (error, result) => {
