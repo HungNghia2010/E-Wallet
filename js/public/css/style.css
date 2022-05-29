@@ -862,6 +862,10 @@ section {
     margin: 20px;
 }
 
+.form-about-me .register-button input {
+    margin: 20px;
+}
+
 .form-about-me .button input {
     height: 100%;
     width: 100%;

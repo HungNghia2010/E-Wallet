@@ -4,6 +4,7 @@ const loggedIn = require('../controllers/LoggedIn')
 const logout = require('../controllers/Logout')
 const OTP = require('../controllers/Sendotp')
 const controllers = require('../controllers/auth')
+const db = require('./db-config')
 
 Router.get('/404', (req, res) => {
     res.render('404')
@@ -160,6 +161,46 @@ Router.get('/manager', loggedIn.loggedIn, (req, res) => {
 Router.get('/xemchoduyet', loggedIn.loggedIn, (req, res) => {
     if(req.user.auth === 'Admin'){
         res.render('xemchoduyet',{status:"info", user: req.user})
+    }else{
+        res.render('404',{status:"no",user: "nothing"})
+    }
+})
+
+Router.get('/xemchuyentien', loggedIn.loggedIn, (req, res) => {
+    if(req.user.auth === 'Admin'){
+        res.render('xemchuyentien',{status:"info", user: req.user})
+    }else{
+        res.render('404',{status:"no",user: "nothing"})
+    }
+})
+
+Router.get('/xemdakichhoat', loggedIn.loggedIn, (req, res) => {
+    if(req.user.auth === 'Admin'){
+        res.render('xemdakichhoat',{status:"info", user: req.user})
+    }else{
+        res.render('404',{status:"no",user: "nothing"})
+    }
+})
+
+Router.get('/xemruttien', loggedIn.loggedIn, (req, res) => {
+    if(req.user.auth === 'Admin'){
+        res.render('xemruttien',{status:"info", user: req.user})
+    }else{
+        res.render('404',{status:"no",user: "nothing"})
+    }
+})
+
+Router.get('/xemvohieuhoa', loggedIn.loggedIn, (req, res) => {
+    if(req.user.auth === 'Admin'){
+        res.render('xemvohieuhoa',{status:"info", user: req.user})
+    }else{
+        res.render('404',{status:"no",user: "nothing"})
+    }
+})
+
+Router.get('/xemvothoihan', loggedIn.loggedIn, (req, res) => {
+    if(req.user.auth === 'Admin'){
+        res.render('xemvothoihan',{status:"info", user: req.user})
     }else{
         res.render('404',{status:"no",user: "nothing"})
     }
