@@ -165,4 +165,44 @@ Router.get('/xemchoduyet', loggedIn.loggedIn, (req, res) => {
     }
 })
 
+Router.get('/xemchuyentien', loggedIn.loggedIn, (req, res) => {
+    if(req.user.auth === 'Admin'){
+        res.render('xemchuyentien',{status:"info", user: req.user})
+    }else{
+        res.render('404',{status:"no",user: "nothing"})
+    }
+})
+
+Router.get('/xemdakichhoat', loggedIn.loggedIn, (req, res) => {
+    if(req.user.auth === 'Admin'){
+        res.render('xemdakichhoat',{status:"info", user: req.user})
+    }else{
+        res.render('404',{status:"no",user: "nothing"})
+    }
+})
+
+Router.get('/xemruttien', loggedIn.loggedIn, (req, res) => {
+    if(req.user.auth === 'Admin'){
+        res.render('xemruttien',{status:"info", user: req.user})
+    }else{
+        res.render('404',{status:"no",user: "nothing"})
+    }
+})
+
+Router.get('/xemvohieuhoa', loggedIn.loggedIn, (req, res) => {
+    if(req.user.auth === 'Admin'){
+        res.render('xemvohieuhoa',{status:"info", user: req.user})
+    }else{
+        res.render('404',{status:"no",user: "nothing"})
+    }
+})
+
+Router.get('/xemvothoihan', loggedIn.loggedIn, (req, res) => {
+    if(req.user.auth === 'Admin'){
+        res.render('xemvothoihan',{status:"info", user: req.user})
+    }else{
+        res.render('404',{status:"no",user: "nothing"})
+    }
+})
+
 module.exports = Router
