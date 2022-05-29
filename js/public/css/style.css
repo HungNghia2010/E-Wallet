@@ -178,11 +178,13 @@ section {
 .login-body {
     background: url(../images/login.jpg);
     background-size: cover;
-    background-position-y: -80px;
+    background-position: center;
     background-repeat: no-repeat;
     min-height: 100vh;
     font-size: 16px;
     overflow: hidden;
+    height: 100%;
+    background-attachment: fixed;
 }
 
 #eye #eye1 i {
@@ -859,6 +861,10 @@ section {
 }
 
 .form-about-me .register-button button {
+    margin: 20px;
+}
+
+.form-about-me .register-button input {
     margin: 20px;
 }
 

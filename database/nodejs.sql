@@ -16,6 +16,7 @@ CREATE TABLE register(
     status varchar(50) NOT NULL,
     role int(10) NOT NULL,
     change_pass int(5) NOT NULL,
+    time_create_account varchar(255) NOT NULL,
     PRIMARY KEY(id)
 );
 
@@ -46,7 +47,8 @@ CREATE TABLE trading(
     ma_Giao_Dich varchar(10) NOT NULL,
     ma_Khach_Hang int(10) NOT NULL,
     money_trading varchar(20) ,
-    date_trading DATE,
+    day_trading varchar(20),
+    time_trading TIME,
     trading_type varchar(20),
     trading_status varchar(20),
     PRIMARY KEY(ma_Giao_Dich)
@@ -54,7 +56,7 @@ CREATE TABLE trading(
 
 INSERT INTO register VALUES 
 (1, 'admin', '$2a$08$2atY3gZJNtmW9jQKXjaDGeJTrg7qXTt48L0KJ58bWVdBwwHmaZN3m', 'admin', 'ad@gmail.com', '0123456789', 
-'123456789', '01/01/2000', 'Hà Nội', '', '', 'chờ xác minh', 1, 1);
+'123456789', '01/01/2000', 'Hà Nội', '', '', 'chờ xác minh', 1, 1, '');
 
 INSERT INTO lockaccount VALUES 
 ('1', 'admin', 0, 0, '');

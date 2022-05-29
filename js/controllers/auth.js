@@ -155,7 +155,7 @@ exports.register = async (req, res) => {
 
             const password = generateRandomString(6);
             let hashedpass = await bcrypt.hash(password,8)
-            db.query('INSERT INTO register SET ?',{username : username, pass: hashedpass, name: nameeee, email: email, phone_number: phone, identity: cmnd, birth: birth ,address: address, status: 'chờ xác minh',role: 2, change_pass: 0}, (error, result)=>{
+            db.query('INSERT INTO register SET ?',{username : username, pass: hashedpass, name: nameeee, email: email, phone_number: phone, identity: cmnd, birth: birth ,address: address, status: 'chờ xác minh',role: 2, change_pass: 0, time_create_account: (dateTime.create()).format('d-m-Y')}, (error, result)=>{
                 if(error){
                     console.log(error)
                 } else{
@@ -448,7 +448,19 @@ exports.nap_tien = async(req, res) => {
                     if(err){
                         console.log(err)
                     }else{
-                        return res.json({status:"success", success:"Nạp tiền thành công"})
+                        // Lịch sử
+                        const ma_Giao_Dich = generateRandomString(6);
+                        const date = dateTime.create();
+                        const today = new Date();
+                        const day_trading = today.getDate() + "/" + today.getMonth() + "/" + today.getFullYear() ;
+                        const time_trading = date.format('H:M:S');
+                        db.query('INSERT INTO trading SET ?',{ma_Giao_Dich : ma_Giao_Dich , ma_Khach_Hang: req.user.id , money_trading : tien , day_trading : day_trading , time_trading : time_trading , trading_type : "Nạp tiền", trading_status : ""}, (error)=>{
+                            if(error){
+                                console.log(error)
+                            } else{
+                                return res.json({status:"success", success:"Nạp tiền thành công"})
+                            }
+                        })
                     }
                 })
             })
@@ -465,7 +477,18 @@ exports.nap_tien = async(req, res) => {
                     if(err){
                         console.log(err)
                     }else{
-                        return res.json({status:"success", success:"Nạp tiền thành công"})
+                        const ma_Giao_Dich = generateRandomString(6);
+                        const date = dateTime.create();
+                        const today = new Date();
+                        const day_trading = today.getDate() + "/" + today.getMonth() + "/" + today.getFullYear() ;
+                        const time_trading = date.format('H:M:S');
+                        db.query('INSERT INTO trading SET ?',{ma_Giao_Dich : ma_Giao_Dich , ma_Khach_Hang: req.user.id , money_trading : tien , day_trading : day_trading , time_trading : time_trading , trading_type : "Nạp tiền", trading_status : ""}, (error)=>{
+                            if(error){
+                                console.log(error)
+                            } else{
+                                return res.json({status:"success", success:"Nạp tiền thành công"})
+                            }
+                        })
                     }
                 })
             })

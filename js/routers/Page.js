@@ -4,6 +4,7 @@ const loggedIn = require('../controllers/LoggedIn')
 const logout = require('../controllers/Logout')
 const OTP = require('../controllers/Sendotp')
 const controllers = require('../controllers/auth')
+const db = require('./db-config')
 
 Router.get('/404', (req, res) => {
     res.render('404')
@@ -151,7 +152,14 @@ Router.get('/lichsu', controllers.isActivated , (req, res) => {
 
 Router.get('/manager', loggedIn.loggedIn, (req, res) => {
     if(req.user.auth === 'Admin'){
-        res.render('manager',{status:"info", user: req.user})
+        db.query('SELECT * FROM register', (err, rows) => {
+            if(!err) {
+                res.render('manager',{status:"info",user: req.user, rows})
+            }
+            else {
+                console.log(err);
+            }
+        })
     }else{
         res.render('404',{status:"no",user: "nothing"})
     }
