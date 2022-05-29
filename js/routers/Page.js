@@ -58,7 +58,7 @@ Router.get('/newpassword', OTP.otp,(req, res) => {
 })
 
 Router.get('/index', loggedIn.loggedIn, (req,res) => {
-    console.log(req.user)
+    //console.log(req.user)
     if(req.user){
         if(req.user.change_pass === 0){
             res.redirect('/firststep')
