@@ -4,6 +4,7 @@ const loggedIn = require('../controllers/LoggedIn')
 const logout = require('../controllers/Logout')
 const OTP = require('../controllers/Sendotp')
 const controllers = require('../controllers/auth')
+const db = require('./db-config')
 
 Router.get('/404', (req, res) => {
     res.render('404')
