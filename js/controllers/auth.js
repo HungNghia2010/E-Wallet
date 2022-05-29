@@ -544,6 +544,8 @@ exports.rut_tien = async(req,res) => {
                     const s = parseInt(tien*0.05) + parseInt(tien)
                     if(parseInt(s) > parseInt(result[0].money)){
                         return res.json({status:"error", error:"Số tiền nhập cộng phí lớn hơn số tiền hiện có"})
+                    }else if(money > 5000000  ){
+                        
                     }else{
                         const money = parseInt(result[0].money) - parseInt(s)
                         db.query('UPDATE account SET money = ? WHERE id = ?',[money,req.user.id], (err,result1) => {
