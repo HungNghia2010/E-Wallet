@@ -149,4 +149,8 @@ Router.get('/lichsu', controllers.isActivated , (req, res) => {
     }
 })
 
+Router.get('/manager', (req, res) => {
+    res.render('manager')
+})
+
 module.exports = Router
