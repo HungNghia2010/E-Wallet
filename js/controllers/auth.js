@@ -37,7 +37,10 @@ exports.login = async (req, res) => {
         const {username,pwd} = req.body
         //console.log(req.body)
         db.query('SELECT * FROM lockaccount WHERE username = ?', [username], async (error,result) => {
-            if (result[0].loginAbnormality <= 1) {     
+            if(result.length === 0){
+                return res.json({status:"error", error:"Tài khoản không tồn tại"})
+            }
+            else if (result[0].loginAbnormality <= 1) {     
                 if(tempLock != 1){
                     if(!username){
                         return res.json({status:"error", error:"Hãy nhập tên đăng nhập"})
