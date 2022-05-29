@@ -34,4 +34,5 @@ Router.post('/changepassword', loggedIn.loggedIn, authController.change_pass)
 
 Router.post('/update', loggedIn.loggedIn, authController.update_info)
 
+
 module.exports = Router;

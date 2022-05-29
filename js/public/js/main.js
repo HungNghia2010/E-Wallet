@@ -37,8 +37,7 @@ if(login){
     window.onscroll = () => {
         navbar.classList.remove('active');
     }
-}
-else {
+} else {
     // Slide show
     var slideIndex = 1;
     showDivs(slideIndex);

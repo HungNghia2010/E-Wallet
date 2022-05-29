@@ -385,6 +385,27 @@ exports.update_info = async (req, res) => {
 
 }
 
+// Check activated
+
+exports.isActivated = async(req,res,next) => {
+    if (!req.cookies.userRegistered) return next();
+    try{
+        const decoded = jwt.verify(req.cookies.userRegistered, process.env.JWT_SECRET)
+        db.query('SELECT * FROM register WHERE id = ?', [decoded.id], async (error,result) => {
+        if(error) return next()
+            req.user = result[0]
+            if(result[0].role === 1){
+                req.user.auth = 'Admin'
+            }else if(result[0].status === 'chờ xác minh' || result[0].status === 'chờ cập nhật'){
+                req.user.wait = 'NoUse'
+            }
+            return next()
+        })
+    }catch (err){
+        if(err) return next()
+    }
+}
+
 //random string for password
 const generateRandomString = (myLength) => {
     const chars =

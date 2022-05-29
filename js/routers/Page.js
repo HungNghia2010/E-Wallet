@@ -3,6 +3,7 @@ const Router = express.Router()
 const loggedIn = require('../controllers/LoggedIn')
 const logout = require('../controllers/Logout')
 const OTP = require('../controllers/Sendotp')
+const controllers = require('../controllers/auth')
 
 Router.get('/404', (req, res) => {
     res.render('404')
@@ -103,12 +104,10 @@ Router.get('/info/changepassword', loggedIn.loggedIn, (req, res) => {
     }
 })
 
-Router.get('/naptien', loggedIn.loggedIn, (req, res) => {
+Router.get('/naptien', controllers.isActivated , (req, res) => {
     if(req.user){
-        if(req.user.change_pass === 0){
-            res.redirect('/firststep')
-        }else if(req.user.status === "chờ xác minh"){
-            res.render('404',{status:"no",user: "nothing"})
+        if(req.user.status === "chờ xác minh"){
+            res.redirect('/index')
         }
         else res.render('nap',{status:"info",user: req.user})
     }else{
