@@ -448,6 +448,7 @@ exports.nap_tien = async(req, res) => {
                     if(err){
                         console.log(err)
                     }else{
+                        // Lịch sử
                         return res.json({status:"success", success:"Nạp tiền thành công"})
                     }
                 })
@@ -465,6 +466,7 @@ exports.nap_tien = async(req, res) => {
                     if(err){
                         console.log(err)
                     }else{
+                        // Lịch sử
                         return res.json({status:"success", success:"Nạp tiền thành công"})
                     }
                 })
