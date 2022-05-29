@@ -440,9 +440,8 @@ exports.nap_tien = async(req, res) => {
             return res.json({status:"error", error:"Số tiền không được vượt quá 1 triệu"})
         }else{
             db.query('SELECT * FROM account WHERE id = ?',[req.user.id],(err,result) => {
-                const money = result[0].money + tien
-                console.log(Number(money))
-                db.query('UPDATE account SET money = ? WHERE id = ?',[Number(money),req.user.id], (err,result1) => {
+                const money = parseInt(tien) + parseInt(result[0].money)
+                db.query('UPDATE account SET money = ? WHERE id = ?',[money,req.user.id], (err,result1) => {
                     if(err){
                         console.log(err)
                     }else{
@@ -458,11 +457,8 @@ exports.nap_tien = async(req, res) => {
             return res.json({status:"error", error:"CVV nhập không đúng"})
         }else{
             db.query('SELECT * FROM account WHERE id = ?',[req.user.id],(err,result) => {
-                var first = parseInt(result[0].money)
-                var second = parseInt(tien)
-                var sum = first + second
-                console.log(sum)
-                db.query('UPDATE account SET money = ? WHERE id = ?',[sum,req.user.id], (err,result1) => {
+                const money = parseInt(tien) + parseInt(result[0].money)
+                db.query('UPDATE account SET money = ? WHERE id = ?',[money,req.user.id], (err,result1) => {
                     if(err){
                         console.log(err)
                     }else{
