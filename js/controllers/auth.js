@@ -83,7 +83,7 @@ exports.login = async (req, res) => {
                                     }
                                 })
                             }else{
-                                db.query('SELECT * FROM account WHERE id = ?',[result[0].id], async(err,    ) => {
+                                db.query('SELECT * FROM account WHERE id = ?',[result[0].id], async(err, result01) => {
                                     if(result01.length === 0){
                                         db.query('INSERT INTO account SET ?', {id: result[0].id, money: 0})
                                     }
