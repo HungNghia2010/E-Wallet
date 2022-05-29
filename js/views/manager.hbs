@@ -66,7 +66,10 @@
                     <th class="lichsuth">Số điện thoại</th>
                     <th class="lichsuth">Ngày tạo</th>
                     <th class="lichsuth">...</th>
-                </tr>
+                </tr>  
+
+                <%= rows.length %>
+
                 <% rows.forEach(function(row) { %>
                 <tr class="lichsutr">
                     <td class="lichsutd"><%= row.id %></td>
