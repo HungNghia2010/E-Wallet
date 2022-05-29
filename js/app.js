@@ -14,6 +14,7 @@ app.use(express.static(publicDirectory))
 
 app.set('view engine', 'hbs');
 
+
 db.connect( (error) => {
     if(error){
         console.log(error)
