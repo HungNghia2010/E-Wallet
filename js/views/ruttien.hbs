@@ -62,7 +62,7 @@
         <div class="container container-about-me">
             <div class="title">Rút tiền</div>
             <div class="content content-about-me">
-                <form class="form-about-me" id="form-rut-tien">
+                <form class="form-about-me" id="form-rut-tien" onsubmit="return false;">
 
                     <div class="user-details">
 
@@ -77,25 +77,42 @@
                         </div>
 
                         <div class="input-box">
-                            <span class="details">Số tài khoản</span>
-                            <input value="" type="text" placeholder="">
+                            <span class="details">Số thẻ</span>
+                            <input  id="sotk" name="sotk" value="" type="text" placeholder="">
                         </div>
                         <div class="input-box">
                             <span class="details">Ngày hết hạn thẻ</span>
-                            <input value="" type="text" placeholder="">
+                            <input value="" id="dayex" name="dayex" type="text" placeholder="">
                         </div>
 
                         <div class="input-box">
                             <span class="details">Mã CVV</span>
-                            <input value="" type="text" placeholder="">
+                            <input value="" id="cvv" name="cvv" type="text" placeholder="">
                         </div>
                         <div class="input-box">
                             <span class="details">Số tiền muốn rút</span>
-                            <input value="" type="text" placeholder="">
+                            <input value="" id="tien" name="tien" type="text" placeholder="">
                         </div>
                         <div class="input-box">
                             <span class="details">Ghi chú</span>
-                            <input value="" type="text" placeholder="">
+                            <input value="" id="ghichu" name="ghichu" type="text" placeholder="">
+                        </div>
+
+                        <div class="alert" id="errorMessage" style="display: none;">
+                            <span class="fas fa-exclamation-circle"></span>
+                            <span class="msg" id="error"></span>
+                        </div>
+
+                        <div id="dialogCont" class="dig-container" style="display: none;">
+                            <div class="dig-header">
+                                Nạp tiền vào tài khoản
+                            </div>
+                            <div id="digbody" class="dig-body">
+                                <h4 id="success"></h4>
+                            </div>
+                            <div class="dig-footer">
+                                <a id="close">Đóng</a>
+                            </div>
                         </div>
                         <div class="input-box">
                             <span>*: chưa bao gồm 5% phí rút</span>
