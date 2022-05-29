@@ -475,6 +475,61 @@ exports.nap_tien = async(req, res) => {
     }
 }
 
+exports.rut_tien = async(req,res) => {
+    const {sotk, dayex, cvv, tien, ghichu} = req.body
+    
+    if(!sotk){
+        return res.json({status:"error", error:"Hãy nhập số tài khoản"})
+    }else if(!dayex){
+        return res.json({status:"error", error:"Hãy nhập ngày hết hạn"})
+    }else if(!cvv){
+        return res.json({status:"error", error:"Hãy nhập cvv"})
+    }else if(!tien){
+        return res.json({status:"error", error:"Hãy nhập số tiền muốn nạp"})
+    }else if(Number.isNaN(Number(tien))){
+        return res.json({status:"error", error:"Hãy nhập đúng số tiền"})
+    }else if(!ghichu){
+        return res.json({status:"error", error:"Hãy nhập ghi chú"})
+    }else if(sotk === '333333'){
+        if(dayex != '12/12/2022'){
+            return res.json({status:"error", error:"Thông tin thẻ không hợp lệ"})
+        }else if(cvv != '577'){
+            return res.json({status:"error", error:"Thông tin thẻ không hợp lệ"})
+        }else{
+            return res.json({status:"error", error:"Thẻ này không được hỗ trợ để rút tiền"})
+        }
+    }else if(sotk === '222222'){
+        if(dayex != '11/11/2022'){
+            return res.json({status:"error", error:"Thông tin thẻ không hợp lệ"})
+        }else if(cvv != '443'){
+            return res.json({status:"error", error:"Thông tin thẻ không hợp lệ"})
+        }else{
+            return res.json({status:"error", error:"Thẻ này không được hỗ trợ để rút tiền"})
+        }
+    }else if(sotk === '111111'){
+        if(dayex != '10/10/2022'){
+            return res.json({status:"error", error:"Sai ngày hết hạn"})
+        }else if(cvv != '411'){
+            return res.json({status:"error", error:"CVV nhập không đúng"})
+        }else if(cvv != '411'){
+            return res.json({status:"error", error:"CVV nhập không đúng"})
+        }else{
+            db.query('SELECT * FROM account WHERE id = ?',[req.user.id],(err,result) => {
+                const money = parseInt(tien) + parseInt(result[0].money)
+                db.query('UPDATE account SET money = ? WHERE id = ?',[money,req.user.id], (err,result1) => {
+                    if(err){
+                        console.log(err)
+                    }else{
+                        return res.json({status:"success", success:"Nạp tiền thành công"})
+                    }
+                })
+            })
+        }
+    }else{
+        return res.json({status:"error", error:"Thẻ này không được hỗ trợ"})
+    }
+}
+
 //random string for password
 const generateRandomString = (myLength) => {
     const chars =

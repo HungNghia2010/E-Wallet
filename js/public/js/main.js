@@ -50,6 +50,7 @@ if(login){
         dialogCont.style.display = "none"
         window.location.reload()
     }
+    ruttien()
     
 }else if (navbar){
     document.querySelector('#menu-btn').onclick = () => {
@@ -215,6 +216,7 @@ function valideUpdateform(){
     })
 }
 
+//naptien
 function naptien(){
     nap.addEventListener("submit", ()=>{
         const naptien = {
@@ -226,6 +228,37 @@ function naptien(){
         fetch("/auth/nap",{
             method: "POST",
             body: JSON.stringify(naptien),
+            headers: {
+                "Content-type":"application/json"
+            }
+        }).then(res => res.json())
+        .then(data => {
+            if(data.status == "error"){
+                dialogCont.style.display = "none"
+                errorMessage.style.display = "block"
+                error.innerText = data.error
+            }else{
+                dialogCont.style.display = "block"
+                errorMessage.style.display = "none"
+                success.innerText = data.success 
+            }
+        })
+    })
+}
+
+//ruttien
+function ruttien(){
+    rut.addEventListener("submit", ()=>{
+        const ruttien = {
+            sotk: sotk.value,
+            dayex: dayex.value,
+            cvv: cvv.value,
+            tien: tien.value,
+            ghichu: ghichu.value
+        }
+        fetch("/auth/ruttien",{
+            method: "POST",
+            body: JSON.stringify(ruttien),
             headers: {
                 "Content-type":"application/json"
             }
