@@ -426,6 +426,8 @@ exports.nap_tien = async(req, res) => {
         return res.json({status:"error", error:"Hãy nhập số tiền muốn nạp"})
     }else if(Number.isNaN(Number(tien))){
         return res.json({status:"error", error:"Hãy nhập đúng số tiền"})
+    }else if (isNaN(Date.parse(dayex))){
+        return res.json({status:"error", error:"Ngày không đúng định dạng"})
     }else if(sotk === '333333'){
         if(dayex != '12/12/2022'){
             return res.json({status:"error", error:"Sai ngày hết hạn"})
@@ -509,6 +511,8 @@ exports.rut_tien = async(req,res) => {
         return res.json({status:"error", error:"Hãy nhập cvv"})
     }else if(!tien){
         return res.json({status:"error", error:"Hãy nhập số tiền muốn nạp"})
+    }else if (isNaN(Date.parse(dayex))){
+        return res.json({status:"error", error:"Ngày không đúng định dạng"})
     }else if(Number.isNaN(Number(tien))){
         return res.json({status:"error", error:"Hãy nhập đúng số tiền"})
     }else if(!ghichu){
@@ -544,6 +548,8 @@ exports.rut_tien = async(req,res) => {
                     const s = parseInt(tien*0.05) + parseInt(tien)
                     if(parseInt(s) > parseInt(result[0].money)){
                         return res.json({status:"error", error:"Số tiền nhập cộng phí lớn hơn số tiền hiện có"})
+                    }else if(money > 5000000  ){
+                        
                     }else{
                         const money = parseInt(result[0].money) - parseInt(s)
                         db.query('UPDATE account SET money = ? WHERE id = ?',[money,req.user.id], (err,result1) => {
