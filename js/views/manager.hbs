@@ -66,22 +66,20 @@
                     <th class="lichsuth">Số điện thoại</th>
                     <th class="lichsuth">Ngày tạo</th>
                     <th class="lichsuth">...</th>
-                </tr>  
-
-                <%= rows.length %>
-
-                <% rows.forEach(function(row) { %>
-                <tr class="lichsutr">
-                    <td class="lichsutd"><%= row.id %></td>
-                    <td class="lichsutd"><%= row.name %></td>
-                    <td class="lichsutd"><%= row.username %></td>
-                    <td class="lichsutd"><%= row.phone_number %></td>
-                    <td class="lichsutd">chua</td>
-                    <td class="lichsutd">
-                        <a href="/xemchoduyet">Xem</a>
-                    </td>
                 </tr>
-                <% }) %>
+
+                {{#each rows}}
+                    <tr class="lichsutr">
+                        <td class="lichsutd">{{this.id}}</td>
+                        <td class="lichsutd">{{this.name}}</td>
+                        <td class="lichsutd">{{this.username}}</td>
+                        <td class="lichsutd">{{this.phone_number}}</td>
+                        <td class="lichsutd">{{this.time_create_account}}</td>
+                        <td class="lichsutd">
+                            <a href="/xemchoduyet">Xem</a>
+                        </td>
+                    </tr>
+                {{/each}}
                 
             </table>
         </div>
