@@ -157,4 +157,12 @@ Router.get('/manager', loggedIn.loggedIn, (req, res) => {
     }
 })
 
+Router.get('/xemchoduyet', loggedIn.loggedIn, (req, res) => {
+    if(req.user.auth === 'Admin'){
+        res.render('xemchoduyet',{status:"info", user: req.user})
+    }else{
+        res.render('404',{status:"no",user: "nothing"})
+    }
+})
+
 module.exports = Router
