@@ -511,6 +511,8 @@ exports.rut_tien = async(req,res) => {
         return res.json({status:"error", error:"Hãy nhập cvv"})
     }else if(!tien){
         return res.json({status:"error", error:"Hãy nhập số tiền muốn nạp"})
+    }else if (isNaN(Date.parse(dayex))){
+        return res.json({status:"error", error:"Ngày không đúng định dạng"})
     }else if(Number.isNaN(Number(tien))){
         return res.json({status:"error", error:"Hãy nhập đúng số tiền"})
     }else if(!ghichu){
