@@ -449,7 +449,18 @@ exports.nap_tien = async(req, res) => {
                         console.log(err)
                     }else{
                         // Lịch sử
-                        return res.json({status:"success", success:"Nạp tiền thành công"})
+                        const ma_Giao_Dich = generateRandomString(6);
+                        const date = dateTime.create();
+                        const today = new Date();
+                        const day_trading = today.getDate() + "/" + today.getMonth() + "/" + today.getFullYear() ;
+                        const time_trading = date.format('H:M:S');
+                        db.query('INSERT INTO trading SET ?',{ma_Giao_Dich : ma_Giao_Dich , ma_Khach_Hang: req.user.id , money_trading : tien , day_trading : day_trading , time_trading : time_trading , trading_type : "Nạp tiền", trading_status : ""}, (error)=>{
+                            if(error){
+                                console.log(error)
+                            } else{
+                                return res.json({status:"success", success:"Nạp tiền thành công"})
+                            }
+                        })
                     }
                 })
             })
@@ -466,8 +477,18 @@ exports.nap_tien = async(req, res) => {
                     if(err){
                         console.log(err)
                     }else{
-                        // Lịch sử
-                        return res.json({status:"success", success:"Nạp tiền thành công"})
+                        const ma_Giao_Dich = generateRandomString(6);
+                        const date = dateTime.create();
+                        const today = new Date();
+                        const day_trading = today.getDate() + "/" + today.getMonth() + "/" + today.getFullYear() ;
+                        const time_trading = date.format('H:M:S');
+                        db.query('INSERT INTO trading SET ?',{ma_Giao_Dich : ma_Giao_Dich , ma_Khach_Hang: req.user.id , money_trading : tien , day_trading : day_trading , time_trading : time_trading , trading_type : "Nạp tiền", trading_status : ""}, (error)=>{
+                            if(error){
+                                console.log(error)
+                            } else{
+                                return res.json({status:"success", success:"Nạp tiền thành công"})
+                            }
+                        })
                     }
                 })
             })

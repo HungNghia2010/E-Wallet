@@ -46,7 +46,8 @@ CREATE TABLE trading(
     ma_Giao_Dich varchar(10) NOT NULL,
     ma_Khach_Hang int(10) NOT NULL,
     money_trading varchar(20) ,
-    date_trading DATE,
+    day_trading varchar(20),
+    time_trading TIME,
     trading_type varchar(20),
     trading_status varchar(20),
     PRIMARY KEY(ma_Giao_Dich)
