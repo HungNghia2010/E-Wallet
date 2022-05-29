@@ -34,5 +34,6 @@ Router.post('/changepassword', loggedIn.loggedIn, authController.change_pass)
 
 Router.post('/update', loggedIn.loggedIn, authController.update_info)
 
+Router.post('/nap', loggedIn.loggedIn, authController.nap_tien)
 
 module.exports = Router;

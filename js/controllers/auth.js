@@ -410,6 +410,72 @@ exports.isActivated = async(req,res,next) => {
     }
 }
 
+exports.nap_tien = async(req, res) => {
+    const {sotk, dayex, cvv, tien} = req.body
+    
+    if(!sotk){
+        return res.json({status:"error", error:"Hãy nhập số tài khoản"})
+    }else if(!dayex){
+        return res.json({status:"error", error:"Hãy nhập ngày hết hạn"})
+    }else if(!cvv){
+        return res.json({status:"error", error:"Hãy nhập cvv"})
+    }else if(!tien){
+        return res.json({status:"error", error:"Hãy nhập số tiền muốn nạp"})
+    }else if(Number.isNaN(Number(tien))){
+        return res.json({status:"error", error:"Hãy nhập đúng số tiền"})
+    }else if(sotk === '333333'){
+        if(dayex != '12/12/2022'){
+            return res.json({status:"error", error:"Sai ngày hết hạn"})
+        }else if(cvv != '577'){
+            return res.json({status:"error", error:"CVV nhập không đúng"})
+        }else{
+            return res.json({status:"error", error:"Thẻ đã hết tiền không thể nạp được"})
+        }
+    }else if(sotk === '222222'){
+        if(dayex != '11/11/2022'){
+            return res.json({status:"error", error:"Sai ngày hết hạn"})
+        }else if(cvv != '443'){
+            return res.json({status:"error", error:"CVV nhập không đúng"})
+        }else if(tien > 1000000){
+            return res.json({status:"error", error:"Số tiền không được vượt quá 1 triệu"})
+        }else{
+            db.query('SELECT * FROM account WHERE id = ?',[req.user.id],(err,result) => {
+                const money = result[0].money + tien
+                console.log(Number(money))
+                db.query('UPDATE account SET money = ? WHERE id = ?',[Number(money),req.user.id], (err,result1) => {
+                    if(err){
+                        console.log(err)
+                    }else{
+                        return res.json({status:"success", success:"Nạp tiền thành công"})
+                    }
+                })
+            })
+        }
+    }else if(sotk === '111111'){
+        if(dayex != '10/10/2022'){
+            return res.json({status:"error", error:"Sai ngày hết hạn"})
+        }else if(cvv != '411'){
+            return res.json({status:"error", error:"CVV nhập không đúng"})
+        }else{
+            db.query('SELECT * FROM account WHERE id = ?',[req.user.id],(err,result) => {
+                var first = parseInt(result[0].money)
+                var second = parseInt(tien)
+                var sum = first + second
+                console.log(sum)
+                db.query('UPDATE account SET money = ? WHERE id = ?',[sum,req.user.id], (err,result1) => {
+                    if(err){
+                        console.log(err)
+                    }else{
+                        return res.json({status:"success", success:"Nạp tiền thành công"})
+                    }
+                })
+            })
+        }
+    }else{
+        return res.json({status:"error", error:"Thẻ này không được hỗ trợ"})
+    }
+}
+
 //random string for password
 const generateRandomString = (myLength) => {
     const chars =

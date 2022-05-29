@@ -1,4 +1,3 @@
-
 //login
 var login = document.getElementById('form-login')
 //register
@@ -9,6 +8,8 @@ var infochange = document.getElementById('form-changepass')
 var firststep = document.getElementById("form-first-changePass")
 
 var updateinfo = document.getElementById("form-update-info")
+
+var nap = document.getElementById("form-nap-tien")
 
 var navbar = document.querySelector('.navbar');
 
@@ -29,6 +30,16 @@ if(login){
     document.getElementById('close').onclick = function(){
         dialogCont.style.display = "none"
     }
+}else if(nap){
+    const s = document.getElementById('money').value;
+    document.getElementById('money').setAttribute('value',formatCash(s) + 'đ');
+
+    document.getElementById('close').onclick = function(){
+        dialogCont.style.display = "none"
+        window.location.reload()
+    }
+    
+    naptien()
 }else if (navbar){
     document.querySelector('#menu-btn').onclick = () => {
         navbar.classList.toggle('active');
@@ -43,6 +54,7 @@ if(login){
     showDivs(slideIndex);
 }
 
+//login
 function validateLogin(){
     login.addEventListener("submit", ()=>{
         const login = {
@@ -67,6 +79,7 @@ function validateLogin(){
     })
 }
 
+//register
 function validateRegister(){
     register.addEventListener("submit", ()=>{
         const register = {
@@ -99,6 +112,7 @@ function validateRegister(){
     })
 }
 
+//changepass
 function validatechangepassinfo(){
     infochange.addEventListener("submit", ()=>{
         const pass = {
@@ -128,6 +142,7 @@ function validatechangepassinfo(){
     })
 }
 
+//changepassfirsttime
 function validatefirststep(){
     firststep.addEventListener("submit", ()=>{
         const pass = {
@@ -189,6 +204,34 @@ function valideUpdateform(){
     })
 }
 
+function naptien(){
+    nap.addEventListener("submit", ()=>{
+        const naptien = {
+            sotk: sotk.value,
+            dayex: dayex.value,
+            cvv: cvv.value,
+            tien: tien.value
+        }
+        fetch("/auth/nap",{
+            method: "POST",
+            body: JSON.stringify(naptien),
+            headers: {
+                "Content-type":"application/json"
+            }
+        }).then(res => res.json())
+        .then(data => {
+            if(data.status == "error"){
+                dialogCont.style.display = "none"
+                errorMessage.style.display = "block"
+                error.innerText = data.error
+            }else{
+                dialogCont.style.display = "block"
+                errorMessage.style.display = "none"
+                success.innerText = data.success 
+            }
+        })
+    })
+}
 
 document.getElementById('eye').onclick = function(){
     var temp = document.getElementById('pwd')
@@ -233,84 +276,8 @@ function showDivs(n) {
     x[slideIndex - 1].style.display = "block";
 }
 
-$("input[data-type='currency']").on({
-    keyup: function() {
-      formatCurrency($(this));
-    },
-    blur: function() { 
-      formatCurrency($(this), "blur");
-    }
-});
-
-function formatNumber(n) {
-    // format number 1000000 to 1,234,567
-    return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-  }
-  
-  
-  function formatCurrency(input, blur) {
-    // appends $ to value, validates decimal side
-    // and puts cursor back in right position.
-    
-    // get input value
-    var input_val = input.val();
-    
-    // don't validate empty input
-    if (input_val === "") { return; }
-    
-    // original length
-    var original_len = input_val.length;
-  
-    // initial caret position 
-    var caret_pos = input.prop("selectionStart");
-      
-    // check for decimal
-    if (input_val.indexOf(".") >= 0) {
-  
-      // get position of first decimal
-      // this prevents multiple decimals from
-      // being entered
-      var decimal_pos = input_val.indexOf(".");
-  
-      // split number by decimal point
-      var left_side = input_val.substring(0, decimal_pos);
-      var right_side = input_val.substring(decimal_pos);
-  
-      // add commas to left side of number
-      left_side = formatNumber(left_side);
-  
-      // validate right side
-      right_side = formatNumber(right_side);
-      
-      // On blur make sure 2 numbers after decimal
-      if (blur === "blur") {
-        right_side += "00";
-      }
-      
-      // Limit decimal to only 2 digits
-      right_side = right_side.substring(0, 2);
-  
-      // join number by .
-      input_val = "$" + left_side + "." + right_side;
-  
-    } else {
-      // no decimal entered
-      // add commas to number
-      // remove all non-digits
-      input_val = formatNumber(input_val);
-      input_val = "$" + input_val;
-      
-      // final formatting
-      if (blur === "blur") {
-        input_val += ".00";
-      }
-    }
-    
-    // send updated string to input
-    input.val(input_val);
-  
-    // put caret back in the right position
-    var updated_len = input_val.length;
-    caret_pos = updated_len - original_len + caret_pos;
-    input[0].setSelectionRange(caret_pos, caret_pos);
-  }
+function formatCash(str) {
+    return str.split('').reverse().reduce((prev, next, index) => {
+        return ((index % 3) ? next : (next + ',')) + prev
+    })
+}
