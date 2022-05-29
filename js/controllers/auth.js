@@ -426,6 +426,8 @@ exports.nap_tien = async(req, res) => {
         return res.json({status:"error", error:"Hãy nhập số tiền muốn nạp"})
     }else if(Number.isNaN(Number(tien))){
         return res.json({status:"error", error:"Hãy nhập đúng số tiền"})
+    }else if (isNaN(Date.parse(dayex))){
+        return res.json({status:"error", error:"Ngày không đúng định dạng"})
     }else if(sotk === '333333'){
         if(dayex != '12/12/2022'){
             return res.json({status:"error", error:"Sai ngày hết hạn"})
