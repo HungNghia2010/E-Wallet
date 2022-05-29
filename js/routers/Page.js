@@ -106,10 +106,47 @@ Router.get('/info/changepassword', loggedIn.loggedIn, (req, res) => {
 
 Router.get('/naptien', controllers.isActivated , (req, res) => {
     if(req.user){
-        if(req.user.status === "chờ xác minh"){
+        if(req.user.status === "chờ xác minh" || result[0].status === 'chờ cập nhật'){
             res.redirect('/index')
         }
-        else res.render('nap',{status:"info",user: req.user})
+        else {
+            const inform = 
+            res.render('nap',{inform : inform})
+
+        }
+    }else{
+        res.render('404',{status:"no",user: "nothing"})
+    }
+})
+
+Router.get('/ruttien', controllers.isActivated , (req, res) => {
+    if(req.user){
+        if(req.user.status === "chờ xác minh" || result[0].status === 'chờ cập nhật'){
+            res.redirect('/index')
+        }
+        else res.render('ruttien',{status:"info",user: req.user})
+    }else{
+        res.render('404',{status:"no",user: "nothing"})
+    }
+})
+
+Router.get('/chuyentien', controllers.isActivated , (req, res) => {
+    if(req.user){
+        if(req.user.status === "chờ xác minh" || result[0].status === 'chờ cập nhật'){
+            res.redirect('/index')
+        }
+        else res.render('chuyen',{status:"info",user: req.user})
+    }else{
+        res.render('404',{status:"no",user: "nothing"})
+    }
+})
+
+Router.get('/lichsu', controllers.isActivated , (req, res) => {
+    if(req.user){
+        if(req.user.status === "chờ xác minh" || result[0].status === 'chờ cập nhật'){
+            res.redirect('/index')
+        }
+        else res.render('lichsu',{status:"info",user: req.user})
     }else{
         res.render('404',{status:"no",user: "nothing"})
     }
