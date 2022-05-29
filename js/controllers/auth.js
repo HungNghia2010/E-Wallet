@@ -511,18 +511,28 @@ exports.rut_tien = async(req,res) => {
             return res.json({status:"error", error:"Sai ngày hết hạn"})
         }else if(cvv != '411'){
             return res.json({status:"error", error:"CVV nhập không đúng"})
-        }else if(cvv != '411'){
-            return res.json({status:"error", error:"CVV nhập không đúng"})
         }else{
             db.query('SELECT * FROM account WHERE id = ?',[req.user.id],(err,result) => {
-                const money = parseInt(tien) + parseInt(result[0].money)
-                db.query('UPDATE account SET money = ? WHERE id = ?',[money,req.user.id], (err,result1) => {
-                    if(err){
-                        console.log(err)
+                if(err){
+                    console.log(err)
+                }else if(parseInt(tien) > parseInt(result[0].money)){
+                    return res.json({status:"error", error:"Số tiền nhập lớn hơn số tiền hiện có"})
+                }else if(parseInt(tien) < parseInt(result[0].money)){
+                    const s = parseInt(tien*0.05) + parseInt(tien)
+                    if(parseInt(s) > parseInt(result[0].money)){
+                        return res.json({status:"error", error:"Số tiền nhập cộng phí lớn hơn số tiền hiện có"})
                     }else{
-                        return res.json({status:"success", success:"Nạp tiền thành công"})
+                        const money = parseInt(result[0].money) - parseInt(s)
+                        db.query('UPDATE account SET money = ? WHERE id = ?',[money,req.user.id], (err,result1) => {
+                            if(err){
+                                console.log(err)
+                            }else{
+                                //add lịch sử
+                                return res.json({status:"success", success:"Nạp tiền thành công, số tiền phí là: " + s})
+                            }
+                        })
                     }
-                })
+                }
             })
         }
     }else{
