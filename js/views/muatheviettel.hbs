@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
@@ -21,7 +21,7 @@
 
         <nav class="navbar ulnav">
             <!-- Chức năng chung -->
-            <a href="index.html">Home</a>
+            <a href="/index">Home</a>
             <!-- Chức năng admin -->
 
             {{#if user.auth}}
@@ -64,7 +64,7 @@
         <div class="container container-about-me">
             <div class="title">Mua thẻ cào</div>
             <div class="content content-about-me">
-                <form class="form-about-me" action="#">
+                <form class="form-about-me" id="form-viettel" action="/auth/muatheviettel" method="post">
 
                     <div class="user-details">
                         
@@ -75,7 +75,7 @@
 
                         <div class="input-box">
                             <span class="details">Số dư</span>
-                            <input disabled id="money" value="{{user.money}}" type="text" placeholder="">
+                            <input disabled id="money" name="money" value="{{user.money}}" type="text" placeholder="">
                         </div>
 
                         <div class="input-box">
@@ -84,22 +84,51 @@
                         </div>
                         <div class="input-box">
                             <span class="details">Mã thẻ</span>
-                            <input value="33333" type="text" placeholder="" required>
+                            <input value="11111" type="text" placeholder="" readonly>
                         </div>
+                        {{#if data}}
                         <div class="input-box">
                             <span class="details">Mệnh giá</span>
-                            <input value="{{tien}}"  type="text" placeholder="" readonly>
+                            <input value="{{data.gia}}" name="gia" id="gia"  type="text" placeholder="" readonly>
                         </div>
+                        {{else}}
+                        <div class="input-box">
+                            <span class="details">Mệnh giá</span>
+                            <input value="{{tien}}" name="gia" id="gia"  type="text" placeholder="" readonly>
+                        </div>
+                        {{/if}}
+
                         <div class="input-box">
                             <span class="details">Số lượng</span>
                             <select class="soluong" name="soluong" id="soluong">
-                                <option class="option" value="soluong">1</option>
-                                <option class="option" value="soluong">2</option>
-                                <option class="option" value="soluong">3</option>
-                                <option class="option" value="soluong">4</option>
-                                <option class="option" value="soluong">5</option>
+                                <option class="option" value="1">1</option>
+                                <option class="option" value="2">2</option>
+                                <option class="option" value="3">3</option>
+                                <option class="option" value="4">4</option>
+                                <option class="option" value="5">5</option>
                             </select>
                         </div>
+
+                        {{#if msg}}
+                        <div class="alert" id="errorMessage" style="display: none;">
+                            <span class="fas fa-exclamation-circle"></span>
+                            <span class="msg" id="error">{{msg}}</span>
+                        </div>
+                        {{/if}}
+
+                        {{#if success}}
+                        <div id="dialogCont" class="dig-container">
+                            <div class="dig-header">
+                                Thanh toán
+                            </div>
+                            <div id="digbody" class="dig-body">
+                                <h4 id="success">{{success}}</h4>
+                            </div>
+                            <div class="dig-footer">
+                                <a id="close">Xem các thẻ</a>
+                            </div>
+                        </div>
+                        {{/if}}
 
                     </div>
 
