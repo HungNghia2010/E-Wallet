@@ -426,6 +426,8 @@ exports.nap_tien = async(req, res) => {
         return res.json({status:"error", error:"Hãy nhập số tiền muốn nạp"})
     }else if(Number.isNaN(Number(tien))){
         return res.json({status:"error", error:"Hãy nhập đúng số tiền"})
+    }else if(tien < 0){
+        return res.json({status:"error", error:"Số tiền không hợp lệ"})
     }else if (isNaN(Date.parse(dayex))){
         return res.json({status:"error", error:"Ngày không đúng định dạng"})
     }else if(sotk === '333333'){
@@ -456,7 +458,7 @@ exports.nap_tien = async(req, res) => {
                         const today = new Date();
                         const day_trading = today.getDate() + "-" + today.getMonth() + "-" + today.getFullYear() ;
                         const time_trading = date.format('H:M:S');
-                        db.query('INSERT INTO trading SET ?',{ma_Giao_Dich : ma_Giao_Dich , ma_Khach_Hang: req.user.id , money_trading : tien , day_trading : day_trading , time_trading : time_trading , trading_type : "Nạp tiền", trading_status : ""}, (error)=>{
+                        db.query('INSERT INTO trading SET ?',{ma_Giao_Dich : ma_Giao_Dich , ma_Khach_Hang: req.user.id , money_trading : tien , day_trading : day_trading , time_trading : time_trading , trading_type : "Nạp tiền", trading_status : "Thành công"}, (error)=>{
                             if(error){
                                 console.log(error)
                             } else{
@@ -484,7 +486,7 @@ exports.nap_tien = async(req, res) => {
                         const today = new Date();
                         const day_trading = today.getDate() + "-" + today.getMonth() + "-" + today.getFullYear() ;
                         const time_trading = date.format('H:M:S');
-                        db.query('INSERT INTO trading SET ?',{ma_Giao_Dich : ma_Giao_Dich , ma_Khach_Hang: req.user.id , money_trading : tien , day_trading : day_trading , time_trading : time_trading , trading_type : "Nạp tiền", trading_status : ""}, (error)=>{
+                        db.query('INSERT INTO trading SET ?',{ma_Giao_Dich : ma_Giao_Dich , ma_Khach_Hang: req.user.id , money_trading : tien , day_trading : day_trading , time_trading : time_trading , trading_type : "Nạp tiền", trading_status : "Thành công"}, (error)=>{
                             if(error){
                                 console.log(error)
                             } else{
@@ -551,45 +553,54 @@ exports.rut_tien = async(req,res) => {
                 }else if(parseInt(tien) < parseInt(result[0].money)){
                     const s = parseInt(tien*0.05) + parseInt(tien)
                     const phi = parseInt(tien*0.05)
-                    if(parseInt(s) > parseInt(result[0].money)){
-                        return res.json({status:"error", error:"Số tiền nhập cộng phí lớn hơn số tiền hiện có"})
-                    }else if(tien > 5000000){
-                        // add lịch sử
-                        const ma_Giao_Dich = generateRandomString(6);
-                        const date = dateTime.create();
-                        const today = new Date();
-                        const day_trading = today.getDate() + "-" + today.getMonth() + "-" + today.getFullYear() ;
-                        const time_trading = date.format('H:M:S');
-                        db.query('INSERT INTO trading SET ?',{ma_Giao_Dich : ma_Giao_Dich , ma_Khach_Hang: req.user.id , money_trading : s , day_trading : day_trading , time_trading : time_trading , trading_type : "Rút tiền", trading_status : "đang chờ"}, (error)=>{
-                            if (error){
-                                console.log(error)
-                            }else{
-                                return res.json({status:"success", success:"Nộp đơn rút tiền thành công, số tiền phí là: " + phi + ", đợi admin xác nhận"})
-                            }
-                        })
-                            
-                }else{
-                        const money = parseInt(result[0].money) - parseInt(s)
-                        db.query('UPDATE account SET money = ? WHERE id = ?',[money,req.user.id], (err,result1) => {
-                            if(err){
-                                console.log(err)
-                            }else{
-                                //add lịch sử
-                                const ma_Giao_Dich = generateRandomString(6);
-                                const date = dateTime.create();
-                                const today = new Date();
-                                const day_trading = today.getDate() + "-" + today.getMonth() + "-" + today.getFullYear() ;
-                                const time_trading = date.format('H:M:S');
-                                db.query('INSERT INTO trading SET ?',{ma_Giao_Dich : ma_Giao_Dich , ma_Khach_Hang: req.user.id , money_trading : s , day_trading : day_trading , time_trading : time_trading , trading_type : "rút tiền", trading_status : ""}, (error)=>{
-                                    if(error){
-                                        console.log(error)
-                                    } else{
-                                        return res.json({status:"success", success:"Rút tiền thành công, số tiền phí bị trừ là:" + phi})
-                                    }
-                                })
-                            }
-                        })
-                    }
+
+                    const ma_Giao_Dich = generateRandomString(6);
+                    const date = dateTime.create();
+                    const today = new Date();
+                    const day_trading = today.getDate() + "-" + today.getMonth() + "-" + today.getFullYear() ;
+                    const time_trading = date.format('H:M:S');
+
+                    db.query('SELECT * FROM trading WHERE day_trading = ? AND trading_type = ?',[day_trading,"Rút tiền"], (err,result123) => {
+                        if(err){
+                            console.log(err)
+                        }
+                        else if(result123.length == 2){
+                            return res.json({status:"error", error:"Hôm nay bạn đã rút tiền 2 lần, hãy rút tiếp vào ngày sau"})
+                        }else if(parseInt(s) > parseInt(result[0].money)){
+                            return res.json({status:"error", error:"Số tiền nhập cộng phí lớn hơn số tiền hiện có"})
+                        }else if(tien > 5000000){
+                            // add lịch sử
+                            db.query('INSERT INTO trading SET ?',{ma_Giao_Dich : ma_Giao_Dich , ma_Khach_Hang: req.user.id , money_trading : s , day_trading : day_trading , time_trading : time_trading , trading_type : "Rút tiền", trading_status : "đang chờ"}, (error)=>{
+                                if (error){
+                                    console.log(error)
+                                }else{
+                                    return res.json({status:"success", success:"Nộp đơn rút tiền thành công, số tiền phí là: " + phi + ", đợi admin xác nhận"})
+                                }
+                            })
+                                
+                        }else{
+                            const money = parseInt(result[0].money) - parseInt(s)
+                            db.query('UPDATE account SET money = ? WHERE id = ?',[money,req.user.id], (err,result1) => {
+                                if(err){
+                                    console.log(err)
+                                }else{
+                                    //add lịch sử
+                                    const ma_Giao_Dich = generateRandomString(6);
+                                    const date = dateTime.create();
+                                    const today = new Date();
+                                    const day_trading = today.getDate() + "-" + today.getMonth() + "-" + today.getFullYear() ;
+                                    const time_trading = date.format('H:M:S');
+                                    db.query('INSERT INTO trading SET ?',{ma_Giao_Dich : ma_Giao_Dich , ma_Khach_Hang: req.user.id , money_trading : s , day_trading : day_trading , time_trading : time_trading , trading_type : "Rút tiền", trading_status : "Thành công"}, (error)=>{
+                                        if(error){
+                                            console.log(error)
+                                        } else{
+                                            return res.json({status:"success", success:"Rút tiền thành công, số tiền phí bị trừ là:" + phi})
+                                        }
+                                    })
+                                }
+                            })
+                        }
+                    })
                 }
             })
         }
