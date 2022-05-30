@@ -46,7 +46,7 @@
 
         <div class="icons">
             <div id="user-btn">
-                <a href="info.html" class="fa-solid fa-user"></a>
+                <a href="/info" class="fa-solid fa-user"></a>
             </div>
 
             <div class="fas fa-bars" id="menu-btn"></div>
@@ -69,6 +69,7 @@
                 </tr>
 
                 {{#each rows}}
+                    {{!-- {{#if (eq this.status "chờ xác minh")}} --}}
                     <tr class="lichsutr">
                         <td class="lichsutd">{{this.id}}</td>
                         <td class="lichsutd">{{this.name}}</td>
@@ -79,6 +80,7 @@
                             <a href="/xemchoduyet">Xem</a>
                         </td>
                     </tr>
+                    {{!-- {{/if}} --}}
                 {{/each}}
                 
             </table>
