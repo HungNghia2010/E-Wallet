@@ -192,10 +192,30 @@ Router.get('/xemchoduyet/:id', loggedIn.loggedIn, (req, res) => {
         db.query('SELECT * FROM register, account WHERE (register.id = account.id) AND (register.id = ?)', [req.params.id] ,(err, rows) => {
             if (err) throw err
             res.render('xemchoduyet',{status:"info", rows})
-            console.log(rows)
         })
     }else{
         res.render('404',{status:"no",user: "nothing"})
+    }
+})
+
+Router.post('/auth/choduyet', loggedIn.loggedIn, (req, res) => {
+    if(req.body.xacminh === 'Xác minh'){
+        db.query('UPDATE register SET status = "đã xác minh" WHERE id = ?', [req.body.id_user] ,(err, rows) => {
+            if (err) throw err
+            res.redirect('/xemchoduyet/'+req.body.id_user)
+        })
+    }
+    else if (req.body.huyxacminh === 'Hủy') {
+        db.query('UPDATE register SET status = "đã vô hiệu hóa" WHERE id = ?', [req.body.id_user] ,(err, rows) => {
+            if (err) throw err
+            res.redirect('/xemchoduyet/'+req.body.id_user)
+        })
+    }
+    else if(req.body.bosungxacminh === 'Yêu cầu bổ sung') {
+        db.query('UPDATE register SET status = "chờ cập nhật" WHERE id = ?', [req.body.id_user] ,(err, rows) => {
+            if (err) throw err
+            res.redirect('/xemchoduyet/'+req.body.id_user)
+        })
     }
 })
 
@@ -260,8 +280,21 @@ Router.get('/xemvothoihan/:id', loggedIn.loggedIn, (req, res) => {
     }
 })
 
-Router.get('/muathe', (req,res) => {
-    res.render('muathe');
+Router.get('/muathe',controllers.isActivated ,(req,res) => {
+    if(req.user){
+        if(req.user.change_pass === 0){
+            res.redirect('/firststep')
+        }
+        else if(req.user.status === "chờ xác minh" || req.user.status === 'chờ cập nhật'){
+            res.redirect('/index')
+        }
+        else{
+            const tien = req.query.pricez
+            res.render('muatheviettel',{status:"info",user: req.user,tien})
+        } 
+    }else{
+        res.render('404',{status:"no",user: "nothing"})
+    }
 })
 
 Router.get('/lichsuchuyen',controllers.isActivated,(req,res) => {

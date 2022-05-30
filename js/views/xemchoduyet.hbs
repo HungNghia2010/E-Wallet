@@ -62,7 +62,7 @@
         <div class="container container-about-me">
             <div class="title">Information</div>
             <div class="content content-about-me">
-                <form class="form-about-me" action="#">
+                <form class="form-about-me" action="/auth/choduyet" method="POST">
                     <div id="content-img">
                         <div class="about-me-image">
                             <img src="/images/empicon.jpg" class="rounded-circle " width="150">
@@ -81,6 +81,7 @@
                             <div class="input-box">
                                 <span class="details">Họ và tên</span>
                                 <input value="{{this.name}}" type="text" disabled required>
+                                <input value="{{this.id}}" id="id_user" name="id_user" type="text" style="display: none;" required>
                             </div>
                             <div class="input-box">
                                 <span class="details">Username</span>
@@ -122,9 +123,9 @@
                     {{/each}}
 
                     <div class="button register-button">
-                        <input class="" type="submit" value="Xác minh">
-                        <input class="" type="submit" value="Yêu cầu bổ sung">
-                        <input class="" type="submit" value="Hủy">
+                        <input name="xacminh" class="" type="submit" value="Xác minh">
+                        <input name="bosungxacminh" class="" type="submit" value="Yêu cầu bổ sung">
+                        <input name="huyxacminh" class="" type="submit" value="Hủy">
                     </div>
                 </form>
             </div>

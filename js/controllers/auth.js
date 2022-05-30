@@ -786,6 +786,22 @@ exports.xacnhan_chuyen = async (req, res) => {
          })
     }
 }
+<<<<<<< HEAD
+=======
+
+exports.cho_duyet = async (req, res) => {
+    const {id_user, xacminh, bosungxacminh, huyxacminh} = req.body
+    var data = {
+        id_user: id_user,
+        xacminh: xacminh,
+        bosungxacminh:bosungxacminh,
+        huyxacminh: huyxacminh
+
+    }
+    res.redirect('/xemchoduyet/'+id_user)
+}
+
+>>>>>>> d322af9f1988934290a3b73e6d22f435ee07640b
 //random string for password
 const generateRandomString = (myLength) => {
     const chars =
