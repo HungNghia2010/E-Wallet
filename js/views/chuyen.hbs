@@ -15,15 +15,16 @@
 <body>
     <header class="header headermana">
 
-        <a href="index.html" class="logo">
+        <a href="/index" class="logo">
             <img src="images/Flash.png" alt="">
         </a>
 
         <nav class="navbar ulnav">
             <!-- Chức năng chung -->
-            <a href="index.html">Home</a>
+            <a href="/index">Home</a>
             <!-- Chức năng admin -->
 
+            {{#if user.auth}}
             <li class="dropdown">
                 <a href="manager.html" class="dropbtn">Manage</a>
                 <div class="dropdown-content">
@@ -35,19 +36,20 @@
                     <a href="manager.html#gdchuyen">Giao dịch chuyển tiền</a>
                 </div>
             </li>
+            {{/if}}
 
             <!-- Chức năng chung -->
-            <a href="index.html#about">About</a>
-            <a href="index.html#menu">Menu</a>
-            <a href="index.html#products">Card</a>
-            <a href="index.html#contact">Contact</a>
-            <a href="index.html#logout">Logout</a>
+            <a href="/index#about">About</a>
+            <a href="/index#menu">Menu</a>
+            <a href="/index#products">Card</a>
+            <a href="/index#contact">Contact</a>
+            <a href="/logout">Logout</a>
 
         </nav>
 
         <div class="icons">
             <div id="user-btn">
-                <a href="info.html" class="fa-solid fa-user"></a>
+                <a href="/info" class="fa-solid fa-user"></a>
             </div>
 
             <div class="fas fa-bars" id="menu-btn"></div>
@@ -62,46 +64,45 @@
         <div class="container container-about-me">
             <div class="title">Chuyển tiền</div>
             <div class="content content-about-me">
-                <form class="form-about-me" action="#">
+                <form class="form-about-me" id="form-chuyen-tien" method="post" action="/auth/chuyen">
 
                     <div class="user-details">
 
                         <div class="input-box">
                             <span class="details">Họ và tên</span>
-                            <input disabled value="Nguyen Trung Hau" type="text" placeholder="" required>
+                            <input disabled value="{{user.name}}" type="text" placeholder="" required>
                         </div>
+
                         <div class="input-box">
                             <span class="details">Số dư</span>
-                            <input disabled value="1.000.000.000" type="text" placeholder="" required>
+                            <input disabled id="money" value="{{user.money}}" type="text" placeholder="">
                         </div>
 
                         <div class="input-box">
                             <span class="details">Số điện thoại người nhận</span>
-                            <input value="" type="text" placeholder="" required>
+                            <input value="" id="phone" name="phone" type="text" placeholder="" required>
                         </div>
-                        <div class="input-box">
-                            <span class="details">Tên người nhận</span>
-                            <input disabled value="" type="text" placeholder="" required>
-                        </div>
+
                         <div class="input-box">
                             <span class="details">Số tiền muốn chuyển</span>
-                            <input value="" type="text" placeholder="" required>
+                            <input id="tien" name="tien" value="" type="text" placeholder="" required>
+
                         </div>
                         <div class="input-box">
                             <span class="details">Phí chuyển</span>
-                            <input disabled value="15.0000" type="text" placeholder="" required>
+                            <input disabled value="5%" type="text" id="tienphi" placeholder="" required>
 
                             <div class="gender-details">
-                                <input type="radio" name="chiuphi" id="dot-1">
-                                <input type="radio" name="chiuphi" id="dot-2">
+                                <input type="radio" name="chiuphi" value="0" id="dot-1">
+                                <input type="radio" name="chiuphi" value="1" id="dot-2">
                                 <div class="category">
                                     <label for="dot-1">
                                         <span class="dot one"></span>
-                                        <span class="chiuphi">Người gửi</span>
+                                        <span class="chiuphi" >Người gửi</span>
                                     </label>
                                     <label for="dot-2">
                                         <span class="dot two"></span>
-                                        <span class="chiuphi">Người nhận</span>
+                                        <span class="chiuphi" >Người nhận</span>
                                     </label>
 
                                 </div>
@@ -111,11 +112,7 @@
 
                         <div class="input-box">
                             <span class="details">Ghi chú</span>
-                            <input value="" type="text" placeholder="" required>
-                        </div>
-                        <div class="input-box">
-                            <span class="details">Trạng thái</span>
-                            <input value="" type="text" placeholder="" required>
+                            <input value="" id="ghichu" name="ghichu" type="text" placeholder="" required>
                         </div>
 
 
@@ -173,11 +170,11 @@
         </div>
 
         <div class="links">
-            <a href="index.html">home</a>
-            <a href="index.html#about">about</a>
-            <a href="index.html#menu">menu</a>
-            <a href="index.html#products">card</a>
-            <a href="index.html#contact">contact</a>
+            <a href="/index">home</a>
+            <a href="/index#about">about</a>
+            <a href="/index#menu">menu</a>
+            <a href="/index#products">card</a>
+            <a href="/index#contact">contact</a>
         </div>
 
         <div class="credit">created by <span>us</span></div>
@@ -185,7 +182,7 @@
     </section>
 
 
-    <script src="js/script.js"></script>
+    <script src="js/main.js"></script>
 
 </body>
 
