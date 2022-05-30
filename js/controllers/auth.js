@@ -610,7 +610,27 @@ exports.rut_tien = async(req,res) => {
 }
 
 exports.chuyen_tien = async (req, res) => {
+    const {phone, tien, chiuphi, ghichu} = req.body
     console.log(req.body)
+
+    var data = {
+        phone: phone,
+        tien: tien,
+        chiuphi: chiuphi,
+        ghichu: ghichu
+    }
+
+    if(!phone){
+        return res.render('chuyen',{msg: 'Hãy nhập số điện thoại người nhận',user: req.user,data: data})
+    }else if(!tien){
+        return res.render('chuyen',{msg: 'Hãy nhập số tiền',user: req.user,data: data})
+    }else if(!chiuphi){
+        return res.render('chuyen',{msg: 'Hãy chọn người chịu phí',user: req.user,data: data})
+    }else if(!ghichu){
+        return res.render('chuyen',{msg: 'Mã nhập ghi chú',user: req.user,data: data})
+    }else{
+        
+    }
 }
 
 //random string for password
