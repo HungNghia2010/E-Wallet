@@ -616,6 +616,7 @@ exports.rut_tien = async(req,res) => {
     }
 }
 
+
 exports.chuyen_tien = async (req, res) => {
     const {phone, tien, chiuphi, ghichu} = req.body
     var data = {
@@ -644,11 +645,11 @@ exports.chuyen_tien = async (req, res) => {
             }else if (phone === req.user.phone_number){
                 return res.render('chuyen',{msg: 'Không thể tự chuyển tiền cho chính mình',user: req.user,data: data})
             }else{
-                db.query('SELECT * FROM account WHERE id = ?',[result[0].id],(err,result1) => {
+                db.query('SELECT * FROM account WHERE id = ?',[req.user.id],(err,result1) => {
                     if(err){
                         console.log(err)
                     }else if(parseInt(tien) > parseInt(result1[0].money)){
-                        return res.json({status:"error", error:"Số tiền nhập lớn hơn số tiền hiện có"})
+                        return res.render('chuyen',{msg: 'Số tiền nhập lớn hơn số tiền hiện có',user: req.user,data: data})
                     }/*else if (tien > 5000000){
                         const ma_Giao_Dich = generateRandomString(6);
                         const date = dateTime.create();
@@ -680,6 +681,11 @@ exports.chuyen_tien = async (req, res) => {
            
         })
     }
+}
+
+exports.xacnhan_chuyen = async (req, res) => {
+    console.log(temp)
+    console.log(req.body)
 }
 
 //random string for password
