@@ -107,7 +107,10 @@ Router.get('/info/changepassword', loggedIn.loggedIn, (req, res) => {
 
 Router.get('/naptien', controllers.isActivated , (req, res) => {
     if(req.user){
-        if(req.user.status === "chờ xác minh" || req.user.status === 'chờ cập nhật'){
+        if(req.user.change_pass === 0){
+            res.redirect('/firststep')
+        }
+        else if(req.user.status === "chờ xác minh" || req.user.status === 'chờ cập nhật'){
             res.redirect('/index')
         }
             else res.render('nap',{status:"info",user: req.user})
@@ -119,7 +122,10 @@ Router.get('/naptien', controllers.isActivated , (req, res) => {
 
 Router.get('/ruttien', controllers.isActivated , (req, res) => {
     if(req.user){
-        if(req.user.status === "chờ xác minh" || req.user.status === 'chờ cập nhật'){
+        if(req.user.change_pass === 0){
+            res.redirect('/firststep')
+        }
+        else if(req.user.status === "chờ xác minh" || req.user.status === 'chờ cập nhật'){
             res.redirect('/index')
         }
         else res.render('ruttien',{status:"info",user: req.user})
@@ -130,7 +136,10 @@ Router.get('/ruttien', controllers.isActivated , (req, res) => {
 
 Router.get('/chuyentien', controllers.isActivated , (req, res) => {
     if(req.user){
-        if(req.user.status === "chờ xác minh" || req.user.status === 'chờ cập nhật'){
+        if(req.user.change_pass === 0){
+            res.redirect('/firststep')
+        }
+        else if(req.user.status === "chờ xác minh" || req.user.status === 'chờ cập nhật'){
             res.redirect('/index')
         }
         else res.render('chuyen',{status:"info",user: req.user})
@@ -145,10 +154,17 @@ Router.get('/xacnhan' ,(req,res) => {
 
 Router.get('/lichsu', controllers.isActivated , (req, res) => {
     if(req.user){
-        if(req.user.status === "chờ xác minh" || req.user.status === 'chờ cập nhật'){
-            res.redirect('/index')
+        if(req.user.change_pass === 0){
+            res.redirect('/firststep')
         }
-        else res.render('lichsu',{status:"info",user: req.user})
+        else if(req.user.status === "chờ xác minh" || req.user.status === 'chờ cập nhật'){
+            res.redirect('/index')
+        }else{
+            db.query('SELECT * FROM trading LEFT JOIN trading_card ON (trading.ma_Khach_Hang = trading_card.ma_Khach_Hang) WHERE trading.ma_Khach_Hang = ? ORDER BY day_trading;',[req.user.id] ,(err, rows) => {
+                if(err) throw err
+                res.render('lichsu',{status:"info",user: req.user,rows})
+            })
+        }
     }else{
         res.render('404',{status:"no",user: "nothing"})
     }
@@ -156,17 +172,15 @@ Router.get('/lichsu', controllers.isActivated , (req, res) => {
 
 Router.get('/manager', loggedIn.loggedIn, (req, res) => {
     if(req.user.auth === 'Admin'){
-        db.query('SELECT * FROM register LEFT JOIN trading ON (register.id = trading.ma_Khach_Hang)', (err, rows) => {
+        db.query('SELECT * FROM register', (err, rows) => {
             if(err) throw err
-            db.query('SELECT * FROM register', (err, rows1) => {
+            db.query('SELECT * FROM trading', (err, rows1) => {
                 if(err) throw err
-                res.render('manager',{status:"info",user: req.user, rows , rows1})
+                db.query('SELECT * FROM transfer_trading', (err, rows2) => {
+                    if(err) throw err
+                    res.render('manager',{status:"info",user: req.user, rows , rows1, rows2})
+                })  
             })
-            if(!err) {
-            }
-            else {
-                console.log(err);
-            }
         })
     }else{
         res.render('404',{status:"no",user: "nothing"})
@@ -204,9 +218,16 @@ Router.get('/xemdakichhoat/:id', loggedIn.loggedIn, (req, res) => {
     }
 })
 
-Router.get('/xemruttien', loggedIn.loggedIn, (req, res) => {
+Router.get('/xemruttien/:code', loggedIn.loggedIn, (req, res) => {
     if(req.user.auth === 'Admin'){
-        res.render('xemruttien',{status:"info", user: req.user})
+        db.query('SELECT * FROM trading WHERE ma_Giao_Dich = ?', [req.params.code] ,(err, rows) => {
+            if (err) throw err
+            db.query('SELECT * FROM register WHERE id = ?', [rows[0].ma_Khach_Hang] ,(err, rows1) => {
+                if (err) throw err
+                res.render('xemruttien',{status:"info", rows, rows1})
+                console.log(rows)
+            })
+        })
     }else{
         res.render('404',{status:"no",user: "nothing"})
     }
