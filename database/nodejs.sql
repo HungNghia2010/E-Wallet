@@ -54,6 +54,18 @@ CREATE TABLE trading(
     PRIMARY KEY(ma_Giao_Dich)
 );
 
+CREATE TABLE trading_card(
+    ma_Giao_Dich varchar(10) NOT NULL,
+    ma_Khach_Hang int(10) NOT NULL,
+    card_seri varchar(20),
+    ma_The varchar(20) NOT NULL,
+    so_Luong int(5),
+    card_type varchar(20) NOT NULL,
+    price varchar(20),
+    total_price varchar(20),
+    PRIMARY KEY(ma_Giao_Dich)
+);
+
 INSERT INTO register VALUES 
 (1, 'admin', '$2a$08$2atY3gZJNtmW9jQKXjaDGeJTrg7qXTt48L0KJ58bWVdBwwHmaZN3m', 'admin', 'ad@gmail.com', '0123456789', 
 '123456789', '01/01/2000', 'Hà Nội', '', '', 'chờ xác minh', 1, 1, '');
