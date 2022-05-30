@@ -23,6 +23,10 @@ app.engine('hbs', exphbs.engine({
         },
         count: function (index){
             return index + 1;
+        },
+        equalsOr: function (arr1, arr2, arr3, options) {
+            if ((arr1 == arr2) || (arr1 == arr3)) return options.fn(this)
+            return options.inverse(this);
         }
     }
 }))

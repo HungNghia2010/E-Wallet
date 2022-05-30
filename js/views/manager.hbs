@@ -69,18 +69,18 @@
                 </tr>
 
                 {{#each rows}}
-                    {{#equals this.status 'chờ xác minh'}}
-                    <tr class="lichsutr">
-                        <td class="lichsutd">{{count @index}}</td>
-                        <td class="lichsutd">{{this.name}}</td>
-                        <td class="lichsutd">{{this.username}}</td>
-                        <td class="lichsutd">{{this.phone_number}}</td>
-                        <td class="lichsutd">{{this.time_create_account}}</td>
-                        <td class="lichsutd">
-                            <a href="/xemchoduyet/{{this.id}}">Xem</a>
-                        </td>
-                    </tr>
-                    {{/equals}}
+                    {{#equalsOr this.status 'chờ xác minh' 'chờ cập nhật'}}
+                        <tr class="lichsutr">
+                            <td class="lichsutd">{{count @index}}</td>
+                            <td class="lichsutd">{{this.name}}</td>
+                            <td class="lichsutd">{{this.username}}</td>
+                            <td class="lichsutd">{{this.phone_number}}</td>
+                            <td class="lichsutd">{{this.time_create_account}}</td>
+                            <td class="lichsutd">
+                                <a href="/xemchoduyet/{{this.id}}">Xem</a>
+                            </td>
+                        </tr>
+                    {{/equalsOr}}
                 {{/each}}
                 
             </table>
@@ -263,11 +263,11 @@
         </div>
 
         <div class="links">
-            <a href="index.html">home</a>
-            <a href="index.html#about">about</a>
-            <a href="index.html#menu">menu</a>
-            <a href="index.html#products">card</a>
-            <a href="index.html#contact">contact</a>
+            <a href="/index">home</a>
+            <a href="/index#about">about</a>
+            <a href="/index#menu">menu</a>
+            <a href="/index#products">card</a>
+            <a href="/index#contact">contact</a>
         </div>
 
         <div class="credit">created by <span>us</span></div>

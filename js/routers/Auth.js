@@ -40,4 +40,6 @@ Router.post('/ruttien', loggedIn.loggedIn, authController.rut_tien)
 
 Router.post('/chuyen', loggedIn.loggedIn, authController.chuyen_tien)
 
+Router.post('/choduyet', loggedIn.loggedIn, authController.cho_duyet)
+
 module.exports = Router;
