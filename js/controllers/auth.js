@@ -787,8 +787,7 @@ exports.xacnhan_chuyen = async (req, res) => {
          })
     }
 }
-<<<<<<< HEAD
-=======
+
 
 exports.cho_duyet = async (req, res) => {
     const {id_user, xacminh, bosungxacminh, huyxacminh} = req.body
@@ -802,9 +801,7 @@ exports.cho_duyet = async (req, res) => {
     res.redirect('/xemchoduyet/'+id_user)
 }
 
-<<<<<<< Updated upstream
->>>>>>> d322af9f1988934290a3b73e6d22f435ee07640b
-=======
+
 exports.muatheviettel = async (req, res) => {
     const{gia, soluong} = req.body;
     const tongtien = parseInt(gia) * parseInt(soluong)
@@ -822,7 +819,6 @@ exports.muatheviettel = async (req, res) => {
     })
 }
 
->>>>>>> Stashed changes
 //random string for password
 function generateRandomString(myLength) {
     const chars = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890";
