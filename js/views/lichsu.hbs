@@ -81,6 +81,18 @@
                         <a href="/lichsuchuyen">Xem</a>
                     </td>
                 </tr>
+                {{#each rows}}  
+                    <tr class="lichsutr">
+                    <td class="lichsutd">{{count @index}}</td>
+                    <td class="lichsutd">this.money_trading</td>
+                    <td class="lichsutd">this.day_trading</td>
+                    <td class="lichsutd">this.trading_type</td>
+                    <td class="lichsutd">this.trading_status</td>
+                    <td class="lichsutd">
+                        <a href="/lichsuchuyen">Xem</a>
+                    </td>
+                    </tr>
+                {{/each}}
 
             </table>
         </div>

@@ -160,7 +160,7 @@ Router.get('/lichsu', controllers.isActivated , (req, res) => {
         else if(req.user.status === "chờ xác minh" || req.user.status === 'chờ cập nhật'){
             res.redirect('/index')
         }else{
-            db.query('SELECT * FROM trading LEFT JOIN trading_card ON trading.ma_Khach_Hang = trading_card.ma_Khach_Hang ORDER BY day_trading', (err, rows) => {
+            db.query('SELECT * FROM trading LEFT JOIN trading_card ON (trading.ma_Khach_Hang = trading_card.ma_Khach_Hang) WHERE trading.ma_Khach_Hang = ? ORDER BY day_trading;',[req.user.id] ,(err, rows) => {
                 if(err) throw err
                 res.render('lichsu',{status:"info",user: req.user,rows})
             })
