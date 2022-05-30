@@ -19,6 +19,9 @@ app.engine('hbs', exphbs.engine({
         equals: function(arr1,arr2,options) {
             if (arr1 == arr2) return options.fn(this) 
             return options.inverse(this);
+        },
+        count: function (index){
+            return index + 1;
         }
     }
 }))

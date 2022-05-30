@@ -71,7 +71,7 @@
                 {{#each rows}}
                     {{#equals this.status 'chờ xác minh'}}
                     <tr class="lichsutr">
-                        <td class="lichsutd">{{this.id}}</td>
+                        <td class="lichsutd">{{count @index}}</td>
                         <td class="lichsutd">{{this.name}}</td>
                         <td class="lichsutd">{{this.username}}</td>
                         <td class="lichsutd">{{this.phone_number}}</td>
