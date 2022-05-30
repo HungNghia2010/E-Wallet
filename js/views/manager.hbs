@@ -56,7 +56,7 @@
 
 
     <section class="kichhoat" id="kichhoat">
-        <h1 class="heading"> Danh sách <span>chờ kích hoạt </span> </h1>
+        <h1 class="heading"> Danh sách <span>chờ xác minh </span> </h1>
         <div class="container container-lichsu my-3">
             <table class="lichsutb">
                 <tr class="lichsutr">
@@ -89,7 +89,7 @@
     </section>
 
     <section class="kichhoated" id="kichhoated">
-        <h1 class="heading"> Danh sách <span>đã kích hoạt </span> </h1>
+        <h1 class="heading"> Danh sách <span>đã xác minh </span> </h1>
         <div class="container container-lichsu my-3">
             <table class="lichsutb">
                 <tr class="lichsutr">
@@ -100,56 +100,22 @@
                     <th class="lichsuth">Ngày tạo</th>
                     <th class="lichsuth">...</th>
                 </tr>
-                <tr class="lichsutr">
-                    <td class="lichsutd">1</td>
-                    <td class="lichsutd">Trần Anh Đức</td>
-                    <td class="lichsutd">Đức Cống</td>
-                    <td class="lichsutd">0909090909</td>
-                    <td class="lichsutd">03/08/1993</td>
-                    <td class="lichsutd">
-                        <a href="/xemdakichhoat">Xem</a>
-                    </td>
-                </tr>
-                <tr class="lichsutr">
-                    <td class="lichsutd">2</td>
-                    <td class="lichsutd">Trần Anh Đức</td>
-                    <td class="lichsutd">Đức Cống</td>
-                    <td class="lichsutd">0909090909</td>
-                    <td class="lichsutd">03/08/1993</td>
-                    <td class="lichsutd">
-                        <a href="/xemdakichhoat">Xem</a>
-                    </td>
-                </tr>
-                <tr class="lichsutr">
-                    <td class="lichsutd">3</td>
-                    <td class="lichsutd">Trần Anh Đức</td>
-                    <td class="lichsutd">Đức Cống</td>
-                    <td class="lichsutd">0909090909</td>
-                    <td class="lichsutd">03/08/1993</td>
-                    <td class="lichsutd">
-                        <a href="/xemdakichhoat">Xem</a>
-                    </td>
-                </tr>
-                <tr class="lichsutr">
-                    <td class="lichsutd">4</td>
-                    <td class="lichsutd">Trần Anh Đức</td>
-                    <td class="lichsutd">Đức Cống</td>
-                    <td class="lichsutd">0909090909</td>
-                    <td class="lichsutd">03/08/1993</td>
-                    <td class="lichsutd">
-                        <a href="/xemdakichhoat">Xem</a>
-                    </td>
-                </tr>
-                <tr class="lichsutr">
-                    <td class="lichsutd">5</td>
-                    <td class="lichsutd">Trần Anh Đức</td>
-                    <td class="lichsutd">Đức Cống</td>
-                    <td class="lichsutd">0909090909</td>
-                    <td class="lichsutd">03/08/1993</td>
-                    <td class="lichsutd">
-                        <a href="/xemdakichhoat">Xem</a>
-                    </td>
-                </tr>
+                {{#each rows}}
+                    {{#equals this.status 'đã xác minh'}}
+                    <tr class="lichsutr">
+                        <td class="lichsutd">{{count @index}}</td>
+                        <td class="lichsutd">{{this.name}}</td>
+                        <td class="lichsutd">{{this.username}}</td>
+                        <td class="lichsutd">{{this.phone_number}}</td>
+                        <td class="lichsutd">{{this.time_create_account}}</td>
+                        <td class="lichsutd">
+                            <a href="/xemchoduyet">Xem</a>
+                        </td>
+                    </tr>
+                    {{/equals}}
+                {{/each}}
+                
+                
             </table>
         </div>
 
@@ -157,7 +123,7 @@
 
 
     <section class="vohieu" id="vohieu">
-        <h1 class="heading"> Danh sách <span>bị vô hiệu hóa </span> </h1>
+        <h1 class="heading"> Danh sách <span>đã vô hiệu hóa </span> </h1>
         <div class="container container-lichsu my-3">
             <table class="lichsutb">
                 <tr class="lichsutr">
@@ -168,56 +134,20 @@
                     <th class="lichsuth">Ngày tạo</th>
                     <th class="lichsuth">...</th>
                 </tr>
-                <tr class="lichsutr">
-                    <td class="lichsutd">1</td>
-                    <td class="lichsutd">Trần Anh Đức</td>
-                    <td class="lichsutd">Đức Cống</td>
-                    <td class="lichsutd">0909090909</td>
-                    <td class="lichsutd">03/08/1993</td>
-                    <td class="lichsutd">
-                        <a href="/xemvohieuhoa">Xem</a>
-                    </td>
-                </tr>
-                <tr class="lichsutr">
-                    <td class="lichsutd">2</td>
-                    <td class="lichsutd">Trần Anh Đức</td>
-                    <td class="lichsutd">Đức Cống</td>
-                    <td class="lichsutd">0909090909</td>
-                    <td class="lichsutd">03/08/1993</td>
-                    <td class="lichsutd">
-                        <a href="/xemvohieuhoa">Xem</a>
-                    </td>
-                </tr>
-                <tr class="lichsutr">
-                    <td class="lichsutd">3</td>
-                    <td class="lichsutd">Trần Anh Đức</td>
-                    <td class="lichsutd">Đức Cống</td>
-                    <td class="lichsutd">0909090909</td>
-                    <td class="lichsutd">03/08/1993</td>
-                    <td class="lichsutd">
-                        <a href="/xemvohieuhoa">Xem</a>
-                    </td>
-                </tr>
-                <tr class="lichsutr">
-                    <td class="lichsutd">4</td>
-                    <td class="lichsutd">Trần Anh Đức</td>
-                    <td class="lichsutd">Đức Cống</td>
-                    <td class="lichsutd">0909090909</td>
-                    <td class="lichsutd">03/08/1993</td>
-                    <td class="lichsutd">
-                        <a href="/xemvohieuhoa">Xem</a>
-                    </td>
-                </tr>
-                <tr class="lichsutr">
-                    <td class="lichsutd">5</td>
-                    <td class="lichsutd">Trần Anh Đức</td>
-                    <td class="lichsutd">Đức Cống</td>
-                    <td class="lichsutd">0909090909</td>
-                    <td class="lichsutd">03/08/1993</td>
-                    <td class="lichsutd">
-                        <a href="/xemvohieuhoa">Xem</a>
-                    </td>
-                </tr>
+                {{#each rows}}
+                    {{#equals this.status 'đã vô hiệu hóa'}}
+                    <tr class="lichsutr">
+                        <td class="lichsutd">{{count @index}}</td>
+                        <td class="lichsutd">{{this.name}}</td>
+                        <td class="lichsutd">{{this.username}}</td>
+                        <td class="lichsutd">{{this.phone_number}}</td>
+                        <td class="lichsutd">{{this.time_create_account}}</td>
+                        <td class="lichsutd">
+                            <a href="/xemchoduyet">Xem</a>
+                        </td>
+                    </tr>
+                    {{/equals}}
+                {{/each}}
             </table>
         </div>
 
@@ -236,56 +166,20 @@
                     <th class="lichsuth">Ngày khóa</th>
                     <th class="lichsuth">...</th>
                 </tr>
-                <tr class="lichsutr">
-                    <td class="lichsutd">1</td>
-                    <td class="lichsutd">Trần Anh Đức</td>
-                    <td class="lichsutd">Đức Cống</td>
-                    <td class="lichsutd">0909090909</td>
-                    <td class="lichsutd">03/08/1993</td>
-                    <td class="lichsutd">
-                        <a href="/xemvothoihan">Xem</a>
-                    </td>
-                </tr>
-                <tr class="lichsutr">
-                    <td class="lichsutd">2</td>
-                    <td class="lichsutd">Trần Anh Đức</td>
-                    <td class="lichsutd">Đức Cống</td>
-                    <td class="lichsutd">0909090909</td>
-                    <td class="lichsutd">03/08/1993</td>
-                    <td class="lichsutd">
-                        <a href="/xemvothoihan">Xem</a>
-                    </td>
-                </tr>
-                <tr class="lichsutr">
-                    <td class="lichsutd">3</td>
-                    <td class="lichsutd">Trần Anh Đức</td>
-                    <td class="lichsutd">Đức Cống</td>
-                    <td class="lichsutd">0909090909</td>
-                    <td class="lichsutd">03/08/1993</td>
-                    <td class="lichsutd">
-                        <a href="/xemvothoihan">Xem</a>
-                    </td>
-                </tr>
-                <tr class="lichsutr">
-                    <td class="lichsutd">4</td>
-                    <td class="lichsutd">Trần Anh Đức</td>
-                    <td class="lichsutd">Đức Cống</td>
-                    <td class="lichsutd">0909090909</td>
-                    <td class="lichsutd">03/08/1993</td>
-                    <td class="lichsutd">
-                        <a href="/xemvothoihan">Xem</a>
-                    </td>
-                </tr>
-                <tr class="lichsutr">
-                    <td class="lichsutd">5</td>
-                    <td class="lichsutd">Trần Anh Đức</td>
-                    <td class="lichsutd">Đức Cống</td>
-                    <td class="lichsutd">0909090909</td>
-                    <td class="lichsutd">03/08/1993</td>
-                    <td class="lichsutd">
-                        <a href="/xemvothoihan">Xem</a>
-                    </td>
-                </tr>
+                {{#each rows}}
+                    {{#equals this.status 'đã khóa vô thời hạn'}}
+                    <tr class="lichsutr">
+                        <td class="lichsutd">{{count @index}}</td>
+                        <td class="lichsutd">{{this.name}}</td>
+                        <td class="lichsutd">{{this.username}}</td>
+                        <td class="lichsutd">{{this.phone_number}}</td>
+                        <td class="lichsutd">{{this.time_create_account}}</td>
+                        <td class="lichsutd">
+                            <a href="/xemchoduyet">Xem</a>
+                        </td>
+                    </tr>
+                    {{/equals}}
+                {{/each}}
             </table>
         </div>
 
@@ -299,61 +193,27 @@
                 <tr class="lichsutr">
                     <th class="lichsuth">STT</th>
                     <th class="lichsuth">Số tiền</th>
-                    <th class="lichsuth">STK</th>
-                    <th class="lichsuth">Số điện thoại</th>
+                    <th class="lichsuth">Mã giao dịch</th>
+                    <th class="lichsuth">Trạng thái</th>
                     <th class="lichsuth">Ngày</th>
                     <th class="lichsuth">...</th>
                 </tr>
-                <tr class="lichsutr">
-                    <td class="lichsutd">1</td>
-                    <td class="lichsutd">6.000.000</td>
-                    <td class="lichsutd">123456</td>
-                    <td class="lichsutd">0909090909</td>
-                    <td class="lichsutd">03/08/1993</td>
-                    <td class="lichsutd">
-                        <a href="/xemruttien">Xem</a>
-                    </td>
-                </tr>
-                <tr class="lichsutr">
-                    <td class="lichsutd">2</td>
-                    <td class="lichsutd">6.000.000</td>
-                    <td class="lichsutd">123456</td>
-                    <td class="lichsutd">0909090909</td>
-                    <td class="lichsutd">03/08/1993</td>
-                    <td class="lichsutd">
-                        <a href="/xemruttien">Xem</a>
-                    </td>
-                </tr>
-                <tr class="lichsutr">
-                    <td class="lichsutd">3</td>
-                    <td class="lichsutd">6.000.000</td>
-                    <td class="lichsutd">123456</td>
-                    <td class="lichsutd">0909090909</td>
-                    <td class="lichsutd">03/08/1993</td>
-                    <td class="lichsutd">
-                        <a href="/xemruttien">Xem</a>
-                    </td>
-                </tr>
-                <tr class="lichsutr">
-                    <td class="lichsutd">4</td>
-                    <td class="lichsutd">6.000.000</td>
-                    <td class="lichsutd">123456</td>
-                    <td class="lichsutd">0909090909</td>
-                    <td class="lichsutd">03/08/1993</td>
-                    <td class="lichsutd">
-                        <a href="/xemruttien">Xem</a>
-                    </td>
-                </tr>
-                <tr class="lichsutr">
-                    <td class="lichsutd">5</td>
-                    <td class="lichsutd">6.000.000</td>
-                    <td class="lichsutd">123456</td>
-                    <td class="lichsutd">0909090909</td>
-                    <td class="lichsutd">03/08/1993</td>
-                    <td class="lichsutd">
-                        <a href="/xemruttien">Xem</a>
-                    </td>
-                </tr>
+                {{#each rows1}}
+                    {{#equals this.trading_type 'Rút tiền'}}
+                        {{#equals this.trading_status 'đang chờ'}}
+                            <tr class="lichsutr">
+                                <td class="lichsutd">{{count @index}}</td>
+                                <td class="lichsutd">{{this.money_trading}}</td>
+                                <td class="lichsutd">{{this.ma_Giao_Dich}}</td>
+                                <td class="lichsutd">{{this.trading_status}}</td>
+                                <td class="lichsutd">{{this.day_trading}}</td>
+                                <td class="lichsutd">
+                                    <a href="/xemchoduyet">Xem</a>
+                                </td>
+                            </tr>
+                        {{/equals}}
+                    {{/equals}}
+                {{/each}}
             </table>
         </div>
 

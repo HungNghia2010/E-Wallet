@@ -153,12 +153,14 @@ Router.get('/lichsu', controllers.isActivated , (req, res) => {
 Router.get('/manager', loggedIn.loggedIn, (req, res) => {
     if(req.user.auth === 'Admin'){
         db.query('SELECT * FROM register', (err, rows) => {
-            if(!err) {
-                res.render('manager',{status:"info",user: req.user, rows})
-            }
-            else {
-                console.log(err);
-            }
+            db.query('SELECT * FROM trading', (err, rows1) => {
+                if(!err) {
+                    res.render('manager',{status:"info",user: req.user, rows, rows1})
+                }
+                else {
+                    console.log(err);
+                }
+            })
         })
     }else{
         res.render('404',{status:"no",user: "nothing"})
