@@ -9,14 +9,14 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
     <header class="header headermana">
 
         <a href="/index" class="logo">
-            <img src="images/Flash.png" alt="">
+            <img src="/images/Flash.png" alt="">
         </a>
 
         <nav class="navbar ulnav">
@@ -64,48 +64,36 @@
             <div class="content content-about-me">
                 <form class="form-about-me" action="#">
 
-                    <div class="user-details">
-
-                        <div class="input-box">
-                            <span class="details">Họ và tên</span>
-                            <input disabled value="Nguyen Trung Hau" type="text" placeholder="" required>
+                    {{#each rows1}}
+                        <div class="user-details">
+                            <div class="input-box">
+                                <span class="details">Họ và tên</span>
+                                <input value="{{this.name}}" type="text" disabled required>
+                            </div>
+                    {{/each}}
+                    {{#each rows}}
+                            <div class="input-box">
+                                <span class="details">Số tiền muốn rút</span>
+                                <input value="{{this.money_trading}}" type="text" disabled required>
+                            </div>
+                            <div class="input-box">
+                                <span class="details">Mã giao dịch</span>
+                                <input value="{{this.ma_Giao_Dich}}" type="text" disabled required>
+                            </div>
+                            <div class="input-box">
+                                <span class="details">Ngày rút</span>
+                                <input value="{{this.day_trading}}" type="text" disabled required>
+                            </div>
+                            <div class="input-box">
+                                <span class="details">Ghi chú</span>
+                                <input value="{{this.note_trading}}" type="text" disabled required>
+                            </div>
+                            <div class="input-box">
+                                <span class="details">Trạng thái</span>
+                                <input value="{{this.trading_status}}" type="text" disabled required>
+                            </div>
                         </div>
-                        <div class="input-box">
-                            <span class="details">Số dư</span>
-                            <input disabled value="1.000.000.000" type="text" placeholder="" required>
-                        </div>
-
-                        <div class="input-box">
-                            <span class="details">Số tài khoản</span>
-                            <input value="" type="text" placeholder="" required>
-                        </div>
-                        <div class="input-box">
-                            <span class="details">Ngày hết hạn thẻ</span>
-                            <input value="" type="text" placeholder="" required>
-                        </div>
-
-                        <div class="input-box">
-                            <span class="details">Mã CVV</span>
-                            <input value="" type="text" placeholder="" required>
-                        </div>
-                        <div class="input-box">
-                            <span class="details">Số tiền muốn rút</span>
-                            <input value="" type="text" placeholder="" required>
-                        </div>
-                        <div class="input-box">
-                            <span class="details">Ghi chú</span>
-                            <input value="" type="text" placeholder="" required>
-                        </div>
-                        <div class="input-box">
-                            <span class="details">Trạng thái</span>
-                            <input value="" type="text" placeholder="" required>
-                        </div>
-
-
-
-
-                    </div>
-
+                    {{/each}}
 
                     <div class="button register-button">
                         <input type="submit" value="Duyệt">

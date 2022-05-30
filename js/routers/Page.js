@@ -172,11 +172,14 @@ Router.get('/lichsu', controllers.isActivated , (req, res) => {
 
 Router.get('/manager', loggedIn.loggedIn, (req, res) => {
     if(req.user.auth === 'Admin'){
-        db.query('SELECT * FROM register LEFT JOIN trading ON (register.id = trading.ma_Khach_Hang)', (err, rows) => {
+        db.query('SELECT * FROM register', (err, rows) => {
             if(err) throw err
-            db.query('SELECT * FROM register', (err, rows1) => {
+            db.query('SELECT * FROM trading', (err, rows1) => {
                 if(err) throw err
-                res.render('manager',{status:"info",user: req.user, rows , rows1})
+                db.query('SELECT * FROM transfer_trading', (err, rows2) => {
+                    if(err) throw err
+                    res.render('manager',{status:"info",user: req.user, rows , rows1, rows2})
+                })  
             })
         })
     }else{
@@ -215,9 +218,16 @@ Router.get('/xemdakichhoat/:id', loggedIn.loggedIn, (req, res) => {
     }
 })
 
-Router.get('/xemruttien', loggedIn.loggedIn, (req, res) => {
+Router.get('/xemruttien/:code', loggedIn.loggedIn, (req, res) => {
     if(req.user.auth === 'Admin'){
-        res.render('xemruttien',{status:"info", user: req.user})
+        db.query('SELECT * FROM trading WHERE ma_Giao_Dich = ?', [req.params.code] ,(err, rows) => {
+            if (err) throw err
+            db.query('SELECT * FROM register WHERE id = ?', [rows[0].ma_Khach_Hang] ,(err, rows1) => {
+                if (err) throw err
+                res.render('xemruttien',{status:"info", rows, rows1})
+                console.log(rows)
+            })
+        })
     }else{
         res.render('404',{status:"no",user: "nothing"})
     }
