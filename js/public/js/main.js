@@ -34,6 +34,7 @@ if(login){
     valideUpdateform()
     document.getElementById('close').onclick = function(){
         dialogCont.style.display = "none"
+        window.location.reload()
     }
 }else if(nap){
     const s = document.getElementById('money').value;
@@ -69,6 +70,7 @@ if(login){
     }
     var slideIndex = 1;
     showDivs(slideIndex);
+
 } else {
     // Slide show
     var slideIndex = 1;
