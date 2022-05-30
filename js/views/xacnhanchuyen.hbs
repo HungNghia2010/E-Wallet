@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
@@ -24,24 +24,26 @@
             <a href="/index">Home</a>
             <!-- Chức năng admin -->
 
+            {{#if user.auth}}
             <li class="dropdown">
-                <a href="/manager" class="dropbtn">Manage</a>
+                <a href="manager.html" class="dropbtn">Manage</a>
                 <div class="dropdown-content">
-                    <a href="/manager#kichhoat">Chờ kích hoạt</a>
-                    <a href="/manager#kichhoated">Đã kích hoạt</a>
-                    <a href="/manager#vohieu">Bị vô hiệu hóa</a>
-                    <a href="/manager#khoa">Bị khóa vô thời hạn</a>
-                    <a href="/manager#gdrut">Giao dịch rút tiền</a>
-                    <a href="/manager#gdchuyen">Giao dịch chuyển tiền</a>
+                    <a href="manager.html#kichhoat">Chờ kích hoạt</a>
+                    <a href="manager.html#kichhoated">Đã kích hoạt</a>
+                    <a href="manager.html#vohieu">Bị vô hiệu hóa</a>
+                    <a href="manager.html#khoa">Bị khóa vô thời hạn</a>
+                    <a href="manager.html#gdrut">Giao dịch rút tiền</a>
+                    <a href="manager.html#gdchuyen">Giao dịch chuyển tiền</a>
                 </div>
             </li>
+            {{/if}}
 
             <!-- Chức năng chung -->
             <a href="/index#about">About</a>
             <a href="/index#menu">Menu</a>
             <a href="/index#products">Card</a>
             <a href="/index#contact">Contact</a>
-            <a href="/index#logout">Logout</a>
+            <a href="/logout">Logout</a>
 
         </nav>
 
@@ -128,7 +130,7 @@
     </section>
 
 
-    <script src="js/script.js"></script>
+    <script src="js/main.js"></script>
 
 </body>
 

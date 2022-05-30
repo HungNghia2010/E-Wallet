@@ -139,6 +139,10 @@ Router.get('/chuyentien', controllers.isActivated , (req, res) => {
     }
 })
 
+Router.get('/xacnhan' ,(req,res) => {
+    res.render('xacnhanchuyen')
+})
+
 Router.get('/lichsu', controllers.isActivated , (req, res) => {
     if(req.user){
         if(req.user.status === "chờ xác minh" || req.user.status === 'chờ cập nhật'){
