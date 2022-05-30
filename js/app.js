@@ -16,11 +16,9 @@ app.engine('hbs', exphbs.engine({
     extname: 'hbs',
     defaultLayout: 'main',
     helpers: {
-        equals: function(arr1,arr2){
-            if(arr1 === arr2){
-                return true;
-            }
-            return false;
+        equals: function(arr1,arr2,options) {
+            if (arr1 == arr2) return options.fn(this) 
+            return options.inverse(this);
         }
     }
 }))
