@@ -152,19 +152,14 @@ Router.get('/lichsu', controllers.isActivated , (req, res) => {
 
 Router.get('/manager', loggedIn.loggedIn, (req, res) => {
     if(req.user.auth === 'Admin'){
-        db.query('SELECT * FROM register', (err, rows) => {
-            if(err) throw err
-            db.query('SELECT * FROM trading', (err, rows1) => {
-                if(err) throw err
-                db.query('SELECT * FROM transfer_trading', (err, rows2) => {
-                    if(!err) {
-                        res.render('manager',{status:"info",user: req.user, rows, rows1, rows2})
-                    }
-                    else {
-                        console.log(err);
-                    }
-                })
-            })
+        db.query('SELECT * FROM register LEFT JOIN trading ON (register.id = trading.ma_Khach_Hang) LEFT JOIN transfer_trading ON (register.id = transfer_trading.ma_Khach_Hang)', (err, rows) => {
+            if(!err) {
+                res.render('manager',{status:"info",user: req.user, rows})
+                console.log(rows)
+            }
+            else {
+                console.log(err);
+            }
         })
     }else{
         res.render('404',{status:"no",user: "nothing"})
@@ -173,9 +168,10 @@ Router.get('/manager', loggedIn.loggedIn, (req, res) => {
 
 Router.get('/xemchoduyet/:id', loggedIn.loggedIn, (req, res) => {
     if(req.user.auth === 'Admin'){
-        db.query('SELECT * FROM register, account WHERE register.id = account.id' ,(err, rows) => {
+        db.query('SELECT * FROM register, account WHERE (register.id = account.id) AND (register.id = ?)', [req.params.id] ,(err, rows) => {
             if (err) throw err
             res.render('xemchoduyet',{status:"info", rows})
+            console.log(rows)
         })
     }else{
         res.render('404',{status:"no",user: "nothing"})
@@ -190,9 +186,11 @@ Router.get('/xemchuyentien', loggedIn.loggedIn, (req, res) => {
     }
 })
 
-Router.get('/xemdakichhoat', loggedIn.loggedIn, (req, res) => {
+Router.get('/xemdakichhoat/:id', loggedIn.loggedIn, (req, res) => {
     if(req.user.auth === 'Admin'){
-        res.render('xemdakichhoat',{status:"info", user: req.user})
+        db.query('SELECT * FROM register, account WHERE (register.id = account.id) AND (register.id = ?)', [req.params.id] ,(err, rows) => {
+            res.render('xemdakichhoat',{status:"info", user: req.user, rows})
+        })
     }else{
         res.render('404',{status:"no",user: "nothing"})
     }
