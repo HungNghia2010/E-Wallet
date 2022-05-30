@@ -566,7 +566,7 @@ exports.rut_tien = async(req,res) => {
                     const day_trading = day + "-" + month + "-" + today.getFullYear() ;
                     const time_trading = date.format('H:M:S');
 
-                    db.query('SELECT * FROM trading WHERE day_trading = ? AND trading_type = ?',[day_trading,"Rút tiền"], (err,result123) => {
+                    db.query('SELECT * FROM trading WHERE day_trading = ? AND trading_type = ? AND ma_Khach_Hang = ?',[day_trading,"Rút tiền",req.user.id], (err,result123) => {
                         if(err){
                             console.log(err)
                         }
