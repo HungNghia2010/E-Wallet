@@ -56,7 +56,9 @@ CREATE TABLE trading(
 
 INSERT INTO register VALUES 
 (1, 'admin', '$2a$08$2atY3gZJNtmW9jQKXjaDGeJTrg7qXTt48L0KJ58bWVdBwwHmaZN3m', 'admin', 'ad@gmail.com', '0123456789', 
-'123456789', '01/01/2000', 'Hà Nội', '', '', 'chờ xác minh', 1, 1, '');
+'123456789', '01/01/2000', 'Hà Nội', '', '', 'chờ xác minh', 1, 1, ''),
+(2, '25541789445', '$2a$08$2atY3gZJNtmW9jQKXjaDGeJTrg7qXTt48L0KJ58bWVdBwwHmaZN3m', 'Nguyễn Trung Hậu', 'hau@gmail.com', '03354412587', 
+'123456789', '01/01/2000', 'Hà Nội', '', '', 'đã xác minh', 2, 1, '');
 
 INSERT INTO lockaccount VALUES 
 ('1', 'admin', 0, 0, '');

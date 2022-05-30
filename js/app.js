@@ -3,8 +3,7 @@ const path = require('path')
 const express = require('express')
 const db = require('./routers/db-config')
 const cookieparser = require('cookie-parser')
-
-
+const exphbs = require('express-handlebars');
 const app = express()
 //app.use(cookieparser)
 
@@ -13,7 +12,6 @@ const publicDirectory = path.join(__dirname, './public')
 app.use(express.static(publicDirectory))
 
 app.set('view engine', 'hbs');
-
 
 db.connect( (error) => {
     if(error){
