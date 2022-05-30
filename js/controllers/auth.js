@@ -582,8 +582,7 @@ exports.rut_tien = async(req,res) => {
                                 }else{
                                     return res.json({status:"success", success:"Nộp đơn rút tiền thành công, số tiền phí là: " + phi + ", đợi admin xác nhận"})
                                 }
-                            })
-                                
+                            })     
                         }else{
                             const money = parseInt(result[0].money) - parseInt(s)
                             db.query('UPDATE account SET money = ? WHERE id = ?',[money,req.user.id], (err,result1) => {
@@ -642,14 +641,34 @@ exports.chuyen_tien = async (req, res) => {
                 console.log(err)
             }else if(result.length === 0){
                 return res.render('chuyen',{msg: 'Không tồn tại người dùng có số điện thoại này',user: req.user,data: data})
+            }else if (phone === req.user.phone_number){
+                return res.render('chuyen',{msg: 'Không thể tự chuyển tiền cho chính mình',user: req.user,data: data})
             }else{
                 db.query('SELECT * FROM account WHERE id = ?',[result[0].id],(err,result1) => {
                     if(err){
                         console.log(err)
                     }else if(parseInt(tien) > parseInt(result1[0].money)){
                         return res.json({status:"error", error:"Số tiền nhập lớn hơn số tiền hiện có"})
-                    }else{
-                        
+                    }/*else if (tien > 5000000){
+                        const ma_Giao_Dich = generateRandomString(6);
+                        const date = dateTime.create();
+                        const today = new Date();
+                        const day = ("0" + today.getDate()).slice(-2);
+                        const month = ("0" + (today.getMonth() + 1)).slice(-2);
+                        const day_trading = day + "-" + month + "-" + today.getFullYear() ;
+                        const time_trading = date.format('H:M:S');
+                        db.query('INSERT INTO transfer_trading SET ?',{ma_Giao_Dich : ma_Giao_Dich , ma_Khach_Hang: req.user.id , ma_Nguoi_Nhan : result1[0].id , ten_Nguoi_Nhan : result[0].name , sdt_Nguoi_Nhan : phone , money_transfer : tien , day_trading : day_trading , time_trading : time_trading , trading_type : "Chuyển tiền", trading_status : "đang chờ", note_trading : ghichu}, (error)=>{
+                            if (error){
+                                console.log(error)
+                            }else{
+                               
+                            }
+                        })
+                    }*/
+                    else {
+                        const vat = parseInt(data.tien) * 0.05; 
+                        const name_receiver = result[0].name; 
+                        return res.render('xacnhanchuyen',{data,vat,name_receiver});
                     }
                 })
             }
@@ -657,16 +676,10 @@ exports.chuyen_tien = async (req, res) => {
         req.session.tien = tien
         req.session.chiuphi = chiuphi
         req.session.ghichu = ghichu
-<<<<<<< HEAD
         res.redirect('/xacnhan')*/
-            const vat = parseInt(data.tien) * 0.05; 
-            return res.render('xacnhanchuyen',{data,vat});
+           
         })
     }
-=======
-        res.redirect('/xacnhan')
-    }   
->>>>>>> 4e110ffb044dde9568505edd3172dd1257a3e360
 }
 
 //random string for password
