@@ -227,6 +227,18 @@ Router.get('/lichsuchuyen',(req,res) => {
     res.render('lichsuchuyen');
 })
 
+Router.get('/lichsurut',(req,res) => {
+    res.render('lichsurut');
+})
 
+
+Router.get('/lichsumuathe',(req,res) => {
+    res.render('lichsumuathe');
+})
+
+
+Router.get('/lichsunap',(req,res) => {
+    res.render('lichsunap');
+})
 
 module.exports = Router
