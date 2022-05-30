@@ -71,10 +71,28 @@
                 {{#each rows}}
                     <tr class="lichsutr">
                         <td class="lichsutd">{{count @index}}</td>
+                        <td class="lichsutd">{{this.money_trading}}</td>
+                        <td class="lichsutd">{{this.day_trading}}</td>
+                        <td class="lichsutd">{{this.trading_type}}</td>
+                        <td class="lichsutd">{{this.trading_status}}</td>
+                    </tr>
+                {{/each}}
+                {{#each rows1}}
+                    <tr class="lichsutr">
+                        <td class="lichsutd">{{count @index}}</td>
+                        <td class="lichsutd">{{this.total_price}}</td>
                         <td class="lichsutd"></td>
-                        <td class="lichsutd">18/06/1989</td>
-                        <td class="lichsutd">Rút tiền</td>
-                        <td class="lichsutd">Đã thực hiện</td>
+                        <td class="lichsutd">Mua thẻ</td>
+                        <td class="lichsutd">Thành công</td>
+                    </tr>
+                {{/each}}
+                {{#each rows2}}
+                    <tr class="lichsutr">
+                        <td class="lichsutd">{{count @index}}</td>
+                        <td class="lichsutd">{{this.money_transfer}}</td>
+                        <td class="lichsutd">{{this.day_trading}}</td>
+                        <td class="lichsutd">{{this.trading_type}}</td>
+                        <td class="lichsutd">{{this.trading_status}}</td>
                     </tr>
                 {{/each}}
             </table>
