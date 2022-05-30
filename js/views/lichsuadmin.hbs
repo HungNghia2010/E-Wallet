@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
 
 </head>
 
@@ -17,7 +17,7 @@
     <header class="header headermana">
 
         <a href="index.html" class="logo">
-            <img src="images/Flash.png" alt="">
+            <img src="/images/Flash.png" alt="">
         </a>
 
         <nav class="navbar ulnav">
@@ -68,41 +68,15 @@
                     <th class="lichsuth">Giao dịch</th>
                     <th class="lichsuth">Trạng thái</th>
                 </tr>
-                <tr class="lichsutr">
-                    <td class="lichsutd">1</td>
-                    <td class="lichsutd">6.000.000</td>
-                    <td class="lichsutd">03/08/1993</td>
-                    <td class="lichsutd">Chuyển tiền</td>
-                    <td class="lichsutd">Đang chờ</td>
-                </tr>
-                <tr class="lichsutr">
-                    <td class="lichsutd">2</td>
-                    <td class="lichsutd">1.000.000</td>
-                    <td class="lichsutd">04/09/1991</td>
-                    <td class="lichsutd">Nạp tiền</td>
-                    <td class="lichsutd">Đã thực hiện</td>
-                </tr>
-                <tr class="lichsutr">
-                    <td class="lichsutd">3</td>
-                    <td class="lichsutd">3.000.000</td>
-                    <td class="lichsutd">06/10/1991</td>
-                    <td class="lichsutd">Rút tiền</td>
-                    <td class="lichsutd">Đã thực hiện</td>
-                </tr>
-                <tr class="lichsutr">
-                    <td class="lichsutd">4</td>
-                    <td class="lichsutd">6.000.000</td>
-                    <td class="lichsutd">16/11/1990</td>
-                    <td class="lichsutd">Rút tiền</td>
-                    <td class="lichsutd">Bị hủy</td>
-                </tr>
-                <tr class="lichsutr">
-                    <td class="lichsutd">5</td>
-                    <td class="lichsutd">1.000.000</td>
-                    <td class="lichsutd">18/06/1989</td>
-                    <td class="lichsutd">Rút tiền</td>
-                    <td class="lichsutd">Đã thực hiện</td>
-                </tr>
+                {{#each rows}}
+                    <tr class="lichsutr">
+                        <td class="lichsutd">{{count @index}}</td>
+                        <td class="lichsutd"></td>
+                        <td class="lichsutd">18/06/1989</td>
+                        <td class="lichsutd">Rút tiền</td>
+                        <td class="lichsutd">Đã thực hiện</td>
+                    </tr>
+                {{/each}}
             </table>
         </div>
 

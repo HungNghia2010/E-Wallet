@@ -116,14 +116,14 @@
                             </div>
                             <div class="input-box">
                                 <span class="details">Trạng thái</span>
-                                <input value="{{this.status}}" type="text" disabled required>
+                                <input value="{{this.status}}" type="text" name="status_us" disabled required>
                             </div>
                         </div>
-                    {{/each}}
 
-                    <div class="button register-button">
-                        <button type="button" class="regisbutton"><a href="/lichsu">Lịch sử giao dịch</a></button>
-                    </div>
+                        <div class="button register-button">
+                            <button type="submit" class="regisbutton"><a href="/lichsuadmin/{{this.id}}">Lịch sử giao dịch</a></button>
+                        </div>
+                    {{/each}}
                 </form>
             </div>
         </div>

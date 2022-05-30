@@ -359,4 +359,21 @@ Router.get('/lichsunap/:id',controllers.isActivated,(req,res) => {
     }
 })
 
+Router.get('/lichsuadmin/:id', loggedIn.loggedIn, (req, res) => {
+    if(req.user.auth === 'Admin'){
+        db.query('SELECT * FROM trading WHERE ma_Khach_Hang = ?', [req.params.id] ,(err, rows) => {
+            if (err) throw err
+            db.query('SELECT * FROM trading_card WHERE ma_Khach_Hang = ?', [req.params.id] ,(err, rows1) => {
+                if (err) throw err
+                db.query('SELECT * FROM transfer_trading WHERE ma_Khach_Hang = ?', [req.params.id] ,(err, rows2) => {
+                    if (err) throw err
+                    res.render('lichsuadmin',{status:"info", user: req.user, rows, rows1, rows2})
+                })  
+            })
+        })
+    }else{
+        res.render('404',{status:"no",user: "nothing"})
+    }
+})
+
 module.exports = Router
