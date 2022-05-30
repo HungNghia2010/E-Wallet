@@ -456,7 +456,9 @@ exports.nap_tien = async(req, res) => {
                         const ma_Giao_Dich = generateRandomString(6);
                         const date = dateTime.create();
                         const today = new Date();
-                        const day_trading = today.getDate() + "-" + today.getMonth() + "-" + today.getFullYear() ;
+                        const day = ("0" + today.getDate()).slice(-2);
+                        const month = ("0" + (today.getMonth() + 1)).slice(-2);
+                        const day_trading = day + "-" + month + "-" + today.getFullYear() ;
                         const time_trading = date.format('H:M:S');
                         db.query('INSERT INTO trading SET ?',{ma_Giao_Dich : ma_Giao_Dich , ma_Khach_Hang: req.user.id , money_trading : tien , day_trading : day_trading , time_trading : time_trading , trading_type : "Nạp tiền", trading_status : "Thành công"}, (error)=>{
                             if(error){
@@ -484,7 +486,9 @@ exports.nap_tien = async(req, res) => {
                         const ma_Giao_Dich = generateRandomString(6);
                         const date = dateTime.create();
                         const today = new Date();
-                        const day_trading = today.getDate() + "-" + today.getMonth() + "-" + today.getFullYear() ;
+                        const day = ("0" + today.getDate()).slice(-2);
+                        const month = ("0" + (today.getMonth() + 1)).slice(-2);
+                        const day_trading = day + "-" + month + "-" + today.getFullYear() ;
                         const time_trading = date.format('H:M:S');
                         db.query('INSERT INTO trading SET ?',{ma_Giao_Dich : ma_Giao_Dich , ma_Khach_Hang: req.user.id , money_trading : tien , day_trading : day_trading , time_trading : time_trading , trading_type : "Nạp tiền", trading_status : "Thành công"}, (error)=>{
                             if(error){
@@ -557,14 +561,16 @@ exports.rut_tien = async(req,res) => {
                     const ma_Giao_Dich = generateRandomString(6);
                     const date = dateTime.create();
                     const today = new Date();
-                    const day_trading = today.getDate() + "-" + today.getMonth() + "-" + today.getFullYear() ;
+                    const day = ("0" + today.getDate()).slice(-2);
+                    const month = ("0" + (today.getMonth() + 1)).slice(-2);
+                    const day_trading = day + "-" + month + "-" + today.getFullYear() ;
                     const time_trading = date.format('H:M:S');
 
-                    db.query('SELECT * FROM trading WHERE day_trading = ? AND trading_type = ?',[day_trading,"Rút tiền"], (err,result123) => {
+                    db.query('SELECT * FROM trading WHERE day_trading = ? AND trading_type = ? AND ma_Khach_Hang = ?',[day_trading,"Rút tiền",req.user.id], (err,result123) => {
                         if(err){
                             console.log(err)
                         }
-                        else if(result123.length == 2){
+                        else if(result123.length === 2){
                             return res.json({status:"error", error:"Hôm nay bạn đã rút tiền 2 lần, hãy rút tiếp vào ngày sau"})
                         }else if(parseInt(s) > parseInt(result[0].money)){
                             return res.json({status:"error", error:"Số tiền nhập cộng phí lớn hơn số tiền hiện có"})
@@ -588,7 +594,9 @@ exports.rut_tien = async(req,res) => {
                                     const ma_Giao_Dich = generateRandomString(6);
                                     const date = dateTime.create();
                                     const today = new Date();
-                                    const day_trading = today.getDate() + "-" + today.getMonth() + "-" + today.getFullYear() ;
+                                    const day = ("0" + today.getDate()).slice(-2);
+                                    const month = ("0" + (today.getMonth() + 1)).slice(-2);
+                                    const day_trading = day + "-" + month + "-" + today.getFullYear() ;
                                     const time_trading = date.format('H:M:S');
                                     db.query('INSERT INTO trading SET ?',{ma_Giao_Dich : ma_Giao_Dich , ma_Khach_Hang: req.user.id , money_trading : s , day_trading : day_trading , time_trading : time_trading , trading_type : "Rút tiền", trading_status : "Thành công", note_trading : ghichu}, (error)=>{
                                         if(error){
@@ -632,7 +640,7 @@ exports.chuyen_tien = async (req, res) => {
         req.session.chiuphi = chiuphi
         req.session.ghichu = ghichu
         res.redirect('/xacnhan')
-    }
+    }   
 }
 
 //random string for password

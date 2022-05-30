@@ -81,56 +81,19 @@
                         <a href="/lichsuchuyen">Xem</a>
                     </td>
                 </tr>
-                <tr class="lichsutr">
-                    <td class="lichsutd">2</td>
-                    <td class="lichsutd">1.000.000</td>
-                    <td class="lichsutd">04/09/1991</td>
-                    <td class="lichsutd">Nạp tiền</td>
-                    <td class="lichsutd">Đã thực hiện</td>
+                {{#each rows}}  
+                    <tr class="lichsutr">
+                    <td class="lichsutd">{{count @index}}</td>
+                    <td class="lichsutd">this.money_trading</td>
+                    <td class="lichsutd">this.day_trading</td>
+                    <td class="lichsutd">this.trading_type</td>
+                    <td class="lichsutd">this.trading_status</td>
                     <td class="lichsutd">
-                        <a href="/lichsunap">Xem</a>
+                        <a href="/lichsuchuyen">Xem</a>
                     </td>
-                </tr>
-                <tr class="lichsutr">
-                    <td class="lichsutd">3</td>
-                    <td class="lichsutd">3.000.000</td>
-                    <td class="lichsutd">06/10/1991</td>
-                    <td class="lichsutd">Rút tiền</td>
-                    <td class="lichsutd">Đã thực hiện</td>
-                    <td class="lichsutd">
-                        <a href="/lichsurut">Xem</a>
-                    </td>
-                </tr>
-                <tr class="lichsutr">
-                    <td class="lichsutd">4</td>
-                    <td class="lichsutd">6.000.000</td>
-                    <td class="lichsutd">16/11/1990</td>
-                    <td class="lichsutd">Rút tiền</td>
-                    <td class="lichsutd">Bị hủy</td>
-                    <td class="lichsutd">
-                        <a href="/lichsurut">Xem</a>
-                    </td>
-                </tr>
-                <tr class="lichsutr">
-                    <td class="lichsutd">5</td>
-                    <td class="lichsutd">1.000.000</td>
-                    <td class="lichsutd">18/06/1989</td>
-                    <td class="lichsutd">Rút tiền</td>
-                    <td class="lichsutd">Đã thực hiện</td>
-                    <td class="lichsutd">
-                        <a href="/lichsurut">Xem</a>
-                    </td>
-                </tr>
-                <tr class="lichsutr">
-                    <td class="lichsutd">6</td>
-                    <td class="lichsutd">100.000</td>
-                    <td class="lichsutd">18/06/1989</td>
-                    <td class="lichsutd">Mua thẻ</td>
-                    <td class="lichsutd">Đã thực hiện</td>
-                    <td class="lichsutd">
-                        <a href="/lichsumuathe">Xem</a>
-                    </td>
-                </tr>
+                    </tr>
+                {{/each}}
+
             </table>
         </div>
 
@@ -159,7 +122,7 @@
     </section>
 
 
-    <script src="js/script.js"></script>
+    <script src="js/main.js"></script>
 
 </body>
 
