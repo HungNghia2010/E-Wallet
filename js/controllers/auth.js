@@ -699,7 +699,10 @@ exports.xacnhan_chuyen = async (req, res) => {
         chiuphi : chiuphi,
         otp : otp
     }
+    console.log(data)
+
     if(!otp){
+        console.log(data)
         return res.render('xacnhanchuyen',{msg: 'Vui lòng nhập mã OTP',user: req.user,data: data})
     } else {
         db.query('SELECT * FROM register WHERE phone_number = ?',[data.phone],(err,result) => {
@@ -727,7 +730,7 @@ exports.xacnhan_chuyen = async (req, res) => {
                 db.query('SELECT * FROM account WHERE id = ?',[req.user.id],(err,result1) => {
                     if(err){
                         console.log(err)
-                    } else if (data.chiuphi == "người gửi"){
+                    } else if (data.chiuphi === "người gửi"){
                         const money = parseInt(result1[0].money) - parseInt(phi)*1.05; 
                         db.query('UPDATE account SET money = ? WHERE id = ?',[money,req.user.id], (err,result2) => {
                             if(err){
@@ -747,14 +750,16 @@ exports.xacnhan_chuyen = async (req, res) => {
                                         db.query('UPDATE account SET money = ? WHERE id = ?',[tien,result[0].id], (err,result2) => {
                                             if (error){
                                                 console.log(err);
+                                            }else{
+                                                return res.json({status:"success", success:"Chuyển tiền thành công, số tiền phí bị trừ là:" + phi})
                                             }
                                         })
-                                        return res.json({status:"success", success:"Chuyển tiền thành công, số tiền phí bị trừ là:" + phi})
+                                        //return res.json({status:"success", success:"Chuyển tiền thành công, số tiền phí bị trừ là:" + phi})
                                     }
                                 })
                             }
                         })
-                    }else if (data.chiuphi == "người nhận"){
+                    }else if (data.chiuphi === "người nhận"){
                         const money = parseInt(result1[0].money) - parseInt(phi); 
                         db.query('UPDATE account SET money = ? WHERE id = ?',[money,req.user.id], (err,result2) => {
                             if(err){
@@ -770,13 +775,15 @@ exports.xacnhan_chuyen = async (req, res) => {
                                 db.query('INSERT INTO transfer_trading SET ?',{ma_Giao_Dich : ma_Giao_Dich , ma_Khach_Hang: req.user.id , ma_Nguoi_Nhan : result[0].id , ten_Nguoi_Nhan : result[0].name , sdt_Nguoi_Nhan : phone , money_transfer : money , day_trading : day_trading , time_trading : time_trading , trading_type : "Chuyển tiền", trading_status : "thành công", note_trading : ghichu},(error)=>{
                                     if(error){
                                         console.log(error)
-                                    } else{
+                                    }else{
                                         db.query('UPDATE account SET money = ? WHERE id = ?',[tien*0.95,result[0].id], (err,result2) => {
-                                            if (err){
+                                            if(err){
                                                 console.log(error);
-                                            }
+                                            }else{
+                                                return res.json({status:"success", success:"Chuyển tiền thành công, số tiền bị trừ là:" + money})
+                                            }          
                                         })
-                                        return res.json({status:"success", success:"Chuyển tiền thành công, số tiền bị trừ là:" + money})
+                                        //return res.json({status:"success", success:"Chuyển tiền thành công, số tiền bị trừ là:" + money})
                                     }
                                 })
                             }

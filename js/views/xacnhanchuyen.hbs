@@ -28,12 +28,12 @@
             <li class="dropdown">
                 <a href="manager.html" class="dropbtn">Manage</a>
                 <div class="dropdown-content">
-                    <a href="manager.html#kichhoat">Chờ kích hoạt</a>
-                    <a href="manager.html#kichhoated">Đã kích hoạt</a>
-                    <a href="manager.html#vohieu">Bị vô hiệu hóa</a>
-                    <a href="manager.html#khoa">Bị khóa vô thời hạn</a>
-                    <a href="manager.html#gdrut">Giao dịch rút tiền</a>
-                    <a href="manager.html#gdchuyen">Giao dịch chuyển tiền</a>
+                    <a href="/manager#kichhoat">Chờ xác minh</a>
+                    <a href="/manager#kichhoated">Đã xác minh</a>
+                    <a href="/manager#vohieu">Bị vô hiệu hóa</a>
+                    <a href="/manager#khoa">Bị khóa vô thời hạn</a>
+                    <a href="/manager#gdrut">Giao dịch rút tiền</a>
+                    <a href="/manager#gdchuyen">Giao dịch chuyển tiền</a>
                 </div>
             </li>
             {{/if}}
@@ -79,25 +79,50 @@
                             <input disabled value="{{data.phone}}" id="phone" name="phone" type="text" placeholder="" required>
                             <input value="{{data.phone}}" id="phone" name="phone" type="text" style="display:none;" placeholder="" required>
                         </div>
+                        
                         <div class="input-box">
                             <span class="details">Số tiền muốn chuyển</span>
                             <input disabled value="{{data.tien}}" id="tien" name="tien" type="text" placeholder="" required>
                             <input value="{{data.tien}}" id="tien" name="tien" type="text" style="display:none;" placeholder="" required>
                         </div>
+
                         <div class="input-box">
                             <span class="details">Phí chuyển</span>
                             <input disabled value="{{vat}}" id="phi" name="phi" type="text" placeholder="" required>
                             <input value="{{vat}}" id="phi" name="phi" type="text" style="display:none" placeholder="" required>
                         </div>
+
                         <div class="input-box">
                             <span class="details">Người chịu phí</span>
                             <input disabled value="{{data.chiuphi}}" id="nguoi_chiu_phi" name="nguoichiuphi" type="text" placeholder="" required>
                             <input value="{{data.chiuphi}}" id="phi" id="nguoi_chiu_phi" name="nguoichiuphi" type="text" style="display:none" placeholder="" required>
                         </div>
+
                         <div class="input-box">
                             <span class="details">Nhập mã OTP</span>
-                            <input value="" id="otp" name="otp" type="text" placeholder="" required>
+                            <input value="" id="otp" name="otp" type="text" placeholder="">
                         </div>
+
+                        {{#if msg}}
+                        <div class="alert" id="errorMessage" style="display: none;">
+                            <span class="fas fa-exclamation-circle"></span>
+                            <span class="msg" id="error">{{msg}}</span>
+                        </div>
+                        {{/if}}
+
+                        {{#if success}}
+                        <div id="dialogCont" class="dig-container" style="display: none;">
+                            <div class="dig-header">
+                                Nạp tiền vào tài khoản
+                            </div>
+                            <div id="digbody" class="dig-body">
+                                <h4 id="success">{{success}}</h4>
+                            </div>
+                            <div class="dig-footer">
+                                <a href="/index">Quay về trang chủ</a>
+                            </div>
+                        </div>
+                        {{/if}}
 
                     </div>
 
