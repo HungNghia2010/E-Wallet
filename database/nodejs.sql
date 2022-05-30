@@ -59,6 +59,8 @@ CREATE TABLE transfer_trading(
     ma_Giao_Dich varchar(10) NOT NULL,
     ma_Khach_Hang int(10) NOT NULL,
     ma_Nguoi_Nhan int(10) NOT NULL,
+    ten_Nguoi_Nhan varchar(50) NOT NULL,
+    sdt_Nguoi_Nhan varchar(15) NOT NULL,
     money_transfer varchar(20) ,
     day_trading varchar(20),
     time_trading TIME,
@@ -81,7 +83,7 @@ CREATE TABLE trading_card(
 
 INSERT INTO register VALUES 
 (1, 'admin', '$2a$08$2atY3gZJNtmW9jQKXjaDGeJTrg7qXTt48L0KJ58bWVdBwwHmaZN3m', 'admin', 'ad@gmail.com', '0123456789', 
-'123456789', '01/01/2000', 'Hà Nội', '', '', 'chờ xác minh', 1, 1, ''),
+'123456789', '01/01/2000', 'Hà Nội', '', '', 'chờ xác minh', 1, 1, '');
 
 INSERT INTO lockaccount VALUES 
 ('1', 'admin', 0, 0, '');

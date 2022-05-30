@@ -216,4 +216,11 @@ Router.get('/xemvothoihan', loggedIn.loggedIn, (req, res) => {
 Router.get('/muathe', (req,res) => {
     res.render('muathe');
 })
+
+Router.get('/lichsuchuyen',(req,res) => {
+    res.render('lichsuchuyen');
+})
+
+
+
 module.exports = Router
