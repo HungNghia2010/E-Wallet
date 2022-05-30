@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
@@ -80,17 +80,17 @@
 
                         <div class="input-box">
                             <span class="details">Số điện thoại người nhận</span>
-                            <input value="" id="phone" name="phone" type="text" placeholder="" required>
+                            <input value="{{data.phone}}" id="phone" name="phone" type="text" placeholder="">
                         </div>
 
                         <div class="input-box">
                             <span class="details">Số tiền muốn chuyển</span>
-                            <input id="tien" name="tien" value="" type="text" placeholder="" required>
+                            <input value="{{data.tien}}" id="tien" name="tien" value="" type="text" placeholder="">
 
                         </div>
                         <div class="input-box">
                             <span class="details">Phí chuyển</span>
-                            <input disabled value="5%" type="text" id="tienphi" placeholder="" required>
+                            <input disabled value="5%" type="text" placeholder="">
 
                             <div class="gender-details">
                                 <input type="radio" name="chiuphi" value="0" id="dot-1">
@@ -112,8 +112,27 @@
 
                         <div class="input-box">
                             <span class="details">Ghi chú</span>
-                            <input value="" id="ghichu" name="ghichu" type="text" placeholder="" required>
+                            <input value="{{data.ghichu}}" id="ghichu" name="ghichu" type="text" placeholder="">
                         </div>
+
+                        {{#if msg}}
+                        <div class="alert" id="errorMessage">
+                            <span class="fas fa-exclamation-circle"></span>
+                            <span class="msg" id="error">{{msg}}</span>
+                        </div>
+                        {{/if}}
+
+                         {{!-- <div id="dialogCont" class="dig-container" style="display: none;">
+                            <div class="dig-header">
+                                Rút tiền từ tài khoản
+                            </div>
+                            <div id="digbody" class="dig-body">
+                                <h4 id="success"></h4>
+                            </div>
+                            <div class="dig-footer">
+                                <a id="close">Đóng</a>
+                            </div>
+                        </div> --}}
 
 
                     </div>
@@ -182,7 +201,7 @@
     </section>
 
 
-    <script src="js/main.js"></script>
+    <script src="/js/main.js"></script>
 
 </body>
 

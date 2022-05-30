@@ -1,3 +1,4 @@
+
 //login
 var login = document.getElementById('form-login')
 //register
@@ -13,7 +14,7 @@ var nap = document.getElementById("form-nap-tien")
 //rút tiền
 var rut = document.getElementById("form-rut-tien")
 //chuyển tiền
-var chuyentien = document.getElementById("form-chuyen-tien")
+var chuyen = document.getElementById("form-chuyen-tien")
 
 var navbar = document.querySelector('.navbar');
 
@@ -54,14 +55,9 @@ if(login){
     }
     ruttien()
     
-}else if(chuyentien){
+}else if(chuyen){
     const s = document.getElementById('money').value;
     document.getElementById('money').setAttribute('value',formatCash(s) + 'đ');
-
-    document.getElementById('close').onclick = function(){
-        dialogCont.style.display = "none"
-        window.location.reload()
-    }
     
 }else if (navbar){
     document.querySelector('#menu-btn').onclick = () => {
@@ -288,6 +284,7 @@ function ruttien(){
         })
     })
 }
+
 
 document.getElementById('eye').onclick = function(){
     var temp = document.getElementById('pwd')
