@@ -570,7 +570,7 @@ exports.rut_tien = async(req,res) => {
                             return res.json({status:"error", error:"Số tiền nhập cộng phí lớn hơn số tiền hiện có"})
                         }else if(tien > 5000000){
                             // add lịch sử
-                            db.query('INSERT INTO trading SET ?',{ma_Giao_Dich : ma_Giao_Dich , ma_Khach_Hang: req.user.id , money_trading : s , day_trading : day_trading , time_trading : time_trading , trading_type : "Rút tiền", trading_status : "đang chờ"}, (error)=>{
+                            db.query('INSERT INTO trading SET ?',{ma_Giao_Dich : ma_Giao_Dich , ma_Khach_Hang: req.user.id , money_trading : s , day_trading : day_trading , time_trading : time_trading , trading_type : "Rút tiền", trading_status : "đang chờ", note_trading : ghichu}, (error)=>{
                                 if (error){
                                     console.log(error)
                                 }else{
@@ -590,7 +590,7 @@ exports.rut_tien = async(req,res) => {
                                     const today = new Date();
                                     const day_trading = today.getDate() + "-" + today.getMonth() + "-" + today.getFullYear() ;
                                     const time_trading = date.format('H:M:S');
-                                    db.query('INSERT INTO trading SET ?',{ma_Giao_Dich : ma_Giao_Dich , ma_Khach_Hang: req.user.id , money_trading : s , day_trading : day_trading , time_trading : time_trading , trading_type : "Rút tiền", trading_status : "Thành công"}, (error)=>{
+                                    db.query('INSERT INTO trading SET ?',{ma_Giao_Dich : ma_Giao_Dich , ma_Khach_Hang: req.user.id , money_trading : s , day_trading : day_trading , time_trading : time_trading , trading_type : "Rút tiền", trading_status : "Thành công", note_trading : ghichu}, (error)=>{
                                         if(error){
                                             console.log(error)
                                         } else{

@@ -168,16 +168,16 @@
                 </tr>
                 {{#each rows}}
                     {{#equals this.status 'đã khóa vô thời hạn'}}
-                    <tr class="lichsutr">
-                        <td class="lichsutd">{{count @index}}</td>
-                        <td class="lichsutd">{{this.name}}</td>
-                        <td class="lichsutd">{{this.username}}</td>
-                        <td class="lichsutd">{{this.phone_number}}</td>
-                        <td class="lichsutd">{{this.time_create_account}}</td>
-                        <td class="lichsutd">
-                            <a href="/xemvothoihan/{{this.id}}">Xem</a>
-                        </td>
-                    </tr>
+                        <tr class="lichsutr">
+                            <td class="lichsutd">{{count @index}}</td>
+                            <td class="lichsutd">{{this.name}}</td>
+                            <td class="lichsutd">{{this.username}}</td>
+                            <td class="lichsutd">{{this.phone_number}}</td>
+                            <td class="lichsutd">{{this.time_create_account}}</td>
+                            <td class="lichsutd">
+                                <a href="/xemvothoihan/{{this.id}}">Xem</a>
+                            </td>
+                        </tr>
                     {{/equals}}
                 {{/each}}
             </table>
@@ -192,13 +192,13 @@
             <table class="lichsutb">
                 <tr class="lichsutr">
                     <th class="lichsuth">STT</th>
-                    <th class="lichsuth">Số tiền</th>
+                    <th class="lichsuth">Số tiền rút</th>
                     <th class="lichsuth">Mã giao dịch</th>
                     <th class="lichsuth">Trạng thái</th>
-                    <th class="lichsuth">Ngày</th>
+                    <th class="lichsuth">Ngày rút</th>
                     <th class="lichsuth">...</th>
                 </tr>
-                {{#each rows}}
+                {{#each rows1}}
                     {{#equals this.trading_type 'Rút tiền'}}
                         {{#equals this.trading_status 'đang chờ'}}
                             <tr class="lichsutr">
@@ -208,7 +208,7 @@
                                 <td class="lichsutd">{{this.trading_status}}</td>
                                 <td class="lichsutd">{{this.day_trading}}</td>
                                 <td class="lichsutd">
-                                    <a href="/xemchoduyet">Xem</a>
+                                    <a href="/xemruttien/{{this.ma_Giao_Dich}}">Xem</a>
                                 </td>
                             </tr>
                         {{/equals}}
