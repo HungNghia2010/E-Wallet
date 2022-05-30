@@ -286,7 +286,14 @@ Router.get('/lichsurut/:id',controllers.isActivated,(req,res) => {
         else if(req.user.status === "chờ xác minh" || req.user.status === 'chờ cập nhật'){
             res.redirect('/index')
         }else{
-            res.render('lichsurut',{status:"info",user: req.user})
+            db.query('SELECT * FROM trading WHERE ma_Khach_Hang = ? AND ma_Giao_Dich = ?',[req.user.id, req.params.id] , (err,rows) => {
+                if(err) throw err
+                else{
+                    const phi = parseInt(rows[0].money_trading * 100 / 105)
+                    const tien = parseInt(rows[0].money_trading) - parseInt(phi)
+                    res.render('lichsurut',{status:"info",user: req.user,test: rows,phi,tien})
+                }
+            })
         }
     }else{
         res.render('404',{status:"no",user: "nothing"})
@@ -310,9 +317,7 @@ Router.get('/lichsunap/:id',controllers.isActivated,(req,res) => {
             db.query('SELECT * FROM trading WHERE ma_Khach_Hang = ? AND ma_Giao_Dich = ?',[req.user.id, req.params.id] , (err,rows) => {
                 if(err) throw err
                 else{
-                    const phi = parseInt(rows[0].money_trading * 100 / 105)
-                    const tien = parseInt(rows[0].money_trading) - parseInt(phi)
-                    res.render('lichsunap',{status:"info",user: req.user,test: rows,phi,tien})
+                    res.render('lichsunap',{status:"info",user: req.user,test: rows})
                 }
             })
         }
