@@ -280,8 +280,21 @@ Router.get('/xemvothoihan/:id', loggedIn.loggedIn, (req, res) => {
     }
 })
 
-Router.get('/muathe', (req,res) => {
-    res.render('muathe');
+Router.get('/muathe',controllers.isActivated ,(req,res) => {
+    if(req.user){
+        if(req.user.change_pass === 0){
+            res.redirect('/firststep')
+        }
+        else if(req.user.status === "chờ xác minh" || req.user.status === 'chờ cập nhật'){
+            res.redirect('/index')
+        }
+        else{
+            const tien = req.query.pricez
+            res.render('muatheviettel',{status:"info",user: req.user,tien})
+        } 
+    }else{
+        res.render('404',{status:"no",user: "nothing"})
+    }
 })
 
 Router.get('/lichsuchuyen',controllers.isActivated,(req,res) => {

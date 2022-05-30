@@ -15,7 +15,7 @@
 <body>
     <header class="header headermana">
 
-        <a href="index.html" class="logo">
+        <a href="/index" class="logo">
             <img src="images/Flash.png" alt="">
         </a>
 
@@ -24,30 +24,32 @@
             <a href="index.html">Home</a>
             <!-- Chức năng admin -->
 
+            {{#if user.auth}}
             <li class="dropdown">
-                <a href="manager.html" class="dropbtn">Manage</a>
+                <a href="/manager" class="dropbtn">Manage</a>
                 <div class="dropdown-content">
-                    <a href="manager.html#kichhoat">Chờ kích hoạt</a>
-                    <a href="manager.html#kichhoated">Đã kích hoạt</a>
-                    <a href="manager.html#vohieu">Bị vô hiệu hóa</a>
-                    <a href="manager.html#khoa">Bị khóa vô thời hạn</a>
-                    <a href="manager.html#gdrut">Giao dịch rút tiền</a>
-                    <a href="manager.html#gdchuyen">Giao dịch chuyển tiền</a>
+                    <a href="/manager#kichhoat">Chờ xác minh</a>
+                    <a href="/manager#kichhoated">Đã xác minh</a>
+                    <a href="/manager#vohieu">Đã vô hiệu hóa</a>
+                    <a href="/manager#khoa">Bị khóa vô thời hạn</a>
+                    <a href="/manager#gdrut">Giao dịch rút tiền</a>
+                    <a href="/manager#gdchuyen">Giao dịch chuyển tiền</a>
                 </div>
             </li>
+            {{/if}}
 
             <!-- Chức năng chung -->
-            <a href="index.html#about">About</a>
-            <a href="index.html#menu">Menu</a>
-            <a href="index.html#products">Card</a>
-            <a href="index.html#contact">Contact</a>
-            <a href="index.html#logout">Logout</a>
+            <a href="/index#about">About</a>
+            <a href="/index#menu">Menu</a>
+            <a href="/index#products">Card</a>
+            <a href="/index#contact">Contact</a>
+            <a href="/logout">Logout</a>
 
         </nav>
 
         <div class="icons">
             <div id="user-btn">
-                <a href="info.html" class="fa-solid fa-user"></a>
+                <a href="/info" class="fa-solid fa-user"></a>
             </div>
 
             <div class="fas fa-bars" id="menu-btn"></div>
@@ -65,10 +67,20 @@
                 <form class="form-about-me" action="#">
 
                     <div class="user-details">
+                        
+                        <div class="input-box">
+                            <span class="details">Họ và tên</span>
+                            <input disabled value="{{user.name}}" type="text" placeholder="">
+                        </div>
+
+                        <div class="input-box">
+                            <span class="details">Số dư</span>
+                            <input disabled id="money" value="{{user.money}}" type="text" placeholder="">
+                        </div>
 
                         <div class="input-box">
                             <span class="details">Tên thẻ</span>
-                            <input value="Vinaphone" type="text" placeholder="" required>
+                            <input value="Viettel" type="text" placeholder="" readonly>
                         </div>
                         <div class="input-box">
                             <span class="details">Mã thẻ</span>
@@ -76,7 +88,7 @@
                         </div>
                         <div class="input-box">
                             <span class="details">Mệnh giá</span>
-                            <input value="20.000" type="text" placeholder="" required>
+                            <input value="{{tien}}"  type="text" placeholder="" readonly>
                         </div>
                         <div class="input-box">
                             <span class="details">Số lượng</span>
@@ -88,10 +100,7 @@
                                 <option class="option" value="soluong">5</option>
                             </select>
                         </div>
-                        <div class="input-box">
-                            <span class="details">Tổng tiền</span>
-                            <input value="100.000" type="text" placeholder="" required>
-                        </div>
+
                     </div>
 
 
@@ -117,11 +126,11 @@
         </div>
 
         <div class="links">
-            <a href="index.html">home</a>
-            <a href="index.html#about">about</a>
-            <a href="index.html#menu">menu</a>
-            <a href="index.html#products">card</a>
-            <a href="index.html#contact">contact</a>
+            <a href="/index">home</a>
+            <a href="/index#about">about</a>
+            <a href="/index#menu">menu</a>
+            <a href="/index#products">card</a>
+            <a href="/index#contact">contact</a>
         </div>
 
         <div class="credit">created by <span>us</span></div>
@@ -129,7 +138,7 @@
     </section>
 
 
-    <script src="js/script.js"></script>
+    <script src="js/main.js"></script>
 
 </body>
 
