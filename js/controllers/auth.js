@@ -808,6 +808,16 @@ exports.cho_duyet = async (req, res) => {
     res.redirect('/xemchoduyet/'+id_user)
 }
 
+exports.vohieuhoa = async (req, res) => {
+    const {id_user, mokhoa, huymokhoa} = req.body
+    var data = {
+        id_user: id_user,
+        mokhoa: mokhoa,
+        huymokhoa: huymokhoa
+    }
+    res.redirect('/xemvohieuhoa/'+id_user)
+}
+
 
 exports.muatheviettel = async (req, res) => {
     const{gia, soluong} = req.body;
