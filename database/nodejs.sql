@@ -59,7 +59,6 @@ CREATE TABLE trading_card(
     ma_Khach_Hang int(10) NOT NULL,
     card_seri varchar(20),
     ma_The varchar(20) NOT NULL,
-    so_Luong int(5),
     card_type varchar(20) NOT NULL,
     price varchar(20),
     total_price varchar(20),
