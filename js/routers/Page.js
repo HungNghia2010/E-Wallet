@@ -199,23 +199,28 @@ Router.get('/xemchoduyet/:id', loggedIn.loggedIn, (req, res) => {
 })
 
 Router.post('/auth/choduyet', loggedIn.loggedIn, (req, res) => {
-    if(req.body.xacminh === 'Xác minh'){
-        db.query('UPDATE register SET status = "đã xác minh" WHERE id = ?', [req.body.id_user] ,(err, rows) => {
-            if (err) throw err
-            res.redirect('/xemchoduyet/'+req.body.id_user)
-        })
+    if(req.user.auth === 'Admin'){  
+        if(req.body.xacminh === 'Xác minh'){
+            db.query('UPDATE register SET status = "đã xác minh" WHERE id = ?', [req.body.id_user] ,(err, rows) => {
+                if (err) throw err
+                res.redirect('/xemchoduyet/'+req.body.id_user)
+            })
+        }
+        else if (req.body.huyxacminh === 'Hủy') {
+            db.query('UPDATE register SET status = "đã vô hiệu hóa" WHERE id = ?', [req.body.id_user] ,(err, rows) => {
+                if (err) throw err
+                res.redirect('/xemchoduyet/'+req.body.id_user)
+            })
+        }
+        else if(req.body.bosungxacminh === 'Yêu cầu bổ sung') {
+            db.query('UPDATE register SET status = "chờ cập nhật" WHERE id = ?', [req.body.id_user] ,(err, rows) => {
+                if (err) throw err
+                res.redirect('/xemchoduyet/'+req.body.id_user)
+            })
+        }
     }
-    else if (req.body.huyxacminh === 'Hủy') {
-        db.query('UPDATE register SET status = "đã vô hiệu hóa" WHERE id = ?', [req.body.id_user] ,(err, rows) => {
-            if (err) throw err
-            res.redirect('/xemchoduyet/'+req.body.id_user)
-        })
-    }
-    else if(req.body.bosungxacminh === 'Yêu cầu bổ sung') {
-        db.query('UPDATE register SET status = "chờ cập nhật" WHERE id = ?', [req.body.id_user] ,(err, rows) => {
-            if (err) throw err
-            res.redirect('/xemchoduyet/'+req.body.id_user)
-        })
+    else {
+        res.render('404',{status:"no",user: "nothing"})
     }
 })
 
@@ -265,6 +270,23 @@ Router.get('/xemvohieuhoa/:id', loggedIn.loggedIn, (req, res) => {
             res.render('xemvohieuhoa',{status:"info", user: req.user, rows})
         })
     }else{
+        res.render('404',{status:"no",user: "nothing"})
+    }
+})
+
+Router.post('/auth/vohieuhoa', loggedIn.loggedIn, (req, res) => {
+    if(req.user.auth === 'Admin'){
+        if(req.body.mokhoa == 'Mở khóa') {
+            db.query('UPDATE register SET status = "chờ xác minh" WHERE id = ?', [req.body.id_user] ,(err, rows) => {
+                if (err) throw err
+                res.redirect('/xemvohieuhoa/'+req.body.id_user)
+            })
+        }
+        else if(req.body.huymokhoa == 'Hủy') {
+            res.redirect('/manager#vohieu')
+        }
+    }
+    else {
         res.render('404',{status:"no",user: "nothing"})
     }
 })
