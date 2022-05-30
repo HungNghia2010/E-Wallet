@@ -71,27 +71,35 @@
                     <th class="lichsuth">Trạng thái</th>
                     <th class="/lichsuth">...</th>
                 </tr>
-                <tr class="lichsutr">
-                    <td class="lichsutd">1</td>
-                    <td class="lichsutd">6.000.000</td>
-                    <td class="lichsutd">03/08/1993</td>
-                    <td class="lichsutd">Chuyển tiền</td>
-                    <td class="lichsutd">Đang chờ</td>
-                    <td class="lichsutd">
-                        <a href="/lichsuchuyen">Xem</a>
-                    </td>
-                </tr>
-                {{#each rows}}  
+ 
+                {{#each rows}} 
+                    {{#equals this.trading_type 'Nạp tiền'}}
                     <tr class="lichsutr">
-                    <td class="lichsutd">{{count @index}}</td>
-                    <td class="lichsutd">this.money_trading</td>
-                    <td class="lichsutd">this.day_trading</td>
-                    <td class="lichsutd">this.trading_type</td>
-                    <td class="lichsutd">this.trading_status</td>
-                    <td class="lichsutd">
-                        <a href="/lichsuchuyen">Xem</a>
-                    </td>
+                        <td class="lichsutd">{{count @index}}</td>
+                        <td class="lichsutd">{{this.money_trading}}</td>
+                        <td class="lichsutd">{{this.day_trading}}</td>
+                        <td class="lichsutd">{{this.trading_type}}</td>
+                        <td class="lichsutd">{{this.trading_status}}</td>
+                        <td class="lichsutd">
+                            <a href="/lichsunap/{{this.ma_Giao_Dich}}">Xem</a>
+                        </td>
                     </tr>
+                    {{/equals}}
+
+                    {{#equals this.trading_type 'Rút tiền'}}
+                    <tr class="lichsutr">
+                        <td class="lichsutd">{{count @index}}</td>
+                        <td class="lichsutd">{{this.money_trading}}</td>
+                        <td class="lichsutd">{{this.day_trading}}</td>
+                        <td class="lichsutd">{{this.trading_type}}</td>
+                        <td class="lichsutd">{{this.trading_status}}</td>
+                        <td class="lichsutd">
+                            <a href="/lichsunap/{{this.ma_Giao_Dich}}">Xem</a>
+                        </td>
+                    </tr>
+                    {{/equals}}
+
+
                 {{/each}}
 
             </table>

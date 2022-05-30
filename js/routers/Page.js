@@ -160,7 +160,7 @@ Router.get('/lichsu', controllers.isActivated , (req, res) => {
         else if(req.user.status === "chờ xác minh" || req.user.status === 'chờ cập nhật'){
             res.redirect('/index')
         }else{
-            db.query('SELECT * FROM trading LEFT JOIN trading_card ON (trading.ma_Khach_Hang = trading_card.ma_Khach_Hang) WHERE trading.ma_Khach_Hang = ? ORDER BY day_trading;',[req.user.id] ,(err, rows) => {
+            db.query('SELECT * FROM trading WHERE ma_Khach_Hang = ? ORDER BY day_trading',[req.user.id] ,(err, rows) => {
                 if(err) throw err
                 res.render('lichsu',{status:"info",user: req.user,rows})
             })
@@ -259,12 +259,33 @@ Router.get('/muathe', (req,res) => {
     res.render('muathe');
 })
 
-Router.get('/lichsuchuyen',(req,res) => {
-    res.render('lichsuchuyen');
+Router.get('/lichsuchuyen',controllers.isActivated,(req,res) => {
+    if(req.user){
+        if(req.user.change_pass === 0){
+            res.redirect('/firststep')
+        }
+        else if(req.user.status === "chờ xác minh" || req.user.status === 'chờ cập nhật'){
+            res.redirect('/index')
+        }
+        else res.render('lichsuchuyen',{status:"info",user: req.user})
+    }else{
+        res.render('404',{status:"no",user: "nothing"})
+    }
 })
 
-Router.get('/lichsurut',(req,res) => {
-    res.render('lichsurut');
+Router.get('/lichsurut/:id',controllers.isActivated,(req,res) => {
+    if(req.user){
+        if(req.user.change_pass === 0){
+            res.redirect('/firststep')
+        }
+        else if(req.user.status === "chờ xác minh" || req.user.status === 'chờ cập nhật'){
+            res.redirect('/index')
+        }else{
+            res.render('lichsurut',{status:"info",user: req.user})
+        }
+    }else{
+        res.render('404',{status:"no",user: "nothing"})
+    }
 })
 
 
@@ -273,8 +294,26 @@ Router.get('/lichsumuathe',(req,res) => {
 })
 
 
-Router.get('/lichsunap',(req,res) => {
-    res.render('lichsunap');
+Router.get('/lichsunap/:id',controllers.isActivated,(req,res) => {
+    if(req.user){
+        if(req.user.change_pass === 0){
+            res.redirect('/firststep')
+        }
+        else if(req.user.status === "chờ xác minh" || req.user.status === 'chờ cập nhật'){
+            res.redirect('/index')
+        }else{
+            db.query('SELECT * FROM trading WHERE ma_Khach_Hang = ? AND ma_Giao_Dich = ?',[req.user.id, req.params.id] , (err,rows) => {
+                if(err) throw err
+                else{
+                    const phi = parseInt(rows[0].money_trading * 100 / 105)
+                    const tien = parseInt(rows[0].money_trading) - parseInt(phi)
+                    res.render('lichsunap',{status:"info",user: req.user,test: rows,phi,tien})
+                }
+            })
+        }
+    }else{
+        res.render('404',{status:"no",user: "nothing"})
+    }
 })
 
 module.exports = Router
