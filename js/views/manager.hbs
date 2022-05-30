@@ -227,61 +227,28 @@
                 <tr class="lichsutr">
                     <th class="lichsuth">STT</th>
                     <th class="lichsuth">Số tiền</th>
-                    <th class="lichsuth">STK</th>
-                    <th class="lichsuth">Số điện thoại</th>
+                    <th class="lichsuth">Mã giao dịch</th>
+                    <th class="lichsuth">Trạng thái</th>
                     <th class="lichsuth">Ngày</th>
                     <th class="lichsuth">...</th>
                 </tr>
-                <tr class="lichsutr">
-                    <td class="lichsutd">1</td>
-                    <td class="lichsutd">6.000.000</td>
-                    <td class="lichsutd">123456</td>
-                    <td class="lichsutd">0909090909</td>
-                    <td class="lichsutd">03/08/1993</td>
-                    <td class="lichsutd">
-                        <a href="/xemchuyentien">Xem</a>
-                    </td>
-                </tr>
-                <tr class="lichsutr">
-                    <td class="lichsutd">2</td>
-                    <td class="lichsutd">6.000.000</td>
-                    <td class="lichsutd">123456</td>
-                    <td class="lichsutd">0909090909</td>
-                    <td class="lichsutd">03/08/1993</td>
-                    <td class="lichsutd">
-                        <a href="/xemchuyentien">Xem</a>
-                    </td>
-                </tr>
-                <tr class="lichsutr">
-                    <td class="lichsutd">3</td>
-                    <td class="lichsutd">6.000.000</td>
-                    <td class="lichsutd">123456</td>
-                    <td class="lichsutd">0909090909</td>
-                    <td class="lichsutd">03/08/1993</td>
-                    <td class="lichsutd">
-                        <a href="/xemchuyentien">Xem</a>
-                    </td>
-                </tr>
-                <tr class="lichsutr">
-                    <td class="lichsutd">4</td>
-                    <td class="lichsutd">6.000.000</td>
-                    <td class="lichsutd">123456</td>
-                    <td class="lichsutd">0909090909</td>
-                    <td class="lichsutd">03/08/1993</td>
-                    <td class="lichsutd">
-                        <a href="/xemchuyentien">Xem</a>
-                    </td>
-                </tr>
-                <tr class="lichsutr">
-                    <td class="lichsutd">5</td>
-                    <td class="lichsutd">6.000.000</td>
-                    <td class="lichsutd">123456</td>
-                    <td class="lichsutd">0909090909</td>
-                    <td class="lichsutd">03/08/1993</td>
-                    <td class="lichsutd">
-                        <a href="/xemchuyentien">Xem</a>
-                    </td>
-                </tr>
+                
+                {{#each rows2}}
+                    {{#equals this.trading_type 'Chuyển tiền'}}
+                        {{#equals this.trading_status 'chờ duyệt'}}
+                            <tr class="lichsutr">
+                                <td class="lichsutd">{{count @index}}</td>
+                                <td class="lichsutd">{{this.money_transfer}}</td>
+                                <td class="lichsutd">{{this.ma_Giao_Dich}}</td>
+                                <td class="lichsutd">{{this.trading_status}}</td>
+                                <td class="lichsutd">{{this.day_trading}}</td>
+                                <td class="lichsutd">
+                                    <a href="/xemchoduyet">Xem</a>
+                                </td>
+                            </tr>
+                        {{/equals}}
+                    {{/equals}}
+                {{/each}}
             </table>
         </div>
 

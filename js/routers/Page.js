@@ -154,12 +154,14 @@ Router.get('/manager', loggedIn.loggedIn, (req, res) => {
     if(req.user.auth === 'Admin'){
         db.query('SELECT * FROM register', (err, rows) => {
             db.query('SELECT * FROM trading', (err, rows1) => {
-                if(!err) {
-                    res.render('manager',{status:"info",user: req.user, rows, rows1})
-                }
-                else {
-                    console.log(err);
-                }
+                db.query('SELECT * FROM transfer_trading', (err, rows2) => {
+                    if(!err) {
+                        res.render('manager',{status:"info",user: req.user, rows, rows1, rows2})
+                    }
+                    else {
+                        console.log(err);
+                    }
+                })
             })
         })
     }else{
