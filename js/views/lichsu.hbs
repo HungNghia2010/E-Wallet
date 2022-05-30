@@ -24,7 +24,8 @@
             <!-- Chức năng chung -->
             <a href="/index">Home</a>
             <!-- Chức năng admin -->
-
+            
+            {{#if user.auth}}
             <li class="dropdown">
                 <a href="/manager" class="dropbtn">Manage</a>
                 <div class="dropdown-content">
@@ -36,7 +37,8 @@
                     <a href="/manager#gdchuyen">Giao dịch chuyển tiền</a>
                 </div>
             </li>
-
+            {{/if}}
+            
             <!-- Chức năng chung -->
             <a href="/index#about">About</a>
             <a href="/index#menu">Menu</a>
