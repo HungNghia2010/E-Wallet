@@ -546,8 +546,7 @@ exports.rut_tien = async(req,res) => {
                     return res.json({status:"error", error:"Vui lòng nhập số tiền là bội số của 50,000vnđ"})
                 }else if(parseInt(tien) < 50000){
                     return res.json({status:"error", error:"Vui lòng rút từ 50,000vnđ trở lên"})
-                }
-                else if(parseInt(tien) > parseInt(result[0].money)){
+                }else if(parseInt(tien) > parseInt(result[0].money)){
                     return res.json({status:"error", error:"Số tiền nhập lớn hơn số tiền hiện có"})
                 }else if(parseInt(tien) < parseInt(result[0].money)){
                     const s = parseInt(tien*0.05) + parseInt(tien)

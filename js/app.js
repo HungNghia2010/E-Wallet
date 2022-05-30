@@ -11,8 +11,19 @@ const app = express()
 const publicDirectory = path.join(__dirname, './public')
 app.use(express.static(publicDirectory))
 
-
-app.set('view engine', '.hbs');
+app.set('view engine', 'hbs');
+app.engine('hbs', exphbs.engine({
+    extname: 'hbs',
+    defaultLayout: 'main',
+    helpers: {
+        equals: function(arr1,arr2){
+            if(arr1 === arr2){
+                return true;
+            }
+            return false;
+        }
+    }
+}))
 
 db.connect( (error) => {
     if(error){
