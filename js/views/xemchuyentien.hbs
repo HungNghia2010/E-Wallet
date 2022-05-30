@@ -9,14 +9,13 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
     <header class="header headermana">
-
         <a href="/index" class="logo">
-            <img src="images/Flash.png" alt="">
+            <img src="/images/Flash.png" alt="">
         </a>
 
         <nav class="navbar ulnav">
@@ -65,58 +64,46 @@
                 <form class="form-about-me" action="#">
 
                     <div class="user-details">
-
-                        <div class="input-box">
-                            <span class="details">Họ và tên</span>
-                            <input disabled value="Nguyen Trung Hau" type="text" placeholder="" required>
-                        </div>
-                        <div class="input-box">
-                            <span class="details">Số dư</span>
-                            <input disabled value="1.000.000.000" type="text" placeholder="" required>
-                        </div>
-
-                        <div class="input-box">
-                            <span class="details">Số điện thoại người nhận</span>
-                            <input value="" type="text" placeholder="" required>
-                        </div>
-                        <div class="input-box">
-                            <span class="details">Tên người nhận</span>
-                            <input disabled value="" type="text" placeholder="" required>
-                        </div>
-                        <div class="input-box">
-                            <span class="details">Số tiền muốn chuyển</span>
-                            <input value="" type="text" placeholder="" required>
-                        </div>
-                        <div class="input-box">
-                            <span class="details">Phí chuyển</span>
-                            <input disabled value="15.0000" type="text" placeholder="" required>
-
-                            <div class="gender-details">
-                                <input type="radio" name="chiuphi" id="dot-1">
-                                <input type="radio" name="chiuphi" id="dot-2">
-                                <div class="category">
-                                    <label for="dot-1">
-                                        <span class="dot one"></span>
-                                        <span class="chiuphi">Người gửi</span>
-                                    </label>
-                                    <label for="dot-2">
-                                        <span class="dot two"></span>
-                                        <span class="chiuphi">Người nhận</span>
-                                    </label>
-
-                                </div>
+                        {{#each rows1}}
+                            <div class="input-box">
+                                <span class="details">Họ và tên</span>
+                                <input value="{{this.name}}" type="text" disabled required>
                             </div>
 
-                        </div>
+                            <div class="input-box">
+                                <span class="details">Số điện thoại người chuyển</span>
+                                <input value="{{this.phone_number}}" type="text" disabled required>
+                            </div>
+                        {{/each}}
+                        {{#each rows}}
+                            <div class="input-box">
+                                <span class="details">Số tiền muốn chuyển</span>
+                                <input value="{{this.money_transfer}}" type="text" disabled required>
+                            </div>
 
-                        <div class="input-box">
-                            <span class="details">Ghi chú</span>
-                            <input value="" type="text" placeholder="" required>
-                        </div>
-                        <div class="input-box">
-                            <span class="details">Trạng thái</span>
-                            <input value="" type="text" placeholder="" required>
-                        </div>
+                            <div class="input-box">
+                                <span class="details">Tên người nhận</span>
+                                <input value="{{this.ten_Nguoi_Nhan}}" type="text" disabled required>
+                            </div>
+
+                            <div class="input-box">
+                                <span class="details">Số điện thoại người nhận</span>
+                                <input value="{{this.sdt_Nguoi_Nhan}}" type="text" disabled required>
+                            </div>                        
+
+                            <div class="input-box">
+                                <span class="details">Ghi chú</span>
+                                <input value="{{this.note_trading}}" type="text" disabled required>
+                            </div>
+                            <div class="input-box">
+                                <span class="details">Trạng thái</span>
+                                <input value="{{this.trading_status}}" type="text" disabled required>
+                            </div>
+                            <div class="input-box">
+                                <span class="details">Ngày chuyển</span>
+                                <input value="{{this.day_trading}}" type="text" disabled required>
+                            </div>
+                        {{/each}}
                     </div>
 
                     <div class="button register-button">
