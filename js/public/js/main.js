@@ -2,16 +2,18 @@
 var login = document.getElementById('form-login')
 //register
 var register = document.getElementById("form")
-
+//đổi mật khẩu info
 var infochange = document.getElementById('form-changepass')
-
+//đổi mật khẩu lần đầu đăng nhập
 var firststep = document.getElementById("form-first-changePass")
-
+//cập nhật thông tin
 var updateinfo = document.getElementById("form-update-info")
-
+//nạp tiền
 var nap = document.getElementById("form-nap-tien")
-
+//rút tiền
 var rut = document.getElementById("form-rut-tien")
+//chuyển tiền
+var chuyentien = document.getElementById("form-chuyen-tien")
 
 var navbar = document.querySelector('.navbar');
 
@@ -52,6 +54,15 @@ if(login){
     }
     ruttien()
     
+}else if(chuyentien){
+    const s = document.getElementById('money').value;
+    document.getElementById('money').setAttribute('value',formatCash(s) + 'đ');
+
+    document.getElementById('close').onclick = function(){
+        dialogCont.style.display = "none"
+        window.location.reload()
+    }
+    
 }else if (navbar){
     document.querySelector('#menu-btn').onclick = () => {
         navbar.classList.toggle('active');
@@ -60,12 +71,13 @@ if(login){
     window.onscroll = () => {
         navbar.classList.remove('active');
     }
+    var slideIndex = 1;
+    showDivs(slideIndex);
 } else {
     // Slide show
     var slideIndex = 1;
     showDivs(slideIndex);
 }
-
 //login
 function validateLogin(){
     login.addEventListener("submit", ()=>{

@@ -38,4 +38,6 @@ Router.post('/nap', loggedIn.loggedIn, authController.nap_tien)
 
 Router.post('/ruttien', loggedIn.loggedIn, authController.rut_tien)
 
+Router.post('/chuyen', loggedIn.loggedIn, authController.chuyen_tien)
+
 module.exports = Router;

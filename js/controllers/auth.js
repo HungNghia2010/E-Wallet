@@ -609,6 +609,10 @@ exports.rut_tien = async(req,res) => {
     }
 }
 
+exports.chuyen_tien = async (req, res) => {
+    console.log(req.body)
+}
+
 //random string for password
 const generateRandomString = (myLength) => {
     const chars =
