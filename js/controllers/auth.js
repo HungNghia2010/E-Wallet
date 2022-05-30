@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs')
 const dateTime = require('node-datetime')
 const nodemailer = require('nodemailer');
 const { text } = require('express');
+const { parse } = require('dotenv');
 
 var transporter = nodemailer.createTransport({
     host: "mail.phongdaotao.com",
@@ -801,7 +802,27 @@ exports.cho_duyet = async (req, res) => {
     res.redirect('/xemchoduyet/'+id_user)
 }
 
+<<<<<<< Updated upstream
 >>>>>>> d322af9f1988934290a3b73e6d22f435ee07640b
+=======
+exports.muatheviettel = async (req, res) => {
+    const{gia, soluong} = req.body;
+    const tongtien = parseInt(gia) * parseInt(soluong)
+
+    var data = {
+        gia: gia
+    }
+    
+    db.query('SELECT * FROM account WHERE id = ?',[req.user.id],(err,result) => {
+        if(tongtien > result[0].money){
+            return res.render('muatheviettel',{msg: 'Không thể tự chuyển tiền cho chính mình',user: req.user,data})
+        }else{
+            return res.render('muatheviettel',{msg: 'Không thể tự chuyển tiền cho chính mình',user: req.user,data})
+        }
+    })
+}
+
+>>>>>>> Stashed changes
 //random string for password
 const generateRandomString = (myLength) => {
     const chars =

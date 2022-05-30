@@ -61,8 +61,6 @@ if(login){
     document.getElementById('money').setAttribute('value',formatCash(s) + 'đ');
     
 }else if (navbar){
-    const s = document.getElementById('money').value;
-    document.getElementById('money').setAttribute('value',formatCash(s) + 'đ');
     
     document.querySelector('#menu-btn').onclick = () => {
         navbar.classList.toggle('active');
@@ -74,7 +72,9 @@ if(login){
     var slideIndex = 1;
     showDivs(slideIndex);
 
-} else {
+
+}
+ else {
     // Slide show
     var slideIndex = 1;
     showDivs(slideIndex);

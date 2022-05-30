@@ -44,4 +44,6 @@ Router.post('/choduyet', loggedIn.loggedIn, authController.cho_duyet)
 
 Router.post('/xacnhan',loggedIn.loggedIn, authController.xacnhan_chuyen)
 
+Router.post('/muatheviettel',loggedIn.loggedIn, authController.muatheviettel)
+
 module.exports = Router;
