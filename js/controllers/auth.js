@@ -622,16 +622,37 @@ exports.chuyen_tien = async (req, res) => {
         return res.render('chuyen',{msg: 'Hãy nhập số điện thoại người nhận',user: req.user,data: data})
     }else if(!tien){
         return res.render('chuyen',{msg: 'Hãy nhập số tiền',user: req.user,data: data})
+    }else if((data.tien <= 0) || Number.isNaN(Number(data.tien))){
+        return res.render('chuyen',{msg: 'Tiền nhập không hợp lệ',user: req.user,data: data})
     }else if(!chiuphi){
         return res.render('chuyen',{msg: 'Hãy chọn người chịu phí',user: req.user,data: data})
     }else if(!ghichu){
         return res.render('chuyen',{msg: 'Mã nhập ghi chú',user: req.user,data: data})
     }else{
-        req.session.phone = phone
+        db.query('SELECT * FROM register WHERE phone_number = ?',[data.phone],(err,result) => {
+            if(err){
+                console.log(err)
+            }else if(result.length === 0){
+                return res.render('chuyen',{msg: 'Không tồn tại người dùng có số điện thoại này',user: req.user,data: data})
+            }else{
+                db.query('SELECT * FROM account WHERE id = ?',[result[0].id],(err,result1) => {
+                    if(err){
+                        console.log(err)
+                    }else if(parseInt(tien) > parseInt(result1[0].money)){
+                        return res.json({status:"error", error:"Số tiền nhập lớn hơn số tiền hiện có"})
+                    }else{
+                        
+                    }
+                })
+            }
+        /*req.session.phone = phone
         req.session.tien = tien
         req.session.chiuphi = chiuphi
         req.session.ghichu = ghichu
-        res.redirect('/xacnhan')
+        res.redirect('/xacnhan')*/
+            const vat = parseInt(data.tien) * 0.05; 
+            return res.render('xacnhanchuyen',{data,vat});
+        })
     }
 }
 
