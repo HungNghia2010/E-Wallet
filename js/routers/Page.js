@@ -302,6 +302,25 @@ Router.get('/xemvothoihan/:id', loggedIn.loggedIn, (req, res) => {
     }
 })
 
+Router.post('/auth/vothoihan', loggedIn.loggedIn, (req, res) => {
+    if(req.user.auth === 'Admin') {
+        if(req.body.mokhoavothoihan == 'Mở khóa') {
+            db.query('UPDATE register SET status = "đã xác minh" WHERE id = ?', [req.body.id_user] ,(err, rows) => {
+                if (err) throw err
+                db.query('UPDATE lockaccount SET loginAbnormality = 0 WHERE id = ?', [req.body.id_user] ,(err, rows1) => {
+                    res.redirect('/xemvothoihan/'+req.body.id_user)
+                })
+            })
+        }
+        else if(req.body.huykhoavothoihan == 'Hủy') {
+            res.redirect('/manager#khoa')
+        }
+    }
+    else{
+        res.render('404',{status:"no",user: "nothing"})
+    }
+})
+
 Router.get('/muathe',controllers.isActivated ,(req,res) => {
     if(req.user){
         if(req.user.change_pass === 0){

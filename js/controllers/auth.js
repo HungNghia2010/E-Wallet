@@ -818,6 +818,15 @@ exports.vohieuhoa = async (req, res) => {
     res.redirect('/xemvohieuhoa/'+id_user)
 }
 
+exports.vothoihan = async (req, res) => {
+    const {id_user, mokhoavothoihan, huykhoavothoihan} = req.body
+    var data = {
+        id_user: id_user,
+        mokhoavothoihan: mokhoavothoihan,
+        huykhoavothoihan: huykhoavothoihan
+    }
+    res.redirect('/xemvothoihan/'+id_user)
+}
 
 exports.muatheviettel = async (req, res) => {
     const{gia, soluong} = req.body;

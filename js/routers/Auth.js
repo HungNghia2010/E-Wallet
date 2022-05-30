@@ -48,4 +48,6 @@ Router.post('/muatheviettel',loggedIn.loggedIn, authController.muatheviettel)
 
 Router.post('/vohieuhoa',loggedIn.loggedIn, authController.vohieuhoa)
 
+Router.post('/vothoihan',loggedIn.loggedIn, authController.vothoihan)
+
 module.exports = Router;
