@@ -611,8 +611,6 @@ exports.rut_tien = async(req,res) => {
 
 exports.chuyen_tien = async (req, res) => {
     const {phone, tien, chiuphi, ghichu} = req.body
-    console.log(req.body)
-
     var data = {
         phone: phone,
         tien: tien,
@@ -629,7 +627,11 @@ exports.chuyen_tien = async (req, res) => {
     }else if(!ghichu){
         return res.render('chuyen',{msg: 'Mã nhập ghi chú',user: req.user,data: data})
     }else{
-        console.log(req.body)
+        req.session.phone = phone
+        req.session.tien = tien
+        req.session.chiuphi = chiuphi
+        req.session.ghichu = ghichu
+        res.redirect('/xacnhan')
     }
 }
 
