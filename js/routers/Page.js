@@ -199,9 +199,15 @@ Router.get('/xemchoduyet/:id', loggedIn.loggedIn, (req, res) => {
     }
 })
 
-Router.get('/xemchuyentien', loggedIn.loggedIn, (req, res) => {
+Router.get('/xemchuyentien/:code', loggedIn.loggedIn, (req, res) => {
     if(req.user.auth === 'Admin'){
-        res.render('xemchuyentien',{status:"info", user: req.user})
+        db.query('SELECT * FROM transfer_trading WHERE ma_Giao_Dich = ?', [req.params.code] ,(err, rows) => {
+            if (err) throw err
+            db.query('SELECT * FROM register WHERE id = ?', [rows[0].ma_Khach_Hang] ,(err, rows1) => {
+                if (err) throw err
+                res.render('xemchuyentien',{status:"info", rows, rows1})
+            })
+        })
     }else{
         res.render('404',{status:"no",user: "nothing"})
     }
@@ -225,7 +231,6 @@ Router.get('/xemruttien/:code', loggedIn.loggedIn, (req, res) => {
             db.query('SELECT * FROM register WHERE id = ?', [rows[0].ma_Khach_Hang] ,(err, rows1) => {
                 if (err) throw err
                 res.render('xemruttien',{status:"info", rows, rows1})
-                console.log(rows)
             })
         })
     }else{

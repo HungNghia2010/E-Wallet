@@ -88,6 +88,9 @@ INSERT INTO register VALUES
 INSERT INTO lockaccount VALUES 
 ('1', 'admin', 0, 0, '');
 
+INSERT INTO transfer_trading VALUES 
+('dkfgb', '288881', '1245587', 'Trung Hậu', '02145789555', '1000000', '30-5-2020', '12:00:00', 'Chuyển tiền', 'chờ duyệt', 'Lương FE');
+
 ALTER TABLE register
     MODIFY id int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 

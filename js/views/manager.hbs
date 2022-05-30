@@ -229,11 +229,11 @@
                     <th class="lichsuth">Số tiền</th>
                     <th class="lichsuth">Mã giao dịch</th>
                     <th class="lichsuth">Trạng thái</th>
-                    <th class="lichsuth">Ngày</th>
+                    <th class="lichsuth">Ngày chuyển</th>
                     <th class="lichsuth">...</th>
                 </tr>
                 
-                {{#each rows1}}
+                {{#each rows2}}
                     {{#equals this.trading_type 'Chuyển tiền'}}
                         {{#equals this.trading_status 'chờ duyệt'}}
                             <tr class="lichsutr">
@@ -243,7 +243,7 @@
                                 <td class="lichsutd">{{this.trading_status}}</td>
                                 <td class="lichsutd">{{this.day_trading}}</td>
                                 <td class="lichsutd">
-                                    <a href="/xemchoduyet">Xem</a>
+                                    <a href="/xemchuyentien/{{this.ma_Giao_Dich}}">Xem</a>
                                 </td>
                             </tr>
                         {{/equals}}
