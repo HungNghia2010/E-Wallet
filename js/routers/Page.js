@@ -374,6 +374,20 @@ Router.get('/lichsurut/:id',controllers.isActivated,(req,res) => {
     }
 })
 
+Router.get('/thongtinthe', controllers.isActivated,(req,res) => {
+    if(req.user){
+        if(req.user.change_pass === 0){
+            res.redirect('/firststep')
+        }
+        else if(req.user.status === "chờ xác minh" || req.user.status === 'chờ cập nhật'){
+            res.redirect('/index')
+        }else{
+            res.render('thongtinthe',{status:"info",user: req.user})
+        }
+    }else{
+        res.render('404',{status:"no",user: "nothing"})
+    }
+})
 
 Router.get('/lichsumuathe',(req,res) => {
     res.render('lichsumuathe');
