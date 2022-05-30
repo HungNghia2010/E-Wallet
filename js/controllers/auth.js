@@ -629,7 +629,7 @@ exports.chuyen_tien = async (req, res) => {
     }else if(!ghichu){
         return res.render('chuyen',{msg: 'Mã nhập ghi chú',user: req.user,data: data})
     }else{
-        
+        console.log(req.body)
     }
 }
 
