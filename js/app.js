@@ -11,7 +11,8 @@ const app = express()
 const publicDirectory = path.join(__dirname, './public')
 app.use(express.static(publicDirectory))
 
-app.set('view engine', 'hbs');
+//app.engine('.hbs', hbs.engine)
+app.set('view engine', '.hbs');
 
 db.connect( (error) => {
     if(error){
