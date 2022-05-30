@@ -16,7 +16,7 @@
     <header class="header headermana">
 
         <a href="/index" class="logo">
-            <img src="images/Flash.png" alt="">
+            <img src="/images/Flash.png" alt="">
         </a>
 
         <nav class="navbar ulnav">
@@ -65,7 +65,7 @@
                 <form class="form-about-me" action="#">
                     <div id="content-img">
                         <div class="about-me-image">
-                            <img src="images/empicon.jpg" class="rounded-circle " width="150">
+                            <img src="/images/empicon.jpg" class="rounded-circle " width="150">
                         </div>
                     </div>
                     <!-- <div class="about-me-image">
@@ -76,64 +76,42 @@
                         <img src="images/ngoc.jpg" class="rounded-circle " width="150">
                     </div> -->
 
-                    <div class="user-details">
-
-                        <div class="input-box">
-                            <span class="details">Họ và tên</span>
-                            <input value="Nguyen Trung Hau" type="text" placeholder="Enter your name" required>
+                    {{#each rows}}
+                        <div class="user-details">
+                            <div class="input-box">
+                                <span class="details">Họ và tên</span>
+                                <input value="{{this.name}}" type="text" disabled required>
+                            </div>
+                            <div class="input-box">
+                                <span class="details">Username</span>
+                                <input value="{{this.username}}" type="text" disabled required>
+                            </div>
+                            <div class="input-box">
+                                <span class="details">Email</span>
+                                <input value="{{this.email}}" type="text" disabled required>
+                            </div>
+                            <div class="input-box">
+                                <span class="details">Số điện thoại</span>
+                                <input value="{{this.phone_number}}" type="text" disabled required>
+                            </div>
+                            <div class="input-box">
+                                <span class="details">Số dư</span>
+                                <input value="{{this.money}}" type="text" disabled required>
+                            </div>
+                            <div class="input-box">
+                                <span class="details">Địa chỉ</span>
+                                <input value="{{this.address}}" type="text" disabled required>
+                            </div>
+                            <div class="input-box">
+                                <span class="details">Ngày sinh</span>
+                                <input value="{{this.birth}}" type="text" disabled required>
+                            </div>
+                            <div class="input-box">
+                                <span class="details">Trạng thái</span>
+                                <input value="{{this.status}}" type="text" disabled required>
+                            </div>
                         </div>
-                        <div class="input-box">
-                            <span class="details">Username</span>
-                            <input value="1131141150" type="text" placeholder="" required>
-                        </div>
-                        <div class="input-box">
-                            <span class="details">Email</span>
-                            <input value="hau@gmail.com" type="text" placeholder="" required>
-                        </div>
-                        <div class="input-box">
-                            <span class="details">Số điện thoại</span>
-                            <input value="0919191919" type="text" placeholder="" required>
-                        </div>
-                        <div class="input-box">
-                            <span class="details">Số dư</span>
-                            <input value="1.000.000.000" type="text" placeholder="" required>
-                        </div>
-
-                        <div class="input-box">
-                            <span class="details">Số tài khoản</span>
-                            <input value="123456" type="text" placeholder="" required>
-                        </div>
-                        <div class="input-box">
-                            <span class="details">Ngày hết hạn thẻ</span>
-                            <input value="1/1/2025" type="text" placeholder="" required>
-                        </div>
-
-                        <div class="input-box">
-                            <span class="details">Mã CVV</span>
-                            <input value="411" type="text" placeholder="" required>
-                        </div>
-
-
-                        <div class="input-box">
-                            <span class="details">CMND/CCCD</span>
-                            <input value="989898989" type="text" placeholder="" required>
-                        </div>
-                        <div class="input-box">
-                            <span class="details">Địa chỉ</span>
-                            <input value="An Giang" type="text" placeholder="" required>
-                        </div>
-                        <div class="input-box">
-                            <span class="details">Ngày sinh</span>
-                            <input value="1/1/2025" type="text" placeholder="" required>
-                        </div>
-                        <div class="input-box">
-                            <span class="details">Trạng thái</span>
-                            <input value="đang chờ xác minh" type="text" placeholder="" required>
-                        </div>
-
-
-                    </div>
-
+                    {{/each}}
 
                     <div class="button register-button">
                         <input class="" type="submit" value="Xác minh">

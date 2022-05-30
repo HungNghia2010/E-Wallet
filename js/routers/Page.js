@@ -171,11 +171,11 @@ Router.get('/manager', loggedIn.loggedIn, (req, res) => {
     }
 })
 
-Router.get('/xemchoduyet/:username', loggedIn.loggedIn, (req, res) => {
+Router.get('/xemchoduyet/:id', loggedIn.loggedIn, (req, res) => {
     if(req.user.auth === 'Admin'){
-        db.query('SELECT * FROM register WHERE username = ?', [req.params.username] ,(err, rows) => {
+        db.query('SELECT * FROM register, account WHERE register.id = account.id' ,(err, rows) => {
             if (err) throw err
-            res.render('xemchoduyet',{status:"info", rows}) 
+            res.render('xemchoduyet',{status:"info", rows})
         })
     }else{
         res.render('404',{status:"no",user: "nothing"})
