@@ -143,7 +143,7 @@
                         <td class="lichsutd">{{this.phone_number}}</td>
                         <td class="lichsutd">{{this.time_create_account}}</td>
                         <td class="lichsutd">
-                            <a href="/xemdakichhoat">Xem</a>
+                            <a href="/xemvohieuhoa/{{this.id}}">Xem</a>
                         </td>
                     </tr>
                     {{/equals}}
@@ -175,7 +175,7 @@
                         <td class="lichsutd">{{this.phone_number}}</td>
                         <td class="lichsutd">{{this.time_create_account}}</td>
                         <td class="lichsutd">
-                            <a href="/xemdakichhoat">Xem</a>
+                            <a href="/xemvothoihan/{{this.id}}">Xem</a>
                         </td>
                     </tr>
                     {{/equals}}
@@ -233,7 +233,7 @@
                     <th class="lichsuth">...</th>
                 </tr>
                 
-                {{#each rows}}
+                {{#each rows1}}
                     {{#equals this.trading_type 'Chuyển tiền'}}
                         {{#equals this.trading_status 'chờ duyệt'}}
                             <tr class="lichsutr">
