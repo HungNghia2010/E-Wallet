@@ -624,7 +624,9 @@ exports.chuyen_tien = async (req, res) => {
         phone: phone,
         tien: tien,
         chiuphi: chiuphi,
-        ghichu: ghichu
+        ghichu: ghichu,
+        phi : null,
+        tennguoinhan: ""
     }
     if (data.chiuphi == 0){
         data.chiuphi = "người chuyển";
@@ -673,9 +675,11 @@ exports.chuyen_tien = async (req, res) => {
                         })
                     }*/
                     else {
-                        const vat = parseInt(data.tien) * 0.05; 
-                        const name_receiver = result[0].name; 
-                        return res.render('xacnhanchuyen',{data,vat,name_receiver});
+                        //const vat = parseInt(data.tien) * 0.05;
+                        data.phi = parseInt(data.tien) * 0.05;
+                        data.tennguoinhan = result[0].name;
+                        //const name_receiver = result[0].name; 
+                        return res.render('xacnhanchuyen',{data});
                     }
                 })
             }
@@ -692,8 +696,8 @@ exports.chuyen_tien = async (req, res) => {
 exports.xacnhan_chuyen = async (req, res) => {
     const {tennguoinhan , phone , tien , phi , nguoichiuphi , ghichu ,otp} = req.body
     var data = {
-        ten_Nguoi_Nhan : tennguoinhan,
-        phone_Number : phone,
+        tennguoinhan : tennguoinhan,
+        phone : phone,
         tien : tien,
         phi : phi,
         chiuphi : nguoichiuphi,
