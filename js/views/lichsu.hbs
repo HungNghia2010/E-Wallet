@@ -112,6 +112,19 @@
                     </tr>
                     {{/equals}}
 
+                    {{#equals this.trading_type 'Thẻ cào'}}
+                    <tr class="lichsutr">
+                        <td class="lichsutd">{{count @index}}</td>
+                        <td class="lichsutd">{{this.money_transfer}}</td>
+                        <td class="lichsutd">{{this.day_trading}}</td>
+                        <td class="lichsutd">{{this.trading_type}}</td>
+                        <td class="lichsutd">{{this.trading_status}}</td>
+                        <td class="lichsutd">
+                            <a href="/lichsumuathe/{{this.ma_Giao_Dich}}">Xem</a>
+                        </td>
+                    </tr>
+                    {{/equals}}
+
 
                 {{/each}}
 

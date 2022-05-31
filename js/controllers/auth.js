@@ -1030,7 +1030,6 @@ exports.muathevina = async (req, res) => {
                 })
             }
             return res.render('muathevina',{success: 'Mua thẻ cào thành công', user: req.user,data})
-            //return res.render('muatheviettel',{success: 'Mua thẻ cào thành công',user: req.user,test})
         }
     })
 }
