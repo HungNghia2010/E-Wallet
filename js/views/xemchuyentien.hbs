@@ -61,13 +61,13 @@
         <div class="container container-about-me">
             <div class="title">Thông tin giao dịch chuyển tiền</div>
             <div class="content content-about-me">
-                <form class="form-about-me" action="#">
-
+                <form class="form-about-me" action="/auth/xemchuyentien" method="post">
                     <div class="user-details">
                         {{#each rows1}}
                             <div class="input-box">
                                 <span class="details">Họ và tên</span>
                                 <input value="{{this.name}}" type="text" disabled required>
+                                <input name="id_user" value="{{this.id}}" type="text" style="display:none;" required>
                             </div>
 
                             <div class="input-box">
@@ -79,6 +79,7 @@
                             <div class="input-box">
                                 <span class="details">Số tiền muốn chuyển</span>
                                 <input value="{{this.money_transfer}}" type="text" disabled required>
+                                <input name="money_transfer" value="{{this.money_transfer}}" type="text" style="display:none;" required>
                             </div>
 
                             <div class="input-box">
@@ -89,11 +90,13 @@
                             <div class="input-box">
                                 <span class="details">Số điện thoại người nhận</span>
                                 <input value="{{this.sdt_Nguoi_Nhan}}" type="text" disabled required>
+                                <input name="sdt_Nguoi_Nhan" value="{{this.sdt_Nguoi_Nhan}}" type="text" style="display:none;" required>
                             </div>                        
 
                             <div class="input-box">
                                 <span class="details">Ghi chú</span>
                                 <input value="{{this.note_trading}}" type="text" disabled required>
+                                <input name="ma_Giao_Dich" value="{{this.ma_Giao_Dich}}" type="text" style="display: none;"required>
                             </div>
                             <div class="input-box">
                                 <span class="details">Trạng thái</span>
@@ -107,8 +110,8 @@
                     </div>
 
                     <div class="button register-button">
-                        <input type="submit" value="Duyệt">
-                        <input type="submit" value="Hủy">
+                        <input name="pheduyetchuyentien" type="submit" value="Phê duyệt">
+                        <input name="tuchoichuyentien" type="submit" value="Từ chối">
                     </div>
                 </form>
             </div>

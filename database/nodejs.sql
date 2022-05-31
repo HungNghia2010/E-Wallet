@@ -81,9 +81,10 @@ CREATE TABLE trading_card(
     PRIMARY KEY(ma_Giao_Dich)
 );
 
-INSERT INTO register VALUES 
+INSERT INTO register VALUES
+-- tk: admin/ mk: 123456 
 (1, 'admin', '$2a$08$2atY3gZJNtmW9jQKXjaDGeJTrg7qXTt48L0KJ58bWVdBwwHmaZN3m', 'admin', 'ad@gmail.com', '0123456789', 
-'123456789', '01/01/2000', 'Hà Nội', '', '', 'chờ xác minh', 1, 1, '');
+'123456789', '01/01/2000', 'Hà Nội', '', '', 'đã xác minh', 1, 1, '');
 
 INSERT INTO lockaccount VALUES 
 ('1', 'admin', 0, 0, '');

@@ -837,7 +837,20 @@ exports.xemruttien = async (req, res) => {
         pheduyet: pheduyet,
         tuchoi: tuchoi
     }
-        res.redirect('/xemruttien/'+ma_Giao_Dich)
+    res.redirect('/xemruttien/'+ma_Giao_Dich)
+}
+
+exports.xemchuyentien = async (req, res) => {
+    const {id_user, money_transfer, sdt_Nguoi_Nhan, ma_Giao_Dich, pheduyetchuyentien, tuchoichuyentien} = req.body
+    var data = {
+        id_user: id_user,
+        money_transfer: money_transfer,
+        sdt_Nguoi_Nhan: sdt_Nguoi_Nhan,
+        ma_Giao_Dich: ma_Giao_Dich,
+        pheduyetchuyentien: pheduyetchuyentien,
+        tuchoichuyentien: tuchoichuyentien
+    }
+    res.redirect('/xemchuyentien/'+ma_Giao_Dich)
 }
 
 exports.muatheviettel = async (req, res) => {

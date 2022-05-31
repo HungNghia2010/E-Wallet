@@ -238,6 +238,20 @@ Router.get('/xemchuyentien/:code', loggedIn.loggedIn, (req, res) => {
     }
 })
 
+Router.post('/auth/xemchuyentien', loggedIn.loggedIn, (req, res) => {
+    if(req.user.auth === 'Admin'){
+        if(req.body.pheduyetchuyentien == 'Phê duyệt') {
+
+        }
+        else if(req.body.tuchoichuyentien == 'Từ chối') {
+            
+        }
+    }
+    else {
+        res.render('404',{status:"no",user: "nothing"})
+    }
+})
+
 Router.get('/xemdakichhoat/:id', loggedIn.loggedIn, (req, res) => {
     if(req.user.auth === 'Admin'){
         db.query('SELECT * FROM register, account WHERE (register.id = account.id) AND (register.id = ?)', [req.params.id] ,(err, rows) => {
