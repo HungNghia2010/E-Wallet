@@ -690,22 +690,22 @@ exports.chuyen_tien = async (req, res) => {
 }
 
 exports.xacnhan_chuyen = async (req, res) => {
-    const {ten_Nguoi_Nhan , phone_Number , tien , phi , chiuphi , otp } = req.body
+    const {tennguoinhan , phone , tien , phi , nguoichiuphi , ghichu ,otp} = req.body
     var data = {
-        ten_Nguoi_Nhan : ten_Nguoi_Nhan,
-        phone_Number : phone_Number,
+        ten_Nguoi_Nhan : tennguoinhan,
+        phone_Number : phone,
         tien : tien,
         phi : phi,
-        chiuphi : chiuphi,
+        chiuphi : nguoichiuphi,
+        ghichu : ghichu,
         otp : otp
     }
     console.log(data)
-
     if(!otp){
         console.log(data)
         return res.render('xacnhanchuyen',{msg: 'Vui lòng nhập mã OTP',user: req.user,data: data})
     } else {
-        db.query('SELECT * FROM register WHERE phone_number = ?',[data.phone],(err,result) => {
+        db.query('SELECT * FROM register WHERE phone_number = ?',[data.phone_Number],(err,result) => {
             if(err){
                 console.log(err)
             }else if (tien > 5000000){
