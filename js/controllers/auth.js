@@ -884,7 +884,7 @@ exports.xemchuyentien = async (req, res) => {
 exports.muatheviettel = async (req, res) => {
     const{gia, soluong} = req.body;
     const tongtien = parseInt(gia) * parseInt(soluong)
-   
+    
     const n = parseInt(soluong)
     var test = new Array();
     
@@ -926,8 +926,15 @@ exports.muatheviettel = async (req, res) => {
                     }
                 })
             }
-            return res.render('muatheviettel',{success: 'Mua thẻ cào thành công', user: req.user,data})
-            //return res.render('muatheviettel',{success: 'Mua thẻ cào thành công',user: req.user,test})
+            db.query('SELECT * FROM account WHERE id = ?', [req.user.id],(err,result)=>{
+                if (err){
+                    console.log(err)
+                }else{
+                    const tiendu = result[0].money - tongtien;
+                    db.query('UPDATE account SET money = ? WHERE id = ?', [tiendu, req.user.id]);
+                    return res.render('muatheviettel',{success: 'Mua thẻ cào thành công', user: req.user,data})
+                }
+            });
         }
     })
 }
@@ -977,8 +984,15 @@ exports.muathemobi = async (req, res) => {
                     }
                 })
             }
-            return res.render('muathemobi',{success: 'Mua thẻ cào thành công', user: req.user,data})
-            //return res.render('muatheviettel',{success: 'Mua thẻ cào thành công',user: req.user,test})
+            db.query('SELECT * FROM account WHERE id = ?', [req.user.id],(err,result)=>{
+                if (err){
+                    console.log(err)
+                }else{
+                    const tiendu = result[0].money - tongtien;
+                    db.query('UPDATE account SET money = ? WHERE id = ?', [tiendu, req.user.id]);
+                    return res.render('muathemobi',{success: 'Mua thẻ cào thành công', user: req.user,data})
+                }
+            });
         }
     })
 }
@@ -1029,8 +1043,15 @@ exports.muathevina = async (req, res) => {
                     }
                 })
             }
-            return res.render('muathevina',{success: 'Mua thẻ cào thành công', user: req.user,data})
-            //return res.render('muatheviettel',{success: 'Mua thẻ cào thành công',user: req.user,test})
+            db.query('SELECT * FROM account WHERE id = ?', [req.user.id],(err,result)=>{
+                if (err){
+                    console.log(err)
+                }else{
+                    const tiendu = result[0].money - tongtien;
+                    db.query('UPDATE account SET money = ? WHERE id = ?', [tiendu, req.user.id]);
+                    return res.render('muathevina',{success: 'Mua thẻ cào thành công', user: req.user,data})
+                }
+            });
         }
     })
 }
