@@ -656,34 +656,14 @@ exports.chuyen_tien = async (req, res) => {
                         console.log(err)
                     }else if(parseInt(tien) > parseInt(result1[0].money)){
                         return res.render('chuyen',{msg: 'Số tiền nhập lớn hơn số tiền hiện có',user: req.user,data: data})
-                    }/*else if (tien > 5000000){
-                        const ma_Giao_Dich = generateRandomString(6);
-                        const date = dateTime.create();
-                        const today = new Date();
-                        const day = ("0" + today.getDate()).slice(-2);
-                        const month = ("0" + (today.getMonth() + 1)).slice(-2);
-                        const day_trading = day + "-" + month + "-" + today.getFullYear() ;
-                        const time_trading = date.format('H:M:S');
-                        db.query('INSERT INTO transfer_trading SET ?',{ma_Giao_Dich : ma_Giao_Dich , ma_Khach_Hang: req.user.id , ma_Nguoi_Nhan : result1[0].id , ten_Nguoi_Nhan : result[0].name , sdt_Nguoi_Nhan : phone , money_transfer : tien , day_trading : day_trading , time_trading : time_trading , trading_type : "Chuyển tiền", trading_status : "đang chờ", note_trading : ghichu}, (error)=>{
-                            if (error){
-                                console.log(error)
-                            }else{
-                               
-                            }
-                        })
-                    }*/
-                    else {
+                    }else {
                         const vat = parseInt(data.tien) * 0.05; 
                         const name_receiver = result[0].name; 
                         return res.render('xacnhanchuyen',{data,vat,name_receiver});
                     }
                 })
             }
-        /*req.session.phone = phone
-        req.session.tien = tien
-        req.session.chiuphi = chiuphi
-        req.session.ghichu = ghichu
-        res.redirect('/xacnhan')*/
+
            
         })
     }
@@ -700,8 +680,9 @@ exports.xacnhan_chuyen = async (req, res) => {
         ghichu : ghichu,
         otp : otp
     }
+    console.log(req.body)
     if(!otp){
-        return res.render('xacnhanchuyen',{msg: 'Vui lòng nhập mã OTP',user: req.user,data: data})
+        return res.render('xacnhanchuyen',{msg: 'Vui lòng nhập mã OTP',user: req.user,data})
     }else {
         db.query('SELECT * FROM register WHERE phone_number = ?',[data.phone_Number],(err,result) => {
             if(err){
@@ -720,7 +701,7 @@ exports.xacnhan_chuyen = async (req, res) => {
                     if(error){
                         console.log(error)
                     } else{
-                        return res.json({status:"success", success:"Chuyển tiền thành công, số tiền phí bị trừ là:" + phi})
+                        return res.render('xacnhanchuyen',{success: 'Chuyển tiền thành công, số tiền phí bị trừ là:' + phi,user: req.user,data: data})
                     }
                 })
             }
@@ -754,7 +735,7 @@ exports.xacnhan_chuyen = async (req, res) => {
                                                     if (err){
                                                         console.log(err);
                                                     }else{
-                                                        return res.json({status:"success", success:"Chuyển tiền thành công, số tiền phí bị trừ là:" + phi})
+                                                        return res.render('xacnhanchuyen',{success: 'Chuyển tiền thành công, số tiền phí bị trừ là:' + phi,user: req.user,data: data})
                                                     }
                                                 })
                                                 //return res.json({status:"success", success:"Chuyển tiền thành công, số tiền phí bị trừ là:" + phi})
@@ -790,7 +771,7 @@ exports.xacnhan_chuyen = async (req, res) => {
                                                     if (err){
                                                         console.log(err);
                                                     }else{
-                                                        return res.json({status:"success", success:"Chuyển tiền thành công, số tiền phí bị trừ là:" + phi})
+                                                        return res.render('xacnhanchuyen',{success: 'Chuyển tiền thành công, số tiền phí bị trừ là:' + phi,user: req.user,data: data})
                                                     }
                                                 })
                                                 //return res.json({status:"success", success:"Chuyển tiền thành công, số tiền phí bị trừ là:" + phi})
