@@ -435,12 +435,7 @@ Router.get('/muathevina',controllers.isActivated ,(req,res) => {
     }
 })
 
-<<<<<<< HEAD
-
-Router.get('/lichsuchuyen',controllers.isActivated,(req,res) => {
-=======
 Router.get('/lichsuchuyen/:id',controllers.isActivated,(req,res) => {
->>>>>>> b9f0aa905bae4d8800cd92e15e2b30cc65ce55e9
     if(req.user){
         if(req.user.change_pass === 0){
             res.redirect('/firststep')
