@@ -80,6 +80,8 @@ CREATE TABLE trading_card(
     time_trading TIME,
     price varchar(20),
     total_price varchar(20),
+    trading_type varchar(20),
+    trading_status varchar(20)
     PRIMARY KEY(ma_Giao_Dich)
 );
 
