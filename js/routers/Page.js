@@ -238,6 +238,42 @@ Router.get('/xemchuyentien/:code', loggedIn.loggedIn, (req, res) => {
     }
 })
 
+Router.post('/auth/xemchuyentien', loggedIn.loggedIn, (req, res) => {
+    if(req.user.auth === 'Admin'){
+        if(req.body.pheduyetchuyentien == 'Phê duyệt') {
+            db.query('UPDATE transfer_trading SET trading_status = "Thành công" WHERE ma_Giao_Dich = ?', [req.body.ma_Giao_Dich] ,(err, rows) => {
+                if (err) throw err
+                // res.redirect('/xemchuyentien/'+req.body.code)
+                db.query('SELECT * FROM account WHERE id = ?', [req.body.id_user], (err, rows1) => {
+                    if (err) throw err
+                    db.query('UPDATE account SET money = ? WHERE id = ?', [(rows1[0].money - req.body.money_transfer), req.body.id_user], (err, rows2) => {
+                        if (err) throw err
+                        db.query('SELECT id FROM register WHERE phone_number = ?', [req.body.sdt_Nguoi_Nhan], (err, rows3) => {
+                            if (err) throw err
+                            db.query('SELECT * FROM account WHERE id = ?', [rows3[0].id], (err, rows4) => {
+                                if (err) throw err
+                                db.query('UPDATE account SET money = ? WHERE id = ?', [(parseInt(rows4[0].money) + parseInt(req.body.money_transfer)), rows3[0].id], (err, rows5) => {
+                                    if (err) throw err
+                                    res.redirect('/xemchuyentien/'+req.body.ma_Giao_Dich)
+                                })
+                            })
+                        })
+                    }) 
+                })
+            })
+        }
+        else if(req.body.tuchoichuyentien == 'Từ chối') {
+            db.query('UPDATE transfer_trading SET trading_status = "Từ chối" WHERE ma_Giao_Dich = ?', [req.body.ma_Giao_Dich] ,(err, rows) => {
+                if (err) throw err
+                res.redirect('/xemchuyentien/'+req.body.ma_Giao_Dich)
+            })
+        }
+    }
+    else {
+        res.render('404',{status:"no",user: "nothing"})
+    }
+})
+
 Router.get('/xemdakichhoat/:id', loggedIn.loggedIn, (req, res) => {
     if(req.user.auth === 'Admin'){
         db.query('SELECT * FROM register, account WHERE (register.id = account.id) AND (register.id = ?)', [req.params.id] ,(err, rows) => {
