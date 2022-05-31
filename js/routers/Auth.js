@@ -48,6 +48,10 @@ Router.post('/xacnhan',loggedIn.loggedIn, authController.xacnhan_chuyen)
 
 Router.post('/muatheviettel',loggedIn.loggedIn, authController.muatheviettel)
 
+Router.post('/muathemobi',loggedIn.loggedIn, authController.muathemobi)
+
+Router.post('/muathevina',loggedIn.loggedIn, authController.muathevina)
+
 Router.post('/vohieuhoa',loggedIn.loggedIn, authController.vohieuhoa)
 
 Router.post('/vothoihan',loggedIn.loggedIn, authController.vothoihan)

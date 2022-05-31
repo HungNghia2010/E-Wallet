@@ -932,6 +932,110 @@ exports.muatheviettel = async (req, res) => {
     })
 }
 
+exports.muathemobi = async (req, res) => {
+    const{gia, soluong} = req.body;
+    const tongtien = parseInt(gia) * parseInt(soluong)
+   
+    const n = parseInt(soluong)
+    var test = new Array();
+    
+    db.query('SELECT * FROM account WHERE id = ?',[req.user.id],(err,result) => {
+        if(tongtien > result[0].money){
+            return res.render('muathemobi',{msg: 'Số dư không đủ để thực hiện giao dịch này',user: req.user,data})
+        }else{
+            for (let i = 0 ; i < soluong  ; i++){
+                const username = Math.floor(1000 + Math.random() * 9000);
+                const seriThe = Math.floor(1000000000 + Math.random() * 900000000);
+                const s = '22222';
+                const the = s + username;
+                var data = {
+                    gia  : gia,
+                    seri : "",
+                    the  : "",
+                    loai : ""
+                }
+                data.loai = "Mobifone"
+                data.seri = seriThe.toString();
+                data.the = the;
+                test.push(data)
+            }
+            for (let j = 0 ; j < test.length; j++){
+                const ma_Giao_Dich = generateRandomString(6);
+                const date = dateTime.create();
+                const today = new Date();
+                const day = ("0" + today.getDate()).slice(-2);
+                const month = ("0" + (today.getMonth() + 1)).slice(-2);
+                const day_trading = day + "-" + month + "-" + today.getFullYear() ;
+                const time_trading = date.format('H:M:S');
+              
+                db.query('INSERT INTO trading_card SET ?',{ma_Giao_Dich : ma_Giao_Dich , ma_Khach_Hang: req.user.id , card_seri : test[0].seri , ma_The : test[j].the , card_type : test[j].loai , day_trading : day_trading , time_trading : time_trading , price : test[j].gia},(error)=>{
+                    if (error){
+                        console.log(error);
+                    }else{
+                        //return res.json({success: 'Mua thẻ cào thành công',user: req.user})
+                        //return res.render('muatheviettel',{success: 'Mua thẻ cào thành công', user: req.user,data})
+                    }
+                })
+            }
+            return res.render('muathemobi',{success: 'Mua thẻ cào thành công', user: req.user,data})
+            //return res.render('muatheviettel',{success: 'Mua thẻ cào thành công',user: req.user,test})
+        }
+    })
+}
+
+
+exports.muathevina = async (req, res) => {
+    const{gia, soluong} = req.body;
+    const tongtien = parseInt(gia) * parseInt(soluong)
+   
+    const n = parseInt(soluong)
+    var test = new Array();
+    
+    db.query('SELECT * FROM account WHERE id = ?',[req.user.id],(err,result) => {
+        if(tongtien > result[0].money){
+            return res.render('muathevina',{msg: 'Số dư không đủ để thực hiện giao dịch này',user: req.user,data})
+        }else{
+            for (let i = 0 ; i < soluong  ; i++){
+                const username = Math.floor(1000 + Math.random() * 9000);
+                const seriThe = Math.floor(1000000000 + Math.random() * 900000000);
+                const s = '33333';
+                const the = s + username;
+                var data = {
+                    gia  : gia,
+                    seri : "",
+                    the  : "",
+                    loai : ""
+                }
+                data.loai = "Vinaphone"
+                data.seri = seriThe.toString();
+                data.the = the;
+                test.push(data)
+            }
+            for (let j = 0 ; j < test.length; j++){
+                const ma_Giao_Dich = generateRandomString(6);
+                const date = dateTime.create();
+                const today = new Date();
+                const day = ("0" + today.getDate()).slice(-2);
+                const month = ("0" + (today.getMonth() + 1)).slice(-2);
+                const day_trading = day + "-" + month + "-" + today.getFullYear() ;
+                const time_trading = date.format('H:M:S');
+              
+                db.query('INSERT INTO trading_card SET ?',{ma_Giao_Dich : ma_Giao_Dich , ma_Khach_Hang: req.user.id , card_seri : test[0].seri , ma_The : test[j].the , card_type : test[j].loai , day_trading : day_trading , time_trading : time_trading , price : test[j].gia},(error)=>{
+                    if (error){
+                        console.log(error);
+                    }else{
+                        //return res.json({success: 'Mua thẻ cào thành công',user: req.user})
+                        //return res.render('muatheviettel',{success: 'Mua thẻ cào thành công', user: req.user,data})
+                    }
+                })
+            }
+            return res.render('muathevina',{success: 'Mua thẻ cào thành công', user: req.user,data})
+            //return res.render('muatheviettel',{success: 'Mua thẻ cào thành công',user: req.user,test})
+        }
+    })
+}
+
+
 //random string for password
 function generateRandomString(myLength) {
     const chars = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890";

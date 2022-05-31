@@ -383,7 +383,7 @@ Router.post('/auth/vothoihan', loggedIn.loggedIn, (req, res) => {
     }
 })
 
-Router.get('/muathe',controllers.isActivated ,(req,res) => {
+Router.get('/muatheviettel',controllers.isActivated ,(req,res) => {
     if(req.user){
         if(req.user.change_pass === 0){
             res.redirect('/firststep')
@@ -399,6 +399,43 @@ Router.get('/muathe',controllers.isActivated ,(req,res) => {
         res.render('404',{status:"no",user: "nothing"})
     }
 })
+
+
+Router.get('/muathemobi',controllers.isActivated ,(req,res) => {
+    if(req.user){
+        if(req.user.change_pass === 0){
+            res.redirect('/firststep')
+        }
+        else if(req.user.status === "chờ xác minh" || req.user.status === 'chờ cập nhật'){
+            res.redirect('/index')
+        }
+        else{
+            const tien = req.query.pricez
+            res.render('muathemobi',{status:"info",user: req.user,tien})
+        } 
+    }else{
+        res.render('404',{status:"no",user: "nothing"})
+    }
+})
+
+
+Router.get('/muathevina',controllers.isActivated ,(req,res) => {
+    if(req.user){
+        if(req.user.change_pass === 0){
+            res.redirect('/firststep')
+        }
+        else if(req.user.status === "chờ xác minh" || req.user.status === 'chờ cập nhật'){
+            res.redirect('/index')
+        }
+        else{
+            const tien = req.query.pricez
+            res.render('muathevina',{status:"info",user: req.user,tien})
+        } 
+    }else{
+        res.render('404',{status:"no",user: "nothing"})
+    }
+})
+
 
 Router.get('/lichsuchuyen',controllers.isActivated,(req,res) => {
     if(req.user){

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CK Bank | Mua thẻ</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <header class="header headermana">
+
+        <a href="/index" class="logo">
+            <img src="images/Flash.png" alt="">
+        </a>
+
+        <nav class="navbar ulnav">
+            <!-- Chức năng chung -->
+            <a href="/index">Home</a>
+            <!-- Chức năng admin -->
+
+            {{#if user.auth}}
+            <li class="dropdown">
+                <a href="/manager" class="dropbtn">Manage</a>
+                <div class="dropdown-content">
+                    <a href="/manager#kichhoat">Chờ xác minh</a>
+                    <a href="/manager#kichhoated">Đã xác minh</a>
+                    <a href="/manager#vohieu">Bị vô hiệu hóa</a>
+                    <a href="/manager#khoa">Bị khóa vô thời hạn</a>
+                    <a href="/manager#gdrut">Giao dịch rút tiền</a>
+                    <a href="/manager#gdchuyen">Giao dịch chuyển tiền</a>
+                </div>
+            </li>
+            {{/if}}
+
+            <!-- Chức năng chung -->
+            <a href="/index#about">About</a>
+            <a href="/index#menu">Menu</a>
+            <a href="/index#products">Card</a>
+            <a href="/index#contact">Contact</a>
+            <a href="/logout">Logout</a>
+
+        </nav>
+
+        <div class="icons">
+            <div id="user-btn">
+                <a href="/info" class="fa-solid fa-user"></a>
+            </div>
+
+            <div class="fas fa-bars" id="menu-btn"></div>
+        </div>
+
+    </header>
+
+
+
+    <section class="about-me" id="about-me">
+
+        <div class="container container-about-me">
+            <div class="title">Mua thẻ cào</div>
+            <div class="content content-about-me">
+                <form class="form-about-me" id="form-mobi" action="/auth/muathemobi" method="post">
+
+                    <div class="user-details">
+                        
+                        <div class="input-box">
+                            <span class="details">Họ và tên</span>
+                            <input disabled value="{{user.name}}" type="text" placeholder="">
+                        </div>
+
+                        <div class="input-box">
+                            <span class="details">Số dư</span>
+                            <input disabled id="money" name="money" value="{{user.money}}" type="text" placeholder="">
+                        </div>
+
+                        <div class="input-box">
+                            <span class="details">Tên thẻ</span>
+                            <input value="Mobifone" type="text" placeholder="" readonly>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Mã thẻ</span>
+                            <input value="22222" type="text" placeholder="" readonly>
+                        </div>
+                        {{#if data}}
+                        <div class="input-box">
+                            <span class="details">Mệnh giá</span>
+                            <input value="{{data.gia}}" name="gia" id="gia"  type="text" placeholder="" readonly>
+                        </div>
+                        {{else}}
+                        <div class="input-box">
+                            <span class="details">Mệnh giá</span>
+                            <input value="{{tien}}" name="gia" id="gia"  type="text" placeholder="" readonly>
+                        </div>
+                        {{/if}}
+
+                        <div class="input-box">
+                            <span class="details">Số lượng</span>
+                            <select class="soluong" name="soluong" id="soluong">
+                                <option class="option" value="1">1</option>
+                                <option class="option" value="2">2</option>
+                                <option class="option" value="3">3</option>
+                                <option class="option" value="4">4</option>
+                                <option class="option" value="5">5</option>
+                            </select>
+                        </div>
+
+                        {{#if msg}}
+                        <div class="alert" id="errorMessage">
+                            <span class="fas fa-exclamation-circle"></span>
+                            <span class="msg" id="error">{{msg}}</span>
+                        </div>
+                        {{/if}}
+
+                        {{#if success}}
+                        <div id="dialogCont" class="dig-container">
+                            <div class="dig-header">
+                                Thanh toán
+                            </div>
+                            <div id="digbody" class="dig-body">
+                                <h4 id="success">{{success}}</h4>
+                            </div>
+                            <div class="dig-footer">
+                                <a href="/thongtinthe">Xem các thẻ</a>
+                            </div>
+                        </div>
+                        {{/if}}
+
+                    </div>
+
+
+                    <div class="button">
+                        <input type="submit" value="Mua thẻ">
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </section>
+
+
+
+
+
+    <section class="footer">
+
+        <div class="share">
+            <a href="#" class="fab fa-facebook-f"></a>
+            <a href="#" class="fab fa-twitter"></a>
+            <a href="#" class="fab fa-instagram"></a>
+        </div>
+
+        <div class="links">
+            <a href="/index">home</a>
+            <a href="/index#about">about</a>
+            <a href="/index#menu">menu</a>
+            <a href="/index#products">card</a>
+            <a href="/index#contact">contact</a>
+        </div>
+
+        <div class="credit">created by <span>us</span></div>
+
+    </section>
+
+
+    <script src="js/main.js"></script>
+
+</body>
+
+</html>
