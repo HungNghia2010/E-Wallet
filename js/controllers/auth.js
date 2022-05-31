@@ -875,17 +875,17 @@ exports.muatheviettel = async (req, res) => {
         gia: gia,
         seri: "",
         the:"",
-        loai: "",
-        soluong : soluong
+        loai: ""
     }
+    const n = parseInt(soluong)
     var test = new Array();
     
     db.query('SELECT * FROM account WHERE id = ?',[req.user.id],(err,result) => {
         if(tongtien > result[0].money){
             return res.render('muatheviettel',{msg: 'Số dư không đủ để thực hiện giao dịch này',user: req.user,data})
         }else{
-<<<<<<< HEAD
-            for (let i = 0 ; i < data.soluong - 1 ; i++){
+            
+            for (let i = 0 ; i < n ; i++){
                 const username = Math.floor(1000 + Math.random() * 9000);
                 const seri = Math.floor(100000000 + Math.random() * 900000000);
                 const s = '11111';
@@ -894,17 +894,8 @@ exports.muatheviettel = async (req, res) => {
                 data.seri = seri;
                 data.the = the;
                 test.push(data);
-                console.log(test);
             }
             return res.render('muatheviettel',{success: 'Mua thẻ cào thành công',user: req.user,test})
-=======
-            const username = Math.floor(1000 + Math.random() * 9000);
-            const s = '11111'
-            const the = s + username
-            console.log(the)
-
-            return res.render('muatheviettel',{success: 'Mua thẻ cào thành công',user: req.user,data})
->>>>>>> 6c3eec1b0ab6483f8040e309c82e9fe82fe763f1
         }
     })
 }
