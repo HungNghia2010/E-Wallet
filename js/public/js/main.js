@@ -1,3 +1,4 @@
+const { otp } = require("../../controllers/Sendotp")
 
 //login
 var login = document.getElementById('form-login')
@@ -15,6 +16,8 @@ var nap = document.getElementById("form-nap-tien")
 var rut = document.getElementById("form-rut-tien")
 //chuyển tiền
 var chuyen = document.getElementById("form-chuyen-tien")
+
+var xacnhanchuyen = document.getElementById("from-xacnhacchuyen")
 
 var navbar = document.querySelector('.navbar');
 

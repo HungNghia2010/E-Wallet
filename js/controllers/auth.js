@@ -683,11 +683,7 @@ exports.chuyen_tien = async (req, res) => {
                     }
                 })
             }
-        /*req.session.phone = phone
-        req.session.tien = tien
-        req.session.chiuphi = chiuphi
-        req.session.ghichu = ghichu
-        res.redirect('/xacnhan')*/
+
            
         })
     }
@@ -704,8 +700,9 @@ exports.xacnhan_chuyen = async (req, res) => {
         ghichu : ghichu,
         otp : otp
     }
+    console.log(req.body)
     if(!otp){
-        return res.render('xacnhanchuyen',{msg: 'Vui lòng nhập mã OTP',user: req.user,data: data})
+        return res.render('xacnhanchuyen',{msg: 'Vui lòng nhập mã OTP',user: req.user,data})
     }else {
         db.query('SELECT * FROM register WHERE phone_number = ?',[data.phone_Number],(err,result) => {
             if(err){
@@ -724,7 +721,7 @@ exports.xacnhan_chuyen = async (req, res) => {
                     if(error){
                         console.log(error)
                     } else{
-                        return res.json({status:"success", success:"Chuyển tiền thành công, số tiền phí bị trừ là:" + phi})
+                        return res.render('xacnhanchuyen',{success: 'Chuyển tiền thành công, số tiền phí bị trừ là:' + phi,user: req.user,data: data})
                     }
                 })
             }
@@ -758,7 +755,7 @@ exports.xacnhan_chuyen = async (req, res) => {
                                                     if (err){
                                                         console.log(err);
                                                     }else{
-                                                        return res.json({status:"success", success:"Chuyển tiền thành công, số tiền phí bị trừ là:" + phi})
+                                                        return res.render('xacnhanchuyen',{success: 'Chuyển tiền thành công, số tiền phí bị trừ là:' + phi,user: req.user,data: data})
                                                     }
                                                 })
                                                 //return res.json({status:"success", success:"Chuyển tiền thành công, số tiền phí bị trừ là:" + phi})
@@ -794,7 +791,7 @@ exports.xacnhan_chuyen = async (req, res) => {
                                                     if (err){
                                                         console.log(err);
                                                     }else{
-                                                        return res.json({status:"success", success:"Chuyển tiền thành công, số tiền phí bị trừ là:" + phi})
+                                                        return res.render('xacnhanchuyen',{success: 'Chuyển tiền thành công, số tiền phí bị trừ là:' + phi,user: req.user,data: data})
                                                     }
                                                 })
                                                 //return res.json({status:"success", success:"Chuyển tiền thành công, số tiền phí bị trừ là:" + phi})
