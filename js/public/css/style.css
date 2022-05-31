@@ -966,6 +966,21 @@ section {
     color: #666;
 }
 
+.dig-footer input {
+    display: inline-block;
+    width: 100px;
+    padding: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background: #eee;
+    cursor: pointer;
+}
+
+.dig-footer input:active {
+    box-shadow: inset 2px 2px 4px 0#ccc;
+    color: #666;
+}
+
 
 /*---------------------------------------------------------dialog----------*/
 
