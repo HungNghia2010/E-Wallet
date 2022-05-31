@@ -661,7 +661,19 @@ exports.chuyen_tien = async (req, res) => {
                     }
                     else {
                         db.query('SELECT * FROM register WHERE id = ?',[req.user.id], (err, result123) =>{
-                            console.log(result123[0].email)
+                            db.query('SELECT * FROM otp WHERE id = ?',[result[0].id] , async (error,result1) => {
+                                const otp = generateRandomString(6)
+                                const dt = dateTime.create()
+                                const formatted = dt.format('H:M:S')
+                                if(error){
+                                    console.log(error)
+                                }if(result1.length === 0){
+                                    db.query('INSERT INTO otp SET ? ',{id: result[0].id, otp: otp, expiry: formatted});
+                                }
+                                else{
+                                    db.query('UPDATE otp SET ? WHERE ?',[{otp: otp, expiry: formatted}, result[0].id]);
+                                }
+                            })
                             // var mailOptions = {
                             //     from: 'sinhvien@phongdaotao.com',
                             //     to: result123[0].email,
@@ -718,6 +730,7 @@ exports.xacnhan_chuyen = async (req, res) => {
                 const time_trading = date.format('H:M:S');
                 const ma_Nguoi_Nhan = result[0].id;
                 const ten_Nguoi_Nhan = result[0].name
+                
                 //lịch sử
                 db.query('INSERT INTO transfer_trading SET ?',{ma_Giao_Dich : ma_Giao_Dich , ma_Khach_Hang : req.user.id , ma_Nguoi_Nhan : ma_Nguoi_Nhan , ten_Nguoi_Nhan : ten_Nguoi_Nhan , sdt_Nguoi_Nhan : phone , money_transfer : tien , day_trading : day_trading , time_trading : time_trading , trading_type : "Chuyển tiền", trading_status : "đang chờ", note_trading : ghichu},(error)=>{
                     if(error){
@@ -884,8 +897,12 @@ exports.muatheviettel = async (req, res) => {
         if(tongtien > result[0].money){
             return res.render('muatheviettel',{msg: 'Số dư không đủ để thực hiện giao dịch này',user: req.user,data})
         }else{
+<<<<<<< Updated upstream
             
             for (let i = 0 ; i < n ; i++){
+=======
+            for (let i = 0 ; i < data.soluong - 1 ; i++){
+>>>>>>> Stashed changes
                 const username = Math.floor(1000 + Math.random() * 9000);
                 const seri = Math.floor(100000000 + Math.random() * 900000000);
                 const s = '11111';
