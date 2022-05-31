@@ -1,4 +1,3 @@
-const { otp } = require("../../controllers/Sendotp")
 
 //login
 var login = document.getElementById('form-login')

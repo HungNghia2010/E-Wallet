@@ -658,28 +658,29 @@ exports.chuyen_tien = async (req, res) => {
                         console.log(err)
                     }else if(parseInt(tien) > parseInt(result1[0].money)){
                         return res.render('chuyen',{msg: 'Số tiền nhập lớn hơn số tiền hiện có',user: req.user,data: data})
-                    }/*else if (tien > 5000000){
-                        const ma_Giao_Dich = generateRandomString(6);
-                        const date = dateTime.create();
-                        const today = new Date();
-                        const day = ("0" + today.getDate()).slice(-2);
-                        const month = ("0" + (today.getMonth() + 1)).slice(-2);
-                        const day_trading = day + "-" + month + "-" + today.getFullYear() ;
-                        const time_trading = date.format('H:M:S');
-                        db.query('INSERT INTO transfer_trading SET ?',{ma_Giao_Dich : ma_Giao_Dich , ma_Khach_Hang: req.user.id , ma_Nguoi_Nhan : result1[0].id , ten_Nguoi_Nhan : result[0].name , sdt_Nguoi_Nhan : phone , money_transfer : tien , day_trading : day_trading , time_trading : time_trading , trading_type : "Chuyển tiền", trading_status : "đang chờ", note_trading : ghichu}, (error)=>{
-                            if (error){
-                                console.log(error)
-                            }else{
-                               
-                            }
-                        })
-                    }*/
+                    }
                     else {
-                        //const vat = parseInt(data.tien) * 0.05;
-                        data.phi = parseInt(data.tien) * 0.05;
-                        data.tennguoinhan = result[0].name;
-                        //const name_receiver = result[0].name; 
-                        return res.render('xacnhanchuyen',{data});
+                        db.query('SELECT * FROM register WHERE id = ?',[req.user.id], (err, result123) =>{
+                            console.log(result123[0].email)
+                            // var mailOptions = {
+                            //     from: 'sinhvien@phongdaotao.com',
+                            //     to: result123[0].email,
+                            //     subject: 'Gửi OTP xác nhận chuyển khoản',
+                            //     text: 'OTP của bạn là '+ otp +' , OTP này có hiệu quả trong vòng 1 phút,
+                            // }
+            
+                            // transporter.sendMail(mailOptions,function(error, info) {
+                            //     if(error){
+                            //         console.log(error)
+                            //     }
+                            // })
+                            
+
+                            data.phi = parseInt(data.tien) * 0.05;
+                            data.tennguoinhan = result[0].name;
+       
+                            return res.render('xacnhanchuyen',{data});
+                        })
                     }
                 })
             }
@@ -717,6 +718,7 @@ exports.xacnhan_chuyen = async (req, res) => {
                 const time_trading = date.format('H:M:S');
                 const ma_Nguoi_Nhan = result[0].id;
                 const ten_Nguoi_Nhan = result[0].name
+                //lịch sử
                 db.query('INSERT INTO transfer_trading SET ?',{ma_Giao_Dich : ma_Giao_Dich , ma_Khach_Hang : req.user.id , ma_Nguoi_Nhan : ma_Nguoi_Nhan , ten_Nguoi_Nhan : ten_Nguoi_Nhan , sdt_Nguoi_Nhan : phone , money_transfer : tien , day_trading : day_trading , time_trading : time_trading , trading_type : "Chuyển tiền", trading_status : "đang chờ", note_trading : ghichu},(error)=>{
                     if(error){
                         console.log(error)
@@ -742,6 +744,7 @@ exports.xacnhan_chuyen = async (req, res) => {
                                 const month = ("0" + (today.getMonth() + 1)).slice(-2);
                                 const day_trading = day + "-" + month + "-" + today.getFullYear() ;
                                 const time_trading = date.format('H:M:S');
+                                //lịch sử
                                 db.query('INSERT INTO transfer_trading SET ?',{ma_Giao_Dich : ma_Giao_Dich , ma_Khach_Hang: req.user.id , ma_Nguoi_Nhan : result[0].id , ten_Nguoi_Nhan : result[0].name , sdt_Nguoi_Nhan : phone , money_transfer : data.tien , day_trading : day_trading , time_trading : time_trading , trading_type : "Chuyển tiền", trading_status : "thành công", note_trading : ghichu},(error)=>{
                                     if(error){
                                         console.log(error)
@@ -778,6 +781,7 @@ exports.xacnhan_chuyen = async (req, res) => {
                                 const month = ("0" + (today.getMonth() + 1)).slice(-2);
                                 const day_trading = day + "-" + month + "-" + today.getFullYear() ;
                                 const time_trading = date.format('H:M:S');
+                                //lịch sử
                                 db.query('INSERT INTO transfer_trading SET ?',{ma_Giao_Dich : ma_Giao_Dich , ma_Khach_Hang: req.user.id , ma_Nguoi_Nhan : result[0].id , ten_Nguoi_Nhan : result[0].name , sdt_Nguoi_Nhan : phone , money_transfer : data.tien , day_trading : day_trading , time_trading : time_trading , trading_type : "Chuyển tiền", trading_status : "thành công", note_trading : ghichu},(error)=>{
                                     if(error){
                                         console.log(error)
@@ -848,20 +852,7 @@ exports.xemruttien = async (req, res) => {
         pheduyet: pheduyet,
         tuchoi: tuchoi
     }
-    res.redirect('/xemruttien/'+ma_Giao_Dich)
-}
-
-exports.xemchuyentien = async (req, res) => {
-    const {id_user, money_transfer, sdt_Nguoi_Nhan, ma_Giao_Dich, pheduyetchuyentien, tuchoichuyentien} = req.body
-    var data = {
-        id_user: id_user,
-        money_transfer: money_transfer,
-        sdt_Nguoi_Nhan: sdt_Nguoi_Nhan,
-        ma_Giao_Dich: ma_Giao_Dich,
-        pheduyetchuyentien: pheduyetchuyentien,
-        tuchoichuyentien: tuchoichuyentien
-    }
-    res.redirect('/xemchuyentien/'+ma_Giao_Dich)
+        res.redirect('/xemruttien/'+ma_Giao_Dich)
 }
 
 exports.muatheviettel = async (req, res) => {
@@ -880,9 +871,7 @@ exports.muatheviettel = async (req, res) => {
             const s = '11111'
             const the = s + username
             console.log(the)
-            test[0] = new Array(the,'1','Vinaphone', s,gia)
-            test[1] = new Array(the,'2','mobiphone', s,gia)
-            console.log(test)
+
             return res.render('muatheviettel',{success: 'Mua thẻ cào thành công',user: req.user,data})
         }
     })
