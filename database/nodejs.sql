@@ -79,7 +79,6 @@ CREATE TABLE trading_card(
     day_trading varchar(20),
     time_trading TIME,
     price varchar(20),
-    total_price varchar(20),
     PRIMARY KEY(ma_Giao_Dich)
 );
 

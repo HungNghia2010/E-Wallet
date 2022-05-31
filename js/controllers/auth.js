@@ -884,12 +884,7 @@ exports.xemchuyentien = async (req, res) => {
 exports.muatheviettel = async (req, res) => {
     const{gia, soluong} = req.body;
     const tongtien = parseInt(gia) * parseInt(soluong)
-    var data = {
-        gia: gia,
-        seri: "",
-        the:"",
-        loai: ""
-    }
+   
     const n = parseInt(soluong)
     var test = new Array();
     
@@ -897,18 +892,42 @@ exports.muatheviettel = async (req, res) => {
         if(tongtien > result[0].money){
             return res.render('muatheviettel',{msg: 'Số dư không đủ để thực hiện giao dịch này',user: req.user,data})
         }else{
-            for (let i = 0 ; i < data.soluong - 1 ; i++){
+            for (let i = 0 ; i < soluong  ; i++){
                 const username = Math.floor(1000 + Math.random() * 9000);
-                const seri = Math.floor(100000000 + Math.random() * 900000000);
+                const seriThe = Math.floor(1000000000 + Math.random() * 900000000);
                 const s = '11111';
                 const the = s + username;
+                var data = {
+                    gia  : gia,
+                    seri : "",
+                    the  : "",
+                    loai : ""
+                }
                 data.loai = "Viettel"
-                data.seri = seri;
+                data.seri = seriThe.toString();
                 data.the = the;
-                test.push(data);
-                console.log(test)
+                test.push(data)
             }
-            return res.render('muatheviettel',{success: 'Mua thẻ cào thành công',user: req.user,test})
+            for (let j = 0 ; j < test.length; j++){
+                const ma_Giao_Dich = generateRandomString(6);
+                const date = dateTime.create();
+                const today = new Date();
+                const day = ("0" + today.getDate()).slice(-2);
+                const month = ("0" + (today.getMonth() + 1)).slice(-2);
+                const day_trading = day + "-" + month + "-" + today.getFullYear() ;
+                const time_trading = date.format('H:M:S');
+              
+                db.query('INSERT INTO trading_card SET ?',{ma_Giao_Dich : ma_Giao_Dich , ma_Khach_Hang: req.user.id , card_seri : test[0].seri , ma_The : test[j].the , card_type : test[j].loai , day_trading : day_trading , time_trading : time_trading , price : test[j].gia},(error)=>{
+                    if (error){
+                        console.log(error);
+                    }else{
+                        //return res.json({success: 'Mua thẻ cào thành công',user: req.user})
+                        console.log("success")
+                        //return res.render('muatheviettel',{success: 'Mua thẻ cào thành công', user: req.user,data})
+                    }
+                })
+            }
+            //return res.render('muatheviettel',{success: 'Mua thẻ cào thành công',user: req.user,test})
         }
     })
 }
