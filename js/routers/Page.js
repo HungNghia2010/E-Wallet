@@ -160,7 +160,8 @@ Router.get('/lichsu', controllers.isActivated , (req, res) => {
         else if(req.user.status === "chờ xác minh" || req.user.status === 'chờ cập nhật'){
             res.redirect('/index')
         }else{
-            db.query('SELECT * FROM trading WHERE ma_Khach_Hang = ? ORDER BY day_trading',[req.user.id] ,(err, rows) => {
+            
+            db.query("SELECT ma_Giao_Dich,ma_Khach_Hang,money_transfer,day_trading,trading_type,trading_status,time_trading FROM transfer_trading WHERE ma_Khach_Hang = ? UNION ALL SELECT ma_Giao_Dich,ma_Khach_Hang,money_trading,day_trading,trading_type,trading_status, time_trading FROM trading WHERE ma_Khach_Hang = ? UNION ALL SELECT ma_Giao_Dich,ma_Khach_Hang,price,day_trading,trading_type,trading_status, time_trading FROM trading_card WHERE ma_Khach_Hang = ? ORDER BY day_trading DESC,time_trading DESC",[req.user.id,req.user.id,req.user.id] ,(err, rows) => {
                 if(err) throw err
                 res.render('lichsu',{status:"info",user: req.user,rows})
             })
@@ -400,7 +401,7 @@ Router.get('/muathe',controllers.isActivated ,(req,res) => {
     }
 })
 
-Router.get('/lichsuchuyen',controllers.isActivated,(req,res) => {
+Router.get('/lichsuchuyen/:id',controllers.isActivated,(req,res) => {
     if(req.user){
         if(req.user.change_pass === 0){
             res.redirect('/firststep')
@@ -408,7 +409,16 @@ Router.get('/lichsuchuyen',controllers.isActivated,(req,res) => {
         else if(req.user.status === "chờ xác minh" || req.user.status === 'chờ cập nhật'){
             res.redirect('/index')
         }
-        else res.render('lichsuchuyen',{status:"info",user: req.user})
+        else {
+            db.query('SELECT * FROM transfer_trading WHERE ma_Khach_hang = ? AND ma_Giao_Dich = ?',[req.user.id, req.params.id], (err, rows) => {
+                if(err) throw err
+                else{
+                    const phi = parseInt(rows[0].money_transfer * 0.05)
+                    res.render('lichsuchuyen',{status:"info",user: req.user,test: rows,phi})
+                }
+            })
+        
+        }
     }else{
         res.render('404',{status:"no",user: "nothing"})
     }

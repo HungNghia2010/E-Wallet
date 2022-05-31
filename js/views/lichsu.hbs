@@ -76,7 +76,7 @@
                     {{#equals this.trading_type 'Nạp tiền'}}
                     <tr class="lichsutr">
                         <td class="lichsutd">{{count @index}}</td>
-                        <td class="lichsutd">{{this.money_trading}}</td>
+                        <td class="lichsutd">{{this.money_transfer}}</td>
                         <td class="lichsutd">{{this.day_trading}}</td>
                         <td class="lichsutd">{{this.trading_type}}</td>
                         <td class="lichsutd">{{this.trading_status}}</td>
@@ -89,12 +89,25 @@
                     {{#equals this.trading_type 'Rút tiền'}}
                     <tr class="lichsutr">
                         <td class="lichsutd">{{count @index}}</td>
-                        <td class="lichsutd">{{this.money_trading}}</td>
+                        <td class="lichsutd">{{this.money_transfer}}</td>
                         <td class="lichsutd">{{this.day_trading}}</td>
                         <td class="lichsutd">{{this.trading_type}}</td>
                         <td class="lichsutd">{{this.trading_status}}</td>
                         <td class="lichsutd">
                             <a href="/lichsurut/{{this.ma_Giao_Dich}}">Xem</a>
+                        </td>
+                    </tr>
+                    {{/equals}}
+
+                    {{#equals this.trading_type 'Chuyển tiền'}}
+                    <tr class="lichsutr">
+                        <td class="lichsutd">{{count @index}}</td>
+                        <td class="lichsutd">{{this.money_transfer}}</td>
+                        <td class="lichsutd">{{this.day_trading}}</td>
+                        <td class="lichsutd">{{this.trading_type}}</td>
+                        <td class="lichsutd">{{this.trading_status}}</td>
+                        <td class="lichsutd">
+                            <a href="/lichsuchuyen/{{this.ma_Giao_Dich}}">Xem</a>
                         </td>
                     </tr>
                     {{/equals}}
