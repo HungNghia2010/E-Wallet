@@ -62,7 +62,7 @@
         <div class="container container-about-me">
             <div class="title">Information</div>
             <div class="content content-about-me">
-                <form class="form-about-me" action="#">
+                <form class="form-about-me" action="/auth/vohieuhoa" method="post">
                     <div id="content-img">
                         <div class="about-me-image">
                             <img src="/images/empicon.jpg" class="rounded-circle " width="150">
@@ -80,6 +80,7 @@
                             <div class="input-box">
                                 <span class="details">Họ và tên</span>
                                 <input value="{{this.name}}" type="text" disabled  required>
+                                <input name="id_user" value="{{this.id}}" type="text" style="display: none;"  required>
                             </div>
                             <div class="input-box">
                                 <span class="details">Username</span>
@@ -120,8 +121,8 @@
                         </div>
                     {{/each}}
                     <div class="button register-button">
-                        <input type="submit" value="Mở khóa">
-                        <input type="submit" value="Hủy">
+                        <input name="mokhoa" type="submit" value="Mở khóa">
+                        <input name="huymokhoa" type="submit" value="Hủy">
                     </div>
                 </form>
             </div>

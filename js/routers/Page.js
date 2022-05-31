@@ -199,23 +199,28 @@ Router.get('/xemchoduyet/:id', loggedIn.loggedIn, (req, res) => {
 })
 
 Router.post('/auth/choduyet', loggedIn.loggedIn, (req, res) => {
-    if(req.body.xacminh === 'Xác minh'){
-        db.query('UPDATE register SET status = "đã xác minh" WHERE id = ?', [req.body.id_user] ,(err, rows) => {
-            if (err) throw err
-            res.redirect('/xemchoduyet/'+req.body.id_user)
-        })
+    if(req.user.auth === 'Admin'){  
+        if(req.body.xacminh === 'Xác minh'){
+            db.query('UPDATE register SET status = "đã xác minh" WHERE id = ?', [req.body.id_user] ,(err, rows) => {
+                if (err) throw err
+                res.redirect('/xemchoduyet/'+req.body.id_user)
+            })
+        }
+        else if (req.body.huyxacminh === 'Hủy') {
+            db.query('UPDATE register SET status = "đã vô hiệu hóa" WHERE id = ?', [req.body.id_user] ,(err, rows) => {
+                if (err) throw err
+                res.redirect('/xemchoduyet/'+req.body.id_user)
+            })
+        }
+        else if(req.body.bosungxacminh === 'Yêu cầu bổ sung') {
+            db.query('UPDATE register SET status = "chờ cập nhật" WHERE id = ?', [req.body.id_user] ,(err, rows) => {
+                if (err) throw err
+                res.redirect('/xemchoduyet/'+req.body.id_user)
+            })
+        }
     }
-    else if (req.body.huyxacminh === 'Hủy') {
-        db.query('UPDATE register SET status = "đã vô hiệu hóa" WHERE id = ?', [req.body.id_user] ,(err, rows) => {
-            if (err) throw err
-            res.redirect('/xemchoduyet/'+req.body.id_user)
-        })
-    }
-    else if(req.body.bosungxacminh === 'Yêu cầu bổ sung') {
-        db.query('UPDATE register SET status = "chờ cập nhật" WHERE id = ?', [req.body.id_user] ,(err, rows) => {
-            if (err) throw err
-            res.redirect('/xemchoduyet/'+req.body.id_user)
-        })
+    else {
+        res.render('404',{status:"no",user: "nothing"})
     }
 })
 
@@ -258,6 +263,32 @@ Router.get('/xemruttien/:code', loggedIn.loggedIn, (req, res) => {
     }
 })
 
+Router.post('/auth/xemruttien', loggedIn.loggedIn, (req, res) => {
+    if(req.user.auth === 'Admin'){
+        if(req.body.pheduyet == 'Phê duyệt') {
+            db.query('UPDATE trading SET trading_status = "Thành công" WHERE ma_Giao_Dich = ?', [req.body.ma_Giao_Dich] ,(err, rows) => {
+                if (err) throw err
+                db.query('SELECT * FROM account WHERE id = ?', [req.body.id_user], (err, rows2) => {
+                    if (err) throw err
+                    db.query('UPDATE account SET money = ? WHERE id = ?', [(rows2[0].money - req.body.money_trading), req.body.id_user], (err, rows3) => {
+                        if (err) throw err
+                        res.redirect('/xemruttien/'+req.body.ma_Giao_Dich)
+                    })
+                })
+            })
+        }
+        else if(req.body.tuchoi == 'Từ chối') {
+            db.query('UPDATE trading SET trading_status = "Từ chối" WHERE ma_Giao_Dich = ?', [req.body.ma_Giao_Dich] ,(err, rows) => {
+                if (err) throw err
+                res.redirect('/xemruttien/'+req.body.ma_Giao_Dich)
+            })
+        }       
+    }
+    else {
+        res.render('404',{status:"no",user: "nothing"})
+    }
+})
+
 Router.get('/xemvohieuhoa/:id', loggedIn.loggedIn, (req, res) => {
     if(req.user.auth === 'Admin'){
         db.query('SELECT * FROM register, account WHERE (register.id = account.id) AND (register.id = ?)', [req.params.id] ,(err, rows) => {
@@ -269,6 +300,23 @@ Router.get('/xemvohieuhoa/:id', loggedIn.loggedIn, (req, res) => {
     }
 })
 
+Router.post('/auth/vohieuhoa', loggedIn.loggedIn, (req, res) => {
+    if(req.user.auth === 'Admin'){
+        if(req.body.mokhoa == 'Mở khóa') {
+            db.query('UPDATE register SET status = "chờ xác minh" WHERE id = ?', [req.body.id_user] ,(err, rows) => {
+                if (err) throw err
+                res.redirect('/xemvohieuhoa/'+req.body.id_user)
+            })
+        }
+        else if(req.body.huymokhoa == 'Hủy') {
+            res.redirect('/manager#vohieu')
+        }
+    }
+    else {
+        res.render('404',{status:"no",user: "nothing"})
+    }
+})
+
 Router.get('/xemvothoihan/:id', loggedIn.loggedIn, (req, res) => {
     if(req.user.auth === 'Admin'){
         db.query('SELECT * FROM register, account WHERE (register.id = account.id) AND (register.id = ?)', [req.params.id] ,(err, rows) => {
@@ -276,6 +324,25 @@ Router.get('/xemvothoihan/:id', loggedIn.loggedIn, (req, res) => {
             res.render('xemvothoihan',{status:"info", user: req.user, rows})
         })
     }else{
+        res.render('404',{status:"no",user: "nothing"})
+    }
+})
+
+Router.post('/auth/vothoihan', loggedIn.loggedIn, (req, res) => {
+    if(req.user.auth === 'Admin') {
+        if(req.body.mokhoavothoihan == 'Mở khóa') {
+            db.query('UPDATE register SET status = "đã xác minh" WHERE id = ?', [req.body.id_user] ,(err, rows) => {
+                if (err) throw err
+                db.query('UPDATE lockaccount SET loginAbnormality = 0 WHERE id = ?', [req.body.id_user] ,(err, rows1) => {
+                    res.redirect('/xemvothoihan/'+req.body.id_user)
+                })
+            })
+        }
+        else if(req.body.huykhoavothoihan == 'Hủy') {
+            res.redirect('/manager#khoa')
+        }
+    }
+    else{
         res.render('404',{status:"no",user: "nothing"})
     }
 })
@@ -333,6 +400,20 @@ Router.get('/lichsurut/:id',controllers.isActivated,(req,res) => {
     }
 })
 
+Router.get('/thongtinthe', controllers.isActivated,(req,res) => {
+    if(req.user){
+        if(req.user.change_pass === 0){
+            res.redirect('/firststep')
+        }
+        else if(req.user.status === "chờ xác minh" || req.user.status === 'chờ cập nhật'){
+            res.redirect('/index')
+        }else{
+            res.render('thongtinthe',{status:"info",user: req.user})
+        }
+    }else{
+        res.render('404',{status:"no",user: "nothing"})
+    }
+})
 
 Router.get('/lichsumuathe',(req,res) => {
     res.render('lichsumuathe');

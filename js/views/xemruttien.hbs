@@ -62,7 +62,7 @@
         <div class="container container-about-me">
             <div class="title">Thông tin giao dịch rút tiền</div>
             <div class="content content-about-me">
-                <form class="form-about-me" action="#">
+                <form class="form-about-me" action="/auth/xemruttien" method="post">
 
                     {{#each rows1}}
                         <div class="user-details">
@@ -75,10 +75,13 @@
                             <div class="input-box">
                                 <span class="details">Số tiền muốn rút</span>
                                 <input value="{{this.money_trading}}" type="text" disabled required>
+                                <input name="money_trading" value="{{this.money_trading}}" type="text" style="display: none;"required>
                             </div>
                             <div class="input-box">
                                 <span class="details">Mã giao dịch</span>
                                 <input value="{{this.ma_Giao_Dich}}" type="text" disabled required>
+                                <input name="ma_Giao_Dich" value="{{this.ma_Giao_Dich}}" type="text" style="display: none;"required>
+                                <input name="id_user" value="{{this.ma_Khach_Hang}}" type="text" style="display:none;" required>
                             </div>
                             <div class="input-box">
                                 <span class="details">Ngày rút</span>
@@ -96,8 +99,8 @@
                     {{/each}}
 
                     <div class="button register-button">
-                        <input type="submit" value="Duyệt">
-                        <input type="submit" value="Hủy">
+                        <input name="pheduyet" type="submit" value="Phê duyệt">
+                        <input name="tuchoi" type="submit" value="Từ chối">
                     </div>
                 </form>
             </div>

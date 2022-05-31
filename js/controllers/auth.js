@@ -808,20 +808,58 @@ exports.cho_duyet = async (req, res) => {
     res.redirect('/xemchoduyet/'+id_user)
 }
 
+exports.vohieuhoa = async (req, res) => {
+    const {id_user, mokhoa, huymokhoa} = req.body
+    var data = {
+        id_user: id_user,
+        mokhoa: mokhoa,
+        huymokhoa: huymokhoa
+    }
+    res.redirect('/xemvohieuhoa/'+id_user)
+}
+
+exports.vothoihan = async (req, res) => {
+    const {id_user, mokhoavothoihan, huykhoavothoihan} = req.body
+    var data = {
+        id_user: id_user,
+        mokhoavothoihan: mokhoavothoihan,
+        huykhoavothoihan: huykhoavothoihan
+    }
+    res.redirect('/xemvothoihan/'+id_user)
+}
+
+exports.xemruttien = async (req, res) => {
+    const {ma_Giao_Dich, id_user, money_trading, pheduyet, tuchoi} = req.body
+    var data = {
+        ma_Giao_Dich: ma_Giao_Dich,
+        id_user: id_user,
+        money_trading: money_trading,
+        pheduyet: pheduyet,
+        tuchoi: tuchoi
+    }
+        res.redirect('/xemruttien/'+ma_Giao_Dich)
+}
 
 exports.muatheviettel = async (req, res) => {
     const{gia, soluong} = req.body;
     const tongtien = parseInt(gia) * parseInt(soluong)
-
     var data = {
         gia: gia
     }
+    var test = new Array();
     
     db.query('SELECT * FROM account WHERE id = ?',[req.user.id],(err,result) => {
         if(tongtien > result[0].money){
             return res.render('muatheviettel',{msg: 'Không thể tự chuyển tiền cho chính mình',user: req.user,data})
         }else{
-            return res.render('muatheviettel',{msg: 'Không thể tự chuyển tiền cho chính mình',user: req.user,data})
+            const username = Math.floor(1000 + Math.random() * 9000);
+            const s = '11111'
+            const the = s + username
+            console.log(the)
+            test[0] = new Array(the,'1','Vinaphone', s,gia)
+            test[1] = new Array(the,'2','mobiphone', s,gia)
+            console.log(test)
+            return res.render('muatheviettel',{success: 'Mua thẻ cào thành công',user: req.user,data})
         }
     })
 }
