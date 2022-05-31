@@ -40,6 +40,8 @@ Router.post('/ruttien', loggedIn.loggedIn, authController.rut_tien)
 
 Router.post('/chuyen', loggedIn.loggedIn, authController.chuyen_tien)
 
+Router.post('/xacnhanchuyen', loggedIn.loggedIn, authController.xacnhan_chuyen)
+
 Router.post('/choduyet', loggedIn.loggedIn, authController.cho_duyet)
 
 Router.post('/xacnhan',loggedIn.loggedIn, authController.xacnhan_chuyen)
