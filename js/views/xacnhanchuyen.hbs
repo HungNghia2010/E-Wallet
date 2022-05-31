@@ -64,14 +64,14 @@
         <div class="container container-about-me">
             <div class="title">Chuyển tiền</div>
             <div class="content content-about-me">
-                <form class="form-about-me" action="/auth/xacnhan" method="post">
+                <form class="form-about-me" id="from-xacnhacchuyen" action="/auth/xacnhan" method="post">
 
                     <div class="user-details">
 
                         <div class="input-box">
                             <span class="details">Họ và tên người nhận</span>
-                            <input disabled value="{{name_receiver}}" name="tennguoinhan" id="tennguoinhan" type="text"  placeholder="" required>
-                            <input value="{{name_receiver}}" name="tennguoinhan" id="tennguoinhan" type="text" style=" display:none; " placeholder="" required>
+                            <input disabled value="{{data.tennguoinhan}}" name="tennguoinhan" id="tennguoinhan" type="text"  placeholder="" required>
+                            <input value="{{data.tennguoinhan}}" name="tennguoinhan" id="tennguoinhan" type="text" style=" display:none; " placeholder="" required>
                         </div>
 
                         <div class="input-box">
@@ -88,14 +88,14 @@
 
                         <div class="input-box">
                             <span class="details">Phí chuyển</span>
-                            <input disabled value="{{vat}}" id="phi" name="phi" type="text" placeholder="" required>
-                            <input value="{{vat}}" id="phi" name="phi" type="text" style="display:none" placeholder="" required>
+                            <input disabled value="{{data.phi}}" id="phi" name="phi" type="text" placeholder="" required>
+                            <input value="{{data.phi}}" id="phi" name="phi" type="text" style="display:none" placeholder="" required>
                         </div>
 
                         <div class="input-box">
                             <span class="details">Người chịu phí</span>
-                            <input disabled value="{{data.chiuphi}}" id="nguoi_chiu_phi" name="nguoichiuphi" type="text" placeholder="" required>
-                            <input value="{{data.chiuphi}}" id="nguoi_chiu_phi" name="nguoichiuphi" type="text" style="display:none" placeholder="" required>
+                            <input disabled value="{{data.chiuphi}}" id="nguoichiuphi" name="nguoichiuphi" type="text" placeholder="" required>
+                            <input value="{{data.chiuphi}}" id="nguoichiuphi" name="nguoichiuphi" type="text" style="display:none" placeholder="" required>
                         </div>
 
                         <div class="input-box">
@@ -110,14 +110,14 @@
                         </div>
 
                         {{#if msg}}
-                        <div class="alert" id="errorMessage" style="display: none;">
+                        <div class="alert" id="errorMessage">
                             <span class="fas fa-exclamation-circle"></span>
                             <span class="msg" id="error">{{msg}}</span>
                         </div>
                         {{/if}}
 
                         {{#if success}}
-                        <div id="dialogCont" class="dig-container" style="display: none;">
+                        <div id="dialogCont" class="dig-container">
                             <div class="dig-header">
                                 Nạp tiền vào tài khoản
                             </div>
