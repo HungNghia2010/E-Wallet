@@ -269,7 +269,7 @@ exports.checkmail = async(req, res) => {
                             db.query('INSERT INTO otp SET ? ',{id: result[0].id, otp: otp, expiry: formatted, checkotp: checkotp});
                         }
                         else{
-                            db.query('UPDATE otp SET ? WHERE ?',[{otp: otp, expiry: formatted, checkotp: checkotp}, result[0].id]);
+                            db.query('UPDATE otp SET ? WHERE id = ?',[{otp: otp, expiry: formatted, checkotp: checkotp}, result[0].id]);
                         }
                     })
                     // var mailOptions = {
@@ -661,7 +661,21 @@ exports.chuyen_tien = async (req, res) => {
                     }
                     else {
                         db.query('SELECT * FROM register WHERE id = ?',[req.user.id], (err, result123) =>{
-                            console.log(result123[0].email)
+
+                            db.query('SELECT * FROM otp WHERE id = ?',[req.user.id] , async (error,result1) => {
+                                const otp = generateRandomString(6)
+                                const dt = dateTime.create()
+                                const formatted = dt.format('H:M:S')
+                                if(error){
+                                    console.log(error)
+                                }if(result1.length === 0){
+                                    db.query('INSERT INTO otp SET ? ',{id: req.user.id, otp: otp, expiry: formatted});
+                                }
+                                else{
+                                    console.log(req.user.id)
+                                    db.query('UPDATE otp SET ? WHERE id = ?',[{otp: otp, expiry: formatted}, req.user.id]);
+                                }
+                            })
                             // var mailOptions = {
                             //     from: 'sinhvien@phongdaotao.com',
                             //     to: result123[0].email,
@@ -705,7 +719,7 @@ exports.xacnhan_chuyen = async (req, res) => {
     if(!otp){
         return res.render('xacnhanchuyen',{msg: 'Vui lòng nhập mã OTP',user: req.user,data})
     }else {
-        db.query('SELECT * FROM register WHERE phone_number = ?',[data.phone_Number],(err,result) => {
+        db.query('SELECT * FROM register WHERE phone_number = ?',[data.phone],(err,result) => {
             if(err){
                 console.log(err)
             }else if (data.tien > 5000000){
@@ -718,12 +732,32 @@ exports.xacnhan_chuyen = async (req, res) => {
                 const time_trading = date.format('H:M:S');
                 const ma_Nguoi_Nhan = result[0].id;
                 const ten_Nguoi_Nhan = result[0].name
-                //lịch sử
-                db.query('INSERT INTO transfer_trading SET ?',{ma_Giao_Dich : ma_Giao_Dich , ma_Khach_Hang : req.user.id , ma_Nguoi_Nhan : ma_Nguoi_Nhan , ten_Nguoi_Nhan : ten_Nguoi_Nhan , sdt_Nguoi_Nhan : phone , money_transfer : tien , day_trading : day_trading , time_trading : time_trading , trading_type : "Chuyển tiền", trading_status : "đang chờ", note_trading : ghichu},(error)=>{
-                    if(error){
-                        console.log(error)
-                    } else{
-                        return res.render('xacnhanchuyen',{success: 'Chuyển tiền thành công, số tiền phí bị trừ là:' + phi,user: req.user,data: data})
+
+                db.query('SELECT * FROM otp WHERE id = ?', [req.user.id] ,  async (err,result1) => {
+                    console.log(req.user.id)
+                    hn = time_trading.split(':')[0] * 3600;
+                    mn = time_trading.split(':')[1] * 60;
+                    sn = time_trading.split(':')[2];
+        
+                    const time = result1[0].expiry
+                    h = time.split(':')[0] * 3600;
+                    m = time.split(':')[1] * 60;
+                    s = time.split(':')[2];
+        
+                    const timeexpiry = (hn + mn + sn) - (h + m + s);
+                    if(otp != result1[0].otp){
+                        return res.render('xacnhanchuyen',{msg: 'Mã otp không đúng',user: req.user,data})
+                    }else if(timeexpiry > 60){
+                        return res.render('xacnhanchuyen',{esc: 'Mã otp hết hạn',user: req.user,data})
+                    }else{
+                        //lịch sử
+                        db.query('INSERT INTO transfer_trading SET ?',{ma_Giao_Dich : ma_Giao_Dich , ma_Khach_Hang : req.user.id , ma_Nguoi_Nhan : ma_Nguoi_Nhan , ten_Nguoi_Nhan : ten_Nguoi_Nhan , sdt_Nguoi_Nhan : phone , money_transfer : tien , day_trading : day_trading , time_trading : time_trading , trading_type : "Chuyển tiền", trading_status : "đang chờ", note_trading : ghichu},(error)=>{
+                            if(error){
+                                console.log(error)
+                            } else{
+                                return res.render('xacnhanchuyen',{success: 'Chuyển tiền thành công, Đợi admin xác minh ,số tiền phí bị trừ là:' + phi,user: req.user,data: data})
+                            }
+                        })
                     }
                 })
             }
@@ -733,7 +767,7 @@ exports.xacnhan_chuyen = async (req, res) => {
                         console.log(err)
                     }else if (data.chiuphi === "người chuyển"){
                         const money = parseInt(result1[0].money) - parseInt(tien)*1.05; 
-                        db.query('UPDATE account SET money = ? WHERE id = ?',[money,req.user.id], (err,result2) => {
+                        db.query('UPDATE account SET money = ? WHERE id = ?',[money,req.user.id], (err) => {
                             if(err){
                                 console.log(err)
                             }else{
@@ -744,28 +778,49 @@ exports.xacnhan_chuyen = async (req, res) => {
                                 const month = ("0" + (today.getMonth() + 1)).slice(-2);
                                 const day_trading = day + "-" + month + "-" + today.getFullYear() ;
                                 const time_trading = date.format('H:M:S');
-                                //lịch sử
-                                db.query('INSERT INTO transfer_trading SET ?',{ma_Giao_Dich : ma_Giao_Dich , ma_Khach_Hang: req.user.id , ma_Nguoi_Nhan : result[0].id , ten_Nguoi_Nhan : result[0].name , sdt_Nguoi_Nhan : phone , money_transfer : data.tien , day_trading : day_trading , time_trading : time_trading , trading_type : "Chuyển tiền", trading_status : "thành công", note_trading : ghichu},(error)=>{
-                                    if(error){
-                                        console.log(error)
-                                    } else{
-                                        db.query('SELECT * FROM account WHERE id = ?',[result[0].id], (err,result2) => {
-                                            if (err){
-                                                console.log(err)
-                                            }else {
-                                                const reciever = parseInt(result2[0].money) + parseInt(tien)
-                                                db.query('UPDATE account SET money = ? WHERE id = ?',[reciever,result[0].id], (err) => {
+                                
+                                db.query('SELECT * FROM otp WHERE id = ?', [req.user.id] ,  async (err,result123) => {
+                                    console.log(req.user.id)
+                                    hn = time_trading.split(':')[0] * 3600;
+                                    mn = time_trading.split(':')[1] * 60;
+                                    sn = time_trading.split(':')[2];
+                        
+                                    const time = result123[0].expiry
+                                    h = time.split(':')[0] * 3600;
+                                    m = time.split(':')[1] * 60;
+                                    s = time.split(':')[2];
+                        
+                                    const timeexpiry = (hn + mn + sn) - (h + m + s);
+                                    if(otp != result123[0].otp){
+                                        return res.render('xacnhanchuyen',{msg: 'Mã otp không đúng',user: req.user,data})
+                                    }else if(timeexpiry > 60){
+                                        return res.render('xacnhanchuyen',{esc: 'Mã otp hết hạn',user: req.user,data})
+                                    }else{
+                                        //lịch sử
+                                        db.query('INSERT INTO transfer_trading SET ?',{ma_Giao_Dich : ma_Giao_Dich , ma_Khach_Hang: req.user.id , ma_Nguoi_Nhan : result[0].id , ten_Nguoi_Nhan : result[0].name , sdt_Nguoi_Nhan : phone , money_transfer : data.tien , day_trading : day_trading , time_trading : time_trading , trading_type : "Chuyển tiền", trading_status : "thành công", note_trading : ghichu},(error)=>{
+                                            if(error){
+                                                console.log(error)
+                                            } else{
+                                                db.query('SELECT * FROM account WHERE id = ?',[result[0].id], (err,result2) => {
                                                     if (err){
-                                                        console.log(err);
-                                                    }else{
-                                                        return res.render('xacnhanchuyen',{success: 'Chuyển tiền thành công, số tiền phí bị trừ là:' + phi,user: req.user,data: data})
+                                                        console.log(err)
+                                                    }else {
+                                                        const reciever = parseInt(result2[0].money) + parseInt(tien)
+                                                        db.query('UPDATE account SET money = ? WHERE id = ?',[reciever,result[0].id], (err) => {
+                                                            if (err){
+                                                                console.log(err);
+                                                            }else{
+                                                                return res.render('xacnhanchuyen',{success: 'Chuyển tiền thành công, số tiền phí bị trừ là:' + phi,user: req.user,data: data})
+                                                            }
+                                                        })
+                                                        
                                                     }
                                                 })
-                                                //return res.json({status:"success", success:"Chuyển tiền thành công, số tiền phí bị trừ là:" + phi})
                                             }
                                         })
                                     }
                                 })
+
                             }
                         })
                     }else if (data.chiuphi === "người nhận"){
@@ -781,28 +836,49 @@ exports.xacnhan_chuyen = async (req, res) => {
                                 const month = ("0" + (today.getMonth() + 1)).slice(-2);
                                 const day_trading = day + "-" + month + "-" + today.getFullYear() ;
                                 const time_trading = date.format('H:M:S');
-                                //lịch sử
-                                db.query('INSERT INTO transfer_trading SET ?',{ma_Giao_Dich : ma_Giao_Dich , ma_Khach_Hang: req.user.id , ma_Nguoi_Nhan : result[0].id , ten_Nguoi_Nhan : result[0].name , sdt_Nguoi_Nhan : phone , money_transfer : data.tien , day_trading : day_trading , time_trading : time_trading , trading_type : "Chuyển tiền", trading_status : "thành công", note_trading : ghichu},(error)=>{
-                                    if(error){
-                                        console.log(error)
+
+                                db.query('SELECT * FROM otp WHERE id = ?', [req.user.id] ,  async (err,result123) => {
+                                    console.log(req.user.id)
+                                    hn = time_trading.split(':')[0] * 3600;
+                                    mn = time_trading.split(':')[1] * 60;
+                                    sn = time_trading.split(':')[2];
+                        
+                                    const time = result123[0].expiry
+                                    h = time.split(':')[0] * 3600;
+                                    m = time.split(':')[1] * 60;
+                                    s = time.split(':')[2];
+                        
+                                    const timeexpiry = (hn + mn + sn) - (h + m + s);
+                                    if(otp != result123[0].otp){
+                                        return res.render('xacnhanchuyen',{msg: 'Mã otp không đúng',user: req.user,data})
+                                    }else if(timeexpiry > 60){
+                                        return res.render('xacnhanchuyen',{esc: 'Mã otp hết hạn',user: req.user,data})
                                     }else{
-                                        db.query('SELECT * FROM account WHERE id = ?',[result[0].id], (err,result2) => {
-                                            if (err){
-                                                console.log(err)
-                                            }else {
-                                                const reciever = parseInt(result2[0].money) + parseInt(tien)*0.95
-                                                db.query('UPDATE account SET money = ? WHERE id = ?',[reciever,result[0].id], (err) => {
+                                        //lịch sử
+                                        db.query('INSERT INTO transfer_trading SET ?',{ma_Giao_Dich : ma_Giao_Dich , ma_Khach_Hang: req.user.id , ma_Nguoi_Nhan : result[0].id , ten_Nguoi_Nhan : result[0].name , sdt_Nguoi_Nhan : phone , money_transfer : data.tien , day_trading : day_trading , time_trading : time_trading , trading_type : "Chuyển tiền", trading_status : "thành công", note_trading : ghichu},(error)=>{
+                                            if(error){
+                                                console.log(error)
+                                            }else{
+                                                db.query('SELECT * FROM account WHERE id = ?',[result[0].id], (err,result2) => {
                                                     if (err){
-                                                        console.log(err);
-                                                    }else{
-                                                        return res.render('xacnhanchuyen',{success: 'Chuyển tiền thành công, số tiền phí bị trừ là:' + phi,user: req.user,data: data})
+                                                        console.log(err)
+                                                    }else {
+                                                        const reciever = parseInt(result2[0].money) + parseInt(tien)*0.95
+                                                        db.query('UPDATE account SET money = ? WHERE id = ?',[reciever,result[0].id], (err) => {
+                                                            if (err){
+                                                                console.log(err);
+                                                            }else{
+                                                                return res.render('xacnhanchuyen',{success: 'Chuyển tiền thành công',user: req.user,data: data})
+                                                            }
+                                                        })
+                                                        
                                                     }
                                                 })
-                                                //return res.json({status:"success", success:"Chuyển tiền thành công, số tiền phí bị trừ là:" + phi})
-                                            }
+                                            }   
                                         })
-                                    }   
+                                    }
                                 })
+                                
                             }
                         })
                     }
@@ -884,8 +960,7 @@ exports.muatheviettel = async (req, res) => {
         if(tongtien > result[0].money){
             return res.render('muatheviettel',{msg: 'Số dư không đủ để thực hiện giao dịch này',user: req.user,data})
         }else{
-            
-            for (let i = 0 ; i < n ; i++){
+            for (let i = 0 ; i < data.soluong - 1 ; i++){
                 const username = Math.floor(1000 + Math.random() * 9000);
                 const seri = Math.floor(100000000 + Math.random() * 900000000);
                 const s = '11111';

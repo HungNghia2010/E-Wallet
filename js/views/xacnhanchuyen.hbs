@@ -119,13 +119,27 @@
                         {{#if success}}
                         <div id="dialogCont" class="dig-container">
                             <div class="dig-header">
-                                Nạp tiền vào tài khoản
+                                Chuyển tiền
                             </div>
                             <div id="digbody" class="dig-body">
                                 <h4 id="success">{{success}}</h4>
                             </div>
                             <div class="dig-footer">
                                 <a href="/index">Quay về trang chủ</a>
+                            </div>
+                        </div>
+                        {{/if}}
+
+                        {{#if esc}}
+                        <div id="dialogCont" class="dig-container">
+                            <div class="dig-header">
+                                Chuyển tiền
+                            </div>
+                            <div id="digbody" class="dig-body">
+                                <h4 id="success">{{esc}}</h4>
+                            </div>
+                            <div class="dig-footer">
+                                <a href="/chuyentien">Quay về trang chuyển tiền</a>
                             </div>
                         </div>
                         {{/if}}
