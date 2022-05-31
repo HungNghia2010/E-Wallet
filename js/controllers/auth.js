@@ -859,44 +859,60 @@ exports.xemchuyentien = async(req, res) => {
 }
 
 exports.muatheviettel = async(req, res) => {
-    const { gia, soluong } = req.body;
-    const tongtien = parseInt(gia) * parseInt(soluong)
-    var data = {
-        gia: gia,
-        seri: "",
-        the: "",
-        loai: "",
-        soluong: soluong
-    }
-    var test = new Array();
-
-    db.query('SELECT * FROM account WHERE id = ?', [req.user.id], (err, result) => {
-        if (tongtien > result[0].money) {
-            return res.render('muatheviettel', { msg: 'Số dư không đủ để thực hiện giao dịch này', user: req.user, data })
-        } else {
-            for (let i = 0; i < data.soluong - 1; i++) {
-                const username = Math.floor(1000 + Math.random() * 9000);
-                const seri = Math.floor(100000000 + Math.random() * 900000000);
-                const s = '11111';
-                const the = s + username;
-                data.loai = "Viettel"
-                data.seri = seri;
-                data.the = the;
-                test.push(data);
-                console.log(test);
-            }
-            return res.render('muatheviettel', { success: 'Mua thẻ cào thành công', user: req.user, test })
+        const { gia, soluong } = req.body;
+        const tongtien = parseInt(gia) * parseInt(soluong)
+        var data = {
+            gia: gia,
+            seri: "",
+            <<
+            << << < HEAD
+            the: "",
+            loai: "",
+            soluong: soluong ===
+                === =
+                the: "",
+            loai: "" >>>
+                >>> > dff23d57498d464900e5f8ea9d225d7ebb379576
         }
-    })
-}
+        const n = parseInt(soluong)
+        var test = new Array(); <<
+        << << < HEAD
 
-//random string for password
-function generateRandomString(myLength) {
-    const chars = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890";
-    const randomArray = Array.from({ length: myLength },
-        (v, k) => chars[Math.floor(Math.random() * chars.length)]
-    );
+        db.query('SELECT * FROM account WHERE id = ?', [req.user.id], (err, result) => {
+                    if (tongtien > result[0].money) {
+                        return res.render('muatheviettel', { msg: 'Số dư không đủ để thực hiện giao dịch này', user: req.user, data })
+                    } else {
+                        for (let i = 0; i < data.soluong - 1; i++) { ===
+                            === =
 
-    const randomString = randomArray.join("");
-    return randomString;
-}
+                            db.query('SELECT * FROM account WHERE id = ?', [req.user.id], (err, result) => {
+                                if (tongtien > result[0].money) {
+                                    return res.render('muatheviettel', { msg: 'Số dư không đủ để thực hiện giao dịch này', user: req.user, data })
+                                } else {
+
+                                    for (let i = 0; i < n; i++) { >>>
+                                        >>> > dff23d57498d464900e5f8ea9d225d7ebb379576
+                                        const username = Math.floor(1000 + Math.random() * 9000);
+                                        const seri = Math.floor(100000000 + Math.random() * 900000000);
+                                        const s = '11111';
+                                        const the = s + username;
+                                        data.loai = "Viettel"
+                                        data.seri = seri;
+                                        data.the = the;
+                                        test.push(data);
+                                    }
+                                    return res.render('muatheviettel', { success: 'Mua thẻ cào thành công', user: req.user, test })
+                                }
+                            })
+                        }
+
+                        //random string for password
+                        function generateRandomString(myLength) {
+                            const chars = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890";
+                            const randomArray = Array.from({ length: myLength },
+                                (v, k) => chars[Math.floor(Math.random() * chars.length)]
+                            );
+
+                            const randomString = randomArray.join("");
+                            return randomString;
+                        }

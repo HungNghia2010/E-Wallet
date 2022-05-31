@@ -69,15 +69,13 @@
                     <th class="lichsuth">Mã seri</th>
                     <th class="lichsuth">Mệnh giá</th>
                 </tr>
-                {{#each test}}
                 <tr class="lichsutr">
                     <td class="lichsutd">1</td>
-                    <td class="lichsutd">{{this.loai}}</td>
+                    <td class="lichsutd">{{#each test}} {{@index}}: {{this.loai}} {{/each}}</td>
                     <td class="lichsutd">{{this.the}}</td>
                     <td class="lichsutd">{{this.seri}}</td>
                     <td class="lichsutd">{{this.gia}}</td>
                 </tr>
-                {{/each}}
             </table>
         </div>
 
