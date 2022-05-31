@@ -39,10 +39,10 @@
             {{/if}}
 
             <!-- Chức năng chung -->
-            <a href="#about">About</a>
-            <a href="#menu">Menu</a>
-            <a href="#products">Card</a>
-            <a href="#contact">Contact</a>
+            <a href="/index#about">About</a>
+            <a href="/index#menu">Menu</a>
+            <a href="/index#products">Card</a>
+            <a href="/index#contact">Contact</a>
             <a href="/logout">Logout</a>
 
         </nav>
@@ -68,18 +68,22 @@
                     <th class="lichsuth">Mã thẻ</th>
                     <th class="lichsuth">Mã seri</th>
                     <th class="lichsuth">Mệnh giá</th>
+                    <th class="lichsuth">Ngày</th>
+                    <th class="lichsuth">Giờ</th>
                 </tr>
+
                 {{#each test}}
-                {{#each this}}
                 <tr class="lichsutr">
-                    <td class="lichsutd">1</td>
-                    <td class="lichsutd">{{@key}}:{{.}}!</td>
-                    <td class="lichsutd">{{this.the}}</td>
-                    <td class="lichsutd">{{this.seri}}</td>
-                    <td class="lichsutd">{{this.gia}}</td>
+                    <td class="lichsutd">{{count @index}}</td>
+                    <td class="lichsutd">{{this.card_type}}</td>
+                    <td class="lichsutd">{{this.ma_The}}</td>
+                    <td class="lichsutd">{{this.card_seri}}</td>
+                    <td class="lichsutd">{{this.price}}</td>
+                    <th class="lichsuth">{{this.day_trading}}</th>
+                    <th class="lichsuth">{{this.time_trading}}</th>
                 </tr>
                 {{/each}}
-                {{/each}}
+
             </table>
         </div>
 

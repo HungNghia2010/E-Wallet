@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
@@ -49,7 +49,7 @@
 
         <div class="icons">
             <div id="user-btn">
-                <a href="info.html" class="fa-solid fa-user"></a>
+                <a href="/info" class="fa-solid fa-user"></a>
             </div>
 
             <div class="fas fa-bars" id="menu-btn"></div>
@@ -65,42 +65,42 @@
             <div class="title">Lịch sử mua thẻ</div>
             <div class="content content-about-me">
                 <form class="form-about-me" action="#">
-
+                    
                     <div class="user-details">
+                        {{#each test}}
                         <div class="input-box">
                             <span class="details">Mã giao dịch</span>
-                            <input value="CMT81945" type="text" placeholder="" required>
+                            <input value="{{this.ma_Giao_Dich}}" type="text" placeholder="" readonly>
                         </div>
+
                         <div class="input-box">
                             <span class="details">Ngày</span>
-                            <input value="03/08/1993" type="text" placeholder="" required>
+                            <input value="{{this.day_trading}}" type="text" placeholder="" readonly>
                         </div>
+
                         <div class="input-box">
                             <span class="details">Tên thẻ</span>
-                            <input value="Vinaphone" type="text" placeholder="" required>
+                            <input value="{{this.card_type}}" type="text" placeholder="" readonly>
                         </div>
+
                         <div class="input-box">
                             <span class="details">Mã thẻ</span>
-                            <input value="33333" type="text" placeholder="" required>
+                            <input value="{{this.ma_The}}" type="text" placeholder="" readonly>
                         </div>
 
                         <div class="input-box">
                             <span class="details">Mã seri</span>
-                            <input value="" type="text" placeholder="" required>
+                            <input value="{{this.card_seri}}" type="text" placeholder="" readonly>
                         </div>
+
                         <div class="input-box">
                             <span class="details">Mệnh giá</span>
-                            <input value="20.000" type="text" placeholder="" required>
+                            <input value="{{this.price}}" type="text" placeholder="" readonly>
                         </div>
-                        <div class="input-box">
-                            <span class="details">Số lượng</span>
-                            <input value="5" type="text" placeholder="" required>
-                        </div>
-                        <div class="input-box">
-                            <span class="details">Tổng tiền</span>
-                            <input value="100.000" type="text" placeholder="" required>
-                        </div>
+
+                    {{/each}}
                     </div>
+    
 
                 </form>
             </div>
@@ -121,11 +121,11 @@
         </div>
 
         <div class="links">
-            <a href="index.html">home</a>
-            <a href="index.html#about">about</a>
-            <a href="index.html#menu">menu</a>
-            <a href="index.html#products">card</a>
-            <a href="index.html#contact">contact</a>
+            <a href="/index">home</a>
+            <a href="/index#about">about</a>
+            <a href="/index#menu">menu</a>
+            <a href="/index#products">card</a>
+            <a href="/index#contact">contact</a>
         </div>
 
         <div class="credit">created by <span>us</span></div>
@@ -133,7 +133,7 @@
     </section>
 
 
-    <script src="js/script.js"></script>
+    <script src="js/main.js"></script>
 
 </body>
 
