@@ -110,7 +110,7 @@ Router.get('/naptien', controllers.isActivated , (req, res) => {
         if(req.user.change_pass === 0){
             res.redirect('/firststep')
         }
-        else if(req.user.status === "chờ xác minh" || req.user.status === 'chờ cập nhật'){
+        else if(req.user.status === "chờ xác minh" || req.user.status === 'chờ cập nhật' || req.user.status === 'đã vô hiệu hóa'){
             res.redirect('/index')
         }
             else res.render('nap',{status:"info",user: req.user})
@@ -125,7 +125,7 @@ Router.get('/ruttien', controllers.isActivated , (req, res) => {
         if(req.user.change_pass === 0){
             res.redirect('/firststep')
         }
-        else if(req.user.status === "chờ xác minh" || req.user.status === 'chờ cập nhật'){
+        else if(req.user.status === "chờ xác minh" || req.user.status === 'chờ cập nhật' || req.user.status === 'đã vô hiệu hóa'){
             res.redirect('/index')
         }
         else res.render('ruttien',{status:"info",user: req.user})
@@ -139,7 +139,7 @@ Router.get('/chuyentien', controllers.isActivated , (req, res) => {
         if(req.user.change_pass === 0){
             res.redirect('/firststep')
         }
-        else if(req.user.status === "chờ xác minh" || req.user.status === 'chờ cập nhật'){
+        else if(req.user.status === "chờ xác minh" || req.user.status === 'chờ cập nhật' || req.user.status === 'đã vô hiệu hóa'){
             res.redirect('/index')
         }
         else res.render('chuyen',{status:"info",user: req.user})
@@ -157,7 +157,7 @@ Router.get('/lichsu', controllers.isActivated , (req, res) => {
         if(req.user.change_pass === 0){
             res.redirect('/firststep')
         }
-        else if(req.user.status === "chờ xác minh" || req.user.status === 'chờ cập nhật'){
+        else if(req.user.status === "chờ xác minh" || req.user.status === 'chờ cập nhật' || req.user.status === 'đã vô hiệu hóa'){
             res.redirect('/index')
         }else{
             
@@ -255,7 +255,7 @@ Router.post('/auth/xemchuyentien', loggedIn.loggedIn, (req, res) => {
                                 if (err) throw err
                                 db.query('UPDATE account SET money = ? WHERE id = ?', [(parseInt(rows4[0].money) + parseInt(req.body.money_transfer)), rows3[0].id], (err, rows5) => {
                                     if (err) throw err
-                                    res.redirect('/xemchuyentien/'+req.body.ma_Giao_Dich)
+                                    res.redirect('/manager#gdchuyen')
                                 })
                             })
                         })
@@ -266,7 +266,7 @@ Router.post('/auth/xemchuyentien', loggedIn.loggedIn, (req, res) => {
         else if(req.body.tuchoichuyentien == 'Từ chối') {
             db.query('UPDATE transfer_trading SET trading_status = "Từ chối" WHERE ma_Giao_Dich = ?', [req.body.ma_Giao_Dich] ,(err, rows) => {
                 if (err) throw err
-                res.redirect('/xemchuyentien/'+req.body.ma_Giao_Dich)
+                res.redirect('/manager#gdchuyen')
             })
         }
     }
@@ -309,7 +309,7 @@ Router.post('/auth/xemruttien', loggedIn.loggedIn, (req, res) => {
                     if (err) throw err
                     db.query('UPDATE account SET money = ? WHERE id = ?', [(rows2[0].money - req.body.money_trading), req.body.id_user], (err, rows3) => {
                         if (err) throw err
-                        res.redirect('/xemruttien/'+req.body.ma_Giao_Dich)
+                        res.redirect('/manager#gdrut')
                     })
                 })
             })
@@ -317,7 +317,7 @@ Router.post('/auth/xemruttien', loggedIn.loggedIn, (req, res) => {
         else if(req.body.tuchoi == 'Từ chối') {
             db.query('UPDATE trading SET trading_status = "Từ chối" WHERE ma_Giao_Dich = ?', [req.body.ma_Giao_Dich] ,(err, rows) => {
                 if (err) throw err
-                res.redirect('/xemruttien/'+req.body.ma_Giao_Dich)
+                res.redirect('/manager#gdrut')
             })
         }       
     }
@@ -389,7 +389,7 @@ Router.get('/muatheviettel',controllers.isActivated ,(req,res) => {
         if(req.user.change_pass === 0){
             res.redirect('/firststep')
         }
-        else if(req.user.status === "chờ xác minh" || req.user.status === 'chờ cập nhật'){
+        else if(req.user.status === "chờ xác minh" || req.user.status === 'chờ cập nhật' || req.user.status === 'đã vô hiệu hóa'){
             res.redirect('/index')
         }
         else{
@@ -406,7 +406,7 @@ Router.get('/muathemobi',controllers.isActivated ,(req,res) => {
         if(req.user.change_pass === 0){
             res.redirect('/firststep')
         }
-        else if(req.user.status === "chờ xác minh" || req.user.status === 'chờ cập nhật'){
+        else if(req.user.status === "chờ xác minh" || req.user.status === 'chờ cập nhật' || req.user.status === 'đã vô hiệu hóa'){
             res.redirect('/index')
         }
         else{
@@ -424,7 +424,7 @@ Router.get('/muathevina',controllers.isActivated ,(req,res) => {
         if(req.user.change_pass === 0){
             res.redirect('/firststep')
         }
-        else if(req.user.status === "chờ xác minh" || req.user.status === 'chờ cập nhật'){
+        else if(req.user.status === "chờ xác minh" || req.user.status === 'chờ cập nhật' || req.user.status === 'đã vô hiệu hóa'){
             res.redirect('/index')
         }
         else{
@@ -441,7 +441,7 @@ Router.get('/lichsuchuyen/:id',controllers.isActivated,(req,res) => {
         if(req.user.change_pass === 0){
             res.redirect('/firststep')
         }
-        else if(req.user.status === "chờ xác minh" || req.user.status === 'chờ cập nhật'){
+        else if(req.user.status === "chờ xác minh" || req.user.status === 'chờ cập nhật' || req.user.status === 'đã vô hiệu hóa'){
             res.redirect('/index')
         }
         else {
@@ -464,7 +464,7 @@ Router.get('/lichsurut/:id',controllers.isActivated,(req,res) => {
         if(req.user.change_pass === 0){
             res.redirect('/firststep')
         }
-        else if(req.user.status === "chờ xác minh" || req.user.status === 'chờ cập nhật'){
+        else if(req.user.status === "chờ xác minh" || req.user.status === 'chờ cập nhật' || req.user.status === 'đã vô hiệu hóa'){
             res.redirect('/index')
         }else{
             db.query('SELECT * FROM trading WHERE ma_Khach_Hang = ? AND ma_Giao_Dich = ?',[req.user.id, req.params.id] , (err,rows) => {
@@ -486,7 +486,7 @@ Router.get('/thongtinthe', controllers.isActivated,(req,res) => {
         if(req.user.change_pass === 0){
             res.redirect('/firststep')
         }
-        else if(req.user.status === "chờ xác minh" || req.user.status === 'chờ cập nhật'){
+        else if(req.user.status === "chờ xác minh" || req.user.status === 'chờ cập nhật' || req.user.status === 'đã vô hiệu hóa'){
             res.redirect('/index')
         }else{
             db.query('SELECT * FROM trading_card WHERE ma_Khach_Hang = ? ORDER BY day_trading,time_trading DESC', [req.user.id] , (err,rows) =>{
@@ -504,7 +504,7 @@ Router.get('/lichsumuathe/:id',controllers.isActivated,(req,res) => {
         if(req.user.change_pass === 0){
             res.redirect('/firststep')
         }
-        else if(req.user.status === "chờ xác minh" || req.user.status === 'chờ cập nhật'){
+        else if(req.user.status === "chờ xác minh" || req.user.status === 'chờ cập nhật' || req.user.status === 'đã vô hiệu hóa'){
             res.redirect('/index')
         }else{
             db.query('SELECT * FROM trading_card WHERE ma_Khach_Hang = ? AND ma_Giao_Dich = ?', [req.user.id,req.params.id] , (err,rows) =>{
@@ -523,7 +523,7 @@ Router.get('/lichsunap/:id',controllers.isActivated,(req,res) => {
         if(req.user.change_pass === 0){
             res.redirect('/firststep')
         }
-        else if(req.user.status === "chờ xác minh" || req.user.status === 'chờ cập nhật'){
+        else if(req.user.status === "chờ xác minh" || req.user.status === 'chờ cập nhật' || req.user.status === 'đã vô hiệu hóa'){
             res.redirect('/index')
         }else{
             db.query('SELECT * FROM trading WHERE ma_Khach_Hang = ? AND ma_Giao_Dich = ?',[req.user.id, req.params.id] , (err,rows) => {

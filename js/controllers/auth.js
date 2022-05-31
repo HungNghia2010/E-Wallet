@@ -66,6 +66,7 @@ exports.login = async (req, res) => {
                                                         loginAbnormality += 1;
                                                         wrongPassword = 0;
                                                         db.query('UPDATE lockaccount SET wrongPassword = ?, loginAbnormality = ?, lockTime = NOW() WHERE username = ?', [wrongPassword, loginAbnormality, username]);
+                                                        db.query('UPDATE register SET status = "đã khóa vô thời hạn" WHERE username = ?', [username])
                                                         return res.json({status:"error", error:"Tài khoản đã bị khóa do nhập sai mật khẩu nhiều lần, vui lòng liên hệ quản trị viên để được hỗ trợ"});
                                                     }
                                                     loginAbnormality += 1;
@@ -579,7 +580,8 @@ exports.rut_tien = async(req,res) => {
                             return res.json({status:"error", error:"Số tiền nhập cộng phí lớn hơn số tiền hiện có"})
                         }else if(tien > 5000000){
                             // add lịch sử
-                            db.query('INSERT INTO trading SET ?',{ma_Giao_Dich : ma_Giao_Dich , ma_Khach_Hang: req.user.id , money_trading : s , day_trading : day_trading , time_trading : time_trading , trading_type : "Rút tiền", trading_status : "đang chờ", note_trading : ghichu}, (error)=>{
+                            const tienrut = parseInt(tien)*0.95
+                            db.query('INSERT INTO trading SET ?',{ma_Giao_Dich : ma_Giao_Dich , ma_Khach_Hang: req.user.id , money_trading : tienrut , day_trading : day_trading , time_trading : time_trading , trading_type : "Rút tiền", trading_status : "đang chờ", note_trading : ghichu}, (error)=>{
                                 if (error){
                                     console.log(error)
                                 }else{
