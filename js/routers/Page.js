@@ -263,6 +263,32 @@ Router.get('/xemruttien/:code', loggedIn.loggedIn, (req, res) => {
     }
 })
 
+Router.post('/auth/xemruttien', loggedIn.loggedIn, (req, res) => {
+    if(req.user.auth === 'Admin'){
+        if(req.body.pheduyet == 'Phê duyệt') {
+            db.query('UPDATE trading SET trading_status = "Thành công" WHERE ma_Giao_Dich = ?', [req.body.ma_Giao_Dich] ,(err, rows) => {
+                if (err) throw err
+                db.query('SELECT * FROM account WHERE id = ?', [req.body.id_user], (err, rows2) => {
+                    if (err) throw err
+                    db.query('UPDATE account SET money = ? WHERE id = ?', [(rows2[0].money - req.body.money_trading), req.body.id_user], (err, rows3) => {
+                        if (err) throw err
+                        res.redirect('/xemruttien/'+req.body.ma_Giao_Dich)
+                    })
+                })
+            })
+        }
+        else if(req.body.tuchoi == 'Từ chối') {
+            db.query('UPDATE trading SET trading_status = "Từ chối" WHERE ma_Giao_Dich = ?', [req.body.ma_Giao_Dich] ,(err, rows) => {
+                if (err) throw err
+                res.redirect('/xemruttien/'+req.body.ma_Giao_Dich)
+            })
+        }       
+    }
+    else {
+        res.render('404',{status:"no",user: "nothing"})
+    }
+})
+
 Router.get('/xemvohieuhoa/:id', loggedIn.loggedIn, (req, res) => {
     if(req.user.auth === 'Admin'){
         db.query('SELECT * FROM register, account WHERE (register.id = account.id) AND (register.id = ?)', [req.params.id] ,(err, rows) => {
