@@ -855,22 +855,30 @@ exports.muatheviettel = async (req, res) => {
     const{gia, soluong} = req.body;
     const tongtien = parseInt(gia) * parseInt(soluong)
     var data = {
-        gia: gia
+        gia: gia,
+        seri: "",
+        the:"",
+        loai: "",
+        soluong : soluong
     }
     var test = new Array();
     
     db.query('SELECT * FROM account WHERE id = ?',[req.user.id],(err,result) => {
         if(tongtien > result[0].money){
-            return res.render('muatheviettel',{msg: 'Không thể tự chuyển tiền cho chính mình',user: req.user,data})
+            return res.render('muatheviettel',{msg: 'Số dư không đủ để thực hiện giao dịch này',user: req.user,data})
         }else{
-            const username = Math.floor(1000 + Math.random() * 9000);
-            const s = '11111'
-            const the = s + username
-            console.log(the)
-            test[0] = new Array(the,'1','Vinaphone', s,gia)
-            test[1] = new Array(the,'2','mobiphone', s,gia)
-            console.log(test)
-            return res.render('muatheviettel',{success: 'Mua thẻ cào thành công',user: req.user,data})
+            for (let i = 0 ; i < data.soluong - 1 ; i++){
+                const username = Math.floor(1000 + Math.random() * 9000);
+                const seri = Math.floor(100000000 + Math.random() * 900000000);
+                const s = '11111';
+                const the = s + username;
+                data.loai = "Viettel"
+                data.seri = seri;
+                data.the = the;
+                test.push(data);
+                console.log(test);
+            }
+            return res.render('muatheviettel',{success: 'Mua thẻ cào thành công',user: req.user,test})
         }
     })
 }
