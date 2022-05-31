@@ -663,13 +663,14 @@ exports.chuyen_tien = async (req, res) => {
                     }
                     else {
                         db.query('SELECT * FROM register WHERE id = ?',[req.user.id], (err, result123) =>{
-                            db.query('SELECT * FROM otp WHERE id = ?',[result[0].id] , async (error,result1) => {
+                            db.query('SELECT * FROM otp WHERE id = ?',[result1[0].id] , async (error,result2) => {
+                               
                                 const otp = generateRandomString(6)
                                 const dt = dateTime.create()
                                 const formatted = dt.format('H:M:S')
                                 if(error){
                                     console.log(error)
-                                }if(result1.length === 0){
+                                }if(result2.length === 0){
                                     db.query('INSERT INTO otp SET ? ',{id: req.user.id, otp: otp, expiry: formatted});
                                 }
                                 else{
@@ -734,7 +735,7 @@ exports.xacnhan_chuyen = async (req, res) => {
                 const ten_Nguoi_Nhan = result[0].name
                 
                 db.query('SELECT * FROM otp WHERE id = ?', [req.user.id] ,  async (err,result1) => {
-                    console.log(req.user.id)
+                    
                     hn = time_trading.split(':')[0] * 3600;
                     mn = time_trading.split(':')[1] * 60;
                     sn = time_trading.split(':')[2];
