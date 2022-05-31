@@ -76,6 +76,8 @@ CREATE TABLE trading_card(
     card_seri varchar(20),
     ma_The varchar(20) NOT NULL,
     card_type varchar(20) NOT NULL,
+    day_trading varchar(20),
+    time_trading TIME,
     price varchar(20),
     total_price varchar(20),
     PRIMARY KEY(ma_Giao_Dich)

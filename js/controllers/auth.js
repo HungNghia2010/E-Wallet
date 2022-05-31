@@ -700,7 +700,7 @@ exports.xacnhan_chuyen = async (req, res) => {
         ghichu : ghichu,
         otp : otp
     }
-    console.log(req.body)
+ 
     if(!otp){
         return res.render('xacnhanchuyen',{msg: 'Vui lòng nhập mã OTP',user: req.user,data})
     }else {
