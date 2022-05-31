@@ -968,7 +968,7 @@ exports.muathemobi = async (req, res) => {
                 const day_trading = day + "-" + month + "-" + today.getFullYear() ;
                 const time_trading = date.format('H:M:S');
               
-                db.query('INSERT INTO trading_card SET ?',{ma_Giao_Dich : ma_Giao_Dich , ma_Khach_Hang: req.user.id , card_seri : test[0].seri , ma_The : test[j].the , card_type : test[j].loai , day_trading : day_trading , time_trading : time_trading , price : test[j].gia},(error)=>{
+                db.query('INSERT INTO trading_card SET ?',{ma_Giao_Dich : ma_Giao_Dich , ma_Khach_Hang: req.user.id , card_seri : test[0].seri , ma_The : test[j].the , card_type : test[j].loai , day_trading : day_trading , time_trading : time_trading , price : test[j].gia , trading_type : 'Thẻ cào', trading_status : 'Thành công'},(error)=>{
                     if (error){
                         console.log(error);
                     }else{
@@ -1020,7 +1020,7 @@ exports.muathevina = async (req, res) => {
                 const day_trading = day + "-" + month + "-" + today.getFullYear() ;
                 const time_trading = date.format('H:M:S');
               
-                db.query('INSERT INTO trading_card SET ?',{ma_Giao_Dich : ma_Giao_Dich , ma_Khach_Hang: req.user.id , card_seri : test[0].seri , ma_The : test[j].the , card_type : test[j].loai , day_trading : day_trading , time_trading : time_trading , price : test[j].gia},(error)=>{
+                db.query('INSERT INTO trading_card SET ?',{ma_Giao_Dich : ma_Giao_Dich , ma_Khach_Hang: req.user.id , card_seri : test[0].seri , ma_The : test[j].the , card_type : test[j].loai , day_trading : day_trading , time_trading : time_trading , price : test[j].gia, trading_type : 'Thẻ cào', trading_status : 'Thành công'},(error)=>{
                     if (error){
                         console.log(error);
                     }else{

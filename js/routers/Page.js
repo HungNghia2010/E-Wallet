@@ -401,7 +401,6 @@ Router.get('/muatheviettel',controllers.isActivated ,(req,res) => {
     }
 })
 
-
 Router.get('/muathemobi',controllers.isActivated ,(req,res) => {
     if(req.user){
         if(req.user.change_pass === 0){
@@ -437,8 +436,6 @@ Router.get('/muathevina',controllers.isActivated ,(req,res) => {
     }
 })
 
-
-Router.get('/lichsuchuyen',controllers.isActivated,(req,res) => {
 Router.get('/lichsuchuyen/:id',controllers.isActivated,(req,res) => {
     if(req.user){
         if(req.user.change_pass === 0){
