@@ -693,7 +693,7 @@ exports.chuyen_tien = async (req, res) => {
                             data.phi = parseInt(data.tien) * 0.05;
                             data.tennguoinhan = result[0].name;
        
-                            return res.render('xacnhanchuyen',{data});
+                            return res.render('xacnhanchuyen',{data,user: req.user});
                         })
                     }
                 })
