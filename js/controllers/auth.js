@@ -897,12 +897,7 @@ exports.muatheviettel = async (req, res) => {
         if(tongtien > result[0].money){
             return res.render('muatheviettel',{msg: 'Số dư không đủ để thực hiện giao dịch này',user: req.user,data})
         }else{
-<<<<<<< Updated upstream
-            
-            for (let i = 0 ; i < n ; i++){
-=======
             for (let i = 0 ; i < data.soluong - 1 ; i++){
->>>>>>> Stashed changes
                 const username = Math.floor(1000 + Math.random() * 9000);
                 const seri = Math.floor(100000000 + Math.random() * 900000000);
                 const s = '11111';
