@@ -124,7 +124,11 @@
                     
                     <div class="button register-button">
                         <button type="button" class="regisbutton"><a href="/info/changepassword"> Đổi mật khẩu </a>
-                        <button type="button" class="regisbutton"><a href="/info/update"> Cập nhật thông tin </a>
+                        {{#if user.test}}
+                            <button disabled type="button" class="regisbutton"><a href="/info/update"> Cập nhật thông tin </a>
+                        {{else}}
+                            <button type="button" class="regisbutton"><a href="/info/update"> Cập nhật thông tin </a>
+                        {{/if}}
                     </div>
                 </form>
             </div>

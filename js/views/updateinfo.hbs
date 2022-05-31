@@ -94,11 +94,6 @@
                             <span class="details">Số điện thoại</span>
                             <input value="{{user.phone_number}}" type="text" id="phone" name="phone" >
                         </div>
- 
-                        <div class="input-box">
-                            <span class="details">Ngày hết hạn thẻ</span>
-                            <input value="1/1/2025" type="text" placeholder="" >
-                        </div>
 
                         <div class="input-box">
                             <span class="details">CMND/CCCD</span>
@@ -110,7 +105,7 @@
                         </div>
                         <div class="input-box">
                             <span class="details">Ngày sinh</span>
-                            <input value="1/1/2025" type="text" id="birth" name="birth">
+                            <input value="{{user.birth}}" type="text" id="birth" name="birth">
                         </div>
 
                         <div class="alert" id="errorMessage" style="display: none;">
