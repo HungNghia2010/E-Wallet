@@ -429,6 +429,8 @@ exports.nap_tien = async(req, res) => {
         return res.json({status:"error", error:"Hãy nhập đúng số tiền"})
     }else if(tien < 0){
         return res.json({status:"error", error:"Số tiền không hợp lệ"})
+    }else if(tien < 20000){
+        return res.json({status:"error", error:"Số tiền phải lớn hơn 20.000 đồng"})
     }else if (isNaN(Date.parse(dayex))){
         return res.json({status:"error", error:"Ngày không đúng định dạng"})
     }else if(sotk === '333333'){
