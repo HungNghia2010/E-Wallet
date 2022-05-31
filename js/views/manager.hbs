@@ -60,7 +60,6 @@
         <div class="container container-lichsu my-3">
             <table class="lichsutb">
                 <tr class="lichsutr">
-                    <th class="lichsuth">STT</th>
                     <th class="lichsuth">Họ tên</th>
                     <th class="lichsuth">Username</th>
                     <th class="lichsuth">Số điện thoại</th>
@@ -71,7 +70,7 @@
                 {{#each rows}}
                     {{#equalsOr this.status 'chờ xác minh' 'chờ cập nhật'}}
                         <tr class="lichsutr">
-                            <td class="lichsutd">{{count @index}}</td>
+                            
                             <td class="lichsutd">{{this.name}}</td>
                             <td class="lichsutd">{{this.username}}</td>
                             <td class="lichsutd">{{this.phone_number}}</td>
@@ -93,7 +92,6 @@
         <div class="container container-lichsu my-3">
             <table class="lichsutb">
                 <tr class="lichsutr">
-                    <th class="lichsuth">STT</th>
                     <th class="lichsuth">Họ tên</th>
                     <th class="lichsuth">Username</th>
                     <th class="lichsuth">Số điện thoại</th>
@@ -103,7 +101,7 @@
                 {{#each rows}}
                     {{#equals this.status 'đã xác minh'}}
                     <tr class="lichsutr">
-                        <td class="lichsutd">{{count @index}}</td>
+                        
                         <td class="lichsutd">{{this.name}}</td>
                         <td class="lichsutd">{{this.username}}</td>
                         <td class="lichsutd">{{this.phone_number}}</td>
@@ -127,7 +125,6 @@
         <div class="container container-lichsu my-3">
             <table class="lichsutb">
                 <tr class="lichsutr">
-                    <th class="lichsuth">STT</th>
                     <th class="lichsuth">Họ tên</th>
                     <th class="lichsuth">Username</th>
                     <th class="lichsuth">Số điện thoại</th>
@@ -137,7 +134,7 @@
                 {{#each rows}}
                     {{#equals this.status 'đã vô hiệu hóa'}}
                     <tr class="lichsutr">
-                        <td class="lichsutd">{{count @index}}</td>
+                        
                         <td class="lichsutd">{{this.name}}</td>
                         <td class="lichsutd">{{this.username}}</td>
                         <td class="lichsutd">{{this.phone_number}}</td>
@@ -159,7 +156,7 @@
         <div class="container container-lichsu my-3">
             <table class="lichsutb">
                 <tr class="lichsutr">
-                    <th class="lichsuth">STT</th>
+                    
                     <th class="lichsuth">Họ tên</th>
                     <th class="lichsuth">Username</th>
                     <th class="lichsuth">Số điện thoại</th>
@@ -169,7 +166,7 @@
                 {{#each rows}}  
                     {{#equals this.status 'đã khóa vô thời hạn'}}
                         <tr class="lichsutr">
-                            <td class="lichsutd">{{count @index}}</td>
+                            
                             <td class="lichsutd">{{this.name}}</td>
                             <td class="lichsutd">{{this.username}}</td>
                             <td class="lichsutd">{{this.phone_number}}</td>
@@ -191,7 +188,7 @@
         <div class="container container-lichsu my-3">
             <table class="lichsutb">
                 <tr class="lichsutr">
-                    <th class="lichsuth">STT</th>
+                    
                     <th class="lichsuth">Số tiền rút</th>
                     <th class="lichsuth">Mã giao dịch</th>
                     <th class="lichsuth">Trạng thái</th>
@@ -202,7 +199,7 @@
                     {{#equals this.trading_type 'Rút tiền'}}
                         {{#equals this.trading_status 'đang chờ'}}
                             <tr class="lichsutr">
-                                <td class="lichsutd">{{count @index}}</td>
+                                
                                 <td class="lichsutd">{{this.money_trading}}</td>
                                 <td class="lichsutd">{{this.ma_Giao_Dich}}</td>
                                 <td class="lichsutd">{{this.trading_status}}</td>
@@ -225,7 +222,7 @@
         <div class="container container-lichsu my-3">
             <table class="lichsutb">
                 <tr class="lichsutr">
-                    <th class="lichsuth">STT</th>
+                    
                     <th class="lichsuth">Số tiền</th>
                     <th class="lichsuth">Mã giao dịch</th>
                     <th class="lichsuth">Trạng thái</th>
@@ -237,7 +234,7 @@
                     {{#equals this.trading_type 'Chuyển tiền'}}
                         {{#equals this.trading_status 'Đang chờ'}}
                             <tr class="lichsutr">
-                                <td class="lichsutd">{{count @index}}</td>
+                                
                                 <td class="lichsutd">{{this.money_transfer}}</td>
                                 <td class="lichsutd">{{this.ma_Giao_Dich}}</td>
                                 <td class="lichsutd">{{this.trading_status}}</td>
